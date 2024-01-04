@@ -5,14 +5,13 @@ execute:
     freeze: auto
 
 website:
-  title: "R Club Würzburg"
+  title: "Lea K. Hildebrandt"
   navbar:
     background: secondary
     search: true
     right:
       - href: index.qmd
         text: Home
-      - slides.qmd  
       - about.qmd
 
 format:
