@@ -1,6 +1,9 @@
 project:
   type: website
 
+execute:
+    freeze: auto
+
 website:
   title: "R Club Würzburg"
   navbar:
@@ -19,4 +22,6 @@ format:
     toc: true
 
 editor: visual
+
+
 
