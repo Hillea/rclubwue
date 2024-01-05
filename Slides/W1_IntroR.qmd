@@ -13,7 +13,7 @@ format:
     scrollable: true
     slide-number: true
     theme: simple
-    chalkboard: true
+    embed-resources: true
 editor: visual
 from: markdown+emoji
 ---

@@ -6,6 +6,12 @@ listing:
   sort: "date"
   fields: [title, description, author, date]
 ---
+
+````{=html}
+<!--#
+
 ```{=html}
 <iframe width="780" height="500" class="slide-deck" src="slides/W1_IntroR.html" title="Week 1"></iframe>
 ```
+-->
+````
