@@ -4,7 +4,245 @@
     "href": "slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Intro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 9, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Intro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#data-wrangling",
+    "href": "Slides/W2b_DataWranglingR.html#data-wrangling",
+    "title": "Data Wrangling",
+    "section": "Data Wrangling?",
+    "text": "Data Wrangling?\n\n\n\n“Preparation” of the data for analysis: cleaning up variables (outliers, erroneous values, recoding…), changing the structure/format of data frames, merging data sets, calculating new variables, reducing/summarizing variables…\n\nYou will spend a lot more time wrangling the data than analyzing it!\n\n\nYou could do this manually (e.g. in Excel), but this is tedious, error prone & not reproducible! (+ Datasets can be huge!)\n\n\nFortunately, it is easy to do in R"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#accessing-variablescolumns",
+    "href": "Slides/W2b_DataWranglingR.html#accessing-variablescolumns",
+    "title": "Data Wrangling",
+    "section": "Accessing Variables/Columns",
+    "text": "Accessing Variables/Columns\nWhen wrangling your data in R, you often want to access/use different columns, e.g. to calculate new ones. There are a number of ways you can do that:\n\n# create a small data set for this example:\ntestdata &lt;- data.frame(a = c(1, 2, 3),  # the c() is important!\n                       b = c(\"a\", \"b\", \"c\"),\n                       c = c(4, 5, 6))\n \n## access column a only:\n# Option 1:\ntestdata$a\n\n[1] 1 2 3\n\n# Option 2:\ntestdata[2:3,\"a\"]\n\n[1] 2 3\n\ntestdata[, 1:2]  # index the first column (better practice to use the name!)\n\n  a b\n1 1 a\n2 2 b\n3 3 c\n\n# this way, you could also access rows:\n# testdata[1:2, ]  # [rows, columns] --&gt; you can leave it empty if you want all\n# 1:10 would mean 1 to and incl 10!\n\n# Option 3 (select is a tidyverse function)\nlibrary(tidyverse)\nselect(testdata, a)\n\n  a\n1 1\n2 2\n3 3\n\n\n\ndata.frame() = function to create a data.frame, which is what holds a data set! (tibbles..)\nc() = function to make a vector. A vector is just like one single column of a data frame: It can hold several values, but all of the same type.\nsubsetting: rows, columns –&gt; leave empty!\nSelect range!\nUse either name or index of column!\nselect –&gt; tidyverse"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#tidyverse",
+    "href": "Slides/W2b_DataWranglingR.html#tidyverse",
+    "title": "Data Wrangling",
+    "section": "Tidyverse",
+    "text": "Tidyverse\nYou can do all data wrangling in Base R, i.e. without loading any packages. However, there’s a neat collection of packages called tidyverse, which makes data wrangling even easier!\n\nBase R:\noutput_data1 &lt;- function1(data)\noutput_data2 &lt;- function2(output_data1)\noutput_data3 &lt;- function3(output_data2)\n\n\nOr:\noutput_data &lt;- function3(function2(function1(data)))\n\n\nTidyverse:\noutput_data &lt;- data %&gt;% function1() %&gt;% function2(.) %&gt;% function3()\n\n\nBe aware, though, that coding in the tidyverse style is very different than in Base R!\nBase R is more similar to “traditional” programming and other programming languages.\nFor example, you could wrap functions, which would then be carried out from the most nested to the outer function:\noutput_data &lt;- function3(function2(function1(data)))\nfunction1() will be carried out first, followed by function2(), then function3() .\n. . .\nIn the tidyverse, the same would look like this:\noutput_data &lt;- data %&gt;% function1() %&gt;% function2() %&gt;% function(3)\n%&gt;% is called “the pipe” and will “hand over” whatever has been done to the next part. In this example, the data is handed over to function1(), which is then carried out, the result of which is handed over to function2() etc.\nTidyverse style programming is thus a bit easier to read!\nThere’s also the new pipe Base R |&gt;, which is similar to %&gt;%.\n\n\n\n%&gt;% is called the pipe. It takes the output of whatever happens to its left and “hands it over” to the right. There’s also a new base-R-pipe: |&gt;. It is very similar, but sometimes the functionality differs."
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#tidyverse-2",
+    "href": "Slides/W2b_DataWranglingR.html#tidyverse-2",
+    "title": "Data Wrangling",
+    "section": "Tidyverse 2",
+    "text": "Tidyverse 2\nlibrary(tidyverse) will load a number of packages, such as dplyr, ggplot2, readr, forcats, tibble etc., which are all usefuls for data wrangling.\nWe will work mainly with functions from the dplyr package, but also use readr to read in data. We will also use ggplot2 to visualize data.\nThe most important dplyr functions for data wrangling are:\n\n\n\n\n\n\n\nFunction\nDescription\n\n\n\n\nselect()\nInclude or exclude certain columns (variables)\n\n\nfilter()\nInclude or exclude certain rows (observations)\n\n\nmutate()\nCreate new columns (variables)\n\n\nsummarize()\nCreate new columns that aggregate data/create summary variables for groups of observations (data frame will become smaller)\n\n\ngroup_by()\nOrganize the rows (observations) into groups\n\n\narrange()\nChange the order of rows (observations)\n\n\n\n\nfunction names very self-explanatory!"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-1-babynames",
+    "href": "Slides/W2b_DataWranglingR.html#activity-1-babynames",
+    "title": "Data Wrangling",
+    "section": "Activity 1: Babynames",
+    "text": "Activity 1: Babynames\n\nOpen RStudio and set the working directory, ensure the environment is clean.\nOpen a new RMarkdown document and save it, e.g. as “DataWrangling1.Rmd”.\nInstall the packages “tidyverse” and “babynames”.\nDelete the default text in the Rmd file, insert a new code chunk and insert code that loads the packages babynames and tidyverse.\n\n\n\n# install.packages(\"tidyverse\")\n# install.packages(\"babynames\")\n\nlibrary(babynames)\nlibrary(tidyverse)\n\n\nload tidyverse last, otherwise functions with same name will be masked from package that is loaded first. Since we often need tidyverse functions, it’s safest to load it last!"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-2-look-at-the-data",
+    "href": "Slides/W2b_DataWranglingR.html#activity-2-look-at-the-data",
+    "title": "Data Wrangling",
+    "section": "Activity 2: Look at the Data",
+    "text": "Activity 2: Look at the Data\n\n\nType the word babynames into your console pane and press enter. What kind of information do you get?\n\n“A tibble: 1,924,665 x 5”\n\ntibble is a format for the data frame\n~1.9 million rows/observations\n5 columns/variables\n\n\nWhat kind of columns/variables do we have?\n\ndbl = double/numeric (can take decimals)\nchr = character/string (letters or words)\nint = integer (cannot take decimales)\n(there are also factors = nominal categories (can be words or numbers))\n\n\n\n\nask first for 1 and 2"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-3-your-first-plot",
+    "href": "Slides/W2b_DataWranglingR.html#activity-3-your-first-plot",
+    "title": "Data Wrangling",
+    "section": "Activity 3: Your First Plot",
+    "text": "Activity 3: Your First Plot\n\nIn a new code chunk, insert and run the following code:\n\n\ndat &lt;- babynames %&gt;% \n  filter(name %in% c(\"Emily\",\n                     \"Kathleen\",\n                     \"Alexandra\",\n                     \"Beverly\"), sex==\"F\")\n\nggplot(data = dat,\n       aes(x = year,\n           y = prop, \n           colour = name))+\n  geom_line()  \n\n\nWe first filter four names, assign this new data to dat, and make a linechart using ggplot()!\n\n\nChange the code to male names (that are hopefully present in the dataset) and change sex==\"F\" to sex==\"M\"."
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-4-selecting-variables-of-interest",
+    "href": "Slides/W2b_DataWranglingR.html#activity-4-selecting-variables-of-interest",
+    "title": "Data Wrangling",
+    "section": "Activity 4: Selecting Variables of Interest",
+    "text": "Activity 4: Selecting Variables of Interest\n\nIn a new code chunk, use select() to select only the columns year, sex, name, and prop and store it as a new tibble called babynames_reduced. Remember that you can run ?select in the console if you need help, e.g. regarding the input/arguments to the function.\n\n\n\nbabynames_reduced &lt;- select(.data = babynames, year, sex, name, prop)\n\n# or alternatively:\nbabynames_reduced &lt;- babynames %&gt;% \n  select(year, sex, name, prop)\n\n# or alternatively:\nbabynames_reduced &lt;- babynames %&gt;% \n  select(-n) # remove using -"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-5-arranging-data",
+    "href": "Slides/W2b_DataWranglingR.html#activity-5-arranging-data",
+    "title": "Data Wrangling",
+    "section": "Activity 5: Arranging Data",
+    "text": "Activity 5: Arranging Data\nChange the order of the data (oberservations/rows)!\n\n\nUsing arrange(), try sorting the data according to the names column.\n\nWhat happens?\n\nHow can you sort a column in a descending fashion? Check out the help file (?arrange).\n\n\n\n\nsort_asc &lt;- arrange(.data = babynames,\n                    name)\n\n\nsort_desc &lt;- arrange(babynames, \n                     desc(year)) \n\n\nremember to save data in new tibble/data frame!"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-6-filter-observations",
+    "href": "Slides/W2b_DataWranglingR.html#activity-6-filter-observations",
+    "title": "Data Wrangling",
+    "section": "Activity 6: Filter Observations",
+    "text": "Activity 6: Filter Observations\nWe have already used select() to keep only certain variables, but often we also want to keep only certain observations, e.g. babies born after 1999 (or reaction times that are realistic, not too fast and not too slow, or certain conditions).\nWe use the function filter() for this.\n\nLook at the following code and think about what it might do.\n\nfilt1 &lt;- filter(.data = babynames,\n                year &gt; 2000)"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#detour-boolean-expressions",
+    "href": "Slides/W2b_DataWranglingR.html#detour-boolean-expressions",
+    "title": "Data Wrangling",
+    "section": "Detour: Boolean Expressions",
+    "text": "Detour: Boolean Expressions\nThe second argument, year &gt; 2000, is a Boolean or logical expression, which means that it results in a value of either TRUE or FALSE. filter() runs this expression and then removes all values/rows that contain FALSE.\nThere are also other Boolean expressions:\n\nBoolean expressions\n\n\n\n\n\n\n\nOperator\nName\nis TRUE if and only if\n\n\n\n\nA &lt; B\nless than\nA is less than B\n\n\nA &lt;= B\nless than or equal\nA is less than or equal to B\n\n\nA &gt; B\ngreater than\nA is greater than B\n\n\nA &gt;= B\ngreater than or equal\nA is greater than or equal to B\n\n\nA == B\nequivalence\nA exactly equals B\n\n\nA != B\nnot equal\nA does not exactly equal B\n\n\nA %in% B\nin\nA is an element of vector B"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-6b-filter-some-more",
+    "href": "Slides/W2b_DataWranglingR.html#activity-6b-filter-some-more",
+    "title": "Data Wrangling",
+    "section": "Activity 6b: Filter some more",
+    "text": "Activity 6b: Filter some more\n\n\nKeep only those observations with the name “Mary”.\nDiscard all “Mary”’s and keep only observations from year &gt; 2000.\nKeep only those with names of former Queens (Mary, Elizabeth, Victoria).\nDiscard the ones with the Queen names!\n\n\n\nFirst task:\n\nmarys &lt;- filter(babynames, name == \"Mary\")\n\n\n\nThe second task might be difficult because you have two expressions, name != \"Mary\" and year &gt; 2000. You can simply add several expressions separated by comma’s in filter:\n\nno_marys_young &lt;- filter(babynames, name != \"Mary\", year &gt; 2000)\n\n\n\nThird task:\n\nqueens &lt;- filter(babynames, name %in% c(\"Mary\", \"Elizabeth\", \"Victoria\"))\n\n\n\nThe fourth task is a bit tricky! You could use three filters in a row with name!=\"Mary\" (or “Elizabeth” or “Victoria”). Or you could use %in%, but then you can’t use the ! in front of the %in%. An alternative to negate the whole expression with !:\n\nno_queens &lt;- filter(babynames, \n                    !(name %in% c(\"Mary\",\n                                  \"Elizabeth\",\n                                  \"Victoria\")))"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-7-create-new-variables",
+    "href": "Slides/W2b_DataWranglingR.html#activity-7-create-new-variables",
+    "title": "Data Wrangling",
+    "section": "Activity 7: Create New Variables",
+    "text": "Activity 7: Create New Variables\nIf we want to create variables that do not exist yet (i.e. by calculating values, combining other variables etc.), we can use mutate()!\n\nAdd a variable called “country” that contains the value “USA” for all observations\n\n\n\nbaby_where &lt;- mutate(.data = babynames,\n                  country = \"USA\")\n\n\n\nBut mutate is much more powerful and can create variables that differ per observation, depending on other values in the tibble/data frame:\n\nCreate a variable that denotes the decade a baby was born:\n\n\nbaby_decades &lt;- mutate(.data = babynames,\n                  decade = floor(year/10) *10)\n\nhead(baby_decades)\n\n# A tibble: 6 × 6\n   year sex   name          n   prop decade\n  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;\n1  1880 F     Mary       7065 0.0724   1880\n2  1880 F     Anna       2604 0.0267   1880\n3  1880 F     Emma       2003 0.0205   1880\n4  1880 F     Elizabeth  1939 0.0199   1880\n5  1880 F     Minnie     1746 0.0179   1880\n6  1880 F     Margaret   1578 0.0162   1880\n\n\nWhat happens here?"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-8-summarizing",
+    "href": "Slides/W2b_DataWranglingR.html#activity-8-summarizing",
+    "title": "Data Wrangling",
+    "section": "Activity 8: Summarizing",
+    "text": "Activity 8: Summarizing\nThe goal of data wrangling is often to summarize (or aggregate) the data, e.g. to have an average value per condition. Sometimes you’d also want to calculate descriptive statistics to report.\n\nYou can do so using the function summarise():\n\n# run the filter function just like above again:\ndat &lt;- babynames %&gt;% \n  filter(name %in% c(\"Emily\",\n                     \"Kathleen\",\n                     \"Alexandra\",\n                     \"Beverly\"), sex == \"F\")\n\n# summarize the data, calculating the number of oberservations:\ndat_sum &lt;- summarise(.data = dat,\n                     total = sum(n))\ndat_sum\n\n# A tibble: 1 × 1\n    total\n    &lt;int&gt;\n1 2161374\n\n\nAs you can see, a new variable named total is created, which contains the total number of observations. There’s also just one row in the data frame, because summarise() reduces the data frame (to only include the necessary information)!"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-8-grouping-and-summarizing",
+    "href": "Slides/W2b_DataWranglingR.html#activity-8-grouping-and-summarizing",
+    "title": "Data Wrangling",
+    "section": "Activity 8: Grouping and Summarizing",
+    "text": "Activity 8: Grouping and Summarizing\nOften, we want to summarize data for specific subgroups, e.g. conditions. For this aim, we use summarise() together with group_by():\n\ngroup_dat &lt;- group_by(.data = dat,\n                      name) \n\ngroup_dat now doesn’t look much different than dat, but the grouping - based on the names, so each name is now a category - is saved in the data frame! (Type group_dat in the console and you will see #Groups: name[4])\nIf you now run the summarize() code from before (but with group_dat as input), you will not get the total number of observations, but the observations per name!\n\ngroup_sum &lt;- summarise(.data = group_dat, \n                       total = sum(n)) \ngroup_sum\n\n# A tibble: 4 × 2\n  name       total\n  &lt;chr&gt;      &lt;int&gt;\n1 Alexandra 231364\n2 Beverly   376914\n3 Emily     841491\n4 Kathleen  711605"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#activity-8b-grouping-and-summarizing-2",
+    "href": "Slides/W2b_DataWranglingR.html#activity-8b-grouping-and-summarizing-2",
+    "title": "Data Wrangling",
+    "section": "Activity 8b: Grouping and Summarizing 2",
+    "text": "Activity 8b: Grouping and Summarizing 2\nYou can group by several columns (think of crosstables) and add several columns at once to the data (e.g. doing different calculations - same for mutate()!)\n\nUse the baby_decades data frame and group_by() sex & decade. Save the output to a new data frame/tibble\nUse that tibble to calculate the mean and median number of observations.\n\n\n\ngroup_decades &lt;- group_by(baby_decades, \n                          sex, \n                          decade)\n\nsum_decades &lt;- summarise(group_decades,\n                         mean_year = mean(n),\n                         median_year = median(n))"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#pipes",
+    "href": "Slides/W2b_DataWranglingR.html#pipes",
+    "title": "Data Wrangling",
+    "section": "Pipes",
+    "text": "Pipes\nRemember the pipe %&gt;%? So far we have always saved intermediate steps in tibbles and used those as input for the next function. With the pipe, we can chain several functions and save relevant results only, no need for crowding the Environment with intermediate tibbles!\n\npipe_summary &lt;- babynames %&gt;%\n  mutate(decade = floor(year/10) *10) %&gt;%\n  filter(name %in% c(\"Emily\",\n                     \"Kathleen\",\n                     \"Alexandra\",\n                     \"Beverly\"), sex==\"F\") %&gt;%\n  group_by(name, \n           decade) %&gt;%\n  summarise(mean_decade = mean(n))"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#counting-data",
+    "href": "Slides/W2b_DataWranglingR.html#counting-data",
+    "title": "Data Wrangling",
+    "section": "Counting Data",
+    "text": "Counting Data\nThere are several ways to get the number of observations per group. In the tidyverse style, one is to use (group_by() +) summarise() with the function n(). The other, a shortcut, is to use count():\n\nbabynames %&gt;% \n   filter(name %in% c(\"Emily\",\n                     \"Kathleen\",\n                     \"Alexandra\",\n                     \"Beverly\"), sex==\"F\") %&gt;%\n  group_by(name) %&gt;% \n  summarise(n = n())\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Alexandra   117\n2 Beverly     122\n3 Emily       138\n4 Kathleen    138\n\nbabynames %&gt;%\n  filter(name %in% c(\"Emily\",\n                     \"Kathleen\",\n                     \"Alexandra\",\n                     \"Beverly\"), sex==\"F\") %&gt;%\n  count(name)\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Alexandra   117\n2 Beverly     122\n3 Emily       138\n4 Kathleen    138"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#ungrouping",
+    "href": "Slides/W2b_DataWranglingR.html#ungrouping",
+    "title": "Data Wrangling",
+    "section": "Ungrouping",
+    "text": "Ungrouping\nRemember that the grouping done with group_by() is saved with the data frame (even though it might not immediately be obvious).\nIt is good practice to always ungroup() your data once you finished the operations you needed the grouping for!\n\nbabynames %&gt;% \n   filter(name %in% c(\"Emily\",\n                     \"Kathleen\",\n                     \"Alexandra\",\n                     \"Beverly\"), sex==\"F\") %&gt;%\n  group_by(name) %&gt;% \n  summarise(n = n()) %&gt;% \n  ungroup()\n\n# A tibble: 4 × 2\n  name          n\n  &lt;chr&gt;     &lt;int&gt;\n1 Alexandra   117\n2 Beverly     122\n3 Emily       138\n4 Kathleen    138"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#tidy-data",
+    "href": "Slides/W2b_DataWranglingR.html#tidy-data",
+    "title": "Data Wrangling",
+    "section": "Tidy Data",
+    "text": "Tidy Data\nTidy data: Data that is easily processed by tidyverse functions (and often the required format for statistical analyses and data visualizations).\nThree principles:\n\nEach variable has its own column.\nEach observation has its own row.\nEach value has its own cell.\n\n\nWide vs. long format data?\n\nWide format: Each participant/animal… has one row, observations per participant are in columns.\nLong format: Each observation = own row. (Likely several rows per participant: Trials etc.)\n\n\n\n\n\n\nID\nTime_1\nTime_2\n\n\n\n\na1\n230\n310\n\n\na2\n195\n220\n\n\na3\n245\n290\n\n\n\n\n\n\n\nID\nTime\nValue\n\n\n\n\na1\n1\n230\n\n\na1\n2\n310\n\n\na2\n1\n195\n\n\na3\n2\n220\n\n\na3\n1\n245\n\n\na3\n2\n290\n\n\n\n\n\n\nData often does not come in this format but is rather messy! That’s why we wrangle.\nTidy data is in between wide and long (you can always go longer! :D)"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#tidy-data-2",
+    "href": "Slides/W2b_DataWranglingR.html#tidy-data-2",
+    "title": "Data Wrangling",
+    "section": "Tidy Data 2",
+    "text": "Tidy Data 2\nWhat do you think, which of the following data sets is tidy?\n\n\n# A tibble: 6 × 4\n  country      year  cases population\n  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;\n1 Afghanistan  1999    745   19987071\n2 Afghanistan  2000   2666   20595360\n3 Brazil       1999  37737  172006362\n4 Brazil       2000  80488  174504898\n5 China        1999 212258 1272915272\n6 China        2000 213766 1280428583\n\n\n# A tibble: 12 × 4\n   country      year type            count\n   &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;\n 1 Afghanistan  1999 cases             745\n 2 Afghanistan  1999 population   19987071\n 3 Afghanistan  2000 cases            2666\n 4 Afghanistan  2000 population   20595360\n 5 Brazil       1999 cases           37737\n 6 Brazil       1999 population  172006362\n 7 Brazil       2000 cases           80488\n 8 Brazil       2000 population  174504898\n 9 China        1999 cases          212258\n10 China        1999 population 1272915272\n11 China        2000 cases          213766\n12 China        2000 population 1280428583\n\n\n# A tibble: 6 × 3\n  country      year rate             \n  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;            \n1 Afghanistan  1999 745/19987071     \n2 Afghanistan  2000 2666/20595360    \n3 Brazil       1999 37737/172006362  \n4 Brazil       2000 80488/174504898  \n5 China        1999 212258/1272915272\n6 China        2000 213766/1280428583\n\n\n# A tibble: 3 × 5\n  country     `1999_cases` `2000_cases` `1999_population` `2000_population`\n  &lt;chr&gt;              &lt;dbl&gt;        &lt;dbl&gt;             &lt;dbl&gt;             &lt;dbl&gt;\n1 Afghanistan          745         2666          19987071          20595360\n2 Brazil             37737        80488         172006362         174504898\n3 China             212258       213766        1272915272        1280428583\n\n\n\nTable1 is tidy!"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#analyzing-the-autism-spectrum-quotient",
+    "href": "Slides/W2b_DataWranglingR.html#analyzing-the-autism-spectrum-quotient",
+    "title": "Data Wrangling",
+    "section": "Analyzing the Autism Spectrum Quotient",
+    "text": "Analyzing the Autism Spectrum Quotient\nFor the following activities, we will need the following files:\n\nresponses.csv containing the AQ survey responses to each of the 10 questions for the 66 participants\nqformats.csv containing information on how a question should be coded - i.e. forward or reverse coding\nscoring.csv containing information on how many points a specific response should get; depending on whether it is forward or reverse coded\npinfo.csv containing participant information such as Age, Sex and importantly ID number."
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#set-up",
+    "href": "Slides/W2b_DataWranglingR.html#set-up",
+    "title": "Data Wrangling",
+    "section": "Set Up",
+    "text": "Set Up\n\nClear your environment or restart the R session (Session -&gt; Restart R).\nStart a new section (# Data Wrangling 3) in your Rmd document.\nMake sure you have downloaded the data into your working directory (or set your working directory to the class folder with the data)."
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#load-the-data",
+    "href": "Slides/W2b_DataWranglingR.html#load-the-data",
+    "title": "Data Wrangling",
+    "section": "Load the Data",
+    "text": "Load the Data\nLoad the four .csv files into your environment, e.g.:\n\nresponses &lt;- read_csv(\"responses.csv\") \nqformats &lt;-                 # load in question formats\nscoring &lt;-                  # load in scoring info\npinfo &lt;-                    # load in participant information"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#look-at-the-data",
+    "href": "Slides/W2b_DataWranglingR.html#look-at-the-data",
+    "title": "Data Wrangling",
+    "section": "Look at the Data",
+    "text": "Look at the Data\nIs the data (responses) in a tidy format?\n\nWhy is it not tidy?\n\nwide format"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#reformatting-the-data",
+    "href": "Slides/W2b_DataWranglingR.html#reformatting-the-data",
+    "title": "Data Wrangling",
+    "section": "Reformatting the Data",
+    "text": "Reformatting the Data\nLet’s bring the wide data in a longer, tidy format!\n\nThere are several functions in R to reformat data, but the newest ones are pivot_longer() and pivot_wider().\nRun the code and see what changes:\n\nrlong &lt;- pivot_longer(data = responses,\n                      cols = Q1:Q10,\n                      names_to = \"Question\", \n                      values_to = \"Response\")\n\n\n\nDescribe what the function does, what does the input/the arguments mean?"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#joining-the-data",
+    "href": "Slides/W2b_DataWranglingR.html#joining-the-data",
+    "title": "Data Wrangling",
+    "section": "Joining the Data",
+    "text": "Joining the Data\nWe now want to combine the different data sets: We want to have the information how the questionnaire has to be scored included with the items.\nWe can find the scoring information (i.e. how the questions are framed, positive or negative/whether they need to be reversed) in the qformats tibble. Furthermore, we can find how many points are given to each item/response in scoring.\nWe can use the function inner_join() to merge the tibbles.\n\nActivity: Replace the NULL values in the below code with the necessary variable names to join rlong and qformats by Question.\n\nrlong2 &lt;- inner_join(x = NULL, \n                     y = NULL, \n                     by = \"NULL\")\n\n\n\n\nrlong2 &lt;- inner_join(x = rlong, \n                     y = qformats, \n                     by = \"Question\")\n\n\nDescribe what happened?\nwhat is forward and reverse scoring?"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#combining-more-data",
+    "href": "Slides/W2b_DataWranglingR.html#combining-more-data",
+    "title": "Data Wrangling",
+    "section": "Combining more Data",
+    "text": "Combining more Data\nYou can only join two data frames/tibbles at once.\nNow add the scoring data:\n\nrscores &lt;- inner_join(rlong2, \n                      scoring, \n                      c(\"QFormat\", \"Response\"))"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#calculate-the-questionnaire-scores",
+    "href": "Slides/W2b_DataWranglingR.html#calculate-the-questionnaire-scores",
+    "title": "Data Wrangling",
+    "section": "Calculate the Questionnaire Scores",
+    "text": "Calculate the Questionnaire Scores\nHow do we need to group and summarize the data to get a sum score per person? (Ignoring the reverse coding for now!) Add the correct column names instead of the NULL.\n\naq_scores &lt;- rscores %&gt;% \n             group_by(NULL) %&gt;%\n             summarise(AQ = sum(NULL))\n\n\n\naq_scores &lt;- rscores %&gt;% \n             group_by(Id) %&gt;% # group by the ID number in column Id\n             summarise(AQ = sum(Score)) # sum column Score to obtain AQ scores."
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#pipe-it-all-together",
+    "href": "Slides/W2b_DataWranglingR.html#pipe-it-all-together",
+    "title": "Data Wrangling",
+    "section": "Pipe it all together!",
+    "text": "Pipe it all together!\n\naq_scores2 &lt;- responses %&gt;% \n  pivot_longer(cols = Q1:Q10,\n               names_to = \"Question\", \n               values_to = \"Response\") %&gt;%  \n  inner_join(qformats, \"Question\") %&gt;% \n  inner_join(scoring, c(\"QFormat\", \"Response\")) %&gt;% \n  group_by(Id) %&gt;% \n  summarise(AQ = sum(Score))"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#learning-to-wrangle",
+    "href": "Slides/W2b_DataWranglingR.html#learning-to-wrangle",
+    "title": "Data Wrangling",
+    "section": "Learning to Wrangle",
+    "text": "Learning to Wrangle\nIn a Breakout-session (or as homework), work in small groups on the assignments (Activity 1 - Activity 8) in this chapter: https://psyteachr.github.io/quant-fun-v2/data-wrangling-2.html"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#solutions",
+    "href": "Slides/W2b_DataWranglingR.html#solutions",
+    "title": "Data Wrangling",
+    "section": "Solutions",
+    "text": "Solutions\nWe’ll use data from a paper that investigates whether the ability to perform an action influences perception. In particular, the authors wondered whether participants who played Pong would perceive the ball to move faster when they have a small paddle.\n\n\nDownload the data, set the working directory, clean your environment. Open a new R Markdown file and save it as “DataWrangling2.Rmd”. Delete the text in the document.\nAdd a new code chunk and read in the data.\nLook at the data."
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#solutions-1",
+    "href": "Slides/W2b_DataWranglingR.html#solutions-1",
+    "title": "Data Wrangling",
+    "section": "Solutions",
+    "text": "Solutions\n\nlibrary(\"tidyverse\")\npong_data &lt;- read_csv(\"Data/PongBlueRedBack 1-16 Codebook.csv\")\nsummary(pong_data)\n\n  Participant     JudgedSpeed      PaddleLength   BallSpeed    TrialNumber    \n Min.   : 1.00   Min.   :0.0000   Min.   : 50   Min.   :2.0   Min.   :  1.00  \n 1st Qu.: 4.75   1st Qu.:0.0000   1st Qu.: 50   1st Qu.:3.0   1st Qu.: 72.75  \n Median : 8.50   Median :1.0000   Median :150   Median :4.5   Median :144.50  \n Mean   : 8.50   Mean   :0.5471   Mean   :150   Mean   :4.5   Mean   :144.50  \n 3rd Qu.:12.25   3rd Qu.:1.0000   3rd Qu.:250   3rd Qu.:6.0   3rd Qu.:216.25  \n Max.   :16.00   Max.   :1.0000   Max.   :250   Max.   :7.0   Max.   :288.00  \n BackgroundColor      HitOrMiss       BlockNumber   \n Length:4608        Min.   :0.0000   Min.   : 1.00  \n Class :character   1st Qu.:0.0000   1st Qu.: 3.75  \n Mode  :character   Median :1.0000   Median : 6.50  \n                    Mean   :0.6866   Mean   : 6.50  \n                    3rd Qu.:1.0000   3rd Qu.: 9.25  \n                    Max.   :1.0000   Max.   :12.00  \n\n# look at the data (can also use summary(), str(), head() etc.)\nglimpse(pong_data)\n\nRows: 4,608\nColumns: 8\n$ Participant     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ JudgedSpeed     &lt;dbl&gt; 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, …\n$ PaddleLength    &lt;dbl&gt; 50, 250, 50, 250, 250, 50, 250, 50, 250, 50, 50, 250, …\n$ BallSpeed       &lt;dbl&gt; 5, 3, 4, 3, 7, 5, 6, 2, 4, 4, 7, 7, 3, 6, 5, 7, 2, 5, …\n$ TrialNumber     &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,…\n$ BackgroundColor &lt;chr&gt; \"red\", \"blue\", \"red\", \"red\", \"blue\", \"blue\", \"red\", \"r…\n$ HitOrMiss       &lt;dbl&gt; 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, …\n$ BlockNumber     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n\nnew_pong_data &lt;- pong_data %&gt;% \n  select(BallSpeed, HitOrMiss, JudgedSpeed, Participant, \n         TrialNumber) %&gt;% \n  arrange(desc(HitOrMiss), desc(JudgedSpeed)) %&gt;% \n  filter(JudgedSpeed == 1,\n         BallSpeed %in% c(\"2\", \"4\", \"5\", \"7\"),\n         HitOrMiss == 0) %&gt;% \n  filter(TrialNumber &gt; 2) %&gt;% \n  mutate(TrialNumber = TrialNumber -1) \n  \n  # summarize (use old data frame because we removed variables)\npong_data_hits &lt;- pong_data %&gt;% \n  group_by(BackgroundColor, \n           PaddleLength) %&gt;% \n  summarise(total_hits = sum(HitOrMiss, \n                             na.rm = TRUE),\n            meanhits = mean(HitOrMiss, \n                            na.rm = TRUE))"
+  },
+  {
+    "objectID": "Slides/W2b_DataWranglingR.html#thanks",
+    "href": "Slides/W2b_DataWranglingR.html#thanks",
+    "title": "Data Wrangling",
+    "section": "Thanks!",
+    "text": "Thanks!\nLearning objectives:\n\nLearn about tidyverse vs. base R\nLearn and apply the six basic dplyr “verbs”\nLearn how to join data frames\n\n\nNext week:\nData Visualization in R"
   },
   {
     "objectID": "index.html",
@@ -39,7 +277,7 @@
     "href": "Slides/W1_IntroR.html#overview-rstudio",
     "title": "Intro to R",
     "section": "Overview RStudio",
-    "text": "Overview RStudio\n\nRStudio Interface\nopen R!"
+    "text": "Overview RStudio\n\nRStudio Interface\nopen RStudio!"
   },
   {
     "objectID": "Slides/W1_IntroR.html#rstudio-panes",
@@ -67,7 +305,7 @@
     "href": "Slides/W1_IntroR.html#working-directory",
     "title": "Intro to R",
     "section": "Working Directory",
-    "text": "Working Directory\n\nIt makes sense to save all your scripts etc. in a folder specifically dedicated to this course.\n\nMake sure that R knows that you want to work in this folder, i.e. set your working directory:\n\nSession -&gt; Set Working Directory -&gt; Choose Directory\n\nAssignment: Please make a folder, e.g. called “Biostatistics” (but not “R” or anything with spaces in it). Then set your working directory to this folder."
+    "text": "Working Directory\n\nIt makes sense to save all your scripts etc. in a folder specifically dedicated to this course.\n\nMake sure that R knows that you want to work in this folder, i.e. set your working directory:\n\nSession -&gt; Set Working Directory -&gt; Choose Directory\n\nAssignment: Please make a folder, e.g. called “R_Club” (but not “R” or anything with spaces in it). Then set your working directory to this folder."
   },
   {
     "objectID": "Slides/W1_IntroR.html#scripts",
@@ -105,34 +343,6 @@
     "text": "Packages\nThere are a number of functions that are already included with Base R, but you can greatly extend the power of R by loading packages. Packages are like libraries of functions that someone else wrote.\nYou can load a package using the install.packages() function:\n\ninstall.packages(\"tidyverse\")\n\n(It may be necessary to install Rtools: https://cran.r-project.org/bin/windows/Rtools/)\nBut installing is not enough to be able to actually use the functions from that package. You’d also need to load the package with the libary() function:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\nAssignment: Install and load the tidyverse package (which we will use a lot in this course).\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!"
   },
   {
-    "objectID": "Slides/W1_IntroR.html#r-markdown",
-    "href": "Slides/W1_IntroR.html#r-markdown",
-    "title": "Intro to R",
-    "section": "R Markdown",
-    "text": "R Markdown\nR scripts are a good way to save your code. However, you’d better heavily comment in your scripts, so that future you (and potentially collaborators) know what happens in your script.\nAn alternative is an R Markdown file. This is also a sort of script, but you can write text (like in a word processor) and mix it with code chunks, where you can write your R code. R Markdown is the “language” you use to write in these files, which is a variety of Markdown.\nThe advantage of R Markdown files (ending with .Rmd) is that they increase reproducibility. For example, you can write whole reports in R Markdown (and also these slides are made with it!).\nA newer variant is called quarto, which works very similar (but is more flexible) to R Markdown."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-2",
-    "href": "Slides/W1_IntroR.html#r-markdown-2",
-    "title": "Intro to R",
-    "section": "R Markdown 2",
-    "text": "R Markdown 2\n\n\n\nR script\n\n\n\n\n\nR Markdown\n\n\n\n\n\nR Markdown rendered as html report"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-3",
-    "href": "Slides/W1_IntroR.html#r-markdown-3",
-    "title": "Intro to R",
-    "section": "R Markdown 3",
-    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\n\n\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\nClick on the little arrow next to knit and select “Knit to PDF”\ninsert inline code"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-4",
-    "href": "Slides/W1_IntroR.html#r-markdown-4",
-    "title": "Intro to R",
-    "section": "R Markdown 4",
-    "text": "R Markdown 4\nThere are many useful things you can so with R Markdown: Adding different headers, adding inline code, knitting as a PDF, adding pictures or tables…You can also decide whether the code chunks should be visible in the output etc.\nYou will need R Markdown for your report!\nFor further information, check out the R Markdown cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"
-  },
-  {
     "objectID": "Slides/W1_IntroR.html#read-in-data",
     "href": "Slides/W1_IntroR.html#read-in-data",
     "title": "Intro to R",
@@ -154,10 +364,164 @@
     "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nThe two objects we just read in are data frames, which consists of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations."
   },
   {
+    "objectID": "Slides/W1_IntroR.html#r-markdown",
+    "href": "Slides/W1_IntroR.html#r-markdown",
+    "title": "Intro to R",
+    "section": "R Markdown",
+    "text": "R Markdown\nR scripts are a good way to save your code. However, you’d better heavily comment in your scripts, so that future you (and potentially collaborators) know what happens in your script.\nAn alternative is an R Markdown file. This is also a sort of script, but you can write text (like in a word processor) and mix it with code chunks, where you can write your R code. R Markdown is the “language” you use to write in these files, which is a variety of Markdown.\nThe advantage of R Markdown files (ending with .Rmd) is that they increase reproducibility. For example, you can write whole reports in R Markdown (and also these slides are made with it!).\nA newer variant is called quarto, which works very similar (but is more flexible) to R Markdown."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-2",
+    "href": "Slides/W1_IntroR.html#r-markdown-2",
+    "title": "Intro to R",
+    "section": "R Markdown 2",
+    "text": "R Markdown 2\n\n\n\nR script\n\n\n\n\n\nR Markdown\n\n\n\n\n\nR Markdown rendered as html report"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-3",
+    "href": "Slides/W1_IntroR.html#r-markdown-3",
+    "title": "Intro to R",
+    "section": "R Markdown 3",
+    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\n\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\nClick on the little arrow next to knit and select “Knit to PDF”\ninsert inline code"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-4",
+    "href": "Slides/W1_IntroR.html#r-markdown-4",
+    "title": "Intro to R",
+    "section": "R Markdown 4",
+    "text": "R Markdown 4\nThere are many useful things you can so with R Markdown: Adding different headers, adding inline code, knitting as a PDF, adding pictures or tables…You can also decide whether the code chunks should be visible in the output etc.\nFor further information, check out the R Markdown cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"
+  },
+  {
     "objectID": "Slides/W1_IntroR.html#thanks",
     "href": "Slides/W1_IntroR.html#thanks",
     "title": "Intro to R",
     "section": "Thanks!",
-    "text": "Thanks!\nThat’s the lesson on “Getting started with R”! If you have any questions, feel free to ask me or post on MS Teams.\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
+    "text": "Thanks!\nThat’s the lesson on “Getting started with R”!\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#ggplot",
+    "href": "Slides/W3b_DataVizR.html#ggplot",
+    "title": "Data Visualization",
+    "section": "ggplot",
+    "text": "ggplot\nWe will use a package called ggplot2 (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful, publication ready figures.\nThe main function to “start” plotting is ggplot() - we will then add layers of data and layers to tweak the appearance.\n\nLayers of a ggplot"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#activity-1-set-up",
+    "href": "Slides/W3b_DataVizR.html#activity-1-set-up",
+    "title": "Data Visualization",
+    "section": "Activity 1: Set Up",
+    "text": "Activity 1: Set Up\n\nDownload ahi-cesd.csv and participant-info.csv into the folder on your computer for this chapter!\nOpen RStudio and set the working directory to your chapter folder. Ensure the environment is clear.\nOpen a new R Markdown document and save it in your working directory. Call the file “DataVisualisation1”.\nDelete the default R Markdown welcome text and insert a new code chunk.\nType and run the below code to load the tidyverse package and to load in the data files.\n\n\nlibrary(tidyverse) \n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nall_dat &lt;- inner_join(dat, \n                      pinfo, \n                      by= c(\"id\", \"intervention\"))\n\nsummarydata &lt;- select(.data = all_dat, \n                      ahiTotal, \n                      cesdTotal, \n                      sex, \n                      age, \n                      educ, \n                      income, \n                      occasion, \n                      elapsed.days) \n\n\nwhat happens in the code chunk?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#look-at-the-data",
+    "href": "Slides/W3b_DataVizR.html#look-at-the-data",
+    "title": "Data Visualization",
+    "section": "Look at the Data",
+    "text": "Look at the Data\nHave a look at the types of data:\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;dbl&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;dbl&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…\n\n\nWhat do you see?\n\nAll variables are loaded as numeric. However, are all of those numeric?\n\n\nsex, educ and income are categories, not numbers per se. We call these variables factors! We need to correct R and convert the data type to factor. Checking and adjusting the data types will be important for plotting and analyzing the data, you might otherwise get strange/wrong results!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
+    "href": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
+    "title": "Data Visualization",
+    "section": "Activity 2: Transform Data Type",
+    "text": "Activity 2: Transform Data Type\nType and run the below code to change the categories to factors.\n\nYou can read each line of the mutate as “overwrite the data that is in that column with the same values now considered factors and not doubles”\nSo for example, the 1s in sex change to categorical factors instead of numerical 1s.\nRemember if you mutate a new column with the same name as the old one, it will overwrite the column.\n\n\nsummarydata &lt;- summarydata %&gt;%\n  mutate(sex = as_factor(sex),\n         educ = as_factor(educ),\n         income = as_factor(income))\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;fct&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;fct&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;fct&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-first-layer",
+    "href": "Slides/W3b_DataVizR.html#the-first-layer",
+    "title": "Data Visualization",
+    "section": "The First Layer",
+    "text": "The First Layer\n\nThe first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).\naes() can take both an x and y argument, however, with a bar plot you are just asking R to count the number of data points in each group so you don’t need to specify this.\n\n\n\nggplot(summarydata, aes(x = sex))"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-second-layer",
+    "href": "Slides/W3b_DataVizR.html#the-second-layer",
+    "title": "Data Visualization",
+    "section": "The Second Layer",
+    "text": "The Second Layer\nThe next layer adds a geom or a shape, in this case we use geom_bar() as we want to draw a bar plot.\n\nNote that we are adding layers, using a + between layers. This is a very important difference between pipes and visualization.\n\n\n\nggplot(summarydata, aes(x = sex)) +\n  geom_bar()\n\n\n\n\n\n\n\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE)"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
+    "href": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
+    "title": "Data Visualization",
+    "section": "The Next Layers - Improving the Plot",
+    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
+    "href": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
+    "title": "Data Visualization",
+    "section": "Themes: Changing the Appearance",
+    "text": "Themes: Changing the Appearance\nThere are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.\nWe will now change the default theme to theme_minimal(), but you can also try other themes (just type “theme_” and see what the autocomplete brings up).\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#colors",
+    "href": "Slides/W3b_DataVizR.html#colors",
+    "title": "Data Visualization",
+    "section": "Colors",
+    "text": "Colors\nThere are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.\nA popular palette is viridis. We can simply add a function/layer to your ggplot named scale_fill_viridis_d() (d for discrete). The function hast 5 color options (A - E).\n\nType and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#transparency",
+    "href": "Slides/W3b_DataVizR.html#transparency",
+    "title": "Data Visualization",
+    "section": "Transparency",
+    "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#grouped-plots",
+    "href": "Slides/W3b_DataVizR.html#grouped-plots",
+    "title": "Data Visualization",
+    "section": "Grouped Plots",
+    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\",\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#facetting",
+    "href": "Slides/W3b_DataVizR.html#facetting",
+    "title": "Data Visualization",
+    "section": "Facetting",
+    "text": "Facetting\nYou could also use facets to divide your data visualizations:\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_wrap(~income)"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#violin-boxplot",
+    "href": "Slides/W3b_DataVizR.html#violin-boxplot",
+    "title": "Data Visualization",
+    "section": "Violin-Boxplot",
+    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot before?\n\n\nggplot(summarydata, aes(x = income, \n                        y = ahiTotal, \n                        fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#layer-order",
+    "href": "Slides/W3b_DataVizR.html#layer-order",
+    "title": "Data Visualization",
+    "section": "Layer Order",
+    "text": "Layer Order\nThe order of layers is crucial, as the plot will be built up in that order:\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_violin() +\n  geom_boxplot()\n\n\n\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_boxplot() +\n  geom_violin()"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#scatterplot",
+    "href": "Slides/W3b_DataVizR.html#scatterplot",
+    "title": "Data Visualization",
+    "section": "Scatterplot",
+    "text": "Scatterplot\nIf we have continuous data of two variables, we often want to make a scatter plot:\n\n\nggplot(summarydata, aes(x = age, y = cesdTotal))+\n  geom_point()+\n  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures",
+    "href": "Slides/W3b_DataVizR.html#saving-your-figures",
+    "title": "Data Visualization",
+    "section": "Saving your Figures",
+    "text": "Saving your Figures\nYou can use ggsave() to save your plots. If you don’t tell ggsave() which plot you want to save, by default it will save the last plot you created.\nYou just have to enter the name of the file to be saved (in your working directory) like this:\n\nggsave(\"violin-boxplot.png\")\n\nCheck whether indeed the last plot was saved!\n\nYou can also specify the dimensions of your plot to be saved:\n\nggsave(\"violin-boxplot.png\",\n       width = 10,\n       height = 8,\n       units = \"cm\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures-2",
+    "href": "Slides/W3b_DataVizR.html#saving-your-figures-2",
+    "title": "Data Visualization",
+    "section": "Saving your Figures 2",
+    "text": "Saving your Figures 2\nYou can also assign the plot to an object in your environment (just like we did with the tibbles previously) and then tell ggsave() which object to save. This is a bit safer.\nRun the code for the violin-boxplot again and save the plot in an object called viobox. You’d then have to explicitly tell ggsave() to save the object viobox:\n\n\nviobox &lt;- summarydata %&gt;%\n  ggplot(aes(x = income,\n             y = ahiTotal,\n             fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\nggsave(\"violin-boxplot-stored.png\", plot = viobox)\n\n\n\n\n\nDo not add ggsave() to the plot with a +. Instead run it on a separate line!\nIf plot is assigned to object, it won’t be displayed unless you type viobox in the console!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#thanks",
+    "href": "Slides/W3b_DataVizR.html#thanks",
+    "title": "Data Visualization",
+    "section": "Thanks!",
+    "text": "Thanks!\nCheck out Chapter 13 of QuantFun for further exercises and tips for data visualization!\nAlso keep in mind: Coding is a lot of googling things!\nYou can also check out the R Graph Gallery for code for different types of plots.\n\nLearning objectives\n\nKnow how to transform (pivot) and join data\nUnderstand the basics of a ggplot (layers etc.)\nBe able to make your first own plots, such as bar charts, violin + boxplots, scatterplots\nKnow what a grouped plot and a facetted plot is\n\n\n\nNext:\n\n?"
   }
 ]
