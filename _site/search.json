@@ -382,7 +382,7 @@
     "href": "Slides/W1_IntroR.html#r-markdown-3",
     "title": "Intro to R",
     "section": "R Markdown 3",
-    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\n\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\nClick on the little arrow next to knit and select “Knit to PDF”\ninsert inline code"
+    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\n\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\nClick on the little arrow next to knit and select “Knit to PDF”\n\ninsert inline code"
   },
   {
     "objectID": "Slides/W1_IntroR.html#r-markdown-4",

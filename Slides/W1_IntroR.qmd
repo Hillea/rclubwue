@@ -18,7 +18,7 @@ editor: visual
 from: markdown+emoji
 ---
 
-# R!
+# R Coding Club?!?
 
 ```{css}
 code.sourceCode {
@@ -29,10 +29,23 @@ div.cell-output-stdout {
   font-size: 1.4em;
 }
 ```
+
+What is a *coding club*?
+
 . . .
-You can find the slides on our **course website**: 
-https://hillea.github.io/rclubwue/slides.html! 
-Handy to follow along and to possibly copy code. 
+
+> "Coding Club is for everyone, regardless of their career stage or current
+> level of knowledge. Coding Club is a place that brings people together,
+> regardless of their gender or background. We all have the right to
+> learn, and we believe learning is more fun and efficient when we help
+> each other along the way." (<https://ourcodingclub.github.io/>)
+
+::: notes
+It would be great if everyone contributes!
+
+\
+. . You can find the slides on our **course website**: https://hillea.github.io/rclubwue/slides.html! Handy to follow along and to possibly copy code.
+:::
 
 ::: notes
 Who has experience with coding and/or R?
@@ -327,11 +340,11 @@ A newer variant is called *quarto*, which works very similar (but is more flexib
 
 ## R Markdown 2
 
-![R script](images/Rscript.jpg){alt="R script"}
+![R script](images/Rscript.jpg)
 
-![R Markdown](images/Rmd.jpg){alt="R Markdown"}
+![R Markdown](images/Rmd.jpg)
 
-![R Markdown rendered as html report](images/rmdrendered.jpg){alt="R Markdown rendered as html report" width="400"}
+![R Markdown rendered as html report](images/rmdrendered.jpg){width="400"}
 
 ## R Markdown 3
 
@@ -348,14 +361,16 @@ A newer variant is called *quarto*, which works very similar (but is more flexib
 
 -   In the grey boxes ("code chunks"), add some code. Try to find out how you can add a new code chunk.
 
+    -   hint: The green C with the + on the top right will do so (or using "insert" in the visual view)
+
 -   Save the file with a sensible name.
 
 -   What happens when you click on "Knit" (top of Script pane)?
-:::
 
--   hint: The green C with the + on the top right will do so (or using "insert" in the visual view)
--   Click on the little arrow next to knit and select "Knit to PDF"
+    -   Click on the little arrow next to knit and select "Knit to PDF"
+
 -   insert inline code
+:::
 
 ## R Markdown 4
 
