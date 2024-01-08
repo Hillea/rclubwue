@@ -1,10 +1,374 @@
 [
   {
-    "objectID": "slides.html",
-    "href": "slides.html",
-    "title": "Slides",
+    "objectID": "webexercises.html",
+    "href": "webexercises.html",
+    "title": "Webexercises",
     "section": "",
-    "text": "Intro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 30, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "This is a Web Exercise template created by the psychology teaching team at the University of Glasgow, based on ideas from Software Carpentry. This template shows how instructors can easily create interactive web documents that students can use in self-guided learning.\nThe {webexercises} package provides a number of functions that you use in inline R code or through code chunk options to create HTML widgets (text boxes, pull down menus, buttons that reveal hidden content). Examples are given below. Render this file to HTML to see how it works.\nNOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser."
+  },
+  {
+    "objectID": "webexercises.html#example-questions",
+    "href": "webexercises.html#example-questions",
+    "title": "Webexercises",
+    "section": "Example Questions",
+    "text": "Example Questions\n\nFill-In-The-Blanks (fitb())\nCreate fill-in-the-blank questions using fitb(), providing the answer as the first argument.\n\n2 + 2 is \n\nYou can also create these questions dynamically, using variables from your R session.\n\nThe square root of 4 is: \n\nThe blanks are case-sensitive; if you don’t care about case, use the argument ignore_case = TRUE.\n\nWhat is the letter after D? \n\nIf you want to ignore differences in whitespace use, use the argument ignore_ws = TRUE (which is the default) and include spaces in your answer anywhere they could be acceptable.\n\nHow do you load the tidyverse package? \n\nYou can set more than one possible correct answer by setting the answers as a vector.\n\nType a vowel: \n\nYou can use regular expressions to test answers against more complex rules.\n\nType any 3 letters: \n\n\n\nMultiple Choice (mcq())\n\n“Never gonna give you up, never gonna: let you goturn you downrun awaylet you down”\n“I bless the rainsguess it rainssense the rain down in Africa” -Toto\n\n\n\nTrue or False (torf())\n\nTrue or False? You can permute values in a vector using sample(). TRUEFALSE\n\n\n\nLonger MCQs (longmcq())\nWhen your answers are very long, sometimes a drop-down select box gets formatted oddly. You can use longmcq() to deal with this. Since the answers are long, It’s probably best to set up the options inside an R chunk with echo=FALSE.\nWhat is a p-value?\n\n the probability that the null hypothesis is true the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true the probability of making an error in your conclusion\n\nWhat is true about a 95% confidence interval of the mean?\n\n 95% of the data fall within this range there is a 95% probability that the true mean lies within this range if you repeated the process many times, 95% of intervals calculated in this way contain the true mean"
+  },
+  {
+    "objectID": "webexercises.html#checked-sections",
+    "href": "webexercises.html#checked-sections",
+    "title": "Webexercises",
+    "section": "Checked sections",
+    "text": "Checked sections\nCreate sections with the class webex-check to add a button that hides feedback until it is pressed. Add the class webex-box to draw a box around the section (or use your own styles).\n\nI am going to learn a lot: TRUEFALSE\nWhat is a p-value?\n\n the probability that the null hypothesis is true the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true the probability of making an error in your conclusion"
+  },
+  {
+    "objectID": "webexercises.html#hidden-solutions-and-hints",
+    "href": "webexercises.html#hidden-solutions-and-hints",
+    "title": "Webexercises",
+    "section": "Hidden solutions and hints",
+    "text": "Hidden solutions and hints\nYou can fence off a solution area that will be hidden behind a button using hide() before the solution and unhide() after, each as inline R code. Pass the text you want to appear on the button to the hide() function.\nIf the solution is a code chunk, instead of using hide() and unhide(), simply set the webex.hide chunk option to TRUE, or set it to the string you wish to display on the button.\nRecreate the scatterplot below, using the built-in cars dataset.\n\n\n\n\n\n\n\nI need a hint\n\nSee the documentation for plot() (?plot)\n\n\n\n\n\nClick here to see the solution\n\nplot(cars$speed, cars$dist)"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#ggplot",
+    "href": "Slides/W3b_DataVizR.html#ggplot",
+    "title": "Data Visualization",
+    "section": "ggplot",
+    "text": "ggplot\nWe will use a package called ggplot2 (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful, publication ready figures.\nThe main function to “start” plotting is ggplot() - we will then add layers of data and layers to tweak the appearance.\n\nLayers of a ggplot"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#activity-1-set-up",
+    "href": "Slides/W3b_DataVizR.html#activity-1-set-up",
+    "title": "Data Visualization",
+    "section": "Activity 1: Set Up",
+    "text": "Activity 1: Set Up\n\nDownload ahi-cesd.csv and participant-info.csv into the folder on your computer for this chapter!\nOpen RStudio and set the working directory to your chapter folder. Ensure the environment is clear.\nOpen a new R Markdown document and save it in your working directory. Call the file “DataVisualisation1”.\nDelete the default R Markdown welcome text and insert a new code chunk.\nType and run the below code to load the tidyverse package and to load in the data files.\n\n\nlibrary(tidyverse) \n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nall_dat &lt;- inner_join(dat, \n                      pinfo, \n                      by= c(\"id\", \"intervention\"))\n\nsummarydata &lt;- select(.data = all_dat, \n                      ahiTotal, \n                      cesdTotal, \n                      sex, \n                      age, \n                      educ, \n                      income, \n                      occasion, \n                      elapsed.days) \n\n\nwhat happens in the code chunk?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#look-at-the-data",
+    "href": "Slides/W3b_DataVizR.html#look-at-the-data",
+    "title": "Data Visualization",
+    "section": "Look at the Data",
+    "text": "Look at the Data\nHave a look at the types of data:\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;dbl&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;dbl&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…\n\n\nWhat do you see?\n\nAll variables are loaded as numeric. However, are all of those numeric?\n\n\nsex, educ and income are categories, not numbers per se. We call these variables factors! We need to correct R and convert the data type to factor. Checking and adjusting the data types will be important for plotting and analyzing the data, you might otherwise get strange/wrong results!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
+    "href": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
+    "title": "Data Visualization",
+    "section": "Activity 2: Transform Data Type",
+    "text": "Activity 2: Transform Data Type\nType and run the below code to change the categories to factors.\n\nYou can read each line of the mutate as “overwrite the data that is in that column with the same values now considered factors and not doubles”\nSo for example, the 1s in sex change to categorical factors instead of numerical 1s.\nRemember if you mutate a new column with the same name as the old one, it will overwrite the column.\n\n\nsummarydata &lt;- summarydata %&gt;%\n  mutate(sex = as_factor(sex),\n         educ = as_factor(educ),\n         income = as_factor(income))\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;fct&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;fct&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;fct&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-first-layer",
+    "href": "Slides/W3b_DataVizR.html#the-first-layer",
+    "title": "Data Visualization",
+    "section": "The First Layer",
+    "text": "The First Layer\n\nThe first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).\naes() can take both an x and y argument, however, with a bar plot you are just asking R to count the number of data points in each group so you don’t need to specify this.\n\n\n\nggplot(summarydata, aes(x = sex))"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-second-layer",
+    "href": "Slides/W3b_DataVizR.html#the-second-layer",
+    "title": "Data Visualization",
+    "section": "The Second Layer",
+    "text": "The Second Layer\nThe next layer adds a geom or a shape, in this case we use geom_bar() as we want to draw a bar plot.\n\nNote that we are adding layers, using a + between layers. This is a very important difference between pipes and visualization.\n\n\n\nggplot(summarydata, aes(x = sex)) +\n  geom_bar()\n\n\n\n\n\n\n\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE)"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
+    "href": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
+    "title": "Data Visualization",
+    "section": "The Next Layers - Improving the Plot",
+    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
+    "href": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
+    "title": "Data Visualization",
+    "section": "Themes: Changing the Appearance",
+    "text": "Themes: Changing the Appearance\nThere are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.\nWe will now change the default theme to theme_minimal(), but you can also try other themes (just type “theme_” and see what the autocomplete brings up).\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#colors",
+    "href": "Slides/W3b_DataVizR.html#colors",
+    "title": "Data Visualization",
+    "section": "Colors",
+    "text": "Colors\nThere are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.\nA popular palette is viridis. We can simply add a function/layer to your ggplot named scale_fill_viridis_d() (d for discrete). The function hast 5 color options (A - E).\n\nType and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#transparency",
+    "href": "Slides/W3b_DataVizR.html#transparency",
+    "title": "Data Visualization",
+    "section": "Transparency",
+    "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#grouped-plots",
+    "href": "Slides/W3b_DataVizR.html#grouped-plots",
+    "title": "Data Visualization",
+    "section": "Grouped Plots",
+    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\",\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#facetting",
+    "href": "Slides/W3b_DataVizR.html#facetting",
+    "title": "Data Visualization",
+    "section": "Facetting",
+    "text": "Facetting\nYou could also use facets to divide your data visualizations:\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_wrap(~income)"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#violin-boxplot",
+    "href": "Slides/W3b_DataVizR.html#violin-boxplot",
+    "title": "Data Visualization",
+    "section": "Violin-Boxplot",
+    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot before?\n\n\nggplot(summarydata, aes(x = income, \n                        y = ahiTotal, \n                        fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#layer-order",
+    "href": "Slides/W3b_DataVizR.html#layer-order",
+    "title": "Data Visualization",
+    "section": "Layer Order",
+    "text": "Layer Order\nThe order of layers is crucial, as the plot will be built up in that order:\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_violin() +\n  geom_boxplot()\n\n\n\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_boxplot() +\n  geom_violin()"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#scatterplot",
+    "href": "Slides/W3b_DataVizR.html#scatterplot",
+    "title": "Data Visualization",
+    "section": "Scatterplot",
+    "text": "Scatterplot\nIf we have continuous data of two variables, we often want to make a scatter plot:\n\n\nggplot(summarydata, aes(x = age, y = cesdTotal))+\n  geom_point()+\n  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures",
+    "href": "Slides/W3b_DataVizR.html#saving-your-figures",
+    "title": "Data Visualization",
+    "section": "Saving your Figures",
+    "text": "Saving your Figures\nYou can use ggsave() to save your plots. If you don’t tell ggsave() which plot you want to save, by default it will save the last plot you created.\nYou just have to enter the name of the file to be saved (in your working directory) like this:\n\nggsave(\"violin-boxplot.png\")\n\nCheck whether indeed the last plot was saved!\n\nYou can also specify the dimensions of your plot to be saved:\n\nggsave(\"violin-boxplot.png\",\n       width = 10,\n       height = 8,\n       units = \"cm\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures-2",
+    "href": "Slides/W3b_DataVizR.html#saving-your-figures-2",
+    "title": "Data Visualization",
+    "section": "Saving your Figures 2",
+    "text": "Saving your Figures 2\nYou can also assign the plot to an object in your environment (just like we did with the tibbles previously) and then tell ggsave() which object to save. This is a bit safer.\nRun the code for the violin-boxplot again and save the plot in an object called viobox. You’d then have to explicitly tell ggsave() to save the object viobox:\n\n\nviobox &lt;- summarydata %&gt;%\n  ggplot(aes(x = income,\n             y = ahiTotal,\n             fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\nggsave(\"violin-boxplot-stored.png\", plot = viobox)\n\n\n\n\n\nDo not add ggsave() to the plot with a +. Instead run it on a separate line!\nIf plot is assigned to object, it won’t be displayed unless you type viobox in the console!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#thanks",
+    "href": "Slides/W3b_DataVizR.html#thanks",
+    "title": "Data Visualization",
+    "section": "Thanks!",
+    "text": "Thanks!\nCheck out Chapter 13 of QuantFun for further exercises and tips for data visualization!\nAlso keep in mind: Coding is a lot of googling things!\nYou can also check out the R Graph Gallery for code for different types of plots.\n\nLearning objectives\n\nKnow how to transform (pivot) and join data\nUnderstand the basics of a ggplot (layers etc.)\nBe able to make your first own plots, such as bar charts, violin + boxplots, scatterplots\nKnow what a grouped plot and a facetted plot is\n\n\n\nNext:\n\n?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#why-write-code",
+    "href": "Slides/W1_IntroR.html#why-write-code",
+    "title": "Intro to R",
+    "section": "Why write code?",
+    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g. SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nYou’ll learn to program!\n\n\n\nChat: What are advantages (or disadvantages!) of coding?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#install-r-rstudio",
+    "href": "Slides/W1_IntroR.html#install-r-rstudio",
+    "title": "Intro to R",
+    "section": "Install R & RStudio",
+    "text": "Install R & RStudio\nYou should all have installed both by now! Who had problems doing so?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#overview-rstudio",
+    "href": "Slides/W1_IntroR.html#overview-rstudio",
+    "title": "Intro to R",
+    "section": "Overview RStudio",
+    "text": "Overview RStudio\n\nRStudio Interface\nopen RStudio!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#rstudio-panes",
+    "href": "Slides/W1_IntroR.html#rstudio-panes",
+    "title": "Intro to R",
+    "section": "RStudio Panes",
+    "text": "RStudio Panes\n\n\n\nScript pane/window -&gt; to save your code\nConsole -&gt; here the commands are run\nEnvironment -&gt; which variables/dataframes are saved\nFiles, plots, help etc. -&gt; files shows you the files in the folder you’re currently in\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\n\nConsole vs. Script (Rmarkdown later)"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
+    "href": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
+    "title": "Intro to R",
+    "section": "Using the Console as a Calculator",
+    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
+    "href": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
+    "title": "Intro to R",
+    "section": "Saving the Results as a Variable/Object",
+    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n“&lt;-” is used to assign values to variables (“=” is also possible but not preferred)\na, multi etc. are the variable names, which can be words, no whitespace allowed\n\nYou can find those now in your Environment!\n\nas you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.\nno output in console!\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\nYou can use those variables for further calculations, e.g. a + multi\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#working-directory",
+    "href": "Slides/W1_IntroR.html#working-directory",
+    "title": "Intro to R",
+    "section": "Working Directory",
+    "text": "Working Directory\n\nIt makes sense to save all your scripts etc. in a folder specifically dedicated to this course.\n\nMake sure that R knows that you want to work in this folder, i.e. set your working directory:\n\nSession -&gt; Set Working Directory -&gt; Choose Directory\n\nAssignment: Please make a folder, e.g. called “R_Club” (but not “R” or anything with spaces in it). Then set your working directory to this folder."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#scripts",
+    "href": "Slides/W1_IntroR.html#scripts",
+    "title": "Intro to R",
+    "section": "Scripts",
+    "text": "Scripts\nIf you type in all your commands/code in the console, it might get lost/you might not remember what you did, and you always have to type it in again if you want to run it again with slight changes. Also, the code in the console is not save-able.\nTherefore, it is better practice to write scripts. Scripts are basically text files that contain your code.\n\nTo open a new script, click File -&gt; New File -&gt; R Script.\nTo run a line of the script, you can either click Run at the top right of the pane or press ctrl + enter. It will always run the line where the cursor is located (or the lines that you have selected with the mouse). To run the whole script, press ctrl + shift + enter."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#scripts-2",
+    "href": "Slides/W1_IntroR.html#scripts-2",
+    "title": "Intro to R",
+    "section": "Scripts 2",
+    "text": "Scripts 2\nAssignment: Open a new file. In this file, write down some of the code (one command per line) that we have used so far and save the file.\nNow run the code (either by pressing “run” at the top right of the script or ctrl + enter)."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#functions",
+    "href": "Slides/W1_IntroR.html#functions",
+    "title": "Intro to R",
+    "section": "Functions",
+    "text": "Functions\nYou might have noticed sqrt(9) earlier. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type ?functionname() in the console, e.g.\n\n?sqrt()\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\n\nDo this now! Anything unclear?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#functions-2",
+    "href": "Slides/W1_IntroR.html#functions-2",
+    "title": "Intro to R",
+    "section": "Functions 2",
+    "text": "Functions 2\nFunctions often take more than one argument:\n\nrnorm(n = 6, mean = 3, sd = 1)\n# rnorm(6, 3, 1)\n\n# By the way, # denotes a comment (ignored by R), which can be helpful for scripting!\n\nYou can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file)."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#packages",
+    "href": "Slides/W1_IntroR.html#packages",
+    "title": "Intro to R",
+    "section": "Packages",
+    "text": "Packages\nThere are a number of functions that are already included with Base R, but you can greatly extend the power of R by loading packages. Packages are like libraries of functions that someone else wrote.\nYou can load a package using the install.packages() function:\n\ninstall.packages(\"tidyverse\")\n\n(It may be necessary to install Rtools: https://cran.r-project.org/bin/windows/Rtools/)\nBut installing is not enough to be able to actually use the functions from that package. You’d also need to load the package with the libary() function:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\nAssignment: Install and load the tidyverse package (which we will use a lot in this course).\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#read-in-data",
+    "href": "Slides/W1_IntroR.html#read-in-data",
+    "title": "Intro to R",
+    "section": "Read in Data",
+    "text": "Read in Data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats.\nWe will use the files from Fundamentals of Quantitative Analysis. Save these in your course folder on your computer (do not open them!). Set your working directory to the course folder.\n\nDelete the text/code in the .Rmd document you just worked on (or add a new header like “Working with data”). Underneath, add a code chunk with the following content:\n\n# library(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code chunk!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#looking-at-the-data",
+    "href": "Slides/W1_IntroR.html#looking-at-the-data",
+    "title": "Intro to R",
+    "section": "Looking at the Data",
+    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on the object/variable name in your Environment.\nType View(NameOfObject) in your console, e.g. View(dat).\nIn the console, type in str(dat) or str(pinfo) to get an overview of the data.\nIn the console, type in summary(dat).\nIn the console, type in head(dat).\nWhat is the difference between these commands?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#looking-at-the-data-2",
+    "href": "Slides/W1_IntroR.html#looking-at-the-data-2",
+    "title": "Intro to R",
+    "section": "Looking at the Data 2",
+    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nThe two objects we just read in are data frames, which consists of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown",
+    "href": "Slides/W1_IntroR.html#r-markdown",
+    "title": "Intro to R",
+    "section": "R Markdown",
+    "text": "R Markdown\nR scripts are a good way to save your code. However, you’d better heavily comment in your scripts, so that future you (and potentially collaborators) know what happens in your script.\nAn alternative is an R Markdown file. This is also a sort of script, but you can write text (like in a word processor) and mix it with code chunks, where you can write your R code. R Markdown is the “language” you use to write in these files, which is a variety of Markdown.\nThe advantage of R Markdown files (ending with .Rmd) is that they increase reproducibility. For example, you can write whole reports in R Markdown (and also these slides are made with it!).\nA newer variant is called quarto, which works very similar (but is more flexible) to R Markdown."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-2",
+    "href": "Slides/W1_IntroR.html#r-markdown-2",
+    "title": "Intro to R",
+    "section": "R Markdown 2",
+    "text": "R Markdown 2\n\n\n\nR script\n\n\n\n\n\nR Markdown\n\n\n\n\n\nR Markdown rendered as html report"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-3",
+    "href": "Slides/W1_IntroR.html#r-markdown-3",
+    "title": "Intro to R",
+    "section": "R Markdown 3",
+    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\n\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\nClick on the little arrow next to knit and select “Knit to PDF”\n\ninsert inline code"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-4",
+    "href": "Slides/W1_IntroR.html#r-markdown-4",
+    "title": "Intro to R",
+    "section": "R Markdown 4",
+    "text": "R Markdown 4\nThere are many useful things you can so with R Markdown: Adding different headers, adding inline code, knitting as a PDF, adding pictures or tables…You can also decide whether the code chunks should be visible in the output etc.\nFor further information, check out the R Markdown cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#thanks",
+    "href": "Slides/W1_IntroR.html#thanks",
+    "title": "Intro to R",
+    "section": "Thanks!",
+    "text": "Thanks!\nThat’s the lesson on “Getting started with R”!\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R Club Würzburg",
+    "section": "",
+    "text": "This is the course website of the R Club of the Research Training Group 2660 at the University and University Clinic in Würzburg, Germany - but it’s open to everyone if space is available!\nThe R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. This way, we can all learn together!\nWe meet weekly on Tuesdays, 16:00 - 18:00 in Room 213 at the Marcusstr, starting in January 2024. The syllabus can be found here. On this page, the slides etc. will be linked.\n\n\n\nSession\nDate\nTopic\nPreparation/Notes\n\n\n\n\n1\n16.01.24\nIntro to R & RStudio\nInstall R and RStudio\n\n\n2\n23.01.24\nData Wrangling\nQuiz 1\n\n\n3\n30.01.24\nData Visualization\n\n\n\n4\n06.02.24\nPreprocessing, e.g. physio data\n\n\n\n5\n13.02.24\n(Semester break or continue?)\n\n\n\n6\n20.02.24\n\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\""
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "The R Club is part of the Research Training Group 2660. The target group are PhD researchers in psychology and neuroscience. Responsible for organizing the R Club is Lea Hildebrandt, but all participants are very welcome to contribute."
+  },
+  {
+    "objectID": "exercises.html",
+    "href": "exercises.html",
+    "title": "Web Exercises",
+    "section": "",
+    "text": "This is a Web Exercise template created by the #PsyTeachR team at the University of Glasgow, based on ideas from Software Carpentry. This template shows how instructors can easily create interactive web documents that students can use in self-guided learning.\nThe {webexercises} package provides a number of functions that you use in inline R code or through code chunk options to create HTML widgets (text boxes, pull down menus, buttons that reveal hidden content). Examples are given below. Knit this file to HTML to see how it works.\nNOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser."
+  },
+  {
+    "objectID": "exercises.html#fill-in-the-blanks-fitb",
+    "href": "exercises.html#fill-in-the-blanks-fitb",
+    "title": "Web Exercises",
+    "section": "Fill-In-The-Blanks (fitb())",
+    "text": "Fill-In-The-Blanks (fitb())\nCreate fill-in-the-blank questions using fitb(), providing the answer as the first argument.\n\n2 + 2 is \n\nYou can also create these questions dynamically, using variables from your R session.\n\nThe square root of 9 is: \n\nThe blanks are case-sensitive; if you don’t care about case, use the argument ignore_case = TRUE.\n\nWhat is the letter after D? \n\nIf you want to ignore differences in whitespace use, use the argument ignore_ws = TRUE (which is the default) and include spaces in your answer anywhere they could be acceptable.\n\nHow do you load the tidyverse package? \n\nYou can set more than one possible correct answer by setting the answers as a vector.\n\nType a vowel: \n\nYou can use regular expressions to test answers against more complex rules.\n\nType any 3 letters:"
+  },
+  {
+    "objectID": "exercises.html#multiple-choice-mcq",
+    "href": "exercises.html#multiple-choice-mcq",
+    "title": "Web Exercises",
+    "section": "Multiple Choice (mcq())",
+    "text": "Multiple Choice (mcq())\n\n“Never gonna give you up, never gonna: let you goturn you downrun awaylet you down”\n“I bless the rainsguess it rainssense the rain down in Africa” -Toto"
+  },
+  {
+    "objectID": "exercises.html#true-or-false-torf",
+    "href": "exercises.html#true-or-false-torf",
+    "title": "Web Exercises",
+    "section": "True or False (torf())",
+    "text": "True or False (torf())\n\nTrue or False? You can permute values in a vector using sample(). TRUEFALSE"
+  },
+  {
+    "objectID": "exercises.html#longer-mcqs-longmcq",
+    "href": "exercises.html#longer-mcqs-longmcq",
+    "title": "Web Exercises",
+    "section": "Longer MCQs (longmcq())",
+    "text": "Longer MCQs (longmcq())\nWhen your answers are very long, sometimes a drop-down select box gets formatted oddly. You can use longmcq() to deal with this. Since the answers are long, It’s probably best to set up the options inside an R chunk with echo=FALSE.\nWhat is a p-value?\n\n the probability that the null hypothesis is true the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true the probability of making an error in your conclusion\n\nWhat is true about a 95% confidence interval of the mean?\n\n if you repeated the process many times, 95% of intervals calculated in this way contain the true mean 95% of the data fall within this range there is a 95% probability that the true mean lies within this range"
+  },
+  {
+    "objectID": "exercises.html#checked-sections",
+    "href": "exercises.html#checked-sections",
+    "title": "Web Exercises",
+    "section": "Checked sections",
+    "text": "Checked sections\nCreate sections with the class webex-check to add a button that hides feedback until it is pressed. Add the class webex-box to draw a box around the section (or use your own styles).\n\nI am going to learn a lot: TRUEFALSE\nWhat is a p-value?\n\n the probability that the null hypothesis is true the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true the probability of making an error in your conclusion"
+  },
+  {
+    "objectID": "exercises.html#hidden-solutions-and-hints",
+    "href": "exercises.html#hidden-solutions-and-hints",
+    "title": "Web Exercises",
+    "section": "Hidden solutions and hints",
+    "text": "Hidden solutions and hints\nYou can fence off a solution area that will be hidden behind a button using hide() before the solution and unhide() after, each as inline R code. Pass the text you want to appear on the button to the hide() function.\nIf the solution is an RMarkdown code chunk, instead of using hide() and unhide(), simply set the webex.hide chunk option to TRUE, or set it to the string you wish to display on the button.\nRecreate the scatterplot below, using the built-in cars dataset.\n\n\n\n\n\n\n\nI need a hint\n\nSee the documentation for plot() (?plot)\n\n\n\n\n\nClick here to see the solution\n\nplot(cars$speed, cars$dist)"
+  },
+  {
+    "objectID": "quiz1.html",
+    "href": "quiz1.html",
+    "title": "Quiz 1",
+    "section": "",
+    "text": "Welcome to the first quiz to test your knowledge after week 1 of the R coding club!\nNOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser."
+  },
+  {
+    "objectID": "quiz1.html#questions",
+    "href": "quiz1.html#questions",
+    "title": "Quiz 1",
+    "section": "Questions",
+    "text": "Questions\n\nWhat is not an advantage of using R: ReproducibilityCodingPoint-and-click software\nHow do you call the window in R Studio where your code is carried out? ScriptEnvironmentViewerConsole\nHow do you open the help file for a function? ?functionname()help functionnamefunctionname()functionname help?\nHow do you load the tidyverse package? \nWhat is not a way to inspect your data? glimpse(dataframe)see(dataframe)View(dataframe)summary(dataframe)"
   },
   {
     "objectID": "Slides/W2b_DataWranglingR.html#data-wrangling",
@@ -245,283 +609,10 @@
     "text": "Thanks!\nLearning objectives:\n\nLearn about tidyverse vs. base R\nLearn and apply the six basic dplyr “verbs”\nLearn how to join data frames\n\n\nNext week:\nData Visualization in R"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "R Club Würzburg",
+    "objectID": "slides.html",
+    "href": "slides.html",
+    "title": "Slides",
     "section": "",
-    "text": "This is the course website of the R Club of the Research Training Group 2660 at the University and University Clinic in Würzburg, Germany - but it’s open to everyone if space is available!\nThe R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. This way, we can all learn together!\nWe meet weekly on Tuesdays, 16:00 - 18:00 in Room 213 at the Marcusstr, starting in January 2024. The syllabus can be found here. On this page, the slides etc. will be linked.\n\n\n\nSession\nDate\nTopic\nPreparation/Notes\n\n\n\n\n1\n16.01.24\nIntro to R & RStudio\nInstall R and RStudio\n\n\n2\n23.01.24\nData Wrangling\n\n\n\n3\n30.01.24\nData Visualization\n\n\n\n4\n06.02.24\nPreprocessing, e.g. physio data\n\n\n\n5\n13.02.24\n(Semester break or continue?)\n\n\n\n6\n20.02.24\n\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\""
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "The R Club is part of the Research Training Group 2660. The target group are PhD researchers in psychology and neuroscience. Responsible for organizing the R Club is Lea Hildebrandt, but all participants are very welcome to contribute."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#why-write-code",
-    "href": "Slides/W1_IntroR.html#why-write-code",
-    "title": "Intro to R",
-    "section": "Why write code?",
-    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g. SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nYou’ll learn to program!\n\n\n\nChat: What are advantages (or disadvantages!) of coding?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#install-r-rstudio",
-    "href": "Slides/W1_IntroR.html#install-r-rstudio",
-    "title": "Intro to R",
-    "section": "Install R & RStudio",
-    "text": "Install R & RStudio\nYou should all have installed both by now! Who had problems doing so?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#overview-rstudio",
-    "href": "Slides/W1_IntroR.html#overview-rstudio",
-    "title": "Intro to R",
-    "section": "Overview RStudio",
-    "text": "Overview RStudio\n\nRStudio Interface\nopen RStudio!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#rstudio-panes",
-    "href": "Slides/W1_IntroR.html#rstudio-panes",
-    "title": "Intro to R",
-    "section": "RStudio Panes",
-    "text": "RStudio Panes\n\n\n\nScript pane/window -&gt; to save your code\nConsole -&gt; here the commands are run\nEnvironment -&gt; which variables/dataframes are saved\nFiles, plots, help etc. -&gt; files shows you the files in the folder you’re currently in\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\n\nConsole vs. Script (Rmarkdown later)"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
-    "href": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
-    "title": "Intro to R",
-    "section": "Using the Console as a Calculator",
-    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
-    "href": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
-    "title": "Intro to R",
-    "section": "Saving the Results as a Variable/Object",
-    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n“&lt;-” is used to assign values to variables (“=” is also possible but not preferred)\na, multi etc. are the variable names, which can be words, no whitespace allowed\n\nYou can find those now in your Environment!\n\nas you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.\nno output in console!\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\nYou can use those variables for further calculations, e.g. a + multi\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#working-directory",
-    "href": "Slides/W1_IntroR.html#working-directory",
-    "title": "Intro to R",
-    "section": "Working Directory",
-    "text": "Working Directory\n\nIt makes sense to save all your scripts etc. in a folder specifically dedicated to this course.\n\nMake sure that R knows that you want to work in this folder, i.e. set your working directory:\n\nSession -&gt; Set Working Directory -&gt; Choose Directory\n\nAssignment: Please make a folder, e.g. called “R_Club” (but not “R” or anything with spaces in it). Then set your working directory to this folder."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#scripts",
-    "href": "Slides/W1_IntroR.html#scripts",
-    "title": "Intro to R",
-    "section": "Scripts",
-    "text": "Scripts\nIf you type in all your commands/code in the console, it might get lost/you might not remember what you did, and you always have to type it in again if you want to run it again with slight changes. Also, the code in the console is not save-able.\nTherefore, it is better practice to write scripts. Scripts are basically text files that contain your code.\n\nTo open a new script, click File -&gt; New File -&gt; R Script.\nTo run a line of the script, you can either click Run at the top right of the pane or press ctrl + enter. It will always run the line where the cursor is located (or the lines that you have selected with the mouse). To run the whole script, press ctrl + shift + enter."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#scripts-2",
-    "href": "Slides/W1_IntroR.html#scripts-2",
-    "title": "Intro to R",
-    "section": "Scripts 2",
-    "text": "Scripts 2\nAssignment: Open a new file. In this file, write down some of the code (one command per line) that we have used so far and save the file.\nNow run the code (either by pressing “run” at the top right of the script or ctrl + enter)."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#functions",
-    "href": "Slides/W1_IntroR.html#functions",
-    "title": "Intro to R",
-    "section": "Functions",
-    "text": "Functions\nYou might have noticed sqrt(9) earlier. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type ?functionname() in the console, e.g.\n\n?sqrt()\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\n\nDo this now! Anything unclear?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#functions-2",
-    "href": "Slides/W1_IntroR.html#functions-2",
-    "title": "Intro to R",
-    "section": "Functions 2",
-    "text": "Functions 2\nFunctions often take more than one argument:\n\nrnorm(n = 6, mean = 3, sd = 1)\n# rnorm(6, 3, 1)\n\n# By the way, # denotes a comment (ignored by R), which can be helpful for scripting!\n\nYou can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file)."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#packages",
-    "href": "Slides/W1_IntroR.html#packages",
-    "title": "Intro to R",
-    "section": "Packages",
-    "text": "Packages\nThere are a number of functions that are already included with Base R, but you can greatly extend the power of R by loading packages. Packages are like libraries of functions that someone else wrote.\nYou can load a package using the install.packages() function:\n\ninstall.packages(\"tidyverse\")\n\n(It may be necessary to install Rtools: https://cran.r-project.org/bin/windows/Rtools/)\nBut installing is not enough to be able to actually use the functions from that package. You’d also need to load the package with the libary() function:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\nAssignment: Install and load the tidyverse package (which we will use a lot in this course).\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#read-in-data",
-    "href": "Slides/W1_IntroR.html#read-in-data",
-    "title": "Intro to R",
-    "section": "Read in Data",
-    "text": "Read in Data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats.\nWe will use the files from Fundamentals of Quantitative Analysis. Save these in your course folder on your computer (do not open them!). Set your working directory to the course folder.\n\nDelete the text/code in the .Rmd document you just worked on (or add a new header like “Working with data”). Underneath, add a code chunk with the following content:\n\n# library(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code chunk!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#looking-at-the-data",
-    "href": "Slides/W1_IntroR.html#looking-at-the-data",
-    "title": "Intro to R",
-    "section": "Looking at the Data",
-    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on the object/variable name in your Environment.\nType View(NameOfObject) in your console, e.g. View(dat).\nIn the console, type in str(dat) or str(pinfo) to get an overview of the data.\nIn the console, type in summary(dat).\nIn the console, type in head(dat).\nWhat is the difference between these commands?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#looking-at-the-data-2",
-    "href": "Slides/W1_IntroR.html#looking-at-the-data-2",
-    "title": "Intro to R",
-    "section": "Looking at the Data 2",
-    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nThe two objects we just read in are data frames, which consists of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown",
-    "href": "Slides/W1_IntroR.html#r-markdown",
-    "title": "Intro to R",
-    "section": "R Markdown",
-    "text": "R Markdown\nR scripts are a good way to save your code. However, you’d better heavily comment in your scripts, so that future you (and potentially collaborators) know what happens in your script.\nAn alternative is an R Markdown file. This is also a sort of script, but you can write text (like in a word processor) and mix it with code chunks, where you can write your R code. R Markdown is the “language” you use to write in these files, which is a variety of Markdown.\nThe advantage of R Markdown files (ending with .Rmd) is that they increase reproducibility. For example, you can write whole reports in R Markdown (and also these slides are made with it!).\nA newer variant is called quarto, which works very similar (but is more flexible) to R Markdown."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-2",
-    "href": "Slides/W1_IntroR.html#r-markdown-2",
-    "title": "Intro to R",
-    "section": "R Markdown 2",
-    "text": "R Markdown 2\n\n\n\nR script\n\n\n\n\n\nR Markdown\n\n\n\n\n\nR Markdown rendered as html report"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-3",
-    "href": "Slides/W1_IntroR.html#r-markdown-3",
-    "title": "Intro to R",
-    "section": "R Markdown 3",
-    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\n\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\nClick on the little arrow next to knit and select “Knit to PDF”\n\ninsert inline code"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-4",
-    "href": "Slides/W1_IntroR.html#r-markdown-4",
-    "title": "Intro to R",
-    "section": "R Markdown 4",
-    "text": "R Markdown 4\nThere are many useful things you can so with R Markdown: Adding different headers, adding inline code, knitting as a PDF, adding pictures or tables…You can also decide whether the code chunks should be visible in the output etc.\nFor further information, check out the R Markdown cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#thanks",
-    "href": "Slides/W1_IntroR.html#thanks",
-    "title": "Intro to R",
-    "section": "Thanks!",
-    "text": "Thanks!\nThat’s the lesson on “Getting started with R”!\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#ggplot",
-    "href": "Slides/W3b_DataVizR.html#ggplot",
-    "title": "Data Visualization",
-    "section": "ggplot",
-    "text": "ggplot\nWe will use a package called ggplot2 (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful, publication ready figures.\nThe main function to “start” plotting is ggplot() - we will then add layers of data and layers to tweak the appearance.\n\nLayers of a ggplot"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#activity-1-set-up",
-    "href": "Slides/W3b_DataVizR.html#activity-1-set-up",
-    "title": "Data Visualization",
-    "section": "Activity 1: Set Up",
-    "text": "Activity 1: Set Up\n\nDownload ahi-cesd.csv and participant-info.csv into the folder on your computer for this chapter!\nOpen RStudio and set the working directory to your chapter folder. Ensure the environment is clear.\nOpen a new R Markdown document and save it in your working directory. Call the file “DataVisualisation1”.\nDelete the default R Markdown welcome text and insert a new code chunk.\nType and run the below code to load the tidyverse package and to load in the data files.\n\n\nlibrary(tidyverse) \n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nall_dat &lt;- inner_join(dat, \n                      pinfo, \n                      by= c(\"id\", \"intervention\"))\n\nsummarydata &lt;- select(.data = all_dat, \n                      ahiTotal, \n                      cesdTotal, \n                      sex, \n                      age, \n                      educ, \n                      income, \n                      occasion, \n                      elapsed.days) \n\n\nwhat happens in the code chunk?"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#look-at-the-data",
-    "href": "Slides/W3b_DataVizR.html#look-at-the-data",
-    "title": "Data Visualization",
-    "section": "Look at the Data",
-    "text": "Look at the Data\nHave a look at the types of data:\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;dbl&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;dbl&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…\n\n\nWhat do you see?\n\nAll variables are loaded as numeric. However, are all of those numeric?\n\n\nsex, educ and income are categories, not numbers per se. We call these variables factors! We need to correct R and convert the data type to factor. Checking and adjusting the data types will be important for plotting and analyzing the data, you might otherwise get strange/wrong results!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
-    "href": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
-    "title": "Data Visualization",
-    "section": "Activity 2: Transform Data Type",
-    "text": "Activity 2: Transform Data Type\nType and run the below code to change the categories to factors.\n\nYou can read each line of the mutate as “overwrite the data that is in that column with the same values now considered factors and not doubles”\nSo for example, the 1s in sex change to categorical factors instead of numerical 1s.\nRemember if you mutate a new column with the same name as the old one, it will overwrite the column.\n\n\nsummarydata &lt;- summarydata %&gt;%\n  mutate(sex = as_factor(sex),\n         educ = as_factor(educ),\n         income = as_factor(income))\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;fct&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;fct&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;fct&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#the-first-layer",
-    "href": "Slides/W3b_DataVizR.html#the-first-layer",
-    "title": "Data Visualization",
-    "section": "The First Layer",
-    "text": "The First Layer\n\nThe first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).\naes() can take both an x and y argument, however, with a bar plot you are just asking R to count the number of data points in each group so you don’t need to specify this.\n\n\n\nggplot(summarydata, aes(x = sex))"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#the-second-layer",
-    "href": "Slides/W3b_DataVizR.html#the-second-layer",
-    "title": "Data Visualization",
-    "section": "The Second Layer",
-    "text": "The Second Layer\nThe next layer adds a geom or a shape, in this case we use geom_bar() as we want to draw a bar plot.\n\nNote that we are adding layers, using a + between layers. This is a very important difference between pipes and visualization.\n\n\n\nggplot(summarydata, aes(x = sex)) +\n  geom_bar()\n\n\n\n\n\n\n\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE)"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
-    "href": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
-    "title": "Data Visualization",
-    "section": "The Next Layers - Improving the Plot",
-    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
-    "href": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
-    "title": "Data Visualization",
-    "section": "Themes: Changing the Appearance",
-    "text": "Themes: Changing the Appearance\nThere are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.\nWe will now change the default theme to theme_minimal(), but you can also try other themes (just type “theme_” and see what the autocomplete brings up).\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal()"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#colors",
-    "href": "Slides/W3b_DataVizR.html#colors",
-    "title": "Data Visualization",
-    "section": "Colors",
-    "text": "Colors\nThere are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.\nA popular palette is viridis. We can simply add a function/layer to your ggplot named scale_fill_viridis_d() (d for discrete). The function hast 5 color options (A - E).\n\nType and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#transparency",
-    "href": "Slides/W3b_DataVizR.html#transparency",
-    "title": "Data Visualization",
-    "section": "Transparency",
-    "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#grouped-plots",
-    "href": "Slides/W3b_DataVizR.html#grouped-plots",
-    "title": "Data Visualization",
-    "section": "Grouped Plots",
-    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\",\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#facetting",
-    "href": "Slides/W3b_DataVizR.html#facetting",
-    "title": "Data Visualization",
-    "section": "Facetting",
-    "text": "Facetting\nYou could also use facets to divide your data visualizations:\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_wrap(~income)"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#violin-boxplot",
-    "href": "Slides/W3b_DataVizR.html#violin-boxplot",
-    "title": "Data Visualization",
-    "section": "Violin-Boxplot",
-    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot before?\n\n\nggplot(summarydata, aes(x = income, \n                        y = ahiTotal, \n                        fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#layer-order",
-    "href": "Slides/W3b_DataVizR.html#layer-order",
-    "title": "Data Visualization",
-    "section": "Layer Order",
-    "text": "Layer Order\nThe order of layers is crucial, as the plot will be built up in that order:\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_violin() +\n  geom_boxplot()\n\n\n\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_boxplot() +\n  geom_violin()"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#scatterplot",
-    "href": "Slides/W3b_DataVizR.html#scatterplot",
-    "title": "Data Visualization",
-    "section": "Scatterplot",
-    "text": "Scatterplot\nIf we have continuous data of two variables, we often want to make a scatter plot:\n\n\nggplot(summarydata, aes(x = age, y = cesdTotal))+\n  geom_point()+\n  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures",
-    "href": "Slides/W3b_DataVizR.html#saving-your-figures",
-    "title": "Data Visualization",
-    "section": "Saving your Figures",
-    "text": "Saving your Figures\nYou can use ggsave() to save your plots. If you don’t tell ggsave() which plot you want to save, by default it will save the last plot you created.\nYou just have to enter the name of the file to be saved (in your working directory) like this:\n\nggsave(\"violin-boxplot.png\")\n\nCheck whether indeed the last plot was saved!\n\nYou can also specify the dimensions of your plot to be saved:\n\nggsave(\"violin-boxplot.png\",\n       width = 10,\n       height = 8,\n       units = \"cm\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures-2",
-    "href": "Slides/W3b_DataVizR.html#saving-your-figures-2",
-    "title": "Data Visualization",
-    "section": "Saving your Figures 2",
-    "text": "Saving your Figures 2\nYou can also assign the plot to an object in your environment (just like we did with the tibbles previously) and then tell ggsave() which object to save. This is a bit safer.\nRun the code for the violin-boxplot again and save the plot in an object called viobox. You’d then have to explicitly tell ggsave() to save the object viobox:\n\n\nviobox &lt;- summarydata %&gt;%\n  ggplot(aes(x = income,\n             y = ahiTotal,\n             fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\nggsave(\"violin-boxplot-stored.png\", plot = viobox)\n\n\n\n\n\nDo not add ggsave() to the plot with a +. Instead run it on a separate line!\nIf plot is assigned to object, it won’t be displayed unless you type viobox in the console!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#thanks",
-    "href": "Slides/W3b_DataVizR.html#thanks",
-    "title": "Data Visualization",
-    "section": "Thanks!",
-    "text": "Thanks!\nCheck out Chapter 13 of QuantFun for further exercises and tips for data visualization!\nAlso keep in mind: Coding is a lot of googling things!\nYou can also check out the R Graph Gallery for code for different types of plots.\n\nLearning objectives\n\nKnow how to transform (pivot) and join data\nUnderstand the basics of a ggplot (layers etc.)\nBe able to make your first own plots, such as bar charts, violin + boxplots, scatterplots\nKnow what a grouped plot and a facetted plot is\n\n\n\nNext:\n\n?"
+    "text": "Intro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 30, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
