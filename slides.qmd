@@ -7,6 +7,8 @@ listing:
   fields: [title, description, author, date]
 ---
 
+Note: It's advisable to open the slides in a new tab!
+
 ````{=html}
 <!--#
 
