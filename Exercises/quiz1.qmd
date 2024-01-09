@@ -2,6 +2,15 @@
 title: "Quiz 1"
 ---
 
+```{r, echo = FALSE, results='asis'}
+knitr::opts_chunk$set(echo = FALSE)
+
+install.packages("rmarkdown")
+
+# Uncomment to change widget colours:
+#style_widgets(incorrect = "goldenrod", correct = "purple", highlight = "firebrick")
+```
+
 Welcome to the first quiz to test your knowledge after week 1 of the R coding club!
 
 **NOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser.**
