@@ -1,10 +1,143 @@
 [
   {
-    "objectID": "slides.html",
-    "href": "slides.html",
-    "title": "Slides",
-    "section": "",
-    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 30, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "objectID": "Slides/W1_IntroR.html#why-write-code",
+    "href": "Slides/W1_IntroR.html#why-write-code",
+    "title": "Intro to R",
+    "section": "Why write code?",
+    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g. SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nYou’ll learn to program!\n\n\n\nChat: What are advantages (or disadvantages!) of coding?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#install-r-rstudio",
+    "href": "Slides/W1_IntroR.html#install-r-rstudio",
+    "title": "Intro to R",
+    "section": "Install R & RStudio",
+    "text": "Install R & RStudio\nYou should all have installed both by now! Who had problems doing so?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#overview-rstudio",
+    "href": "Slides/W1_IntroR.html#overview-rstudio",
+    "title": "Intro to R",
+    "section": "Overview RStudio",
+    "text": "Overview RStudio\n\nRStudio Interface\nopen RStudio!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#rstudio-panes",
+    "href": "Slides/W1_IntroR.html#rstudio-panes",
+    "title": "Intro to R",
+    "section": "RStudio Panes",
+    "text": "RStudio Panes\n\n\n\nScript pane/window -&gt; to save your code\nConsole -&gt; here the commands are run\nEnvironment -&gt; which variables/dataframes are saved\nFiles, plots, help etc. -&gt; files shows you the files in the folder you’re currently in\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\n\nConsole vs. Script (Rmarkdown later)"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
+    "href": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
+    "title": "Intro to R",
+    "section": "Using the Console as a Calculator",
+    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
+    "href": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
+    "title": "Intro to R",
+    "section": "Saving the Results as a Variable/Object",
+    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n“&lt;-” is used to assign values to variables (“=” is also possible but not preferred)\na, multi etc. are the variable names, which can be words, no whitespace allowed\n\nYou can find those now in your Environment!\n\nas you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.\nno output in console!\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\nYou can use those variables for further calculations, e.g. a + multi\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#working-directory",
+    "href": "Slides/W1_IntroR.html#working-directory",
+    "title": "Intro to R",
+    "section": "Working Directory",
+    "text": "Working Directory\n\nIt makes sense to save all your scripts etc. in a folder specifically dedicated to this course.\n\nMake sure that R knows that you want to work in this folder, i.e. set your working directory:\n\nSession -&gt; Set Working Directory -&gt; Choose Directory\n\nAssignment: Please make a folder, e.g. called “R_Club” (but not “R” or anything with spaces in it). Then set your working directory to this folder."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#scripts",
+    "href": "Slides/W1_IntroR.html#scripts",
+    "title": "Intro to R",
+    "section": "Scripts",
+    "text": "Scripts\nIf you type in all your commands/code in the console, it might get lost/you might not remember what you did, and you always have to type it in again if you want to run it again with slight changes. Also, the code in the console is not save-able.\nTherefore, it is better practice to write scripts. Scripts are basically text files that contain your code.\n\nTo open a new script, click File -&gt; New File -&gt; R Script.\nTo run a line of the script, you can either click Run at the top right of the pane or press ctrl + enter. It will always run the line where the cursor is located (or the lines that you have selected with the mouse). To run the whole script, press ctrl + shift + enter."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#scripts-2",
+    "href": "Slides/W1_IntroR.html#scripts-2",
+    "title": "Intro to R",
+    "section": "Scripts 2",
+    "text": "Scripts 2\nAssignment: Open a new file. In this file, write down some of the code (one command per line) that we have used so far and save the file.\nNow run the code (either by pressing “run” at the top right of the script or ctrl + enter)."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#functions",
+    "href": "Slides/W1_IntroR.html#functions",
+    "title": "Intro to R",
+    "section": "Functions",
+    "text": "Functions\nYou might have noticed sqrt(9) earlier. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type ?functionname() in the console, e.g.\n\n?sqrt()\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\n\nDo this now! Anything unclear?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#functions-2",
+    "href": "Slides/W1_IntroR.html#functions-2",
+    "title": "Intro to R",
+    "section": "Functions 2",
+    "text": "Functions 2\nFunctions often take more than one argument:\n\nrnorm(n = 6, mean = 3, sd = 1)\n# rnorm(6, 3, 1)\n\n# By the way, # denotes a comment (ignored by R), which can be helpful for scripting!\n\nYou can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file)."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#packages",
+    "href": "Slides/W1_IntroR.html#packages",
+    "title": "Intro to R",
+    "section": "Packages",
+    "text": "Packages\nThere are a number of functions that are already included with Base R, but you can greatly extend the power of R by loading packages. Packages are like libraries of functions that someone else wrote.\nYou can load a package using the install.packages() function:\n\ninstall.packages(\"tidyverse\")\n\n(It may be necessary to install Rtools: https://cran.r-project.org/bin/windows/Rtools/)\nBut installing is not enough to be able to actually use the functions from that package. You’d also need to load the package with the libary() function:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\nAssignment: Install and load the tidyverse package (which we will use a lot in this course).\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#read-in-data",
+    "href": "Slides/W1_IntroR.html#read-in-data",
+    "title": "Intro to R",
+    "section": "Read in Data",
+    "text": "Read in Data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats.\nWe will use the files from Fundamentals of Quantitative Analysis. Save these in your course folder on your computer (do not open them!). Set your working directory to the course folder.\n\nDelete the text/code in the .Rmd document you just worked on (or add a new header like “Working with data”). Underneath, add a code chunk with the following content:\n\n# library(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code chunk!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#looking-at-the-data",
+    "href": "Slides/W1_IntroR.html#looking-at-the-data",
+    "title": "Intro to R",
+    "section": "Looking at the Data",
+    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on the object/variable name in your Environment.\nType View(NameOfObject) in your console, e.g. View(dat).\nIn the console, type in str(dat) or str(pinfo) to get an overview of the data.\nIn the console, type in summary(dat).\nIn the console, type in head(dat).\nWhat is the difference between these commands?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#looking-at-the-data-2",
+    "href": "Slides/W1_IntroR.html#looking-at-the-data-2",
+    "title": "Intro to R",
+    "section": "Looking at the Data 2",
+    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nThe two objects we just read in are data frames, which consists of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown",
+    "href": "Slides/W1_IntroR.html#r-markdown",
+    "title": "Intro to R",
+    "section": "R Markdown",
+    "text": "R Markdown\nR scripts are a good way to save your code. However, you’d better heavily comment in your scripts, so that future you (and potentially collaborators) know what happens in your script.\nAn alternative is an R Markdown file. This is also a sort of script, but you can write text (like in a word processor) and mix it with code chunks, where you can write your R code. R Markdown is the “language” you use to write in these files, which is a variety of Markdown.\nThe advantage of R Markdown files (ending with .Rmd) is that they increase reproducibility. For example, you can write whole reports in R Markdown (and also these slides are made with it!).\nA newer variant is called quarto, which works very similar (but is more flexible) to R Markdown."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-2",
+    "href": "Slides/W1_IntroR.html#r-markdown-2",
+    "title": "Intro to R",
+    "section": "R Markdown 2",
+    "text": "R Markdown 2\n\n\n\nR script\n\n\n\n\n\nR Markdown\n\n\n\n\n\nR Markdown rendered as html report"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-3",
+    "href": "Slides/W1_IntroR.html#r-markdown-3",
+    "title": "Intro to R",
+    "section": "R Markdown 3",
+    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\n\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\nClick on the little arrow next to knit and select “Knit to PDF”\n\ninsert inline code"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-4",
+    "href": "Slides/W1_IntroR.html#r-markdown-4",
+    "title": "Intro to R",
+    "section": "R Markdown 4",
+    "text": "R Markdown 4\nThere are many useful things you can so with R Markdown: Adding different headers, adding inline code, knitting as a PDF, adding pictures or tables…You can also decide whether the code chunks should be visible in the output etc.\nFor further information, check out the R Markdown cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#thanks",
+    "href": "Slides/W1_IntroR.html#thanks",
+    "title": "Intro to R",
+    "section": "Thanks!",
+    "text": "Thanks!\nThat’s the lesson on “Getting started with R”!\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
   },
   {
     "objectID": "Slides/W2b_DataWranglingR.html#data-wrangling",
@@ -252,20 +385,6 @@
     "text": "This is the course website of the R Club of the Research Training Group 2660 at the University and University Clinic in Würzburg, Germany - but it’s open to everyone if space is available!\nThe R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. This way, we can all learn together!\nWe meet weekly on Tuesdays, 16:00 - 18:00 in Room 213 at the Marcusstr, starting in January 2024. The syllabus can be found here. On this page, the slides etc. will be linked.\n\n\n\nSession\nDate\nTopic\nPreparation/Notes\n\n\n\n\n1\n16.01.24\nIntro to R & RStudio\nInstall R and RStudio\n\n\n2\n23.01.24\nData Wrangling\nQuiz 1\n\n\n3\n30.01.24\nData Visualization\n\n\n\n4\n06.02.24\nPreprocessing, e.g. physio data\n\n\n\n5\n13.02.24\n(Semester break or continue?)\n\n\n\n6\n20.02.24\n\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\""
   },
   {
-    "objectID": "Exercises/quiz1.html",
-    "href": "Exercises/quiz1.html",
-    "title": "Quiz 1",
-    "section": "",
-    "text": "Welcome to the first quiz to test your knowledge after week 1 of the R coding club!\nNOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser."
-  },
-  {
-    "objectID": "Exercises/quiz1.html#questions",
-    "href": "Exercises/quiz1.html#questions",
-    "title": "Quiz 1",
-    "section": "Questions",
-    "text": "Questions\n\nWhat is not an advantage of using R: ReproducibilityCodingPoint-and-click software\nHow do you call the window in R Studio where your code is carried out? ScriptEnvironmentViewerConsole\nHow do you open the help file for a function? ?functionname()help functionnamefunctionname()functionname help?\nHow do you load the tidyverse package? \nWhat is not a way to inspect your data? glimpse(dataframe)see(dataframe)View(dataframe)summary(dataframe)"
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -273,221 +392,11 @@
     "text": "The R Club is part of the Research Training Group 2660. The target group are PhD researchers in psychology and neuroscience. Responsible for organizing the R Club is Lea Hildebrandt, but all participants are very welcome to contribute."
   },
   {
-    "objectID": "Exercises/exercises.html",
-    "href": "Exercises/exercises.html",
-    "title": "Web Exercises",
+    "objectID": "slides.html",
+    "href": "slides.html",
+    "title": "Slides",
     "section": "",
-    "text": "This is a Web Exercise template created by the #PsyTeachR team at the University of Glasgow, based on ideas from Software Carpentry. This template shows how instructors can easily create interactive web documents that students can use in self-guided learning.\nThe {webexercises} package provides a number of functions that you use in inline R code or through code chunk options to create HTML widgets (text boxes, pull down menus, buttons that reveal hidden content). Examples are given below. Knit this file to HTML to see how it works.\nNOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser."
-  },
-  {
-    "objectID": "Exercises/exercises.html#fill-in-the-blanks-fitb",
-    "href": "Exercises/exercises.html#fill-in-the-blanks-fitb",
-    "title": "Web Exercises",
-    "section": "Fill-In-The-Blanks (fitb())",
-    "text": "Fill-In-The-Blanks (fitb())\nCreate fill-in-the-blank questions using fitb(), providing the answer as the first argument.\n\n2 + 2 is \n\nYou can also create these questions dynamically, using variables from your R session.\n\nThe square root of 9 is: \n\nThe blanks are case-sensitive; if you don’t care about case, use the argument ignore_case = TRUE.\n\nWhat is the letter after D? \n\nIf you want to ignore differences in whitespace use, use the argument ignore_ws = TRUE (which is the default) and include spaces in your answer anywhere they could be acceptable.\n\nHow do you load the tidyverse package? \n\nYou can set more than one possible correct answer by setting the answers as a vector.\n\nType a vowel: \n\nYou can use regular expressions to test answers against more complex rules.\n\nType any 3 letters:"
-  },
-  {
-    "objectID": "Exercises/exercises.html#multiple-choice-mcq",
-    "href": "Exercises/exercises.html#multiple-choice-mcq",
-    "title": "Web Exercises",
-    "section": "Multiple Choice (mcq())",
-    "text": "Multiple Choice (mcq())\n\n“Never gonna give you up, never gonna: let you goturn you downrun awaylet you down”\n“I bless the rainsguess it rainssense the rain down in Africa” -Toto"
-  },
-  {
-    "objectID": "Exercises/exercises.html#true-or-false-torf",
-    "href": "Exercises/exercises.html#true-or-false-torf",
-    "title": "Web Exercises",
-    "section": "True or False (torf())",
-    "text": "True or False (torf())\n\nTrue or False? You can permute values in a vector using sample(). TRUEFALSE"
-  },
-  {
-    "objectID": "Exercises/exercises.html#longer-mcqs-longmcq",
-    "href": "Exercises/exercises.html#longer-mcqs-longmcq",
-    "title": "Web Exercises",
-    "section": "Longer MCQs (longmcq())",
-    "text": "Longer MCQs (longmcq())\nWhen your answers are very long, sometimes a drop-down select box gets formatted oddly. You can use longmcq() to deal with this. Since the answers are long, It’s probably best to set up the options inside an R chunk with echo=FALSE.\nWhat is a p-value?\n\n the probability that the null hypothesis is true the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true the probability of making an error in your conclusion\n\nWhat is true about a 95% confidence interval of the mean?\n\n if you repeated the process many times, 95% of intervals calculated in this way contain the true mean 95% of the data fall within this range there is a 95% probability that the true mean lies within this range"
-  },
-  {
-    "objectID": "Exercises/exercises.html#checked-sections",
-    "href": "Exercises/exercises.html#checked-sections",
-    "title": "Web Exercises",
-    "section": "Checked sections",
-    "text": "Checked sections\nCreate sections with the class webex-check to add a button that hides feedback until it is pressed. Add the class webex-box to draw a box around the section (or use your own styles).\n\nI am going to learn a lot: TRUEFALSE\nWhat is a p-value?\n\n the probability that the null hypothesis is true the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true the probability of making an error in your conclusion"
-  },
-  {
-    "objectID": "Exercises/exercises.html#hidden-solutions-and-hints",
-    "href": "Exercises/exercises.html#hidden-solutions-and-hints",
-    "title": "Web Exercises",
-    "section": "Hidden solutions and hints",
-    "text": "Hidden solutions and hints\nYou can fence off a solution area that will be hidden behind a button using hide() before the solution and unhide() after, each as inline R code. Pass the text you want to appear on the button to the hide() function.\nIf the solution is an RMarkdown code chunk, instead of using hide() and unhide(), simply set the webex.hide chunk option to TRUE, or set it to the string you wish to display on the button.\nRecreate the scatterplot below, using the built-in cars dataset.\n\n\n\n\n\n\n\nI need a hint\n\nSee the documentation for plot() (?plot)\n\n\n\n\n\nClick here to see the solution\n\nplot(cars$speed, cars$dist)"
-  },
-  {
-    "objectID": "Exercises/webexercises.html",
-    "href": "Exercises/webexercises.html",
-    "title": "Webexercises",
-    "section": "",
-    "text": "This is a Web Exercise template created by the psychology teaching team at the University of Glasgow, based on ideas from Software Carpentry. This template shows how instructors can easily create interactive web documents that students can use in self-guided learning.\nThe {webexercises} package provides a number of functions that you use in inline R code or through code chunk options to create HTML widgets (text boxes, pull down menus, buttons that reveal hidden content). Examples are given below. Render this file to HTML to see how it works.\nNOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser."
-  },
-  {
-    "objectID": "Exercises/webexercises.html#example-questions",
-    "href": "Exercises/webexercises.html#example-questions",
-    "title": "Webexercises",
-    "section": "Example Questions",
-    "text": "Example Questions\n\nFill-In-The-Blanks (fitb())\nCreate fill-in-the-blank questions using fitb(), providing the answer as the first argument.\n\n2 + 2 is \n\nYou can also create these questions dynamically, using variables from your R session.\n\nThe square root of 64 is: \n\nThe blanks are case-sensitive; if you don’t care about case, use the argument ignore_case = TRUE.\n\nWhat is the letter after D? \n\nIf you want to ignore differences in whitespace use, use the argument ignore_ws = TRUE (which is the default) and include spaces in your answer anywhere they could be acceptable.\n\nHow do you load the tidyverse package? \n\nYou can set more than one possible correct answer by setting the answers as a vector.\n\nType a vowel: \n\nYou can use regular expressions to test answers against more complex rules.\n\nType any 3 letters: \n\n\n\nMultiple Choice (mcq())\n\n“Never gonna give you up, never gonna: let you goturn you downrun awaylet you down”\n“I bless the rainsguess it rainssense the rain down in Africa” -Toto\n\n\n\nTrue or False (torf())\n\nTrue or False? You can permute values in a vector using sample(). TRUEFALSE\n\n\n\nLonger MCQs (longmcq())\nWhen your answers are very long, sometimes a drop-down select box gets formatted oddly. You can use longmcq() to deal with this. Since the answers are long, It’s probably best to set up the options inside an R chunk with echo=FALSE.\nWhat is a p-value?\n\n the probability that the null hypothesis is true the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true the probability of making an error in your conclusion\n\nWhat is true about a 95% confidence interval of the mean?\n\n if you repeated the process many times, 95% of intervals calculated in this way contain the true mean 95% of the data fall within this range there is a 95% probability that the true mean lies within this range"
-  },
-  {
-    "objectID": "Exercises/webexercises.html#checked-sections",
-    "href": "Exercises/webexercises.html#checked-sections",
-    "title": "Webexercises",
-    "section": "Checked sections",
-    "text": "Checked sections\nCreate sections with the class webex-check to add a button that hides feedback until it is pressed. Add the class webex-box to draw a box around the section (or use your own styles).\n\nI am going to learn a lot: TRUEFALSE\nWhat is a p-value?\n\n the probability that the null hypothesis is true the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true the probability of making an error in your conclusion"
-  },
-  {
-    "objectID": "Exercises/webexercises.html#hidden-solutions-and-hints",
-    "href": "Exercises/webexercises.html#hidden-solutions-and-hints",
-    "title": "Webexercises",
-    "section": "Hidden solutions and hints",
-    "text": "Hidden solutions and hints\nYou can fence off a solution area that will be hidden behind a button using hide() before the solution and unhide() after, each as inline R code. Pass the text you want to appear on the button to the hide() function.\nIf the solution is a code chunk, instead of using hide() and unhide(), simply set the webex.hide chunk option to TRUE, or set it to the string you wish to display on the button.\nRecreate the scatterplot below, using the built-in cars dataset.\n\n\n\n\n\n\n\nI need a hint\n\nSee the documentation for plot() (?plot)\n\n\n\n\n\nClick here to see the solution\n\nplot(cars$speed, cars$dist)"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#why-write-code",
-    "href": "Slides/W1_IntroR.html#why-write-code",
-    "title": "Intro to R",
-    "section": "Why write code?",
-    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g. SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nYou’ll learn to program!\n\n\n\nChat: What are advantages (or disadvantages!) of coding?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#install-r-rstudio",
-    "href": "Slides/W1_IntroR.html#install-r-rstudio",
-    "title": "Intro to R",
-    "section": "Install R & RStudio",
-    "text": "Install R & RStudio\nYou should all have installed both by now! Who had problems doing so?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#overview-rstudio",
-    "href": "Slides/W1_IntroR.html#overview-rstudio",
-    "title": "Intro to R",
-    "section": "Overview RStudio",
-    "text": "Overview RStudio\n\nRStudio Interface\nopen RStudio!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#rstudio-panes",
-    "href": "Slides/W1_IntroR.html#rstudio-panes",
-    "title": "Intro to R",
-    "section": "RStudio Panes",
-    "text": "RStudio Panes\n\n\n\nScript pane/window -&gt; to save your code\nConsole -&gt; here the commands are run\nEnvironment -&gt; which variables/dataframes are saved\nFiles, plots, help etc. -&gt; files shows you the files in the folder you’re currently in\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\n\nConsole vs. Script (Rmarkdown later)"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
-    "href": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
-    "title": "Intro to R",
-    "section": "Using the Console as a Calculator",
-    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
-    "href": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
-    "title": "Intro to R",
-    "section": "Saving the Results as a Variable/Object",
-    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n“&lt;-” is used to assign values to variables (“=” is also possible but not preferred)\na, multi etc. are the variable names, which can be words, no whitespace allowed\n\nYou can find those now in your Environment!\n\nas you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.\nno output in console!\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\nYou can use those variables for further calculations, e.g. a + multi\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#working-directory",
-    "href": "Slides/W1_IntroR.html#working-directory",
-    "title": "Intro to R",
-    "section": "Working Directory",
-    "text": "Working Directory\n\nIt makes sense to save all your scripts etc. in a folder specifically dedicated to this course.\n\nMake sure that R knows that you want to work in this folder, i.e. set your working directory:\n\nSession -&gt; Set Working Directory -&gt; Choose Directory\n\nAssignment: Please make a folder, e.g. called “R_Club” (but not “R” or anything with spaces in it). Then set your working directory to this folder."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#scripts",
-    "href": "Slides/W1_IntroR.html#scripts",
-    "title": "Intro to R",
-    "section": "Scripts",
-    "text": "Scripts\nIf you type in all your commands/code in the console, it might get lost/you might not remember what you did, and you always have to type it in again if you want to run it again with slight changes. Also, the code in the console is not save-able.\nTherefore, it is better practice to write scripts. Scripts are basically text files that contain your code.\n\nTo open a new script, click File -&gt; New File -&gt; R Script.\nTo run a line of the script, you can either click Run at the top right of the pane or press ctrl + enter. It will always run the line where the cursor is located (or the lines that you have selected with the mouse). To run the whole script, press ctrl + shift + enter."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#scripts-2",
-    "href": "Slides/W1_IntroR.html#scripts-2",
-    "title": "Intro to R",
-    "section": "Scripts 2",
-    "text": "Scripts 2\nAssignment: Open a new file. In this file, write down some of the code (one command per line) that we have used so far and save the file.\nNow run the code (either by pressing “run” at the top right of the script or ctrl + enter)."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#functions",
-    "href": "Slides/W1_IntroR.html#functions",
-    "title": "Intro to R",
-    "section": "Functions",
-    "text": "Functions\nYou might have noticed sqrt(9) earlier. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type ?functionname() in the console, e.g.\n\n?sqrt()\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\n\nDo this now! Anything unclear?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#functions-2",
-    "href": "Slides/W1_IntroR.html#functions-2",
-    "title": "Intro to R",
-    "section": "Functions 2",
-    "text": "Functions 2\nFunctions often take more than one argument:\n\nrnorm(n = 6, mean = 3, sd = 1)\n# rnorm(6, 3, 1)\n\n# By the way, # denotes a comment (ignored by R), which can be helpful for scripting!\n\nYou can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file)."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#packages",
-    "href": "Slides/W1_IntroR.html#packages",
-    "title": "Intro to R",
-    "section": "Packages",
-    "text": "Packages\nThere are a number of functions that are already included with Base R, but you can greatly extend the power of R by loading packages. Packages are like libraries of functions that someone else wrote.\nYou can load a package using the install.packages() function:\n\ninstall.packages(\"tidyverse\")\n\n(It may be necessary to install Rtools: https://cran.r-project.org/bin/windows/Rtools/)\nBut installing is not enough to be able to actually use the functions from that package. You’d also need to load the package with the libary() function:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\nAssignment: Install and load the tidyverse package (which we will use a lot in this course).\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#read-in-data",
-    "href": "Slides/W1_IntroR.html#read-in-data",
-    "title": "Intro to R",
-    "section": "Read in Data",
-    "text": "Read in Data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats.\nWe will use the files from Fundamentals of Quantitative Analysis. Save these in your course folder on your computer (do not open them!). Set your working directory to the course folder.\n\nDelete the text/code in the .Rmd document you just worked on (or add a new header like “Working with data”). Underneath, add a code chunk with the following content:\n\n# library(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code chunk!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#looking-at-the-data",
-    "href": "Slides/W1_IntroR.html#looking-at-the-data",
-    "title": "Intro to R",
-    "section": "Looking at the Data",
-    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on the object/variable name in your Environment.\nType View(NameOfObject) in your console, e.g. View(dat).\nIn the console, type in str(dat) or str(pinfo) to get an overview of the data.\nIn the console, type in summary(dat).\nIn the console, type in head(dat).\nWhat is the difference between these commands?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#looking-at-the-data-2",
-    "href": "Slides/W1_IntroR.html#looking-at-the-data-2",
-    "title": "Intro to R",
-    "section": "Looking at the Data 2",
-    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nThe two objects we just read in are data frames, which consists of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown",
-    "href": "Slides/W1_IntroR.html#r-markdown",
-    "title": "Intro to R",
-    "section": "R Markdown",
-    "text": "R Markdown\nR scripts are a good way to save your code. However, you’d better heavily comment in your scripts, so that future you (and potentially collaborators) know what happens in your script.\nAn alternative is an R Markdown file. This is also a sort of script, but you can write text (like in a word processor) and mix it with code chunks, where you can write your R code. R Markdown is the “language” you use to write in these files, which is a variety of Markdown.\nThe advantage of R Markdown files (ending with .Rmd) is that they increase reproducibility. For example, you can write whole reports in R Markdown (and also these slides are made with it!).\nA newer variant is called quarto, which works very similar (but is more flexible) to R Markdown."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-2",
-    "href": "Slides/W1_IntroR.html#r-markdown-2",
-    "title": "Intro to R",
-    "section": "R Markdown 2",
-    "text": "R Markdown 2\n\n\n\nR script\n\n\n\n\n\nR Markdown\n\n\n\n\n\nR Markdown rendered as html report"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-3",
-    "href": "Slides/W1_IntroR.html#r-markdown-3",
-    "title": "Intro to R",
-    "section": "R Markdown 3",
-    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\n\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\nClick on the little arrow next to knit and select “Knit to PDF”\n\ninsert inline code"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-4",
-    "href": "Slides/W1_IntroR.html#r-markdown-4",
-    "title": "Intro to R",
-    "section": "R Markdown 4",
-    "text": "R Markdown 4\nThere are many useful things you can so with R Markdown: Adding different headers, adding inline code, knitting as a PDF, adding pictures or tables…You can also decide whether the code chunks should be visible in the output etc.\nFor further information, check out the R Markdown cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#thanks",
-    "href": "Slides/W1_IntroR.html#thanks",
-    "title": "Intro to R",
-    "section": "Thanks!",
-    "text": "Thanks!\nThat’s the lesson on “Getting started with R”!\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
+    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 30, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Slides/W3b_DataVizR.html#ggplot",
