@@ -1,0 +1,20 @@
+---
+title: "Randomization and Counterbalancing"
+subtitle: |
+   | R Coding Club 
+   | RTG 2660
+author: "Dr. Lea Hildebrandt"
+date: 2024/01/16
+description: "Using R for your study design (or other things where you need randomization)"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: simple
+    chalkboard: true
+editor: visual
+from: markdown+emoji
+---
+
+# Randomization vs. Counterbalancing
