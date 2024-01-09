@@ -4,8 +4,8 @@ subtitle: |
    | R Coding Club 
    | RTG 2660
 author: "Dr. Lea Hildebrandt"
-date: 2024/01/16
-description: "Using R for your study design (or other things where you need randomization)"
+date: 2024/01/30
+description: "Using R for e.g. your study design"
 format: 
   revealjs:
     smaller: true
@@ -18,3 +18,7 @@ from: markdown+emoji
 ---
 
 # Randomization vs. Counterbalancing
+
+*Randomization*: Determining completely at random (or pseudorandom) e.g. which condition a participant belongs to/which stimulus is shown...
+
+*Counterbalancing*: Determining how many conditions etc. there are and making sure that all orders are seen by the same number of participants.
