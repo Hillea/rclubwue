@@ -1,7 +1,7 @@
 project:
   type: website
 execute:
-  freeze: auto
+  freeze: true
 website:
   title: R Club Würzburg
   navbar:
