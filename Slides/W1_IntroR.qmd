@@ -34,24 +34,43 @@ What is a *coding club*?
 
 . . .
 
-> "Coding Club is for everyone, regardless of their career stage or current
-> level of knowledge. Coding Club is a place that brings people together,
-> regardless of their gender or background. We all have the right to
-> learn, and we believe learning is more fun and efficient when we help
-> each other along the way." (<https://ourcodingclub.github.io/>)
+> "Coding Club is for everyone, regardless of their career stage or current level of knowledge. Coding Club is a place that brings people together, regardless of their gender or background. We all have the right to learn, and we believe learning is more fun and efficient when we help each other along the way." (<https://ourcodingclub.github.io/>)
+
+. . .
+
+-   Code Review: Someone brings a script, we go through it and learn from it/improve it.
+
+    -   Coding "solutions": Someone presents something neat they implemented with code.
+
+-   Coding "problems": Someone brings a problem and we try to solve it together.
+
+-   Data Dojo: We take a dataset (from one of us or an openly available one, e.g. tidy tuesday) and work with it collaboratively. After deciding what to do with it, two people start: One is the driver (who live codes) and one the co-pilot (who helps and instructs). After 5 min. the co-pilot switches to driver and a new co-pilot steps up.
 
 ::: notes
 It would be great if everyone contributes!
 
 \
 . . You can find the slides on our **course website**: https://hillea.github.io/rclubwue/slides.html! Handy to follow along and to possibly copy code.
-:::
 
-::: notes
 Who has experience with coding and/or R?
 
 but don't cheat and look at solutions in slides!
 :::
+
+## Schedule (preliminary)
+
+How often do we want to meet? (Beginning weekly, maybe later bi-weekly?)
+
+Semester break?
+
+| Session | Date     | Topic                            | Preparation/Notes                                                               |
+|---------------|---------------|---------------|---------------------------|
+| 1       | 16.01.24 | Intro to R & RStudio             | [Install R and RStudio](https://rstudio-education.github.io/hopr/starting.html) |
+| 2       | 23.01.24 | Data Wrangling                   |                                                                                 |
+| 3       | 30.01.24 | Randomization & Counterbalancing | (Ecem)                                                                          |
+| 4       | 06.02.24 | Data Visualization               |                                                                                 |
+| 5       | 13.02.24 | (Semester break or continue?)    |                                                                                 |
+| 6       | 20.02.24 | Preprocessing, e.g. physio data  |                                                                                 |
 
 ## Why write code?
 

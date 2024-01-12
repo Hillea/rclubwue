@@ -19,6 +19,51 @@ from: markdown+emoji
 
 # Randomization vs. Counterbalancing
 
-*Randomization*: Determining completely at random (or pseudorandom) e.g. which condition a participant belongs to/which stimulus is shown...
+*Randomization/random assignment*: Determining completely at random (or pseudorandom) e.g. which condition a participant belongs to/which stimulus is shown... (Block randomization = all conditions occur once before being repeated.)
 
-*Counterbalancing*: Determining how many conditions etc. there are and making sure that all orders are seen by the same number of participants.
+*Counterbalancing*: Determining how many conditions etc. there are and making sure that all orders are seen by the same number of participants. (This term is often used for within-subjects designs!)
+
+::: notes
+Problem Random: unequal sample sizes (not a problem for LMMs, but should be roughly equal to have good power)
+
+Counterbalanced Randomization: Make list and randomly assign participants to which list to use.
+:::
+
+## Let's dive in with an example
+
+We have three conditions (between-subject) and we want to randomly assign each participant to a condition.
+
+. . .
+
+We would use a function called `sample()`, which will be our best friend for today:\
+It allows us to draw from a vector (think of drawing a paper slip from a hat), either with or without replacement.
+
+```{r}
+#| echo: true
+
+# just shuffle
+conds <- sample(c("condition A", "condition B", "condition C"))
+conds
+
+# draw them repeatedly (with equal probability)
+conds2 <- sample(c("condition A", "condition B", "condition C"), 30, replace = TRUE)
+conds2
+table(conds2)
+
+```
+
+. . .
+
+The latter would be \~ random assignment. If we want equal group sizes, we could use a vector of length = sample size and shuffle it (sample without replacement):
+
+```{r}
+#| echo: true
+#| 
+conds <- sample(rep(c("condition A", "condition B", "condition C"), times=10))
+conds
+table(conds)
+```
+
+## What do we need for randomization?
+
+Probability theory! Or, at least

@@ -4,12 +4,12 @@ title: "R Club Würzburg"
 
 This is the course website of the R Club of the [Research Training Group 2660](https://www.uni-wuerzburg.de/grk2660/news/) at the University and University Clinic in Würzburg, Germany - but it's open to everyone if space is available!
 
-The R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. This way, we can all learn together!
+The R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. We may end up as a Data Dojo/Coding Club, where we work on problems together. This way, we can all learn together!
 
 We meet weekly on Tuesdays, 16:00 - 18:00 in Room 213 at the Marcusstr, starting in January 2024. The syllabus can be found [here](https://docs.google.com/document/d/1ZJPsgPMPv_2EYwyGL7kv9Mb846iilznj3cuKNvwuINc/edit#heading=h.9xs7fuefba6l). On this page, the slides etc. will be linked.
 
 | Session | Date     | Topic                            | Preparation/Notes                                                               |
-|------------|------------|------------|------------------------------------|
+|--------------|--------------|--------------|-------------------------------|
 | 1       | 16.01.24 | Intro to R & RStudio             | [Install R and RStudio](https://rstudio-education.github.io/hopr/starting.html) |
 | 2       | 23.01.24 | Data Wrangling                   |                                                                                 |
 | 3       | 30.01.24 | Randomization & Counterbalancing | (Ecem)                                                                          |
