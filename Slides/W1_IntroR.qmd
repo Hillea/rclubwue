@@ -63,14 +63,14 @@ How often do we want to meet? (Beginning weekly, maybe later bi-weekly?)
 
 Semester break?
 
-| Session | Date     | Topic                            | Preparation/Notes                                                               |
-|---------------|---------------|---------------|---------------------------|
-| 1       | 16.01.24 | Intro to R & RStudio             | [Install R and RStudio](https://rstudio-education.github.io/hopr/starting.html) |
-| 2       | 23.01.24 | Data Wrangling                   |                                                                                 |
-| 3       | 30.01.24 | Randomization & Counterbalancing | (Ecem)                                                                          |
-| 4       | 06.02.24 | Data Visualization               |                                                                                 |
-| 5       | 13.02.24 | (Semester break or continue?)    |                                                                                 |
-| 6       | 20.02.24 | Preprocessing, e.g. physio data  |                                                                                 |
+| Session | Date     | Topic                            | Preparation/Notes                                                                                                                                                            |
+|------------|------------|------------|------------------------------------|
+| 1       | 16.01.24 | Intro to R & RStudio             | [Install R and RStudio](https://rstudio-education.github.io/hopr/starting.html), download [Dataset1](Slides/Data/ahi-cesd.csv), [Dataset2](Slides/Data/participant-info.csv) |
+| 2       | 23.01.24 | Data Wrangling                   |                                                                                                                                                                              |
+| 3       | 30.01.24 | Randomization & Counterbalancing | (Ecem)                                                                                                                                                                       |
+| 4       | 06.02.24 | Data Visualization               |                                                                                                                                                                              |
+| 5       | 13.02.24 | (Semester break or continue?)    |                                                                                                                                                                              |
+| 6       | 20.02.24 | Preprocessing, e.g. physio data  | (Francesco)                                                                                                                                                                  |
 
 ## Why write code?
 
@@ -167,6 +167,8 @@ word <- "Hello"
 
 ::: {.incremental .smaller}
 -   "\<-" is used to assign values to variables ("=" is also possible but not preferred)
+
+    -   Hint: use `Alt` + `-` as a shortcut
 
 -   `a`, `multi` etc. are the variable names, which can be words, no whitespace allowed
 
@@ -297,7 +299,7 @@ We will use the files from [Fundamentals of Quantitative Analysis](https://psyte
 
 . . .
 
-Delete the text/code in the .Rmd document you just worked on (or add a new header like "Working with data"). Underneath, add a code chunk with the following content:
+Delete the text/code in the R Script you just worked on (and add a comment as a header: "Working with data"). Underneath, add the following code:
 
 ```{r}
 #| echo: true
@@ -309,7 +311,7 @@ dat <- read_csv("ahi-cesd.csv")
 pinfo <- read_csv("participant-info.csv")
 ```
 
-Run the code chunk!
+Run the code!
 
 ## Looking at the Data
 
@@ -327,6 +329,10 @@ There are several options to get a glimpse at the data:
 -   In the console, type in `head(dat).`
 
 -   What is the difference between these commands?
+:::
+
+::: notes
+glimpse() is also possible, but not in base R (dplyr)
 :::
 
 ## Looking at the Data 2
