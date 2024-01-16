@@ -1,1 +1,1 @@
-Sitemap: https://github.com/Hillea/rclubwue/sitemap.xml
+Sitemap: https://Hillea.github.io/rclubwue/sitemap.xml
