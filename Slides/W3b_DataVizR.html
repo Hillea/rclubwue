@@ -1149,10 +1149,10 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
           event.initEvent("slideenter", true, true);
           window.document.dispatchEvent(event);
         }
-
+    
         function fireSlideChanged(previousSlide, currentSlide) {
           fireSlideEnter();
-
+    
           // dispatch for shiny
           if (window.jQuery) {
             if (previousSlide) {
@@ -1163,7 +1163,7 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
             }
           }
         }
-
+    
         // hookup for slidy
         if (window.w3c_slidy) {
           window.w3c_slidy.add_observer(function (slide_num) {
@@ -1171,10 +1171,10 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
             fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
           });
         }
-
+    
       })();
     </script>
-
+    
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
