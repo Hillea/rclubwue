@@ -64,6 +64,50 @@ conds
 table(conds)
 ```
 
+Add to dataframe:
+
+```{r}
+#| echo: true
+
+library(tidyverse)
+
+design <- tibble(
+  ID = 1:30,
+  cond = sample(rep(c("condition A", "condition B", "condition C"), times=10))
+)
+
+```
+
+## Two conditions
+
+We can draw them separately:
+
+```{r}
+#| echo: true
+
+
+treatment <- c("Treatment", "Control")
+color <- c("blue", "yellow")
+
+design <- tibble(
+  ID = 1:30,
+  cond = sample(rep(treatment, times=15)),
+  color = sample(rep(color, times=15))
+)
+
+table(design$cond, design$color) 
+
+# make sure each combination is equally often represented:
+design <- crossing(treatment, color) %>% # gets all combinations
+  mutate(combi=str_c(treatment, color, sep="_")) %>%  # combine columns
+  select(-treatment, -color) %>%   # remove original ones
+  reframe(combi2 = sample(rep(combi, 10))) %>%  # use reframe to add rows
+  mutate(ID = 1:n()) %>%  # add participant number
+  separate_wider_delim(combi2, delim="_", names=c("treatment", "color"))
+
+table(design$treatment, design$color)
+```
+
 ## What do we need for randomization?
 
 Probability theory! Or, at least
