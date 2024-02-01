@@ -1,0 +1,11 @@
+[
+  {
+    "listing": "/slides.html",
+    "items": [
+      "/Slides/W1_IntroR.html",
+      "/Slides/W2b_DataWranglingR.html",
+      "/Slides/W3_Randomize.html",
+      "/Slides/W3b_DataVizR.html"
+    ]
+  }
+]
