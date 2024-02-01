@@ -17,6 +17,10 @@ editor: visual
 from: markdown+emoji
 ---
 
+# Some general notes
+
+-   You can write everything on one line, but I usually add line breaks to increase readability
+
 # Randomization vs. Counterbalancing
 
 *Randomization/random assignment*: Determining completely at random (or pseudorandom) e.g. which condition a participant belongs to/which stimulus is shown... (Block randomization = all conditions occur once before being repeated.)
@@ -40,8 +44,11 @@ It allows us to draw from a vector (think of drawing a paper slip from a hat), e
 
 ```{r}
 #| echo: true
+# good practice to set a seed to make the (pseudo-)randomization reproducible 
+set.seed(123)
 
 # just shuffle
+# you could also use this to create different stimulus-lists!
 conds <- sample(c("condition A", "condition B", "condition C"))
 conds
 
@@ -90,9 +97,9 @@ treatment <- c("Treatment", "Control")
 color <- c("blue", "yellow")
 
 design <- tibble(
-  ID = 1:30,
-  cond = sample(rep(treatment, times=15)),
-  color = sample(rep(color, times=15))
+  ID = 1:40,
+  cond = sample(rep(treatment, times=20)),
+  color = sample(rep(color, times=20))
 )
 
 table(design$cond, design$color) 
@@ -108,6 +115,312 @@ design <- crossing(treatment, color) %>% # gets all combinations
 table(design$treatment, design$color)
 ```
 
-## What do we need for randomization?
+## Draw from a probability distribution
 
-Probability theory! Or, at least
+Sometimes it can be helpful to draw a random number from a certain probability distribution, e.g. if you want to get Inter-Trial-Intervals from a normal or uniform distribution or if you want to simulate a coin toss with a binomial distribution.
+
+In R, you can use certain functions that start with an "r" (e.g. `rnorm()`, `runif()`, `rbinom()`) to draw random numbers from distributions.
+
+. . .
+
+Let's start with the coin toss, as it is similar to using `sample()`. The binomial distribution gives you the "successes" (vs. failure, so 1 vs. 0 or heads vs. tails) in a row of "experiments" (coin tosses).
+
+You could of course determine the condition by "tossing a coin". The "problem" is that the count of each outcome will be different for each participant.
+
+```{r}
+#| echo: true
+
+# repeat a study 10 times in which 100 fair coins are tossed -out of the 100, how often do we get heads?
+rbinom(10,100,.5) 
+
+# For one participant, determine whether 10 trials are condition 0 or 1 (with 60% probability for cond. 1)
+rbinom(10,1,.6)
+```
+
+. . .
+
+Let's draw 10 jittered ITIs from a normal distribution: We want them to be jittered around a mean of 1500 msec with a SD of 200 msec:
+
+```{r}
+#| echo: true
+
+rnorm(10, mean = 1500, sd = 200)
+
+# you could also round them:
+round(rnorm(10, 1500, 200), 0)
+```
+
+You could use the uniform distribution if you want each number to be equally likely:
+
+```{r}
+#| echo: true
+# get 10 numbers between 1200 and 1800 msec
+round(runif(10, min = 1200, max = 1800), 0)
+
+```
+
+## Any other questions?
+
+Specific to your design etc.?
+
+## Ecem's study - detour incl. loops and if-statements!
+
+-   Shape (4x) and color (4x)
+
+-   each participant (N=~~16~~ 4) should have four stimuli assigned, each color and each shape once
+
+-   but each of the stimuli should be used equally often!
+
+```{r}
+#| echo: true
+shape <- c("s1", "s2", "s3", "s4")
+color <- c("c1", "c2", "c3", "c4")
+
+crossing(shape, color)  # 16 combinations
+```
+
+If we simply draw from this list, a participant likely has a shape/color twice. If we draw from both lists separately, we can't make sure that another participant won't get the same combination! (If we just draw stimuli completely at random, this would be fine...)
+
+. . .
+
+We could "brute-force" it: Draw a stimulus and compare it to the already drawn ones. If already included, draw next one etc.
+
+```{r}
+#| echo: true
+# participant 1
+stimlist1 <- tibble(
+  ID = 1, 
+  stim_shape = sample(shape),
+  stim_col = sample(color)
+) %>% 
+  mutate(combi=str_c(stim_shape, stim_col, sep="_"))   # combine columns
+  
+# participant 2
+stimlist2 <- tibble(
+  ID = 2, 
+  stim_shape = sample(shape),
+  stim_col = sample(color)
+) %>% 
+  mutate(combi=str_c(stim_shape, stim_col, sep="_"))   # combine columns
+
+# check whether stimuli are the same in both stimlists
+# you could use %in% (not "==" -> would only check rowwise!) or setdiff()
+
+stimlist1$combi %in% stimlist2$combi # checks whether any of stimlist 2 is in stimlist 1 -> should be 4x FALSE
+setdiff(stimlist2$combi, stimlist1$combi) # gives you the ones that are different in stimlist2 -> should be 4
+
+any(stimlist1$combi %in% stimlist2$combi) # test whether any of the 4 is TRUE
+```
+
+### Run repeatedly until "novel" list is found
+
+We will use a `while statement`[^1] in combination with an `if statement` for this!
+
+[^1]: Rarely used in tidyverse, but often used in base R/other programming languages!
+
+The `while statement` will run the code until the condition in the if statement is met and then break out of the while loop.
+
+The `if statement` tests a condition. Only if the condition is met, the code underneath is carried out. It is also possible to use alternative conditions: `if(...) {...} elseif() {...} else {...}`
+
+```{r}
+#| echo: true
+# check repeatedly
+while(TRUE) {
+  stimlist2 <- tibble(
+  ID = 2, 
+  stim_shape = sample(shape),
+  stim_col = sample(color)
+) %>% 
+  mutate(combi=str_c(stim_shape, stim_col, sep="_"))   # combine columns
+  
+  if(!any(stimlist1$combi %in% stimlist2$combi)){
+    break;
+  }
+}
+
+# we could also use:
+# test <- TRUE
+# while(test == TRUE) {
+#   ...
+#   if(...)
+#     test <- FALSE}
+```
+
+## Repeat for more participants
+
+We could copy the code for every participant, but this would be tedious and would result in a long script. Alternatively, we can use a `for-loop`! It is similar to the while statement and runs the included code a specified number of times:
+
+```{r}
+#| echo: true
+
+# initiate variables and dataframes (fill in with values later)
+n <- 4 # easily change number of subjects here - max 4 possible w/16 combis!
+shape <- c("heart", "sacral", "throat", "solar") # or "s1" etc
+color <- c("yellow", "purple", "orange", "blue") # or "c1" etc
+
+overall_stimlist <- tibble(
+  ID = rep(NA, 4*n), # fill in NAs, 4 rows per participant
+  stim_shape = rep(NA, 4*n),
+  stim_col = rep(NA, 4*n),
+  combi = rep(NA, 4*n)
+)
+
+for(i in 1:n){
+  
+  print(i)  # just so you know how far the loop is
+  
+  while(TRUE) {
+  stimlist2 <- tibble(
+  ID = i,   # use the index of the loop iteration!
+  stim_shape = sample(shape),
+  stim_col = sample(color)) %>% 
+  mutate(combi=str_c(stim_shape, stim_col, sep="_"))   # combine columns
+  
+  if(!any(overall_stimlist$combi %in% stimlist2$combi)){
+      break;
+    }
+  }
+  
+   # save to overall_stimlist at correct location
+  overall_stimlist[(4*i-3):(4*i), ] <- stimlist2
+  
+  
+  # Ecem also wants to shuffle each stimlist2 4 times to get different orders - making sure that no stimulus is in the same location!
+  # we can get all permutations (using an R function like Permn()), but this would be 24 variations (incl. same stimulus in same location)
+  # instead, we just manually shift the stimuli by one (e.g. 1st becomes 2nd etc.)
+  
+  # stimlist3 <- stimlist2[c(2,3,4,1),]
+  # stimlist4 <- stimlist2[c(3,4,1,2),]
+  # stimlist5 <- stimlist2[c(4,1,2,3),]
+ 
+  
+}
+
+# add further info to the dataframe
+overall_stimlist <- overall_stimlist %>% 
+  mutate(
+    CS_type = rep(c("threat", "safety", "amb1", "amb2"), times=n),
+    percentage = rep(c(100, 0, 50, 50), times=n)
+  )
+
+```
+
+For Ecem's study, it is more complex and she already made stimulus lists per hand! I would actually just use this list and read it into R (in a good format).
+
+## Make the stimulus list per participant
+
+Now that we know which stimulus is used for which category for each participant, we can generate the stimulus list. In Ecem's study, we have 2 blocks à 100 trials (after the first block, the stimulus type changes). Let's focus on the first block.
+
+We have different trial types: 60 single and 40 multi cue. For the single cues, each of the 4 stimulus types is shown 15x, for the multicue, a combination of two types (threat or safety with each amb) is shown 10x. In the multi cue trials, other stimuli are also shown, which are the other combinations of shape and color.
+
+We first simply list all possibilities and repeat them as often as needed:
+
+```{r}
+#| echo: true
+#| 
+trial_list <- sample(c(  # wrap in sample()!
+  rep("threat", 15),
+  rep("safety", 15),
+  rep("amb1", 15),
+  rep("amb2", 15),
+  rep("threat-amb1", 10),
+  rep("threat-amb2", 10),
+  rep("safety-amb1", 10),
+  rep("safety-amb2", 10)
+))
+
+length(trial_list)  # make sure it's 100!
+trial_list
+
+
+```
+
+What if we need a minimum distance between the same stimulus types?
+
+TAKES LONG; DON'T RUN!
+
+```{r}
+#| echo: true
+#| eval: false
+
+trial_list2 <- rep(NA, length(trial_list))
+trial_list2[1] <- trial_list[1] # fill in the first already to have a comparison
+
+for (i in 2:length(trial_list)) { # start with 2!
+  
+  while(trial_list[i] == trial_list[i-1]) { # check for last 2: %in% trial_list[i-2:i-1]
+    trial_list[i:length(trial_list)] <- sample(trial_list[i:length(trial_list)])
+  } 
+  trial_list2[i] <- trial_list[i]
+  
+}
+
+# check whether correct
+trial_list2 != lag(trial_list2) 
+```
+
+## Fill in the remaining information
+
+...for single cue trials!
+
+```{r}
+#| echo: true
+
+triallist_vp1 <- tibble(
+  trial = 1:length(trial_list),
+  block = 1,
+  CS_type = trial_list # same name as in stimlist for join!
+) %>% 
+  
+  # add info from stimlist
+  left_join(overall_stimlist %>% filter(ID==1)) %>%  # change ID! = for-loop
+  
+  # determine whether shock or not (can also use 1 and 0)
+  rowwise() %>% 
+  mutate(
+    trial_type = ifelse(CS_type %in% c("threat", "safety", "amb1", "amb2"), "sc", "mc"),
+    shock = case_when(
+      CS_type == "threat" ~ "shock", 
+      CS_type == "safety" ~ "noshock",
+      # CS_type %in% c("amb1", "amb2") ~ sample(c("shock","noshock"), 1, prob = c(.5,.5)))
+      CS_type %in% c("amb1", "amb2") ~ rbinom(1,1,.5)))
+  )
+
+# Doesn't seem to work, always
+```
+
+Btw: This will lead to shocks being delivered not exactly 50% of the time in the amb1/2 trials –\> see above for other solution.
+
+## Multi-cue trials?
+
+For the multi-cue trials, we could split the name of the stimuli to two columns and do similar things as above with both columns:
+
+```{r}
+#| echo: true
+
+# we start again with the trial_list, code from above
+triallist_vp1 <- tibble(
+  trial = 1:length(trial_list),
+  block = 1,
+  type = trial_list # DIFFERENT name as in stimlist for join! (not neccessary!)
+) %>% 
+  
+  separate_wider_delim(type, delim="-", names=c("CS_type1", "CS_type2"), cols_remove = FALSE, too_few = "align_start") %>% 
+  # last argument leads to NAs in 2nd column for SC trials
+  
+   # add info from stimlist
+  left_join(overall_stimlist %>% filter(ID==1), by = join_by(CS_type1 == CS_type)) %>%  # change ID! = for-loop
+  
+  # determine whether shock or not (can also use 1 and 0)
+  mutate(
+    trial_type = ifelse(type %in% c("threat", "safety", "amb1", "amb2"), "sc", "mc"),
+    shock1 = case_when(
+      CS_type1 == "threat" ~ "shock", 
+      CS_type1 == "safety" ~ "noshock",
+      CS_type1 %in% c("amb1", "amb2") ~ sample(c("shock","noshock"), 1, prob = c(.5,.5))),
+    shock2 = case_when(
+      CS_type2 == "threat" ~ "shock", 
+      CS_type2 == "safety" ~ "noshock",
+      CS_type2 %in% c("amb1", "amb2") ~ sample(c("shock","noshock"), 1)))
+
+```
