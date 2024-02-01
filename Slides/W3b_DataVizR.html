@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Dr.&nbsp;Lea Hildebrandt">
   <meta name="dcterms.date" content="2024-01-30">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -224,7 +224,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -395,8 +396,8 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Data Visualization</h1>
-  <p class="subtitle"></p><p>R Coding Club<br>
-RTG 2660</p><p></p>
+  <p class="subtitle"></p><div class="line-block">R Coding Club<br>
+RTG 2660</div><p></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -453,7 +454,7 @@ Error in summarise(.data = babynames, mean_n = mean(n)) :
 <p>The main function to “start” plotting is <code>ggplot()</code> - we will then add layers of data and layers to tweak the appearance.</p>
 
 <img data-src="images/ggplotlayers.PNG" alt="Depiction of how a plot is built up from different layers in ggplot2" width="502" class="r-stretch quarto-figure-center"><p class="caption">Layers of a ggplot</p></section>
-<section id="activity-1-set-up" class="slide level2">
+<section id="activity-1-set-up" class="slide level2 scrollable">
 <h2>Activity 1: Set Up</h2>
 <ol type="1">
 <li><p>Download <a href="https://psyteachr.github.io/quant-fun-v2/ahi-cesd.csv"><code>ahi-cesd.csv</code></a> and <a href="https://psyteachr.github.io/quant-fun-v2/participant-info.csv"><code>participant-info.csv</code></a> into the folder on your computer for this chapter!</p></li>
@@ -463,24 +464,24 @@ Error in summarise(.data = babynames, mean_n = mean(n)) :
 <li><p>Type and run the below code to load the <code>tidyverse</code> package and to load in the data files.</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(tidyverse) </span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ahi-cesd.csv"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participant-info.csv"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(dat, </span>
-<span id="cb2-7"><a href="#cb2-7"></a>                      pinfo, </span>
-<span id="cb2-8"><a href="#cb2-8"></a>                      <span class="at">by=</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"intervention"</span>))</span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a>summarydata <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> all_dat, </span>
-<span id="cb2-11"><a href="#cb2-11"></a>                      ahiTotal, </span>
-<span id="cb2-12"><a href="#cb2-12"></a>                      cesdTotal, </span>
-<span id="cb2-13"><a href="#cb2-13"></a>                      sex, </span>
-<span id="cb2-14"><a href="#cb2-14"></a>                      age, </span>
-<span id="cb2-15"><a href="#cb2-15"></a>                      educ, </span>
-<span id="cb2-16"><a href="#cb2-16"></a>                      income, </span>
-<span id="cb2-17"><a href="#cb2-17"></a>                      occasion, </span>
-<span id="cb2-18"><a href="#cb2-18"></a>                      elapsed.days) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse) </span>
+<span id="cb2-2"><a></a></span>
+<span id="cb2-3"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ahi-cesd.csv"</span>)</span>
+<span id="cb2-4"><a></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participant-info.csv"</span>)</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(dat, </span>
+<span id="cb2-7"><a></a>                      pinfo, </span>
+<span id="cb2-8"><a></a>                      <span class="at">by=</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"intervention"</span>))</span>
+<span id="cb2-9"><a></a></span>
+<span id="cb2-10"><a></a>summarydata <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="at">.data =</span> all_dat, </span>
+<span id="cb2-11"><a></a>                      ahiTotal, </span>
+<span id="cb2-12"><a></a>                      cesdTotal, </span>
+<span id="cb2-13"><a></a>                      sex, </span>
+<span id="cb2-14"><a></a>                      age, </span>
+<span id="cb2-15"><a></a>                      educ, </span>
+<span id="cb2-16"><a></a>                      income, </span>
+<span id="cb2-17"><a></a>                      occasion, </span>
+<span id="cb2-18"><a></a>                      elapsed.days) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>what happens in the code chunk?</p>
@@ -500,7 +501,7 @@ Error in summarise(.data = babynames, mean_n = mean(n)) :
 <h2>Look at the Data</h2>
 <p>Have a look at the types of data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">glimpse</span>(summarydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">glimpse</span>(summarydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 992
 Columns: 8
@@ -531,12 +532,12 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <li><p>Remember if you mutate a new column with the same name as the old one, it will overwrite the column.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>summarydata <span class="ot">&lt;-</span> summarydata <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as_factor</span>(sex),</span>
-<span id="cb5-3"><a href="#cb5-3"></a>         <span class="at">educ =</span> <span class="fu">as_factor</span>(educ),</span>
-<span id="cb5-4"><a href="#cb5-4"></a>         <span class="at">income =</span> <span class="fu">as_factor</span>(income))</span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="fu">glimpse</span>(summarydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>summarydata <span class="ot">&lt;-</span> summarydata <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as_factor</span>(sex),</span>
+<span id="cb5-3"><a></a>         <span class="at">educ =</span> <span class="fu">as_factor</span>(educ),</span>
+<span id="cb5-4"><a></a>         <span class="at">income =</span> <span class="fu">as_factor</span>(income))</span>
+<span id="cb5-5"><a></a></span>
+<span id="cb5-6"><a></a><span class="fu">glimpse</span>(summarydata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 992
 Columns: 8
@@ -565,10 +566,14 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -581,11 +586,15 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex)) <span class="sc">+</span></span>
+<span id="cb8-2"><a></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -596,11 +605,15 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="1|2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="1|2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb9-2"><a></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -618,14 +631,18 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="3,4|5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
-<span id="cb10-4"><a href="#cb10-4"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10" data-code-line-numbers="3,4|5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb10-2"><a></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
+<span id="cb10-4"><a></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
+<span id="cb10-5"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -650,15 +667,19 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <p>We will now change the default theme to <code>theme_minimal()</code>, but you can also try other themes (just type “theme_” and see what the autocomplete brings up).</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
-<span id="cb11-4"><a href="#cb11-4"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>) <span class="sc">+</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11" data-code-line-numbers="6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb11-2"><a></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
+<span id="cb11-4"><a></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
+<span id="cb11-5"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -672,16 +693,20 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
-<span id="cb12-4"><a href="#cb12-4"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb12-2"><a></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
+<span id="cb12-4"><a></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
+<span id="cb12-5"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb12-7"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -692,17 +717,21 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <p>To do so, you can simply add <code>alpha</code> to the <code>geom_bar()</code>:</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb13-3"><a href="#cb13-3"></a>           <span class="at">alpha =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
-<span id="cb13-5"><a href="#cb13-5"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>) <span class="sc">+</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb13-2"><a></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb13-3"><a></a>           <span class="at">alpha =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
+<span id="cb13-5"><a></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
+<span id="cb13-6"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-8"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -712,18 +741,22 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <p>Let’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several <em>factors</em> that you want to use to group your data, such as gender and income. In this case, you could use a <strong>grouped bar plot</strong>:</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="1|2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> income)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>,</span>
-<span id="cb14-3"><a href="#cb14-3"></a>           <span class="at">show.legend =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb14-4"><a href="#cb14-4"></a>           <span class="at">alpha =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
-<span id="cb14-6"><a href="#cb14-6"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="1|2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> income)) <span class="sc">+</span></span>
+<span id="cb14-2"><a></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>,</span>
+<span id="cb14-3"><a></a>           <span class="at">show.legend =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb14-4"><a></a>           <span class="at">alpha =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
+<span id="cb14-6"><a></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
+<span id="cb14-7"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>) <span class="sc">+</span></span>
+<span id="cb14-8"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-9"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -733,18 +766,22 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <p>You could also use <strong>facets</strong> to divide your data visualizations:</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb15-3"><a href="#cb15-3"></a>           <span class="at">alpha =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
-<span id="cb15-5"><a href="#cb15-5"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>) <span class="sc">+</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)  <span class="sc">+</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15" data-code-line-numbers="9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb15-2"><a></a>  <span class="fu">geom_bar</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb15-3"><a></a>           <span class="at">alpha =</span> .<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Participant Sex"</span>, </span>
+<span id="cb15-5"><a></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>)) <span class="sc">+</span></span>
+<span id="cb15-6"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Number of participants"</span>) <span class="sc">+</span></span>
+<span id="cb15-7"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-8"><a></a>  <span class="fu">scale_fill_viridis_d</span>(<span class="at">option =</span> <span class="st">"E"</span>)  <span class="sc">+</span></span>
+<span id="cb15-9"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -760,25 +797,29 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <p>Let’s look at the code. How does the code differ from the one for the barplot before?</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="|2|4|7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> income, </span>
-<span id="cb16-2"><a href="#cb16-2"></a>                        <span class="at">y =</span> ahiTotal, </span>
-<span id="cb16-3"><a href="#cb16-3"></a>                        <span class="at">fill =</span> income)) <span class="sc">+</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb16-5"><a href="#cb16-5"></a>              <span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb16-6"><a href="#cb16-6"></a>              <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, </span>
-<span id="cb16-8"><a href="#cb16-8"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb16-9"><a href="#cb16-9"></a>               <span class="at">alpha =</span> .<span class="dv">7</span>)<span class="sc">+</span></span>
-<span id="cb16-10"><a href="#cb16-10"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Income"</span>,</span>
-<span id="cb16-11"><a href="#cb16-11"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Below Average"</span>, </span>
-<span id="cb16-12"><a href="#cb16-12"></a>                              <span class="st">"Average"</span>, </span>
-<span id="cb16-13"><a href="#cb16-13"></a>                              <span class="st">"Above Average"</span>)) <span class="sc">+</span></span>
-<span id="cb16-14"><a href="#cb16-14"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Authentic Happiness Inventory Score"</span>)<span class="sc">+</span></span>
-<span id="cb16-15"><a href="#cb16-15"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb16-16"><a href="#cb16-16"></a>  <span class="fu">scale_fill_viridis_d</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="|2|4|7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> income, </span>
+<span id="cb16-2"><a></a>                        <span class="at">y =</span> ahiTotal, </span>
+<span id="cb16-3"><a></a>                        <span class="at">fill =</span> income)) <span class="sc">+</span></span>
+<span id="cb16-4"><a></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb16-5"><a></a>              <span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb16-6"><a></a>              <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, </span>
+<span id="cb16-8"><a></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb16-9"><a></a>               <span class="at">alpha =</span> .<span class="dv">7</span>)<span class="sc">+</span></span>
+<span id="cb16-10"><a></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Income"</span>,</span>
+<span id="cb16-11"><a></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Below Average"</span>, </span>
+<span id="cb16-12"><a></a>                              <span class="st">"Average"</span>, </span>
+<span id="cb16-13"><a></a>                              <span class="st">"Above Average"</span>)) <span class="sc">+</span></span>
+<span id="cb16-14"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Authentic Happiness Inventory Score"</span>)<span class="sc">+</span></span>
+<span id="cb16-15"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-16"><a></a>  <span class="fu">scale_fill_viridis_d</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -802,20 +843,28 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <div class="columns">
 <div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> income, <span class="at">y =</span> ahiTotal)) <span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> income, <span class="at">y =</span> ahiTotal)) <span class="sc">+</span></span>
+<span id="cb17-2"><a></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb17-3"><a></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> income, <span class="at">y =</span> ahiTotal)) <span class="sc">+</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">geom_violin</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> income, <span class="at">y =</span> ahiTotal)) <span class="sc">+</span></span>
+<span id="cb18-2"><a></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a></a>  <span class="fu">geom_violin</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -826,12 +875,16 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <p>If we have continuous data of two variables, we often want to make a <strong>scatter plot</strong>:</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb19" data-code-line-numbers="1|2|5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> cesdTotal))<span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm) <span class="co"># if you don't want the shaded CI, add se = FALSE to this</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19" data-code-line-numbers="1|2|5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">ggplot</span>(summarydata, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> cesdTotal))<span class="sc">+</span></span>
+<span id="cb19-2"><a></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb19-3"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm) <span class="co"># if you don't want the shaded CI, add se = FALSE to this</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 <div class="cell-output-display">
+<div>
+<figure>
 <p><img data-src="W3b_DataVizR_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -841,16 +894,16 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <p>You can use <code>ggsave()</code> to save your plots. If you don’t tell <code>ggsave()</code> which plot you want to save, by default it will save <strong>the last plot you created</strong>.</p>
 <p>You just have to enter the name of the file to be saved (in your working directory) like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggsave</span>(<span class="st">"violin-boxplot.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">ggsave</span>(<span class="st">"violin-boxplot.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Check whether indeed the last plot was saved!</p>
 <div class="fragment">
 <p>You can also specify the dimensions of your plot to be saved:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">ggsave</span>(<span class="st">"violin-boxplot.png"</span>,</span>
-<span id="cb21-2"><a href="#cb21-2"></a>       <span class="at">width =</span> <span class="dv">10</span>,</span>
-<span id="cb21-3"><a href="#cb21-3"></a>       <span class="at">height =</span> <span class="dv">8</span>,</span>
-<span id="cb21-4"><a href="#cb21-4"></a>       <span class="at">units =</span> <span class="st">"cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">ggsave</span>(<span class="st">"violin-boxplot.png"</span>,</span>
+<span id="cb21-2"><a></a>       <span class="at">width =</span> <span class="dv">10</span>,</span>
+<span id="cb21-3"><a></a>       <span class="at">height =</span> <span class="dv">8</span>,</span>
+<span id="cb21-4"><a></a>       <span class="at">units =</span> <span class="st">"cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
@@ -860,26 +913,26 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <p>Run the code for the violin-boxplot again and save the plot in an object called <code>viobox</code>. You’d then have to explicitly tell <code>ggsave()</code> to save the object <code>viobox</code>:</p>
 <div class="cell columns column-output-location">
 <div class="column">
-<div class="sourceCode cell-code" id="cb22" data-code-line-numbers="1,20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>viobox <span class="ot">&lt;-</span> summarydata <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> income,</span>
-<span id="cb22-3"><a href="#cb22-3"></a>             <span class="at">y =</span> ahiTotal,</span>
-<span id="cb22-4"><a href="#cb22-4"></a>             <span class="at">fill =</span> income)) <span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb22-6"><a href="#cb22-6"></a>              <span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb22-7"><a href="#cb22-7"></a>              <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, </span>
-<span id="cb22-9"><a href="#cb22-9"></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb22-10"><a href="#cb22-10"></a>               <span class="at">alpha =</span> .<span class="dv">7</span>)<span class="sc">+</span></span>
-<span id="cb22-11"><a href="#cb22-11"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Income"</span>,</span>
-<span id="cb22-12"><a href="#cb22-12"></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Below Average"</span>, </span>
-<span id="cb22-13"><a href="#cb22-13"></a>                              <span class="st">"Average"</span>, </span>
-<span id="cb22-14"><a href="#cb22-14"></a>                              <span class="st">"Above Average"</span>)) <span class="sc">+</span></span>
-<span id="cb22-15"><a href="#cb22-15"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Authentic Happiness Inventory Score"</span>)<span class="sc">+</span></span>
-<span id="cb22-16"><a href="#cb22-16"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb22-17"><a href="#cb22-17"></a>  <span class="fu">scale_fill_viridis_d</span>()</span>
-<span id="cb22-18"><a href="#cb22-18"></a></span>
-<span id="cb22-19"><a href="#cb22-19"></a></span>
-<span id="cb22-20"><a href="#cb22-20"></a><span class="fu">ggsave</span>(<span class="st">"violin-boxplot-stored.png"</span>, <span class="at">plot =</span> viobox)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22" data-code-line-numbers="1,20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a>viobox <span class="ot">&lt;-</span> summarydata <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> income,</span>
+<span id="cb22-3"><a></a>             <span class="at">y =</span> ahiTotal,</span>
+<span id="cb22-4"><a></a>             <span class="at">fill =</span> income)) <span class="sc">+</span></span>
+<span id="cb22-5"><a></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb22-6"><a></a>              <span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb22-7"><a></a>              <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb22-8"><a></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, </span>
+<span id="cb22-9"><a></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb22-10"><a></a>               <span class="at">alpha =</span> .<span class="dv">7</span>)<span class="sc">+</span></span>
+<span id="cb22-11"><a></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Income"</span>,</span>
+<span id="cb22-12"><a></a>                   <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Below Average"</span>, </span>
+<span id="cb22-13"><a></a>                              <span class="st">"Average"</span>, </span>
+<span id="cb22-14"><a></a>                              <span class="st">"Above Average"</span>)) <span class="sc">+</span></span>
+<span id="cb22-15"><a></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Authentic Happiness Inventory Score"</span>)<span class="sc">+</span></span>
+<span id="cb22-16"><a></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-17"><a></a>  <span class="fu">scale_fill_viridis_d</span>()</span>
+<span id="cb22-18"><a></a></span>
+<span id="cb22-19"><a></a></span>
+<span id="cb22-20"><a></a><span class="fu">ggsave</span>(<span class="st">"violin-boxplot-stored.png"</span>, <span class="at">plot =</span> viobox)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column fragment">
 
 </div>
@@ -919,8 +972,10 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <li>?</li>
 </ul>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </div>
 </section></section>
@@ -951,7 +1006,6 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -1251,10 +1305,9 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -1264,8 +1317,17 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 

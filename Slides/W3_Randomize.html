@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Dr.&nbsp;Lea Hildebrandt">
   <meta name="dcterms.date" content="2024-01-30">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -224,7 +224,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -395,8 +396,8 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Randomization and Counterbalancing</h1>
-  <p class="subtitle"></p><p>R Coding Club<br>
-RTG 2660</p><p></p>
+  <p class="subtitle"></p><div class="line-block">R Coding Club<br>
+RTG 2660</div><p></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -435,15 +436,15 @@ Dr.&nbsp;Lea Hildebrandt
 <p>We would use a function called <code>sample()</code>, which will be our best friend for today:<br>
 It allows us to draw from a vector (think of drawing a paper slip from a hat), either with or without replacement.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># just shuffle</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>conds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>))</span>
-<span id="cb1-3"><a href="#cb1-3"></a>conds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># just shuffle</span></span>
+<span id="cb1-2"><a></a>conds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>))</span>
+<span id="cb1-3"><a></a>conds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "condition C" "condition B" "condition A"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># draw them repeatedly (with equal probability)</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>conds2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>conds2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># draw them repeatedly (with equal probability)</span></span>
+<span id="cb3-2"><a></a>conds2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-3"><a></a>conds2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "condition A" "condition C" "condition C" "condition C" "condition C"
  [6] "condition A" "condition C" "condition C" "condition B" "condition A"
@@ -452,7 +453,7 @@ It allows us to draw from a vector (think of drawing a paper slip from a hat), e
 [21] "condition B" "condition A" "condition C" "condition C" "condition A"
 [26] "condition B" "condition A" "condition A" "condition B" "condition A"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">table</span>(conds2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">table</span>(conds2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>conds2
 condition A condition B condition C 
@@ -463,8 +464,8 @@ condition A condition B condition C
 <div class="fragment">
 <p>The latter would be ~ random assignment. If we want equal group sizes, we could use a vector of length = sample size and shuffle it (sample without replacement):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>conds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>), <span class="at">times=</span><span class="dv">10</span>))</span>
-<span id="cb7-2"><a href="#cb7-2"></a>conds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>conds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>), <span class="at">times=</span><span class="dv">10</span>))</span>
+<span id="cb7-2"><a></a>conds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "condition A" "condition C" "condition C" "condition A" "condition C"
  [6] "condition A" "condition C" "condition B" "condition A" "condition B"
@@ -473,7 +474,7 @@ condition A condition B condition C
 [21] "condition C" "condition A" "condition A" "condition B" "condition C"
 [26] "condition B" "condition A" "condition A" "condition B" "condition A"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">table</span>(conds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">table</span>(conds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>conds
 condition A condition B condition C 
@@ -486,8 +487,10 @@ condition A condition B condition C
 <h2>What do we need for randomization?</h2>
 <p>Probability theory! Or, at least</p>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
+</div>
 </div>
 </section></section>
     </div>
@@ -517,7 +520,6 @@ condition A condition B condition C
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -817,10 +819,9 @@ condition A condition B condition C
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -830,8 +831,17 @@ condition A condition B condition C
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
