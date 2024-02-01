@@ -8,10 +8,10 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.450">
+  <meta name="generator" content="quarto-1.4.549">
 
   <meta name="author" content="Dr.&nbsp;Lea Hildebrandt">
-  <meta name="dcterms.date" content="2024-01-30">
+  <meta name="dcterms.date" content="2024-02-06">
   <title>R Club Würzburg - Randomization and Counterbalancing</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -32,7 +32,7 @@
     }
     /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
     .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -224,7 +224,8 @@
   }
 
   .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 
   .callout.callout-titled .callout-icon::before {
@@ -395,8 +396,8 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Randomization and Counterbalancing</h1>
-  <p class="subtitle"></p><p>R Coding Club<br>
-RTG 2660</p><p></p>
+  <p class="subtitle"></p><div class="line-block">R Coding Club<br>
+RTG 2660</div><p></p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -406,11 +407,23 @@ Dr.&nbsp;Lea Hildebrandt
 </div>
 </div>
 
-  <p class="date">2024-01-30</p>
+  <p class="date">2024-02-06</p>
 </section>
 <section>
 <section id="randomization-vs.-counterbalancing" class="title-slide slide level1 center">
 <h1>Randomization vs.&nbsp;Counterbalancing</h1>
+<div class="cell">
+<style type="text/css">
+code.sourceCode {
+  font-size: 1.4em;
+}
+
+div.cell-output-stdout {
+  font-size: 1.4em;
+}
+</style>
+</div>
+<p><em>. . .</em></p>
 <p><em>Randomization/random assignment</em>: Determining completely at random (or pseudorandom) e.g.&nbsp;which condition a participant belongs to/which stimulus is shown… (Block randomization = all conditions occur once before being repeated.)</p>
 <p><em>Counterbalancing</em>: Determining how many conditions etc. there are and making sure that all orders are seen by the same number of participants. (This term is often used for within-subjects designs!)</p>
 <aside class="notes">
@@ -435,61 +448,559 @@ Dr.&nbsp;Lea Hildebrandt
 <p>We would use a function called <code>sample()</code>, which will be our best friend for today:<br>
 It allows us to draw from a vector (think of drawing a paper slip from a hat), either with or without replacement.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># just shuffle</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>conds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>))</span>
-<span id="cb1-3"><a href="#cb1-3"></a>conds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># good practice to set a seed to make the (pseudo-)randomization reproducible </span></span>
+<span id="cb1-2"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="co"># just shuffle</span></span>
+<span id="cb1-5"><a></a><span class="co"># you could also use this to create different stimulus-lists!</span></span>
+<span id="cb1-6"><a></a>conds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>))</span>
+<span id="cb1-7"><a></a>conds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "condition C" "condition B" "condition A"</code></pre>
+<pre><code>[1] "condition C" "condition A" "condition B"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># draw them repeatedly (with equal probability)</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>conds2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>conds2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="co"># draw them repeatedly (with equal probability)</span></span>
+<span id="cb3-2"><a></a>conds2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-3"><a></a>conds2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "condition A" "condition C" "condition C" "condition C" "condition C"
- [6] "condition A" "condition C" "condition C" "condition B" "condition A"
-[11] "condition A" "condition C" "condition B" "condition A" "condition B"
-[16] "condition C" "condition A" "condition A" "condition C" "condition C"
-[21] "condition B" "condition A" "condition C" "condition C" "condition A"
-[26] "condition B" "condition A" "condition A" "condition B" "condition A"</code></pre>
+<pre><code> [1] "condition B" "condition C" "condition B" "condition B" "condition B"
+ [6] "condition C" "condition A" "condition B" "condition B" "condition A"
+[11] "condition B" "condition C" "condition A" "condition C" "condition C"
+[16] "condition A" "condition A" "condition A" "condition A" "condition C"
+[21] "condition B" "condition C" "condition B" "condition A" "condition B"
+[26] "condition C" "condition B" "condition A" "condition C" "condition C"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">table</span>(conds2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">table</span>(conds2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>conds2
 condition A condition B condition C 
-         12           6          12 </code></pre>
+          9          11          10 </code></pre>
 </div>
 </div>
 </div>
 <div class="fragment">
 <p>The latter would be ~ random assignment. If we want equal group sizes, we could use a vector of length = sample size and shuffle it (sample without replacement):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>conds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>), <span class="at">times=</span><span class="dv">10</span>))</span>
-<span id="cb7-2"><a href="#cb7-2"></a>conds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] "condition A" "condition C" "condition C" "condition A" "condition C"
- [6] "condition A" "condition C" "condition B" "condition A" "condition B"
-[11] "condition B" "condition B" "condition C" "condition B" "condition B"
-[16] "condition B" "condition C" "condition C" "condition C" "condition A"
-[21] "condition C" "condition A" "condition A" "condition B" "condition C"
-[26] "condition B" "condition A" "condition A" "condition B" "condition A"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">table</span>(conds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>conds <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>), <span class="at">times=</span><span class="dv">10</span>))</span>
+<span id="cb7-2"><a></a><span class="co"># conds</span></span>
+<span id="cb7-3"><a></a><span class="fu">table</span>(conds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>conds
 condition A condition B condition C 
          10          10          10 </code></pre>
 </div>
 </div>
+<p>Add to dataframe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-2"><a></a></span>
+<span id="cb9-3"><a></a>design <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-4"><a></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>,</span>
+<span id="cb9-5"><a></a>  <span class="at">cond =</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"condition A"</span>, <span class="st">"condition B"</span>, <span class="st">"condition C"</span>), <span class="at">times=</span><span class="dv">10</span>))</span>
+<span id="cb9-6"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </section>
-<section id="what-do-we-need-for-randomization" class="slide level2">
-<h2>What do we need for randomization?</h2>
-<p>Probability theory! Or, at least</p>
+<section id="two-conditions" class="slide level2">
+<h2>Two conditions</h2>
+<p>We can draw them separately:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a>treatment <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Control"</span>)</span>
+<span id="cb10-2"><a></a>color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"yellow"</span>)</span>
+<span id="cb10-3"><a></a></span>
+<span id="cb10-4"><a></a>design <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb10-5"><a></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>,</span>
+<span id="cb10-6"><a></a>  <span class="at">cond =</span> <span class="fu">sample</span>(<span class="fu">rep</span>(treatment, <span class="at">times=</span><span class="dv">20</span>)),</span>
+<span id="cb10-7"><a></a>  <span class="at">color =</span> <span class="fu">sample</span>(<span class="fu">rep</span>(color, <span class="at">times=</span><span class="dv">20</span>))</span>
+<span id="cb10-8"><a></a>)</span>
+<span id="cb10-9"><a></a></span>
+<span id="cb10-10"><a></a><span class="fu">table</span>(design<span class="sc">$</span>cond, design<span class="sc">$</span>color) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           
+            blue yellow
+  Control      9     11
+  Treatment   11      9</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>…or make sure that every combination is equally often represented:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" data-code-line-numbers="1|2-3|4|5|6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>design <span class="ot">&lt;-</span> <span class="fu">crossing</span>(treatment, color) <span class="sc">%&gt;%</span> <span class="co"># gets all combinations</span></span>
+<span id="cb12-2"><a></a>  <span class="fu">mutate</span>(<span class="at">combi=</span><span class="fu">str_c</span>(treatment, color, <span class="at">sep=</span><span class="st">"_"</span>)) <span class="sc">%&gt;%</span>  <span class="co"># combine columns</span></span>
+<span id="cb12-3"><a></a>  <span class="fu">select</span>(<span class="sc">-</span>treatment, <span class="sc">-</span>color) <span class="sc">%&gt;%</span>   <span class="co"># remove original ones</span></span>
+<span id="cb12-4"><a></a>  <span class="fu">reframe</span>(<span class="at">combi2 =</span> <span class="fu">sample</span>(<span class="fu">rep</span>(combi, <span class="dv">10</span>))) <span class="sc">%&gt;%</span>  <span class="co"># use reframe to add rows</span></span>
+<span id="cb12-5"><a></a>  <span class="fu">mutate</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span>  <span class="co"># add participant number</span></span>
+<span id="cb12-6"><a></a>  <span class="fu">separate_wider_delim</span>(combi2, <span class="at">delim=</span><span class="st">"_"</span>, <span class="at">names=</span><span class="fu">c</span>(<span class="st">"treatment"</span>, <span class="st">"color"</span>))</span>
+<span id="cb12-7"><a></a></span>
+<span id="cb12-8"><a></a><span class="fu">table</span>(design<span class="sc">$</span>treatment, design<span class="sc">$</span>color)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           
+            blue yellow
+  Control     10     10
+  Treatment   10     10</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="draw-from-a-probability-distribution" class="slide level2">
+<h2>Draw from a probability distribution</h2>
+<p>Sometimes it can be helpful to draw a random number from a certain probability distribution, e.g.&nbsp;if you want to get Inter-Trial-Intervals from a normal or uniform distribution or if you want to simulate a coin toss with a binomial distribution.</p>
+<p>In R, you can use certain functions that start with an “r” (e.g.&nbsp;<code>rnorm()</code>, <code>runif()</code>, <code>rbinom()</code>) to draw random numbers from distributions.</p>
+<div class="fragment">
+<p>Let’s start with the coin toss, as it is similar to using <code>sample()</code>. The binomial distribution gives you the “successes” (vs.&nbsp;failure, so 1 vs.&nbsp;0 or heads vs.&nbsp;tails) in a row of “experiments” (coin tosses).</p>
+<p>You could of course determine the condition by “tossing a coin”. The “problem” is that the count of each outcome will be different for each participant.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># repeat a study 10 times in which 100 fair coins are tossed -out of the 100, how often do we get heads?</span></span>
+<span id="cb14-2"><a></a><span class="fu">rbinom</span>(<span class="dv">10</span>,<span class="dv">100</span>,.<span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 51 41 51 44 43 46 43 48 51 41</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># For one participant, determine whether 10 trials are condition 0 or 1 (with 60% probability for cond. 1)</span></span>
+<span id="cb16-2"><a></a><span class="fu">rbinom</span>(<span class="dv">10</span>,<span class="dv">1</span>,.<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 1 0 1 1 0 1 1 0 0</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Let’s draw 10 jittered ITIs from a normal distribution: We want them to be jittered around a mean of 1500 msec with a SD of 200 msec:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1500</span>, <span class="at">sd =</span> <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1387.146 1694.062 1496.273 1572.474 1902.261 1264.407 1348.966 1433.743
+ [9] 1443.259 1562.831</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="co"># you could also round them:</span></span>
+<span id="cb20-2"><a></a><span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">1500</span>, <span class="dv">200</span>), <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1869 1304 1939 1459 1695 1326 1400 1657 1080 1492</code></pre>
+</div>
+</div>
+<p>You could use the uniform distribution if you want each number to be equally likely:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="co"># get 10 numbers between 1200 and 1800 msec</span></span>
+<span id="cb22-2"><a></a><span class="fu">round</span>(<span class="fu">runif</span>(<span class="dv">10</span>, <span class="at">min =</span> <span class="dv">1200</span>, <span class="at">max =</span> <span class="dv">1800</span>), <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1406 1720 1473 1520 1778 1665 1325 1385 1783 1551</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="any-other-questions" class="slide level2">
+<h2>Any other questions?</h2>
+<p>Specific to your design etc.?</p>
+</section>
+<section id="ecems-study---detour-incl.-loops-and-if-statements" class="slide level2">
+<h2>Ecem’s study - detour incl.&nbsp;loops and if-statements!</h2>
+<ul>
+<li><p>Shape (4x) and color (4x)</p></li>
+<li><p>each participant (N=<del>16</del> 4) should have four stimuli assigned, each color and each shape once</p></li>
+<li><p>but each of the stimuli should be used equally often (= once)!</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a>shape <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>, <span class="st">"s3"</span>, <span class="st">"s4"</span>)</span>
+<span id="cb24-2"><a></a>color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"c1"</span>, <span class="st">"c2"</span>, <span class="st">"c3"</span>, <span class="st">"c4"</span>)</span>
+<span id="cb24-3"><a></a></span>
+<span id="cb24-4"><a></a><span class="fu">crossing</span>(shape, color)  <span class="co"># 16 combinations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 2
+   shape color
+   &lt;chr&gt; &lt;chr&gt;
+ 1 s1    c1   
+ 2 s1    c2   
+ 3 s1    c3   
+ 4 s1    c4   
+ 5 s2    c1   
+ 6 s2    c2   
+ 7 s2    c3   
+ 8 s2    c4   
+ 9 s3    c1   
+10 s3    c2   
+11 s3    c3   
+12 s3    c4   
+13 s4    c1   
+14 s4    c2   
+15 s4    c3   
+16 s4    c4   </code></pre>
+</div>
+</div>
+<p>If we simply draw from this list, a participant likely has a shape/color twice. If we draw from both lists separately, we can’t make sure that another participant won’t get the same combination! (If we just draw stimuli completely at random, this would be fine…)</p>
+<div class="fragment">
+<p><strong>Task: In small groups, try to solve this problem in pseudo-code (break it down in small steps and write down what should happen in each step). (10 min.!)</strong></p>
+</div>
+</section>
+<section id="get-stimulus-list" class="slide level2">
+<h2>Get stimulus list</h2>
+<p>We could “brute-force” it: Draw a stimulus and compare it to the already drawn ones. If already included, discard and draw next one etc.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a><span class="co"># participant 1</span></span>
+<span id="cb26-2"><a></a>stimlist1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb26-3"><a></a>  <span class="at">ID =</span> <span class="dv">1</span>, </span>
+<span id="cb26-4"><a></a>  <span class="at">stim_shape =</span> <span class="fu">sample</span>(shape),</span>
+<span id="cb26-5"><a></a>  <span class="at">stim_col =</span> <span class="fu">sample</span>(color)</span>
+<span id="cb26-6"><a></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-7"><a></a>  <span class="fu">mutate</span>(<span class="at">combi=</span><span class="fu">str_c</span>(stim_shape, stim_col, <span class="at">sep=</span><span class="st">"_"</span>))   <span class="co"># combine columns</span></span>
+<span id="cb26-8"><a></a>  </span>
+<span id="cb26-9"><a></a><span class="co"># participant 2</span></span>
+<span id="cb26-10"><a></a>stimlist2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb26-11"><a></a>  <span class="at">ID =</span> <span class="dv">2</span>, </span>
+<span id="cb26-12"><a></a>  <span class="at">stim_shape =</span> <span class="fu">sample</span>(shape),</span>
+<span id="cb26-13"><a></a>  <span class="at">stim_col =</span> <span class="fu">sample</span>(color)</span>
+<span id="cb26-14"><a></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-15"><a></a>  <span class="fu">mutate</span>(<span class="at">combi=</span><span class="fu">str_c</span>(stim_shape, stim_col, <span class="at">sep=</span><span class="st">"_"</span>))   <span class="co"># combine columns</span></span>
+<span id="cb26-16"><a></a></span>
+<span id="cb26-17"><a></a><span class="co"># check whether stimuli are the same in both stimlists</span></span>
+<span id="cb26-18"><a></a><span class="co"># you could use %in% (not "==" -&gt; would only check rowwise!) or setdiff()</span></span>
+<span id="cb26-19"><a></a></span>
+<span id="cb26-20"><a></a>stimlist1<span class="sc">$</span>combi <span class="sc">%in%</span> stimlist2<span class="sc">$</span>combi <span class="co"># checks whether any of stimlist 2 is in stimlist 1 -&gt; should be 4x FALSE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE FALSE FALSE FALSE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">setdiff</span>(stimlist2<span class="sc">$</span>combi, stimlist1<span class="sc">$</span>combi) <span class="co"># gives you the ones that are different in stimlist2 -&gt; should be 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "s3_c3" "s4_c4" "s1_c2" "s2_c1"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a><span class="fu">any</span>(stimlist1<span class="sc">$</span>combi <span class="sc">%in%</span> stimlist2<span class="sc">$</span>combi) <span class="co"># test whether any of the 4 is TRUE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="run-repeatedly-until-novel-list-is-found" class="slide level2 scrollable">
+<h2>Run repeatedly until “novel” list is found</h2>
+<p>We will use a <code>while statement</code><sup>1</sup> in combination with an <code>if statement</code> for this!</p>
+<p>The <code>while statement</code> will run the code until the condition in the if statement is met and then break out of the while loop.</p>
+<p>The <code>if statement</code> tests a condition. Only if the condition is met, the code underneath is carried out. It is also possible to use alternative conditions: <code>if(...) {...} elseif() {...} else {...}</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a><span class="co"># check repeatedly</span></span>
+<span id="cb32-2"><a></a><span class="cf">while</span>(<span class="cn">TRUE</span>) {</span>
+<span id="cb32-3"><a></a>  stimlist2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb32-4"><a></a>  <span class="at">ID =</span> <span class="dv">2</span>, </span>
+<span id="cb32-5"><a></a>  <span class="at">stim_shape =</span> <span class="fu">sample</span>(shape),</span>
+<span id="cb32-6"><a></a>  <span class="at">stim_col =</span> <span class="fu">sample</span>(color)</span>
+<span id="cb32-7"><a></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-8"><a></a>  <span class="fu">mutate</span>(<span class="at">combi=</span><span class="fu">str_c</span>(stim_shape, stim_col, <span class="at">sep=</span><span class="st">"_"</span>))   <span class="co"># combine columns</span></span>
+<span id="cb32-9"><a></a>  </span>
+<span id="cb32-10"><a></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">any</span>(stimlist1<span class="sc">$</span>combi <span class="sc">%in%</span> stimlist2<span class="sc">$</span>combi)){</span>
+<span id="cb32-11"><a></a>    <span class="cf">break</span>;</span>
+<span id="cb32-12"><a></a>  }</span>
+<span id="cb32-13"><a></a>}</span>
+<span id="cb32-14"><a></a></span>
+<span id="cb32-15"><a></a><span class="co"># we could also use:</span></span>
+<span id="cb32-16"><a></a><span class="co"># test &lt;- TRUE</span></span>
+<span id="cb32-17"><a></a><span class="co"># while(test == TRUE) {</span></span>
+<span id="cb32-18"><a></a><span class="co">#   ...</span></span>
+<span id="cb32-19"><a></a><span class="co">#   if(...)</span></span>
+<span id="cb32-20"><a></a><span class="co">#     test &lt;- FALSE}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn1"><p>Rarely used in tidyverse, but often used in base R/other programming languages!</p></li></ol></aside></section>
+<section id="repeat-for-more-participants" class="slide level2">
+<h2>Repeat for more participants</h2>
+<p>We could copy the code for every participant, but this would be tedious and would result in a long script. Alternatively, we can use a <code>for-loop</code>! It is similar to the while statement and runs the included code a specified number of times:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33" data-code-line-numbers="1-4|5-12|14|16,24|17-21|23|28-29|43-48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="co"># initiate variables and dataframes (fill in with values later)</span></span>
+<span id="cb33-2"><a></a>n <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="co"># easily change number of subjects here - max 4 possible w/16 combis!</span></span>
+<span id="cb33-3"><a></a>shape <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"heart"</span>, <span class="st">"sacral"</span>, <span class="st">"throat"</span>, <span class="st">"solar"</span>) <span class="co"># or "s1" etc</span></span>
+<span id="cb33-4"><a></a>color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"yellow"</span>, <span class="st">"purple"</span>, <span class="st">"orange"</span>, <span class="st">"blue"</span>) <span class="co"># or "c1" etc</span></span>
+<span id="cb33-5"><a></a></span>
+<span id="cb33-6"><a></a><span class="co"># initiate "empty" tibble to fill in for-loop</span></span>
+<span id="cb33-7"><a></a>overall_stimlist <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb33-8"><a></a>  <span class="at">ID =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">4</span><span class="sc">*</span>n), <span class="co"># fill in NAs, 4 rows per participant</span></span>
+<span id="cb33-9"><a></a>  <span class="at">stim_shape =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">4</span><span class="sc">*</span>n),</span>
+<span id="cb33-10"><a></a>  <span class="at">stim_col =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">4</span><span class="sc">*</span>n),</span>
+<span id="cb33-11"><a></a>  <span class="at">combi =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">4</span><span class="sc">*</span>n)</span>
+<span id="cb33-12"><a></a>)</span>
+<span id="cb33-13"><a></a></span>
+<span id="cb33-14"><a></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb33-15"><a></a>  </span>
+<span id="cb33-16"><a></a>  <span class="cf">while</span>(<span class="cn">TRUE</span>) {</span>
+<span id="cb33-17"><a></a>  stimlist2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb33-18"><a></a>    <span class="at">ID =</span> i,   <span class="co"># use the index of the loop iteration!</span></span>
+<span id="cb33-19"><a></a>    <span class="at">stim_shape =</span> <span class="fu">sample</span>(shape),</span>
+<span id="cb33-20"><a></a>    <span class="at">stim_col =</span> <span class="fu">sample</span>(color)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-21"><a></a>    <span class="fu">mutate</span>(<span class="at">combi=</span><span class="fu">str_c</span>(stim_shape, stim_col, <span class="at">sep=</span><span class="st">"_"</span>))   <span class="co"># combine columns</span></span>
+<span id="cb33-22"><a></a>  </span>
+<span id="cb33-23"><a></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">any</span>(overall_stimlist<span class="sc">$</span>combi <span class="sc">%in%</span> stimlist2<span class="sc">$</span>combi)){</span>
+<span id="cb33-24"><a></a>      <span class="cf">break</span>;</span>
+<span id="cb33-25"><a></a>    }</span>
+<span id="cb33-26"><a></a>  }</span>
+<span id="cb33-27"><a></a>  </span>
+<span id="cb33-28"><a></a>   <span class="co"># save to overall_stimlist at correct location</span></span>
+<span id="cb33-29"><a></a>  overall_stimlist[(<span class="dv">4</span><span class="sc">*</span>i<span class="dv">-3</span>)<span class="sc">:</span>(<span class="dv">4</span><span class="sc">*</span>i), ] <span class="ot">&lt;-</span> stimlist2</span>
+<span id="cb33-30"><a></a>  </span>
+<span id="cb33-31"><a></a>  </span>
+<span id="cb33-32"><a></a>  <span class="co"># Ecem also wants to shuffle each stimlist2 4 times to get different orders - making sure that no stimulus is in the same location!</span></span>
+<span id="cb33-33"><a></a>  <span class="co"># we can get all permutations (using an R function like Permn()), but this would be 24 variations (incl. same stimulus in same location)</span></span>
+<span id="cb33-34"><a></a>  <span class="co"># instead, we just manually shift the stimuli by one (e.g. 1st becomes 2nd etc.)</span></span>
+<span id="cb33-35"><a></a>  </span>
+<span id="cb33-36"><a></a>  <span class="co"># stimlist3 &lt;- stimlist2[c(2,3,4,1),]</span></span>
+<span id="cb33-37"><a></a>  <span class="co"># stimlist4 &lt;- stimlist2[c(3,4,1,2),]</span></span>
+<span id="cb33-38"><a></a>  <span class="co"># stimlist5 &lt;- stimlist2[c(4,1,2,3),]</span></span>
+<span id="cb33-39"><a></a> </span>
+<span id="cb33-40"><a></a>  </span>
+<span id="cb33-41"><a></a>}</span>
+<span id="cb33-42"><a></a></span>
+<span id="cb33-43"><a></a><span class="co"># add further info to the dataframe</span></span>
+<span id="cb33-44"><a></a>overall_stimlist <span class="ot">&lt;-</span> overall_stimlist <span class="sc">%&gt;%</span> </span>
+<span id="cb33-45"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb33-46"><a></a>    <span class="at">CS_type =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"threat"</span>, <span class="st">"safety"</span>, <span class="st">"amb1"</span>, <span class="st">"amb2"</span>), <span class="at">times=</span>n),</span>
+<span id="cb33-47"><a></a>    <span class="at">percentage =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">50</span>), <span class="at">times=</span>n)</span>
+<span id="cb33-48"><a></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For Ecem’s study, it is more complex and she already made stimulus lists per hand! I would actually just use this list and read it into R (in a good format).</p>
+</section>
+<section id="make-the-trial-list-per-participant" class="slide level2">
+<h2>Make the trial list per participant</h2>
+<p>Now that we know which stimulus is used for which category for each participant, we can generate the stimulus list. In Ecem’s study, we have 2 blocks à 100 trials (after the first block, the stimulus type changes). Let’s focus on the first block.</p>
+<p>We have different trial types: 60 single and 40 multi cue. For the single cues, each of the 4 stimulus types is shown 15x, for the multicue, a combination of two types (threat or safety with each amb) is shown 10x. In the multi cue trials, other stimuli are also shown, which are the other combinations of shape and color.</p>
+<p><strong>Task: How can we make an individual trial list per subject? (2 min.)</strong></p>
+<div class="fragment">
+<p>We first simply list all possibilities and repeat them as often as needed:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>trial_list <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(  <span class="co"># wrap in sample()!</span></span>
+<span id="cb34-2"><a></a>                       <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"threat"</span>,<span class="st">"safety"</span>,<span class="st">"amb1"</span>,<span class="st">"amb2"</span>), <span class="dv">15</span>),</span>
+<span id="cb34-3"><a></a>                       <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"threat-amb1"</span>,<span class="st">"threat-amb2"</span>,<span class="st">"safety-amb1"</span>,<span class="st">"safety-amb2"</span>), <span class="dv">10</span>)</span>
+<span id="cb34-4"><a></a>                       ))</span>
+<span id="cb34-5"><a></a></span>
+<span id="cb34-6"><a></a><span class="fu">length</span>(trial_list)  <span class="co"># make sure it's 100!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>trial_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "amb1"        "threat-amb1" "threat"      "amb2"        "threat-amb2"
+  [6] "safety-amb2" "safety-amb2" "threat"      "safety-amb2" "threat"     
+ [11] "threat"      "safety-amb2" "safety"      "threat"      "amb2"       
+ [16] "amb2"        "safety-amb1" "amb1"        "threat"      "amb1"       
+ [21] "amb1"        "safety"      "threat-amb1" "amb2"        "threat-amb2"
+ [26] "amb2"        "threat-amb1" "threat"      "safety-amb1" "threat-amb1"
+ [31] "safety"      "amb2"        "safety-amb1" "threat"      "threat"     
+ [36] "safety"      "safety-amb2" "amb1"        "threat"      "safety"     
+ [41] "threat"      "threat-amb1" "amb2"        "safety"      "safety-amb1"
+ [46] "safety"      "amb1"        "threat"      "amb2"        "safety-amb1"
+ [51] "safety-amb1" "threat-amb2" "threat-amb1" "safety-amb2" "amb1"       
+ [56] "safety-amb1" "safety-amb1" "threat"      "amb1"        "threat-amb2"
+ [61] "safety"      "safety"      "amb2"        "threat-amb1" "safety-amb2"
+ [66] "amb2"        "safety"      "threat-amb1" "safety-amb1" "amb2"       
+ [71] "amb2"        "amb2"        "safety-amb2" "amb1"        "amb1"       
+ [76] "threat-amb1" "threat-amb1" "safety-amb2" "safety"      "amb1"       
+ [81] "threat-amb2" "safety"      "safety"      "safety"      "safety-amb1"
+ [86] "safety-amb2" "amb1"        "amb1"        "threat-amb2" "amb1"       
+ [91] "threat"      "threat"      "amb2"        "safety"      "threat-amb2"
+ [96] "amb2"        "amb1"        "threat-amb2" "threat-amb2" "threat-amb2"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="minimum-distance-same-stimulus-types" class="slide level2">
+<h2>Minimum distance same stimulus types?</h2>
+<p>What if we need a minimum distance between the same stimulus types?</p>
+<p>TAKES LONG; DON’T RUN!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>trial_list2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">length</span>(trial_list))</span>
+<span id="cb38-2"><a></a>trial_list2[<span class="dv">1</span>] <span class="ot">&lt;-</span> trial_list[<span class="dv">1</span>] <span class="co"># fill in the first already to have a comparison</span></span>
+<span id="cb38-3"><a></a></span>
+<span id="cb38-4"><a></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(trial_list)) { <span class="co"># start with 2!</span></span>
+<span id="cb38-5"><a></a>  </span>
+<span id="cb38-6"><a></a>  <span class="cf">while</span>(trial_list[i] <span class="sc">==</span> trial_list[i<span class="dv">-1</span>]) { <span class="co"># check for last 2: %in% trial_list[i-2:i-1]</span></span>
+<span id="cb38-7"><a></a>    trial_list[i<span class="sc">:</span><span class="fu">length</span>(trial_list)] <span class="ot">&lt;-</span> <span class="fu">sample</span>(trial_list[i<span class="sc">:</span><span class="fu">length</span>(trial_list)])</span>
+<span id="cb38-8"><a></a>  } </span>
+<span id="cb38-9"><a></a>  trial_list2[i] <span class="ot">&lt;-</span> trial_list[i]</span>
+<span id="cb38-10"><a></a>  </span>
+<span id="cb38-11"><a></a>}</span>
+<span id="cb38-12"><a></a></span>
+<span id="cb38-13"><a></a><span class="co"># check whether correct</span></span>
+<span id="cb38-14"><a></a>trial_list2 <span class="sc">!=</span> <span class="fu">lag</span>(trial_list2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fill-in-the-remaining-information" class="slide level2">
+<h2>Fill in the remaining information</h2>
+<p>…for single cue trials!</p>
+<p><strong>Tasks: (5 min.)</strong></p>
+<ul>
+<li><p><strong>How can we get the further stimulus information (color, shape) into this list?</strong></p></li>
+<li><p><strong>How can we add the info whether it’s a “sc” or a “mc” trial</strong></p></li>
+<li><p><strong>How can we determine whether a shock should be given in each trial?</strong></p></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>triallist_vp1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb39-2"><a></a>  <span class="at">trial =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(trial_list),</span>
+<span id="cb39-3"><a></a>  <span class="at">block =</span> <span class="dv">1</span>,</span>
+<span id="cb39-4"><a></a>  <span class="at">CS_type =</span> trial_list <span class="co"># same name as in stimlist for join!</span></span>
+<span id="cb39-5"><a></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-6"><a></a>  </span>
+<span id="cb39-7"><a></a>  <span class="co"># add info from stimlist</span></span>
+<span id="cb39-8"><a></a>  <span class="fu">left_join</span>(overall_stimlist <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ID<span class="sc">==</span><span class="dv">1</span>)) <span class="sc">%&gt;%</span>  <span class="co"># change ID! = for-loop</span></span>
+<span id="cb39-9"><a></a>  </span>
+<span id="cb39-10"><a></a>  <span class="co"># determine whether shock or not (can also use 1 and 0)</span></span>
+<span id="cb39-11"><a></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span>   <span class="co"># this is crucial! otherwise it will always be the same value</span></span>
+<span id="cb39-12"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb39-13"><a></a>    <span class="at">trial_type =</span> <span class="fu">ifelse</span>(CS_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"threat"</span>, <span class="st">"safety"</span>, <span class="st">"amb1"</span>, <span class="st">"amb2"</span>), <span class="st">"sc"</span>, <span class="st">"mc"</span>),</span>
+<span id="cb39-14"><a></a>    </span>
+<span id="cb39-15"><a></a>    <span class="at">shock =</span> <span class="fu">case_when</span>(</span>
+<span id="cb39-16"><a></a>      CS_type <span class="sc">==</span> <span class="st">"threat"</span> <span class="sc">~</span> <span class="st">"shock"</span>, </span>
+<span id="cb39-17"><a></a>      CS_type <span class="sc">==</span> <span class="st">"safety"</span> <span class="sc">~</span> <span class="st">"noshock"</span>,</span>
+<span id="cb39-18"><a></a>      CS_type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"amb1"</span>, <span class="st">"amb2"</span>) <span class="sc">~</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"shock"</span>,<span class="st">"noshock"</span>), <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">5</span>,.<span class="dv">5</span>))))</span>
+<span id="cb39-19"><a></a>     <span class="co"># CS_type %in% c("amb1", "amb2") ~ rbinom(1,1,.5)))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Btw: This will lead to shocks being delivered not exactly 50% of the time in the amb1/2 trials –&gt; see above for other solution.</p>
+</div>
+</section>
+<section id="multi-cue-trials" class="slide level2">
+<h2>Multi-cue trials?</h2>
+<p><strong>Task: Any ideas how we can do the same also for mc trials? (1 min.)</strong></p>
+<div class="fragment">
+<p>For the multi-cue trials, we could split the name of the stimuli to two columns and do similar things as above with both columns:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="co"># we start again with the trial_list, code from above</span></span>
+<span id="cb40-2"><a></a>triallist_vp1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb40-3"><a></a>  <span class="at">trial =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(trial_list),</span>
+<span id="cb40-4"><a></a>  <span class="at">block =</span> <span class="dv">1</span>,</span>
+<span id="cb40-5"><a></a>  <span class="at">type =</span> trial_list <span class="co"># DIFFERENT name as in stimlist for join! (not neccessary!)</span></span>
+<span id="cb40-6"><a></a>) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-7"><a></a>  </span>
+<span id="cb40-8"><a></a>  <span class="fu">separate_wider_delim</span>(type, <span class="at">delim=</span><span class="st">"-"</span>, <span class="at">names=</span><span class="fu">c</span>(<span class="st">"CS_type1"</span>, <span class="st">"CS_type2"</span>), <span class="at">cols_remove =</span> <span class="cn">FALSE</span>, <span class="at">too_few =</span> <span class="st">"align_start"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-9"><a></a>  <span class="co"># last argument leads to NAs in 2nd column for SC trials</span></span>
+<span id="cb40-10"><a></a>  </span>
+<span id="cb40-11"><a></a>   <span class="co"># add info from stimlist</span></span>
+<span id="cb40-12"><a></a>  <span class="fu">left_join</span>(., overall_stimlist <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ID<span class="sc">==</span><span class="dv">1</span>), <span class="at">by =</span> <span class="fu">join_by</span>(CS_type1 <span class="sc">==</span> CS_type)) <span class="sc">%&gt;%</span>  <span class="co"># change ID! = for-loop</span></span>
+<span id="cb40-13"><a></a>  </span>
+<span id="cb40-14"><a></a>  <span class="co"># determine whether shock or not (can also use 1 and 0)</span></span>
+<span id="cb40-15"><a></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb40-16"><a></a>  <span class="fu">mutate</span>(</span>
+<span id="cb40-17"><a></a>    <span class="at">trial_type =</span> <span class="fu">ifelse</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"threat"</span>, <span class="st">"safety"</span>, <span class="st">"amb1"</span>, <span class="st">"amb2"</span>), <span class="st">"sc"</span>, <span class="st">"mc"</span>), </span>
+<span id="cb40-18"><a></a>    </span>
+<span id="cb40-19"><a></a>    <span class="at">shock1 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb40-20"><a></a>      CS_type1 <span class="sc">==</span> <span class="st">"threat"</span> <span class="sc">~</span> <span class="st">"shock"</span>, </span>
+<span id="cb40-21"><a></a>      CS_type1 <span class="sc">==</span> <span class="st">"safety"</span> <span class="sc">~</span> <span class="st">"noshock"</span>,</span>
+<span id="cb40-22"><a></a>      CS_type1 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"amb1"</span>, <span class="st">"amb2"</span>) <span class="sc">~</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"shock"</span>,<span class="st">"noshock"</span>), <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">5</span>,.<span class="dv">5</span>))),</span>
+<span id="cb40-23"><a></a>    </span>
+<span id="cb40-24"><a></a>    <span class="at">shock2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb40-25"><a></a>      CS_type2 <span class="sc">==</span> <span class="st">"threat"</span> <span class="sc">~</span> <span class="st">"shock"</span>, </span>
+<span id="cb40-26"><a></a>      CS_type2 <span class="sc">==</span> <span class="st">"safety"</span> <span class="sc">~</span> <span class="st">"noshock"</span>,</span>
+<span id="cb40-27"><a></a>      CS_type2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"amb1"</span>, <span class="st">"amb2"</span>) <span class="sc">~</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"shock"</span>,<span class="st">"noshock"</span>), <span class="dv">1</span>)),</span>
+<span id="cb40-28"><a></a>    <span class="at">shock =</span> <span class="fu">coalesce</span>(shock2, shock1)) <span class="sc">%&gt;%</span> <span class="co"># uses "shock2" unless there's NA, then shock1</span></span>
+<span id="cb40-29"><a></a>    </span>
+<span id="cb40-30"><a></a>    <span class="co"># also add shape and color for 2nd stimulus in MC trials - could use ifelse(), case_when() or join again</span></span>
+<span id="cb40-31"><a></a>    <span class="fu">left_join</span>(overall_stimlist <span class="sc">%&gt;%</span> </span>
+<span id="cb40-32"><a></a>                <span class="fu">filter</span>(ID<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-33"><a></a>                <span class="fu">select</span>(stim_shape, stim_col, combi, CS_type), </span>
+<span id="cb40-34"><a></a>              <span class="at">by =</span> <span class="fu">join_by</span>(CS_type2 <span class="sc">==</span> CS_type), <span class="co"># now pick CS_type2</span></span>
+<span id="cb40-35"><a></a>              <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"2"</span>))  <span class="co"># adds a 2 for the new columns added </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="more-stimuli" class="slide level2">
+<h2>More stimuli!</h2>
+<p>In addition, Ecem wants to show 2 more stimuli in the multi-cue trials: The other combinations of shapes and colors, e.g.&nbsp;shape1 with color2 and shape2 with color1. We can easily add this to the dataframe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a></a>triallist_vp1 <span class="ot">&lt;-</span> triallist_vp1 <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a></a>  <span class="co"># mutate(stim_shape3 = ifelse(trial_type == "sc", NA, stim_shape),  # only fill in if MC trial</span></span>
+<span id="cb41-3"><a></a>  <span class="co">#        stim_col3 = stim_col2,</span></span>
+<span id="cb41-4"><a></a>  <span class="co">#        stim_shape4 = stim_shape2,</span></span>
+<span id="cb41-5"><a></a>  <span class="co">#        stim_col4 = ifelse(trial_type == "sc", NA, stim_col))</span></span>
+<span id="cb41-6"><a></a>  <span class="fu">mutate</span>(<span class="at">combi3 =</span> <span class="fu">ifelse</span>(trial_type <span class="sc">==</span> <span class="st">"sc"</span>, <span class="cn">NA</span>, <span class="fu">str_c</span>(stim_shape, stim_col2, <span class="at">sep =</span> <span class="st">"_"</span>)),</span>
+<span id="cb41-7"><a></a>         <span class="at">combi4 =</span> <span class="fu">ifelse</span>(trial_type <span class="sc">==</span> <span class="st">"sc"</span>, <span class="cn">NA</span>, <span class="fu">str_c</span>(stim_shape2, stim_col, <span class="at">sep =</span> <span class="st">"_"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>Ecem also wants to shuffle the four stimuli and show them in a different order on the other side of the screen. Again, there is probably a number of different solutions!</p>
+<p>Here, we shuffle the stimulus names from all four “combi”-columns. Because <code>sample()</code> gives out 4 values then but we can only save one within mutate(), we <code>paste</code>/concatenate/<code>str_c()</code> them and separate that string in the next step into four columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>triallist_vp1 <span class="ot">&lt;-</span> triallist_vp1 <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a></a>  <span class="fu">mutate</span>(<span class="at">allcombisshuffled =</span> <span class="fu">str_c</span>(<span class="fu">sample</span>(<span class="fu">c</span>(combi, combi2, combi3, combi4)), <span class="at">collapse =</span> <span class="st">";"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a></a>  <span class="fu">separate_wider_delim</span>(allcombisshuffled, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"combi5"</span>, <span class="st">"combi6"</span>, <span class="st">"combi7"</span>, <span class="st">"combi8"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="bring-it-all-together-for-all-participants" class="slide level2">
+<h2>Bring it all together for all participants</h2>
+<p>We can use the <code>overall_stimlist</code> we already made for all (four) participants. We could do the same without the for-loop (just have another column for participant and more rows), but we will use a for loop for now so you can practice it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43" data-code-line-numbers="|1-2|4|5-11|13-17|19-21|23-28|30-41|43|45-47|48|50-51|53-54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>ntrials <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb43-2"><a></a>nsubjects <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb43-3"><a></a></span>
+<span id="cb43-4"><a></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsubjects) {</span>
+<span id="cb43-5"><a></a>  triallist <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb43-6"><a></a>    <span class="at">trial =</span> <span class="dv">1</span><span class="sc">:</span>ntrials,</span>
+<span id="cb43-7"><a></a>    <span class="at">block =</span> <span class="dv">1</span>,</span>
+<span id="cb43-8"><a></a>    <span class="at">type =</span> <span class="fu">sample</span>(<span class="fu">c</span>( </span>
+<span id="cb43-9"><a></a>      <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"threat"</span>,<span class="st">"safety"</span>,<span class="st">"amb1"</span>,<span class="st">"amb2"</span>), <span class="dv">15</span>),</span>
+<span id="cb43-10"><a></a>      <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"threat-amb1"</span>,<span class="st">"threat-amb2"</span>,<span class="st">"safety-amb1"</span>,<span class="st">"safety-amb2"</span>), <span class="dv">10</span>)))</span>
+<span id="cb43-11"><a></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-12"><a></a>    </span>
+<span id="cb43-13"><a></a>    <span class="fu">separate_wider_delim</span>(type, </span>
+<span id="cb43-14"><a></a>                         <span class="at">delim=</span><span class="st">"-"</span>, </span>
+<span id="cb43-15"><a></a>                         <span class="at">names=</span><span class="fu">c</span>(<span class="st">"CS_type1"</span>, <span class="st">"CS_type2"</span>), </span>
+<span id="cb43-16"><a></a>                         <span class="at">cols_remove =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb43-17"><a></a>                         <span class="at">too_few =</span> <span class="st">"align_start"</span>) <span class="sc">%&gt;%</span> <span class="co"># last argument leads to NAs in 2nd column for SC trials</span></span>
+<span id="cb43-18"><a></a>    </span>
+<span id="cb43-19"><a></a>    <span class="co"># add info from stimlist</span></span>
+<span id="cb43-20"><a></a>    <span class="fu">left_join</span>(overall_stimlist <span class="sc">%&gt;%</span> <span class="fu">filter</span>(ID<span class="sc">==</span>s), <span class="co"># change ID! = for-loop</span></span>
+<span id="cb43-21"><a></a>              <span class="at">by =</span> <span class="fu">join_by</span>(CS_type1 <span class="sc">==</span> CS_type)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb43-22"><a></a>    </span>
+<span id="cb43-23"><a></a>     <span class="co"># also add shape and color for 2nd stimulus in MC trials - could use ifelse(), case_when() or join again</span></span>
+<span id="cb43-24"><a></a>    <span class="fu">left_join</span>(overall_stimlist <span class="sc">%&gt;%</span> </span>
+<span id="cb43-25"><a></a>                <span class="fu">filter</span>(ID<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-26"><a></a>                <span class="fu">select</span>(stim_shape, stim_col, combi, CS_type), </span>
+<span id="cb43-27"><a></a>              <span class="at">by =</span> <span class="fu">join_by</span>(CS_type2 <span class="sc">==</span> CS_type), <span class="co"># now pick CS_type2</span></span>
+<span id="cb43-28"><a></a>              <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"2"</span>)) <span class="sc">%&gt;%</span>  <span class="co"># adds a 2 for the new columns added </span></span>
+<span id="cb43-29"><a></a>    </span>
+<span id="cb43-30"><a></a>    <span class="co"># determine whether shock or not (can also use 1 and 0)</span></span>
+<span id="cb43-31"><a></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb43-32"><a></a>    <span class="fu">mutate</span>(</span>
+<span id="cb43-33"><a></a>      <span class="at">trial_type =</span> <span class="fu">ifelse</span>(type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"threat"</span>, <span class="st">"safety"</span>, <span class="st">"amb1"</span>, <span class="st">"amb2"</span>), <span class="st">"sc"</span>, <span class="st">"mc"</span>),</span>
+<span id="cb43-34"><a></a>      <span class="at">shock1 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb43-35"><a></a>        CS_type1 <span class="sc">==</span> <span class="st">"threat"</span> <span class="sc">~</span> <span class="st">"shock"</span>, </span>
+<span id="cb43-36"><a></a>        CS_type1 <span class="sc">==</span> <span class="st">"safety"</span> <span class="sc">~</span> <span class="st">"noshock"</span>,</span>
+<span id="cb43-37"><a></a>        CS_type1 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"amb1"</span>, <span class="st">"amb2"</span>) <span class="sc">~</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"shock"</span>,<span class="st">"noshock"</span>), <span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">5</span>,.<span class="dv">5</span>))),</span>
+<span id="cb43-38"><a></a>      <span class="at">shock2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb43-39"><a></a>        CS_type2 <span class="sc">==</span> <span class="st">"threat"</span> <span class="sc">~</span> <span class="st">"shock"</span>, </span>
+<span id="cb43-40"><a></a>        CS_type2 <span class="sc">==</span> <span class="st">"safety"</span> <span class="sc">~</span> <span class="st">"noshock"</span>,</span>
+<span id="cb43-41"><a></a>        CS_type2 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"amb1"</span>, <span class="st">"amb2"</span>) <span class="sc">~</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"shock"</span>,<span class="st">"noshock"</span>), <span class="dv">1</span>)),</span>
+<span id="cb43-42"><a></a>      </span>
+<span id="cb43-43"><a></a>      <span class="at">shock =</span> <span class="fu">coalesce</span>(shock2, shock1)) <span class="sc">%&gt;%</span> <span class="co"># uses "shock2" unless there's NA, then shock1</span></span>
+<span id="cb43-44"><a></a>    </span>
+<span id="cb43-45"><a></a>    <span class="fu">mutate</span>(<span class="at">combi3 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(combi2), <span class="cn">NA</span>, <span class="fu">str_c</span>(stim_shape, stim_col2, <span class="at">sep =</span> <span class="st">"_"</span>)),</span>
+<span id="cb43-46"><a></a>           <span class="at">combi4 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(combi2), <span class="cn">NA</span>, <span class="fu">str_c</span>(stim_shape2, stim_col, <span class="at">sep =</span> <span class="st">"_"</span>)),</span>
+<span id="cb43-47"><a></a>           <span class="at">allcombisshuffled =</span> <span class="fu">str_c</span>(<span class="fu">sample</span>(<span class="fu">c</span>(combi, combi2, combi3, combi4)), <span class="at">collapse =</span> <span class="st">";"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-48"><a></a>    <span class="fu">separate_wider_delim</span>(allcombisshuffled, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"combi5"</span>, <span class="st">"combi6"</span>, <span class="st">"combi7"</span>, <span class="st">"combi8"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-49"><a></a>    </span>
+<span id="cb43-50"><a></a>    <span class="co"># clean up (remove unnecessary columns, reorder)</span></span>
+<span id="cb43-51"><a></a>    <span class="fu">select</span>(ID, block, trial, trial_type, shock, <span class="at">CS_type =</span> type, CS_type1, CS_type2, combi, combi2, combi3, combi4, combi5, combi6, combi7, combi8) </span>
+<span id="cb43-52"><a></a>    </span>
+<span id="cb43-53"><a></a>    <span class="co"># save for each participant</span></span>
+<span id="cb43-54"><a></a>    <span class="fu">write_csv</span>(triallist, <span class="fu">paste0</span>(<span class="st">"Triallist_"</span>, <span class="fu">as.character</span>(s), <span class="st">".csv"</span>))</span>
+<span id="cb43-55"><a></a>  </span>
+<span id="cb43-56"><a></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="block-2" class="slide level2">
+<h2>Block 2</h2>
+<p>The last step for Ecem’s design would be to generate the stimuli for the second block!</p>
+<p>In this block, the threat and safety stimuli should become ambiguous stimuli, and amb1 and amb2 should become threat and safety (though it should be random which becomes which - or does it even matter? The participants don’t know which ambiguous stimulus is amb1?).</p>
+<p>We’ll do the easy solution for now and simply swap threat with amb1, and safety with amb2. We’ll go back to the original stimulus list to add this information:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>overall_stimlist <span class="ot">&lt;-</span> overall_stimlist <span class="sc">%&gt;%</span> </span>
+<span id="cb44-2"><a></a>  <span class="fu">mutate</span>(<span class="at">CS_type_block2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb44-3"><a></a>    CS_type <span class="sc">==</span> <span class="st">"threat"</span> <span class="sc">~</span> <span class="st">"amb1"</span>,</span>
+<span id="cb44-4"><a></a>    CS_type <span class="sc">==</span> <span class="st">"safety"</span> <span class="sc">~</span> <span class="st">"amb2"</span>,</span>
+<span id="cb44-5"><a></a>    CS_type <span class="sc">==</span> <span class="st">"amb1"</span> <span class="sc">~</span> <span class="st">"threat"</span>,</span>
+<span id="cb44-6"><a></a>    CS_type <span class="sc">==</span> <span class="st">"amb2"</span> <span class="sc">~</span> <span class="st">"safety"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can bring this in a longer format, so that we can simply run the code (with minor adjustments) from above for all trials (but we could also run it twice and change the column from CS_type to CS_type_block2):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>overall_stimlist2 <span class="ot">&lt;-</span> overall_stimlist <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"CS_type"</span>),</span>
+<span id="cb45-3"><a></a>               <span class="at">names_to =</span> <span class="st">"block"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
+</div>
 </section></section>
+
     </div>
   </div>
 
@@ -517,7 +1028,6 @@ condition A condition B condition C
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': true,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
@@ -817,10 +1327,9 @@ condition A condition B condition C
         // clear code selection
         e.clearSelection();
       });
-      function tippyHover(el, contentFn) {
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -830,8 +1339,17 @@ condition A condition B condition C
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
