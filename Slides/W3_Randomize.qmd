@@ -4,7 +4,7 @@ subtitle: |
    | R Coding Club 
    | RTG 2660
 author: "Dr. Lea Hildebrandt"
-date: 2024/01/30
+date: 2024/02/06
 description: "Using R for e.g. your study design"
 format: 
   revealjs:
@@ -17,11 +17,19 @@ editor: visual
 from: markdown+emoji
 ---
 
-# Some general notes
-
--   You can write everything on one line, but I usually add line breaks to increase readability
-
 # Randomization vs. Counterbalancing
+
+```{css}
+code.sourceCode {
+  font-size: 1.4em;
+}
+
+div.cell-output-stdout {
+  font-size: 1.4em;
+}
+```
+
+*. . .*
 
 *Randomization/random assignment*: Determining completely at random (or pseudorandom) e.g. which condition a participant belongs to/which stimulus is shown... (Block randomization = all conditions occur once before being repeated.)
 
@@ -67,7 +75,7 @@ The latter would be \~ random assignment. If we want equal group sizes, we could
 #| echo: true
 #| 
 conds <- sample(rep(c("condition A", "condition B", "condition C"), times=10))
-conds
+# conds
 table(conds)
 ```
 
@@ -104,7 +112,15 @@ design <- tibble(
 
 table(design$cond, design$color) 
 
-# make sure each combination is equally often represented:
+```
+
+. . .
+
+...or make sure that every combination is equally often represented:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "1|2-3|4|5|6"
 design <- crossing(treatment, color) %>% # gets all combinations
   mutate(combi=str_c(treatment, color, sep="_")) %>%  # combine columns
   select(-treatment, -color) %>%   # remove original ones
@@ -169,7 +185,7 @@ Specific to your design etc.?
 
 -   each participant (N=~~16~~ 4) should have four stimuli assigned, each color and each shape once
 
--   but each of the stimuli should be used equally often!
+-   but each of the stimuli should be used equally often (= once)!
 
 ```{r}
 #| echo: true
@@ -183,7 +199,11 @@ If we simply draw from this list, a participant likely has a shape/color twice. 
 
 . . .
 
-We could "brute-force" it: Draw a stimulus and compare it to the already drawn ones. If already included, draw next one etc.
+**Task: In small groups, try to solve this problem in pseudo-code (break it down in small steps and write down what should happen in each step). (10 min.!)**
+
+## Get stimulus list
+
+We could "brute-force" it: Draw a stimulus and compare it to the already drawn ones. If already included, discard and draw next one etc.
 
 ```{r}
 #| echo: true
@@ -207,12 +227,13 @@ stimlist2 <- tibble(
 # you could use %in% (not "==" -> would only check rowwise!) or setdiff()
 
 stimlist1$combi %in% stimlist2$combi # checks whether any of stimlist 2 is in stimlist 1 -> should be 4x FALSE
+
 setdiff(stimlist2$combi, stimlist1$combi) # gives you the ones that are different in stimlist2 -> should be 4
 
 any(stimlist1$combi %in% stimlist2$combi) # test whether any of the 4 is TRUE
 ```
 
-### Run repeatedly until "novel" list is found
+## Run repeatedly until "novel" list is found
 
 We will use a `while statement`[^1] in combination with an `if statement` for this!
 
@@ -252,12 +273,14 @@ We could copy the code for every participant, but this would be tedious and woul
 
 ```{r}
 #| echo: true
+#| code-line-numbers: "1-4|5-12|14|16,24|17-21|23|28-29|43-48"
 
 # initiate variables and dataframes (fill in with values later)
 n <- 4 # easily change number of subjects here - max 4 possible w/16 combis!
 shape <- c("heart", "sacral", "throat", "solar") # or "s1" etc
 color <- c("yellow", "purple", "orange", "blue") # or "c1" etc
 
+# initiate "empty" tibble to fill in for-loop
 overall_stimlist <- tibble(
   ID = rep(NA, 4*n), # fill in NAs, 4 rows per participant
   stim_shape = rep(NA, 4*n),
@@ -267,14 +290,12 @@ overall_stimlist <- tibble(
 
 for(i in 1:n){
   
-  print(i)  # just so you know how far the loop is
-  
   while(TRUE) {
   stimlist2 <- tibble(
-  ID = i,   # use the index of the loop iteration!
-  stim_shape = sample(shape),
-  stim_col = sample(color)) %>% 
-  mutate(combi=str_c(stim_shape, stim_col, sep="_"))   # combine columns
+    ID = i,   # use the index of the loop iteration!
+    stim_shape = sample(shape),
+    stim_col = sample(color)) %>% 
+    mutate(combi=str_c(stim_shape, stim_col, sep="_"))   # combine columns
   
   if(!any(overall_stimlist$combi %in% stimlist2$combi)){
       break;
@@ -307,11 +328,15 @@ overall_stimlist <- overall_stimlist %>%
 
 For Ecem's study, it is more complex and she already made stimulus lists per hand! I would actually just use this list and read it into R (in a good format).
 
-## Make the stimulus list per participant
+## Make the trial list per participant
 
 Now that we know which stimulus is used for which category for each participant, we can generate the stimulus list. In Ecem's study, we have 2 blocks à 100 trials (after the first block, the stimulus type changes). Let's focus on the first block.
 
 We have different trial types: 60 single and 40 multi cue. For the single cues, each of the 4 stimulus types is shown 15x, for the multicue, a combination of two types (threat or safety with each amb) is shown 10x. In the multi cue trials, other stimuli are also shown, which are the other combinations of shape and color.
+
+**Task: How can we make an individual trial list per subject? (2 min.)**
+
+. . .
 
 We first simply list all possibilities and repeat them as often as needed:
 
@@ -319,21 +344,17 @@ We first simply list all possibilities and repeat them as often as needed:
 #| echo: true
 #| 
 trial_list <- sample(c(  # wrap in sample()!
-  rep("threat", 15),
-  rep("safety", 15),
-  rep("amb1", 15),
-  rep("amb2", 15),
-  rep("threat-amb1", 10),
-  rep("threat-amb2", 10),
-  rep("safety-amb1", 10),
-  rep("safety-amb2", 10)
-))
+                       rep(c("threat","safety","amb1","amb2"), 15),
+                       rep(c("threat-amb1","threat-amb2","safety-amb1","safety-amb2"), 10)
+                       ))
 
 length(trial_list)  # make sure it's 100!
 trial_list
 
 
 ```
+
+## Minimum distance same stimulus types?
 
 What if we need a minimum distance between the same stimulus types?
 
@@ -363,6 +384,16 @@ trial_list2 != lag(trial_list2)
 
 ...for single cue trials!
 
+**Tasks: (5 min.)**
+
+-   **How can we get the further stimulus information (color, shape) into this list?**
+
+-   **How can we add the info whether it's a "sc" or a "mc" trial**
+
+-   **How can we determine whether a shock should be given in each trial?**
+
+. . .
+
 ```{r}
 #| echo: true
 
@@ -376,22 +407,26 @@ triallist_vp1 <- tibble(
   left_join(overall_stimlist %>% filter(ID==1)) %>%  # change ID! = for-loop
   
   # determine whether shock or not (can also use 1 and 0)
-  rowwise() %>% 
+  rowwise() %>%   # this is crucial! otherwise it will always be the same value
   mutate(
     trial_type = ifelse(CS_type %in% c("threat", "safety", "amb1", "amb2"), "sc", "mc"),
+    
     shock = case_when(
       CS_type == "threat" ~ "shock", 
       CS_type == "safety" ~ "noshock",
-      # CS_type %in% c("amb1", "amb2") ~ sample(c("shock","noshock"), 1, prob = c(.5,.5)))
-      CS_type %in% c("amb1", "amb2") ~ rbinom(1,1,.5)))
-  )
+      CS_type %in% c("amb1", "amb2") ~ sample(c("shock","noshock"), 1, prob = c(.5,.5))))
+     # CS_type %in% c("amb1", "amb2") ~ rbinom(1,1,.5)))
+  
 
-# Doesn't seem to work, always
 ```
 
 Btw: This will lead to shocks being delivered not exactly 50% of the time in the amb1/2 trials –\> see above for other solution.
 
 ## Multi-cue trials?
+
+**Task: Any ideas how we can do the same also for mc trials? (1 min.)**
+
+. . .
 
 For the multi-cue trials, we could split the name of the stimuli to two columns and do similar things as above with both columns:
 
@@ -409,18 +444,167 @@ triallist_vp1 <- tibble(
   # last argument leads to NAs in 2nd column for SC trials
   
    # add info from stimlist
-  left_join(overall_stimlist %>% filter(ID==1), by = join_by(CS_type1 == CS_type)) %>%  # change ID! = for-loop
+  left_join(., overall_stimlist %>% filter(ID==1), by = join_by(CS_type1 == CS_type)) %>%  # change ID! = for-loop
   
   # determine whether shock or not (can also use 1 and 0)
+  rowwise() %>% 
   mutate(
-    trial_type = ifelse(type %in% c("threat", "safety", "amb1", "amb2"), "sc", "mc"),
+    trial_type = ifelse(type %in% c("threat", "safety", "amb1", "amb2"), "sc", "mc"), 
+    
     shock1 = case_when(
       CS_type1 == "threat" ~ "shock", 
       CS_type1 == "safety" ~ "noshock",
       CS_type1 %in% c("amb1", "amb2") ~ sample(c("shock","noshock"), 1, prob = c(.5,.5))),
+    
     shock2 = case_when(
       CS_type2 == "threat" ~ "shock", 
       CS_type2 == "safety" ~ "noshock",
-      CS_type2 %in% c("amb1", "amb2") ~ sample(c("shock","noshock"), 1)))
+      CS_type2 %in% c("amb1", "amb2") ~ sample(c("shock","noshock"), 1)),
+    shock = coalesce(shock2, shock1)) %>% # uses "shock2" unless there's NA, then shock1
+    
+    # also add shape and color for 2nd stimulus in MC trials - could use ifelse(), case_when() or join again
+    left_join(overall_stimlist %>% 
+                filter(ID==1) %>% 
+                select(stim_shape, stim_col, combi, CS_type), 
+              by = join_by(CS_type2 == CS_type), # now pick CS_type2
+              suffix = c("", "2"))  # adds a 2 for the new columns added 
 
 ```
+
+## More stimuli!
+
+In addition, Ecem wants to show 2 more stimuli in the multi-cue trials: The other combinations of shapes and colors, e.g. shape1 with color2 and shape2 with color1. We can easily add this to the dataframe:
+
+```{r}
+#| echo: true
+
+triallist_vp1 <- triallist_vp1 %>% 
+  # mutate(stim_shape3 = ifelse(trial_type == "sc", NA, stim_shape),  # only fill in if MC trial
+  #        stim_col3 = stim_col2,
+  #        stim_shape4 = stim_shape2,
+  #        stim_col4 = ifelse(trial_type == "sc", NA, stim_col))
+  mutate(combi3 = ifelse(trial_type == "sc", NA, str_c(stim_shape, stim_col2, sep = "_")),
+         combi4 = ifelse(trial_type == "sc", NA, str_c(stim_shape2, stim_col, sep = "_")))
+
+```
+
+. . .
+
+Ecem also wants to shuffle the four stimuli and show them in a different order on the other side of the screen. Again, there is probably a number of different solutions!
+
+Here, we shuffle the stimulus names from all four "combi"-columns. Because `sample()` gives out 4 values then but we can only save one within mutate(), we `paste`/concatenate/`str_c()` them and separate that string in the next step into four columns.
+
+```{r}
+#| echo: true
+
+triallist_vp1 <- triallist_vp1 %>% 
+  mutate(allcombisshuffled = str_c(sample(c(combi, combi2, combi3, combi4)), collapse = ";")) %>% 
+  separate_wider_delim(allcombisshuffled, delim = ";", names = c("combi5", "combi6", "combi7", "combi8"))
+
+```
+
+## Bring it all together for all participants
+
+We can use the `overall_stimlist` we already made for all (four) participants. We could do the same without the for-loop (just have another column for participant and more rows), but we will use a for loop for now so you can practice it.
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1-2|4|5-11|13-17|19-21|23-28|30-41|43|45-46|47-48|50-51|53-54"
+
+ntrials <- 100
+nsubjects <- 4
+
+for (s in 1:nsubjects) {
+  triallist <- tibble(
+    trial = 1:ntrials,
+    block = 1,
+    type = sample(c( 
+      rep(c("threat","safety","amb1","amb2"), 15),
+      rep(c("threat-amb1","threat-amb2","safety-amb1","safety-amb2"), 10)))
+  ) %>% 
+    
+    separate_wider_delim(type, 
+                         delim="-", 
+                         names=c("CS_type1", "CS_type2"), 
+                         cols_remove = FALSE, 
+                         too_few = "align_start") %>% # last argument leads to NAs in 2nd column for SC trials
+    
+    # add info from stimlist
+    left_join(overall_stimlist %>% filter(ID==s), # change ID! = for-loop
+              by = join_by(CS_type1 == CS_type)) %>%  
+    
+     # also add shape and color for 2nd stimulus in MC trials - could use ifelse(), case_when() or join again
+    left_join(overall_stimlist %>% 
+                filter(ID==1) %>% 
+                select(stim_shape, stim_col, combi, CS_type), 
+              by = join_by(CS_type2 == CS_type), # now pick CS_type2
+              suffix = c("", "2")) %>%  # adds a 2 for the new columns added 
+    
+    # determine whether shock or not (can also use 1 and 0)
+    rowwise() %>% 
+    mutate(
+      trial_type = ifelse(type %in% c("threat", "safety", "amb1", "amb2"), "sc", "mc"),
+      shock1 = case_when(
+        CS_type1 == "threat" ~ "shock", 
+        CS_type1 == "safety" ~ "noshock",
+        CS_type1 %in% c("amb1", "amb2") ~ sample(c("shock","noshock"), 1, prob = c(.5,.5))),
+      shock2 = case_when(
+        CS_type2 == "threat" ~ "shock", 
+        CS_type2 == "safety" ~ "noshock",
+        CS_type2 %in% c("amb1", "amb2") ~ sample(c("shock","noshock"), 1)),
+      
+      shock = coalesce(shock2, shock1)) %>% # uses "shock2" unless there's NA, then shock1
+    
+    mutate(combi3 = ifelse(is.na(combi2), NA, str_c(stim_shape, stim_col2, sep = "_")),
+           combi4 = ifelse(is.na(combi2), NA, str_c(stim_shape2, stim_col, sep = "_")),
+           allcombisshuffled = str_c(sample(c(combi, combi2, combi3, combi4)), collapse = ";")) %>% 
+    separate_wider_delim(allcombisshuffled, delim = ";", names = c("combi5", "combi6", "combi7", "combi8")) %>% 
+    
+    # clean up (remove unnecessary columns, reorder)
+    select(ID, block, trial, trial_type, shock, CS_type = type, CS_type1, CS_type2, combi, combi2, combi3, combi4, combi5, combi6, combi7, combi8) 
+    
+    # save for each participant
+    write_csv(triallist, paste0("Triallist_", as.character(s), ".csv"))
+  
+}
+  
+    
+```
+
+## Block 2
+
+The last step for Ecem's design would be to generate the stimuli for the second block!
+
+In this block, the threat and safety stimuli should become ambiguous stimuli, and amb1 and amb2 should become threat and safety (though it should be random which becomes which - or does it even matter? The participants don't know which ambiguous stimulus is amb1?).
+
+We'll do the easy solution for now and simply swap threat with amb1, and safety with amb2. We'll go back to the original stimulus list to add this information:
+
+```{r}
+#| echo: true
+
+overall_stimlist <- overall_stimlist %>% 
+  mutate(CS_type_block2 = case_when(
+    CS_type == "threat" ~ "amb1",
+    CS_type == "safety" ~ "amb2",
+    CS_type == "amb1" ~ "threat",
+    CS_type == "amb2" ~ "safety"))
+
+```
+
+We can bring this in a longer format, so that we can simply run the code (with minor adjustments) from above for all trials (but we could also run it twice and change the column from CS_type to CS_type_block2):
+
+```{r}
+#| echo: true  
+
+overall_stimlist2 <- overall_stimlist %>% 
+  pivot_longer(cols = starts_with("CS_type"),
+               names_to = "block")
+
+```
+
+## Thanks!
+
+No R club next week! (Carnival)
+
+Homework: Please have a look at the [rest of last week's presentation](https://hillea.github.io/rclubwue/Slides/W2b_DataWranglingR.html#/data-wrangling-3) and/or [chapter 6 of Fundamentals of Quantitative Analysis](https://psyteachr.github.io/quant-fun-v2/data-wrangling-3.html)!\
+(We've covered a lot of it today, but it will help you understand joins and bringing data in long format etc. better!)
