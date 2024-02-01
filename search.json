@@ -1,31 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "slides.html",
+    "href": "slides.html",
+    "title": "Slides",
     "section": "",
-    "text": "The R Club is part of the Research Training Group 2660. The target group are PhD researchers in psychology and neuroscience. Responsible for organizing the R Club is Lea Hildebrandt, but all participants are very welcome to contribute."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "R Club Würzburg",
-    "section": "",
-    "text": "This is the course website of the R Club of the Research Training Group 2660 at the University and University Clinic in Würzburg, Germany - but it’s open to everyone if space is available!\nThe R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. We may end up as a Data Dojo/Coding Club, where we work on problems together. This way, we can all learn together!\nWe meet weekly on Tuesdays, 16:00 - 18:00 in Room 213 at the Marcusstr, starting in January 2024. The syllabus can be found here. On this page, the slides etc. will be linked.\n\n\n\nSession\n1\nDate\n16.01.24\nTopic\nIntro to R & RStudio\nPreparation/Notes\nInstall R and RStudio, download Dataset1, Dataset2\n\n\n2\n23.01.24\nData Wrangling\nDownload Datasets 1, 2, 3, & 4 (click on link and symbol for “download raw file” on the top-right)\n\n\n3\n30.01.24\nNo R Club! (Clinical Research Workshop)\n\n\n\n4\n06.02.24\nRandomization & Counterbalancing\n(Ecem)\n\n\n5\n13.02.24\nFurther Data Wrangling\n(Uni closed in the afternoon - carnival?)\n\n\n\n6\n20.02.24\nNo R Club!\n\n\n\n7\n27.02.24\nData Visualization\n\n\n\n8\n5.03.24\nPreprocessing, e.g. physio data\n(Francesco)\n\n\n9\n12.03.24\n\n\n\n\n10\n19.03.24\n\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\""
-  },
-  {
-    "objectID": "Slides/W3_Randomize.html#lets-dive-in-with-an-example",
-    "href": "Slides/W3_Randomize.html#lets-dive-in-with-an-example",
-    "title": "Randomization and Counterbalancing",
-    "section": "Let’s dive in with an example",
-    "text": "Let’s dive in with an example\nWe have three conditions (between-subject) and we want to randomly assign each participant to a condition.\n\nWe would use a function called sample(), which will be our best friend for today:\nIt allows us to draw from a vector (think of drawing a paper slip from a hat), either with or without replacement.\n\n# just shuffle\nconds &lt;- sample(c(\"condition A\", \"condition B\", \"condition C\"))\nconds\n\n[1] \"condition C\" \"condition B\" \"condition A\"\n\n# draw them repeatedly (with equal probability)\nconds2 &lt;- sample(c(\"condition A\", \"condition B\", \"condition C\"), 30, replace = TRUE)\nconds2\n\n [1] \"condition A\" \"condition C\" \"condition C\" \"condition C\" \"condition C\"\n [6] \"condition A\" \"condition C\" \"condition C\" \"condition B\" \"condition A\"\n[11] \"condition A\" \"condition C\" \"condition B\" \"condition A\" \"condition B\"\n[16] \"condition C\" \"condition A\" \"condition A\" \"condition C\" \"condition C\"\n[21] \"condition B\" \"condition A\" \"condition C\" \"condition C\" \"condition A\"\n[26] \"condition B\" \"condition A\" \"condition A\" \"condition B\" \"condition A\"\n\ntable(conds2)\n\nconds2\ncondition A condition B condition C \n         12           6          12 \n\n\n\n\nThe latter would be ~ random assignment. If we want equal group sizes, we could use a vector of length = sample size and shuffle it (sample without replacement):\n\nconds &lt;- sample(rep(c(\"condition A\", \"condition B\", \"condition C\"), times=10))\nconds\n\n [1] \"condition A\" \"condition C\" \"condition C\" \"condition A\" \"condition C\"\n [6] \"condition A\" \"condition C\" \"condition B\" \"condition A\" \"condition B\"\n[11] \"condition B\" \"condition B\" \"condition C\" \"condition B\" \"condition B\"\n[16] \"condition B\" \"condition C\" \"condition C\" \"condition C\" \"condition A\"\n[21] \"condition C\" \"condition A\" \"condition A\" \"condition B\" \"condition C\"\n[26] \"condition B\" \"condition A\" \"condition A\" \"condition B\" \"condition A\"\n\ntable(conds)\n\nconds\ncondition A condition B condition C \n         10          10          10"
-  },
-  {
-    "objectID": "Slides/W3_Randomize.html#what-do-we-need-for-randomization",
-    "href": "Slides/W3_Randomize.html#what-do-we-need-for-randomization",
-    "title": "Randomization and Counterbalancing",
-    "section": "What do we need for randomization?",
-    "text": "What do we need for randomization?\nProbability theory! Or, at least"
+    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 30, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Slides/W3b_DataVizR.html#ggplot",
@@ -67,14 +46,14 @@
     "href": "Slides/W3b_DataVizR.html#the-second-layer",
     "title": "Data Visualization",
     "section": "The Second Layer",
-    "text": "The Second Layer\nThe next layer adds a geom or a shape, in this case we use geom_bar() as we want to draw a bar plot.\n\nNote that we are adding layers, using a + between layers. This is a very important difference between pipes and visualization.\n\n\n\nggplot(summarydata, aes(x = sex)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\n\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE)"
+    "text": "The Second Layer\nThe next layer adds a geom or a shape, in this case we use geom_bar() as we want to draw a bar plot.\n\nNote that we are adding layers, using a + between layers. This is a very important difference between pipes and visualization.\n\n\n\nggplot(summarydata, aes(x = sex)) +\n  geom_bar()\n\n\n\n\n\n\n\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE)"
   },
   {
     "objectID": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
     "href": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
     "title": "Data Visualization",
     "section": "The Next Layers - Improving the Plot",
-    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?"
+    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?"
   },
   {
     "objectID": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
@@ -116,14 +95,14 @@
     "href": "Slides/W3b_DataVizR.html#violin-boxplot",
     "title": "Data Visualization",
     "section": "Violin-Boxplot",
-    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot before?\n\n\nggplot(summarydata, aes(x = income, \n                        y = ahiTotal, \n                        fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!"
+    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot before?\n\n\nggplot(summarydata, aes(x = income, \n                        y = ahiTotal, \n                        fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!"
   },
   {
     "objectID": "Slides/W3b_DataVizR.html#layer-order",
     "href": "Slides/W3b_DataVizR.html#layer-order",
     "title": "Data Visualization",
     "section": "Layer Order",
-    "text": "Layer Order\nThe order of layers is crucial, as the plot will be built up in that order:\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_violin() +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_boxplot() +\n  geom_violin()"
+    "text": "Layer Order\nThe order of layers is crucial, as the plot will be built up in that order:\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_violin() +\n  geom_boxplot()\n\n\n\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_boxplot() +\n  geom_violin()"
   },
   {
     "objectID": "Slides/W3b_DataVizR.html#scatterplot",
@@ -299,6 +278,20 @@
     "title": "Intro to R",
     "section": "Thanks!",
     "text": "Thanks!\nThat’s the lesson on “Getting started with R”!\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "The R Club is part of the Research Training Group 2660. The target group are PhD researchers in psychology and neuroscience. Responsible for organizing the R Club is Lea Hildebrandt, but all participants are very welcome to contribute."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R Club Würzburg",
+    "section": "",
+    "text": "This is the course website of the R Club of the Research Training Group 2660 at the University and University Clinic in Würzburg, Germany - but it’s open to everyone if space is available!\nThe R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. We may end up as a Data Dojo/Coding Club, where we work on problems together. This way, we can all learn together!\nWe meet weekly on Tuesdays, 16:00 - 18:00 in Room 213 at the Marcusstr, starting in January 2024. The syllabus can be found here. On this page, the slides etc. will be linked.\n\n\n\nSession\n1\nDate\n16.01.24\nTopic\nIntro to R & RStudio\nPreparation/Notes\nInstall R and RStudio, download Dataset1, Dataset2\n\n\n2\n23.01.24\nData Wrangling\nDownload Datasets 1, 2, 3, & 4 (click on link and symbol for “download raw file” on the top-right)\n\n\n3\n30.01.24\nNo R Club! (Clinical Research Workshop)\n\n\n\n4\n06.02.24\nRandomization & Counterbalancing\n(Ecem)\n\n\n5\n13.02.24\nFurther Data Wrangling\n(Uni closed in the afternoon - carnival?)\n\n\n\n6\n20.02.24\nNo R Club!\n\n\n\n7\n27.02.24\nData Visualization\n\n\n\n8\n5.03.24\nPreprocessing, e.g. physio data\n(Francesco)\n\n\n9\n12.03.24\n\n\n\n\n10\n19.03.24\n\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\""
   },
   {
     "objectID": "Slides/W2b_DataWranglingR.html#data-wrangling",
@@ -539,10 +532,17 @@
     "text": "Thanks!\nLearning objectives:\n\nLearn about tidyverse vs. base R\nLearn and apply the six basic dplyr “verbs”\nLearn how to join data frames\n\n\nNext week:\nData Visualization in R"
   },
   {
-    "objectID": "slides.html",
-    "href": "slides.html",
-    "title": "Slides",
-    "section": "",
-    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 30, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "objectID": "Slides/W3_Randomize.html#lets-dive-in-with-an-example",
+    "href": "Slides/W3_Randomize.html#lets-dive-in-with-an-example",
+    "title": "Randomization and Counterbalancing",
+    "section": "Let’s dive in with an example",
+    "text": "Let’s dive in with an example\nWe have three conditions (between-subject) and we want to randomly assign each participant to a condition.\n\nWe would use a function called sample(), which will be our best friend for today:\nIt allows us to draw from a vector (think of drawing a paper slip from a hat), either with or without replacement.\n\n# just shuffle\nconds &lt;- sample(c(\"condition A\", \"condition B\", \"condition C\"))\nconds\n\n[1] \"condition C\" \"condition B\" \"condition A\"\n\n# draw them repeatedly (with equal probability)\nconds2 &lt;- sample(c(\"condition A\", \"condition B\", \"condition C\"), 30, replace = TRUE)\nconds2\n\n [1] \"condition A\" \"condition C\" \"condition C\" \"condition C\" \"condition C\"\n [6] \"condition A\" \"condition C\" \"condition C\" \"condition B\" \"condition A\"\n[11] \"condition A\" \"condition C\" \"condition B\" \"condition A\" \"condition B\"\n[16] \"condition C\" \"condition A\" \"condition A\" \"condition C\" \"condition C\"\n[21] \"condition B\" \"condition A\" \"condition C\" \"condition C\" \"condition A\"\n[26] \"condition B\" \"condition A\" \"condition A\" \"condition B\" \"condition A\"\n\ntable(conds2)\n\nconds2\ncondition A condition B condition C \n         12           6          12 \n\n\n\n\nThe latter would be ~ random assignment. If we want equal group sizes, we could use a vector of length = sample size and shuffle it (sample without replacement):\n\nconds &lt;- sample(rep(c(\"condition A\", \"condition B\", \"condition C\"), times=10))\nconds\n\n [1] \"condition A\" \"condition C\" \"condition C\" \"condition A\" \"condition C\"\n [6] \"condition A\" \"condition C\" \"condition B\" \"condition A\" \"condition B\"\n[11] \"condition B\" \"condition B\" \"condition C\" \"condition B\" \"condition B\"\n[16] \"condition B\" \"condition C\" \"condition C\" \"condition C\" \"condition A\"\n[21] \"condition C\" \"condition A\" \"condition A\" \"condition B\" \"condition C\"\n[26] \"condition B\" \"condition A\" \"condition A\" \"condition B\" \"condition A\"\n\ntable(conds)\n\nconds\ncondition A condition B condition C \n         10          10          10"
+  },
+  {
+    "objectID": "Slides/W3_Randomize.html#what-do-we-need-for-randomization",
+    "href": "Slides/W3_Randomize.html#what-do-we-need-for-randomization",
+    "title": "Randomization and Counterbalancing",
+    "section": "What do we need for randomization?",
+    "text": "What do we need for randomization?\nProbability theory! Or, at least"
   }
 ]
