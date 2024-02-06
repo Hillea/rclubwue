@@ -1,0 +1,109 @@
+---
+title: "W3_Randomize_Worksheet"
+author: "Lea"
+date: "2024-02-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# these are just general options for the .Rmd document
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
+
+# Randomization & Counterbalancing
+
+In today's session, you'll work in small groups (2-3 people) on the following exercises. In this worksheet, I added the descriptions of the tasks/problems, and already added code chunks where you should fill in code. I don't expect that we will finish all exercises (maybe half?)!
+
+## Task 1
+
+1.  [ ] **Discuss with everyone where and how you need randomization or counterbalancing in your study designs. Feel free to take notes below.**
+
+Notes:
+
+## Task 2
+
+1.  [ ] **What kind of function would you need for assigning conditions to participants?**
+
+2.  [ ] **How can we solve this problem if we have two different things we want to randomize/counterbalance across two factors (e.g. treatment/control and blue/yellow)?**
+
+## Task 3
+
+1.  [ ] **What are specific problems with randomization/counterbalancing in your study design?**
+
+## Task 4
+
+Let's have a look at Ecem's study, which has a complicated structure for (pseudo-)random assignment of stimuli.
+
+Ecem has 2x4 stimulus characteristics that should vary:
+
+-   shape: heart, sacral, throat, solar
+
+-   color: yellow, purple, orange, blue
+
+Each participant should have 4 stimuli assigned, each color and shape should be represented once. In addition, no stimuli (combination of color&shape) should be the same across participants. There are thus 4\*4=16 unique stimuli available.
+
+1.  [ ] **How would you assign four stimuli to four different participants, making sure that every participant sees every color & shape but no combination is used more than once across participants?**
+
+2.  [ ] **Write your solution as pseudo-code as comments: Break it down in little steps and describe which computation should happen at each step/what the code should do.**
+
+```{r}
+# 1. create vectors for shape and color
+
+# 2. ...
+
+
+# 3. ...
+
+
+```
+
+## Task 5
+
+In Ecem's study, we want to have 100 trials (in Block 1): 60 "single-cue" and 40 "multi-cue" trials. \
+For the 60 single-cue trials, each of the four stimulus types is supposed to be shown 15 time.\
+For the multi-cue trials, each combination (threat-amb1, threat-amb2, safety-amb1, safety-amb2) should be shown 10x.
+
+1.  [ ] **How can we make an individual trial list for one participant?**
+
+```{r}
+# 1. ...
+
+
+# 2. ...
+```
+
+## Task 6
+
+We furthermore want to add the following information for the single-cue trials:
+
+1.  [ ] **How can we get the further stimulus information (color, shape) into this list?**
+
+2.  [ ] **How can we add the info whether it’s a “sc” or a “mc” trial**
+
+3.  [ ] **How can we determine whether a shock should be given in each trial?**
+
+```{r}
+
+```
+
+## Task 7
+
+For the multi-cue trials, we have two stimuli per trial.
+
+1.  [ ] **How can we add the information (color, shape, shock given) for the multi-cue trials?**
+
+```{r}
+
+```
+
+## Task 8
+
+In the multi-cue trials, Ecem also wants to show two more stimuli: The other combinations of color and shape (e.g. color1 with shape2).
+
+1.  [ ] **How can we add these other two combinations of shape and color as new columns?**
+
+```{r}
+
+```

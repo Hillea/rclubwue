@@ -29,8 +29,6 @@ div.cell-output-stdout {
 }
 ```
 
-*. . .*
-
 *Randomization/random assignment*: Determining completely at random (or pseudorandom) e.g. which condition a participant belongs to/which stimulus is shown... (Block randomization = all conditions occur once before being repeated.)
 
 *Counterbalancing*: Determining how many conditions etc. there are and making sure that all orders are seen by the same number of participants. (This term is often used for within-subjects designs!)
@@ -44,6 +42,8 @@ Counterbalanced Randomization: Make list and randomly assign participants to whi
 ## Let's dive in with an example
 
 We have three conditions (between-subject) and we want to randomly assign each participant to a condition.
+
+What kind of function would you need for this?
 
 . . .
 
@@ -141,13 +141,17 @@ In R, you can use certain functions that start with an "r" (e.g. `rnorm()`, `run
 
 Let's start with the coin toss, as it is similar to using `sample()`. The binomial distribution gives you the "successes" (vs. failure, so 1 vs. 0 or heads vs. tails) in a row of "experiments" (coin tosses).
 
-You could of course determine the condition by "tossing a coin". The "problem" is that the count of each outcome will be different for each participant.
-
 ```{r}
 #| echo: true
 
 # repeat a study 10 times in which 100 fair coins are tossed -out of the 100, how often do we get heads?
 rbinom(10,100,.5) 
+```
+
+You could of course determine the condition by "tossing a coin". The "problem" is that the count of each outcome will be different for each participant.
+
+```{r}
+#| echo: true
 
 # For one participant, determine whether 10 trials are condition 0 or 1 (with 60% probability for cond. 1)
 rbinom(10,1,.6)
@@ -332,9 +336,9 @@ For Ecem's study, it is more complex and she already made stimulus lists per han
 
 Now that we know which stimulus is used for which category for each participant, we can generate the stimulus list. In Ecem's study, we have 2 blocks à 100 trials (after the first block, the stimulus type changes). Let's focus on the first block.
 
-We have different trial types: 60 single and 40 multi cue. For the single cues, each of the 4 stimulus types is shown 15x, for the multicue, a combination of two types (threat or safety with each amb) is shown 10x. In the multi cue trials, other stimuli are also shown, which are the other combinations of shape and color.
+We have different trial types: 60 single- and 40 multi-cue. For the single cues, each of the 4 stimulus types is shown 15x, for the multi-cue, a combination of two types (threat or safety with each amb) is shown 10x. In the multi-cue trials, other stimuli are also shown, which are the other combinations of shape and color.
 
-**Task: How can we make an individual trial list per subject? (2 min.)**
+**Task: How can we make an individual trial list per subject (i.e. an order of trials)? (2 min.)**
 
 . . .
 
@@ -535,7 +539,7 @@ for (s in 1:nsubjects) {
     
      # also add shape and color for 2nd stimulus in MC trials - could use ifelse(), case_when() or join again
     left_join(overall_stimlist %>% 
-                filter(ID==1) %>% 
+                filter(ID==s) %>% 
                 select(stim_shape, stim_col, combi, CS_type), 
               by = join_by(CS_type2 == CS_type), # now pick CS_type2
               suffix = c("", "2")) %>%  # adds a 2 for the new columns added 
@@ -555,8 +559,8 @@ for (s in 1:nsubjects) {
       
       shock = coalesce(shock2, shock1)) %>% # uses "shock2" unless there's NA, then shock1
     
-    mutate(combi3 = ifelse(is.na(combi2), NA, str_c(stim_shape, stim_col2, sep = "_")),
-           combi4 = ifelse(is.na(combi2), NA, str_c(stim_shape2, stim_col, sep = "_")),
+    mutate(combi3 = ifelse(trial_type == "mc", str_c(stim_shape, stim_col2, sep = "_"), NA),
+           combi4 = ifelse(trial_type == "mc", str_c(stim_shape2, stim_col, sep = "_"), NA),
            allcombisshuffled = str_c(sample(c(combi, combi2, combi3, combi4)), collapse = ";")) %>% 
     separate_wider_delim(allcombisshuffled, delim = ";", names = c("combi5", "combi6", "combi7", "combi8")) %>% 
     
