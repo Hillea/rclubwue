@@ -4,7 +4,7 @@
     "href": "slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nW3_Randomize_Worksheet\n\n\n\n\n\n\nLea\n\n\nFeb 2, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nW3_Randomize_Worksheet\n\n\n\n\n\n\nyour name\n\n\nFeb 2, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Slides/W3b_DataVizR.html#ggplot",
@@ -130,7 +130,7 @@
     "href": "Slides/W3b_DataVizR.html#thanks",
     "title": "Data Visualization",
     "section": "Thanks!",
-    "text": "Thanks!\nCheck out Chapter 13 of QuantFun for further exercises and tips for data visualization!\nAlso keep in mind: Coding is a lot of googling things!\nYou can also check out the R Graph Gallery for code for different types of plots.\n\nLearning objectives\n\nKnow how to transform (pivot) and join data\nUnderstand the basics of a ggplot (layers etc.)\nBe able to make your first own plots, such as bar charts, violin + boxplots, scatterplots\nKnow what a grouped plot and a facetted plot is\n\n\n\nNext:\n\n?"
+    "text": "Thanks!\nCheck out Chapter 13 of QuantFun for further exercises and tips for data visualization!\nAlso keep in mind: Coding is a lot of googling things!\nYou can also check out the R Graph Gallery for code for different types of plots.\n\nLearning objectives\n\nKnow how to transform (pivot) and join data\nUnderstand the basics of a ggplot (layers etc.)\nBe able to make your first own plots, such as bar charts, violin + boxplots, scatterplots\nKnow what a grouped plot and a facetted plot is\n\n\n\nNext:\n\n? (More data wrangling? Data viz?)"
   },
   {
     "objectID": "Slides/W1_IntroR.html#schedule-preliminary",
