@@ -4,7 +4,7 @@ subtitle: |
    | R Coding Club 
    | RTG 2660
 author: "Dr. Lea Hildebrandt"
-date: 2024/02/06
+date: 2024/02/14
 description: "Making the first plots"
 format: 
   revealjs:
@@ -17,7 +17,7 @@ editor: visual
 from: markdown+emoji
 ---
 
-# Quiz
+# Warm-up
 
 ```{r}
 #| echo: false
@@ -48,6 +48,8 @@ dat <- summarise(.data = babynames, mean_n = mean(n))
 Error in summarise(.data = babynames, mean_n = mean(n)) : 
   could not find function "summarise"
 ```
+
+-   How to load (and save?) data - Data Wrangling 3
 
 # Data Viz
 
@@ -520,4 +522,4 @@ You can also check out the [R Graph Gallery](https://r-graph-gallery.com/) for c
 
 **Next:**
 
--   ?
+-   ? (More data wrangling? Data viz?)

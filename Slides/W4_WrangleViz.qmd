@@ -1,0 +1,69 @@
+---
+title: "W4_WrangleViz"
+subtitle: |
+   | R Coding Club 
+   | RTG 2660
+author: "Dr. Lea Hildebrandt"
+date: 2024/02/14
+description: "Getting the raw data in a useful format"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: simple
+    chalkboard: true
+editor: visual
+from: markdown+emoji
+---
+
+# More Data Wrangling & First Visualizations
+
+## Warm-up
+
+Did anyone bring a problem?
+
+```{r} #| echo: false}
+library(tidyverse) 
+```
+
+```{css}
+code.sourceCode {   font-size: 1.4em; }  
+div.cell-output-stdout {   font-size: 1.4em; }
+```
+
+. . .
+
+If I type this code into the console (and run it), I will get the following error. Why?
+
+```         
+library(babynames)  
+dat <- summarise(.data = babynames, mean_n = mean(n))  
+
+Error in summarise(.data = babynames, mean_n = mean(n)) :    could not find function "summarise"
+```
+
+. . .
+
+Which function(s) would you use to calculate reaction times per subject?
+
+. . .
+
+How do you merge two data sets?
+
+## Valentines Day!
+
+Let's work with a "romantic" data set today! :D
+
+I found this huge data set on speed dating online, plus it's codebook. Let's check it out.
+
+. . .
+
+First, we need to load the data. For this, there are a variety of functions (also for reading in specialized files). Since it is a basic .csv file, we can use \`read_data()\`:
+
+```{r}
+#| echo: false
+
+speed_dating <- read_csv()
+
+```
