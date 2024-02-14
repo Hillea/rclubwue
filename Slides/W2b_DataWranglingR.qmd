@@ -153,7 +153,7 @@ We will work mainly with functions from the *dplyr* package, but also use *readr
 The most important dplyr functions for data wrangling are:
 
 | Function    | Description                                                                                                                 |
-|-------------|-----------------------------------------------------------------------------------------------------------------------------|
+|-------------|-----------------------------------------------------------|
 | select()    | Include or exclude certain columns (variables)                                                                              |
 | filter()    | Include or exclude certain rows (observations)                                                                              |
 | mutate()    | Create new columns (variables)                                                                                              |
@@ -320,7 +320,7 @@ The second argument, `year > 2000`, is a Boolean or logical expression, which me
 There are also other Boolean expressions:
 
 | Operator | Name                  | is TRUE if and only if                    |
-|----------|-----------------------|-------------------------------------------|
+|----------------|-------------------|-------------------------------------|
 | A \< B   | less than             | A is less than B                          |
 | A \<= B  | less than or equal    | A is less than or equal to B              |
 | A \> B   | greater than          | A is greater than B                       |

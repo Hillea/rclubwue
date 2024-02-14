@@ -93,8 +93,8 @@ The main function to "start" plotting is `ggplot()` - we will then add layers of
 #| 
 library(tidyverse) 
 
-dat <- read_csv("ahi-cesd.csv")
-pinfo <- read_csv("participant-info.csv")
+dat <- read_csv("Data/ahi-cesd.csv")
+pinfo <- read_csv("Data/participant-info.csv")
 
 all_dat <- inner_join(dat, 
                       pinfo, 

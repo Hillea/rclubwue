@@ -21,11 +21,13 @@ from: markdown+emoji
 
 ## Warm-up
 
+Who has practiced a bit, and what did you cover?
+
+. . .
+
 Did anyone bring a problem?
 
-```{r} #| echo: false}
-library(tidyverse) 
-```
+`{r} #| echo: false} library(tidyverse)`
 
 ```{css}
 code.sourceCode {   font-size: 1.4em; }  
@@ -59,11 +61,352 @@ I found this huge data set on speed dating online, plus it's codebook. Let's che
 
 . . .
 
-First, we need to load the data. For this, there are a variety of functions (also for reading in specialized files). Since it is a basic .csv file, we can use \`read_data()\`:
+First, we need to load the data. For this, there are a variety of functions (also for reading in specialized files). Since it is a basic .csv file, we can use \`read_data()\` (from the tidyverse):
 
 ```{r}
-#| echo: false
+#| echo: true
 
-speed_dating <- read_csv()
+library(tidyverse)
+speed_dating <- read_csv("Data/Speed Dating Data.csv")
+
+# check out data structure
+str(speed_dating)
+```
+
+## Removing irrelevant columns
+
+We have 195 columns, it's hard to understand what they mean and have an overview. Let's have a look at the Codebook and decide which columns we want to keep. What do you find interesting?
+
+. . .
+
+```{r}
+#| echo: true
+
+speed_dating2 <- speed_dating %>% 
+  select(iid, gender, condtn, wave, round, pid, match, int_corr, age, age_o, dec_o, field_cd, goal, sports, dining, art, attr1_1, sinc1_1, intel1_1, fun1_1, amb1_1, shar1_1, attr1_2, sinc1_2, intel1_2, fun1_2, amb1_2, shar1_2, attr1_3, sinc1_3, intel1_3, fun1_3, amb1_3, shar1_3,  attr7_2, sinc7_2, intel7_2, fun7_2, amb7_2, shar7_2, attr7_3, sinc7_3, intel7_3, fun7_3, amb7_3, shar7_3)
 
 ```
+
+## Renaming columns
+
+These column names might not be very helpful to remember what the names stand for. If you want to, try to change the names of a few of these columns!
+
+. . .
+
+You could do that while selecting the columns already, but afterwards also works:
+
+```{r}
+#| echo: true
+
+speed_dating2 <- speed_dating2 %>% 
+  rename(partner_iid = pid)
+
+```
+
+## Is this data frame in a tidy format?
+
+Tidy data: Data that is easily processed by tidyverse functions (and often the required format for statistical analyses and data visualizations).
+
+Three principles:
+
+-   Each variable has its own column.
+
+-   Each observation has its own row.
+
+-   Each value has its own cell.
+
+. . .
+
+Wide vs. long format data?
+
+-   Wide format: Each participant/animal... has one row, observations per participant are in columns.
+
+-   Long format: Each observation = own row. (Likely several rows per participant: Trials etc.)
+
+::: columns
+::: column
+| ID  | Time_1 | Time_2 |
+|-----|--------|--------|
+| a1  | 230    | 310    |
+| a2  | 195    | 220    |
+| a3  | 245    | 290    |
+:::
+
+::: column
+| ID  | Time | Value |
+|-----|------|-------|
+| a1  | 1    | 230   |
+| a1  | 2    | 310   |
+| a2  | 1    | 195   |
+| a3  | 2    | 220   |
+| a3  | 1    | 245   |
+| a3  | 2    | 290   |
+:::
+:::
+
+Data often does not come in this format but is rather messy! That's why we wrangle.
+
+Tidy data is in between wide and long (you can always go longer! :D)
+
+## Tidy Data 2
+
+What do you think, which of the following data sets is tidy?
+
+```{r}
+table1
+#> # A tibble: 6 x 4
+#>   country      year  cases population
+#>   <chr>       <int>  <int>      <int>
+#> 1 Afghanistan  1999    745   19987071
+#> 2 Afghanistan  2000   2666   20595360
+#> 3 Brazil       1999  37737  172006362
+#> 4 Brazil       2000  80488  174504898
+#> 5 China        1999 212258 1272915272
+#> 6 China        2000 213766 1280428583
+table2
+#> # A tibble: 12 x 4
+#>   country      year type           count
+#>   <chr>       <int> <chr>          <int>
+#> 1 Afghanistan  1999 cases            745
+#> 2 Afghanistan  1999 population  19987071
+#> 3 Afghanistan  2000 cases           2666
+#> 4 Afghanistan  2000 population  20595360
+#> 5 Brazil       1999 cases          37737
+#> 6 Brazil       1999 population 172006362
+#> # … with 6 more rows
+table3
+#> # A tibble: 6 x 3
+#>   country      year rate             
+#> * <chr>       <int> <chr>            
+#> 1 Afghanistan  1999 745/19987071     
+#> 2 Afghanistan  2000 2666/20595360    
+#> 3 Brazil       1999 37737/172006362  
+#> 4 Brazil       2000 80488/174504898  
+#> 5 China        1999 212258/1272915272
+#> 6 China        2000 213766/1280428583
+
+left_join(table4a, table4b, by="country", suffix=c("_cases", "_population"))
+# A tibble: 3 x 5
+#   country     `1999_cases` `2000_cases` `1999_population` `2000_population`
+#   <chr>              <int>        <int>             <int>             <int>
+# 1 Afghanistan          745         2666          19987071          20595360
+# 2 Brazil             37737        80488         172006362         174504898
+# 3 China             212258       213766        1272915272        1280428583
+```
+
+## Tidying the speed dating data
+
+If you selected columns that represent different time points (e.g. attr1_1 to attr1_3), you'd have repeated measures that you'd want to have in long format. How do you reshape the data?
+
+. . .
+
+```{r}
+#| echo: true
+
+sd_long1 <- speed_dating2 %>% 
+  pivot_longer(cols = starts_with("attr1"), names_to = "timepoint", values_to = "attractive")
+
+# do it for several columns
+sd_long2 <- speed_dating2 %>% 
+  pivot_longer(cols = starts_with(c("attr1", "fun1", "intel1", "amb1", "shar1", "sinc1")), names_to = c(".value", "timepoint"),  names_sep = "_")
+
+# or you could do it separately as above and then join the datasets! Good for practicing joins! :)
+```
+
+## Calculating the average ratings
+
+We might want to calculate the average of the ratings, e.g. attractiveness across time points.
+
+First of all, unfortunately the ratings are on different scales between waves:
+
+> Waves 6-9: Please rate the importance of the following attributes in a potential date on a scale of 1-10 (1=not at all important, 10=extremely important):
+>
+> Waves 1-5, 10-21: You have 100 points to distribute among the following attributes -- give more points to those attributes that are more important in a potential date, and fewer points to those attributes that are less important in a potential date.  Total points must equal 100.
+
+Bring these ratings on scales that are somewhat comparable!
+
+. . .
+
+Now calculate the average ratings across time points per speed dater.
+
+We can either do so before bringing it in long format using \`mutate()\` or afterwards using group_by() and summarise().
+
+## Filtering the speed daters
+
+Make a new data frame that only consists of female speed daters! Also filter out those where the partner is older than the speed dater.
+
+## Sort the data frame
+
+Sort the data frame based on the correlation between the interests, from highest to lowest.
+
+## Visualize!
+
+Small Intro –\> Visualization Slides!
+
+. . .
+
+Why should we visualize our data?
+
+::: incremental
+-   check whether data make sense (unusual observations?)
+
+-   honestly present the data
+
+-   check whether data fits the assumptions of statistical tests
+:::
+
+. . .
+
+It's fun! (And plots are probably the most important information in papers!)
+
+## ggplot
+
+We will use a package called `ggplot2` (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful, publication ready figures.
+
+The main function to "start" plotting is `ggplot()` - we will then add layers of data and layers to tweak the appearance.
+
+![](images/ggplotlayers.PNG){fig-alt="Depiction of how a plot is built up from different layers in ggplot2" width="502"}
+
+## What do we want to plot?
+
+How about attractiveness ratings over time? Or gender distribution?
+
+What kind of plot do we need/how can we visualize it best?
+
+. . .
+
+Let's start with a simple bar chart of the gender distribution (counts)!
+
+## The First Layer
+
+-   The first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).
+
+-   `aes()` can take both an `x` and `y` argument, however, with a bar chart you are just asking R to count the number of data points in each group so you don't need to specify this.
+
+```{r}
+#| output-location: column-fragment 
+#| echo: true 
+#| 
+ggplot(sd_long2, aes(x = gender))  # obviously don't use the filtered data 
+```
+
+## The Second Layer
+
+The next layer adds a **geom** or a shape, in this case we use `geom_bar()` as we want to draw a bar plot.
+
+-   Note that we are adding layers, using a [`+`](https://rdrr.io/r/base/Arithmetic.html) between layers. This is a very important difference between pipes and visualization.
+
+```{r}
+#| echo: true 
+#| output-location: column-fragment 
+#| code-line-numbers: "2"  
+
+ggplot(sd_long2, aes(x = gender)) +   
+  geom_bar()
+```
+
+. . .
+
+-   Adding `fill` to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of `gender`.
+
+-   We can get rid of the (in this case redundant legend) with `show.legend = FALSE`.
+
+```{r}
+#| echo: true 
+#| output-location: column-fragment 
+#| code-line-numbers: "1|2" 
+
+ggplot(sd_long2, aes(x = gender, fill=gender)) +   
+  geom_bar(show.legend = FALSE)
+```
+
+## The Next Layers - Improving the Plot
+
+We might want to make the plot a bit prettier and easier to read. What would you improve?
+
+. . .
+
+We might want to add better axis labels and change the colors of the bars. We can do so with the functions `scale_x_discrete()` and `scale_y_continuous()`, which will adjust the x and y axes.
+
+We will use these two arguments in those functions:
+
+-   `name` controls/overwrites the axis name (e.g. Groups)
+
+-   `labels` controls the break points on the axis, i.e. what are the conditions called? The order is important here!
+
+```{r}
+#| echo: true 
+#| output-location: column-fragment 
+#| code-line-numbers: "3,4|5" 
+
+ggplot(sd_long2, aes(x = gender, fill=gender)) + 
+  geom_bar(show.legend = FALSE) +   
+  scale_x_discrete(name = "Gender",                     
+                   labels = c("Female", "Male")) +   # make sure this is correct
+  scale_y_continuous(name = "Number of speed daters")
+```
+
+There's also the counterparts `scale_x_continuous()` and `scale_y_discrete()`. What do you think, why do we use the ones mentioned above and when would we use the other ones?
+
+## Themes: Changing the Appearance
+
+There are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.
+
+We will now change the default theme to `theme_minimal()`, but you can also try other themes (just type "theme\_" and see what the autocomplete brings up).
+
+```{r}
+#| echo: true 
+#| output-location: column-fragment 
+#| code-line-numbers: "6" 
+ggplot(sd_long2, aes(x = gender, fill=gender)) +   
+  geom_bar(show.legend = FALSE) +   
+  scale_x_discrete(name = "Participant Sex",                     
+                   labels = c("Female", "Male")) +   
+  scale_y_continuous(name = "Number of participants") +   
+  theme_minimal()
+```
+
+## Colors
+
+There are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.
+
+A popular palette is **viridis**. We can simply add a function/layer to your ggplot named `scale_fill_viridis_d()` (d for discrete). The function hast 5 color options (A - E).
+
+-   Type and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!
+
+```{r}
+#| echo: true 
+#| output-location: column-fragment 
+#| code-line-numbers: "7" 
+#
+ggplot(sd_long2, aes(x = gender, fill=gender)) +   
+  geom_bar(show.legend = FALSE) +   
+  scale_x_discrete(name = "Participant Sex",                     
+                   labels = c("Female", "Male")) +   
+  scale_y_continuous(name = "Number of participants") +   
+  theme_minimal() +   
+  scale_fill_viridis_d(option = "E") 
+```
+
+## Transparency
+
+You can also add transparency to your plot, which can be helpful if you plot several layers of data.
+
+To do so, you can simply add `alpha` to the `geom_bar()`:
+
+```{r}
+#| echo: true 
+#| output-location: column-fragment 
+#| code-line-numbers: "3"  
+#| 
+ggplot(sd_long2, aes(x = gender, fill=gender)) +   
+geom_bar(show.legend = FALSE,            
+         alpha = .8) +   
+  scale_x_discrete(name = "Participant Sex",                    
+                   labels = c("Female", "Male")) +   
+  scale_y_continuous(name = "Number of participants") +  
+  theme_minimal() +   
+  scale_fill_viridis_d(option = "E") 
+```
+
+## 

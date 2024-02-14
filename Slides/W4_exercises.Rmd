@@ -1,0 +1,108 @@
+---
+title: "W4_WrangleViz"
+author: "R Club"
+date: "2024-02-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Valentine's Day!
+
+Today, we're going to work with a data set on speed dating together.
+
+First of all, possibly download (or locate) the data and **load** it into R:
+
+```{r}
+# load data into RStudio
+
+
+
+
+```
+
+## What can we do with this data set?
+
+Check out the data set (and possibly the codebook), and decide what aspects (a.k.a. columns/variables) of the data would interest you (as a group!).
+
+195 columns are a lot, so maybe only **keep those columns** that are interesting for you.
+
+```{r}
+# check out data
+
+
+```
+
+## Renaming columns
+
+These column names might not be very helpful to remember what the names stand for. If you want to, try to **change the names** of a few of these columns!
+
+```{r}
+
+```
+
+## Tidying the data
+
+Is the data in a tidy format?
+
+What is a tidy format? (Slides)
+
+If not, **reshape** the data. (And if yes, reshape it anyway to practice! :D)
+
+```{r}
+
+```
+
+(You might merge data frames at some point, possibly here, how do you da that?)
+
+## Calculating the average ratings
+
+We might want to calculate the average of the ratings, e.g. attractiveness across time points.
+
+First of all, unfortunately the ratings are on different scales between waves:
+
+> Waves 6-9: Please rate the importance of the following attributes in a potential date on a scale of 1-10 (1=not at all important, 10=extremely important):
+>
+> Waves 1-5, 10-21: You have 100 points to distribute among the following attributes -- give more points to those attributes that are more important in a potential date, and fewer points to those attributes that are less important in a potential date.  Total points must equal 100.
+
+1.  **Transform** these ratings to scales that are somewhat comparable!
+
+```{r}
+
+```
+
+1.  Now **calculate the average** ratings across time points per speed dater.
+
+```{r}
+
+```
+
+## Filtering the speed daters
+
+Make a new data frame that only consists of female speed daters! Also filter out those where the partner is older than the speed dater.
+
+```{r}
+
+```
+
+## Sort the data frame
+
+Sort the data frame based on the correlation between the interests, from highest to lowest.
+
+```{r}
+
+```
+
+## Visualize!
+
+(Small Intro –\> Visualization Slides!)
+
+Now decide - as a group - what kind of plot to make!
+
+Make this **plot**, layer by layer.
+
+```{r}
+
+```
