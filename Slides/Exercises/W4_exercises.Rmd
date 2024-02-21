@@ -1,5 +1,5 @@
 ---
-title: "W4_WrangleViz"
+title: "Worksheet More Wrangling"
 author: "R Club"
 date: "2024-02-14"
 output: html_document
@@ -11,12 +11,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Valentine's Day!
 
-Today, we're going to work with a data set on speed dating together.
+Today, we're going to work with a data set on speed dating together. Feel free to google (coding is 90% googling...) or use AI as much as you want (but also think about the steps you need to take yourself...).
 
 First of all, possibly download (or locate) the data and **load** it into R:
 
 ```{r}
 # load data into RStudio
+
+data <- read.csv("C:/Users/leh83zj/Documents/UniWü/Lehre/Rclub/rclubwue/Slides/Data/Speed Dating Data.csv")
 
 
 
@@ -32,6 +34,14 @@ Check out the data set (and possibly the codebook), and decide what aspects (a.k
 ```{r}
 # check out data
 
+View(data) 
+
+#id, iid, age, gender. age of the partner, study area, ratings...
+
+new_data <- data %>% 
+  select(iid, gender, condtn, wave, round, pid, match, int_corr, age, age_o, dec_o, field_cd, goal, sports, dining, art, attr1_1, sinc1_1, intel1_1, fun1_1, amb1_1, shar1_1, attr1_2, sinc1_2, intel1_2, fun1_2, amb1_2, shar1_2, attr1_3, sinc1_3, intel1_3, fun1_3, amb1_3, shar1_3,  attr7_2, sinc7_2, intel7_2, fun7_2, amb7_2, shar7_2, attr7_3, sinc7_3, intel7_3, fun7_3, amb7_3, shar7_3)
+
+
 
 ```
 
@@ -40,6 +50,10 @@ Check out the data set (and possibly the codebook), and decide what aspects (a.k
 These column names might not be very helpful to remember what the names stand for. If you want to, try to **change the names** of a few of these columns!
 
 ```{r}
+# rename with capital first letter "gender, condtn, wave"
+
+renamed_data<-new_data %>% 
+  rename(Gender= gender, Condtn= condtn,Wave= wave)
 
 ```
 
@@ -52,7 +66,8 @@ What is a tidy format? (Slides)
 If not, **reshape** the data. (And if yes, reshape it anyway to practice! :D)
 
 ```{r}
-
+tidy_format <- renamed_data %>%
+  pivot_longer(cols = c("attr1_1", "attr1_2", "attr1_3"), names_to = "Time_point", values_to = "Att_drating")
 ```
 
 (You might merge data frames at some point, possibly here, how do you da that?)
@@ -71,12 +86,18 @@ First of all, unfortunately the ratings are on different scales between waves:
 
 ```{r}
 
+data_cor <- tidy_format %>%
+  mutate(Cor_rate = ifelse(Wave %in% c(6, 7, 8, 9), 
+                           Att_rating*10, Att_rating))
+
 ```
 
 1.  Now **calculate the average** ratings across time points per speed dater.
 
 ```{r}
-
+att_aver <- data_cor %>% 
+  group_by(iid) %>% 
+  summarise(av_att_id=mean(Cor_rate, na.rm=FALSE))
 ```
 
 ## Filtering the speed daters
@@ -84,6 +105,8 @@ First of all, unfortunately the ratings are on different scales between waves:
 Make a new data frame that only consists of female speed daters! Also filter out those where the partner is older than the speed dater.
 
 ```{r}
+female_part_y <- data_cor %>% 
+  filter(Gender==0, age_o >age)
 
 ```
 
@@ -92,7 +115,8 @@ Make a new data frame that only consists of female speed daters! Also filter out
 Sort the data frame based on the correlation between the interests, from highest to lowest.
 
 ```{r}
-
+sort_data_intr <- female_part_y %>% 
+  arrange(desc(int_corr))
 ```
 
 ## Visualize!

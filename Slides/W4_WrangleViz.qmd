@@ -1,5 +1,5 @@
 ---
-title: "W4_WrangleViz"
+title: "More Wrangling"
 subtitle: |
    | R Coding Club 
    | RTG 2660
@@ -17,7 +17,9 @@ editor: visual
 from: markdown+emoji
 ---
 
-# More Data Wrangling & First Visualizations
+# More Data Wrangling 
+
+(see worksheet!)
 
 ## Warm-up
 
@@ -48,6 +50,14 @@ Error in summarise(.data = babynames, mean_n = mean(n)) :    could not find func
 . . .
 
 Which function(s) would you use to calculate reaction times per subject?
+
+```{r}
+
+data <- df %>% 
+  group_by(subject) %>% 
+  summarise(rt = mean(raw_data)) %>% 
+  ungroup()
+```
 
 . . .
 
@@ -238,175 +248,5 @@ Make a new data frame that only consists of female speed daters! Also filter out
 ## Sort the data frame
 
 Sort the data frame based on the correlation between the interests, from highest to lowest.
-
-## Visualize!
-
-Small Intro –\> Visualization Slides!
-
-. . .
-
-Why should we visualize our data?
-
-::: incremental
--   check whether data make sense (unusual observations?)
-
--   honestly present the data
-
--   check whether data fits the assumptions of statistical tests
-:::
-
-. . .
-
-It's fun! (And plots are probably the most important information in papers!)
-
-## ggplot
-
-We will use a package called `ggplot2` (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful, publication ready figures.
-
-The main function to "start" plotting is `ggplot()` - we will then add layers of data and layers to tweak the appearance.
-
-![](images/ggplotlayers.PNG){fig-alt="Depiction of how a plot is built up from different layers in ggplot2" width="502"}
-
-## What do we want to plot?
-
-How about attractiveness ratings over time? Or gender distribution?
-
-What kind of plot do we need/how can we visualize it best?
-
-. . .
-
-Let's start with a simple bar chart of the gender distribution (counts)!
-
-## The First Layer
-
--   The first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).
-
--   `aes()` can take both an `x` and `y` argument, however, with a bar chart you are just asking R to count the number of data points in each group so you don't need to specify this.
-
-```{r}
-#| output-location: column-fragment 
-#| echo: true 
-#| 
-ggplot(sd_long2, aes(x = gender))  # obviously don't use the filtered data 
-```
-
-## The Second Layer
-
-The next layer adds a **geom** or a shape, in this case we use `geom_bar()` as we want to draw a bar plot.
-
--   Note that we are adding layers, using a [`+`](https://rdrr.io/r/base/Arithmetic.html) between layers. This is a very important difference between pipes and visualization.
-
-```{r}
-#| echo: true 
-#| output-location: column-fragment 
-#| code-line-numbers: "2"  
-
-ggplot(sd_long2, aes(x = gender)) +   
-  geom_bar()
-```
-
-. . .
-
--   Adding `fill` to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of `gender`.
-
--   We can get rid of the (in this case redundant legend) with `show.legend = FALSE`.
-
-```{r}
-#| echo: true 
-#| output-location: column-fragment 
-#| code-line-numbers: "1|2" 
-
-ggplot(sd_long2, aes(x = gender, fill=gender)) +   
-  geom_bar(show.legend = FALSE)
-```
-
-## The Next Layers - Improving the Plot
-
-We might want to make the plot a bit prettier and easier to read. What would you improve?
-
-. . .
-
-We might want to add better axis labels and change the colors of the bars. We can do so with the functions `scale_x_discrete()` and `scale_y_continuous()`, which will adjust the x and y axes.
-
-We will use these two arguments in those functions:
-
--   `name` controls/overwrites the axis name (e.g. Groups)
-
--   `labels` controls the break points on the axis, i.e. what are the conditions called? The order is important here!
-
-```{r}
-#| echo: true 
-#| output-location: column-fragment 
-#| code-line-numbers: "3,4|5" 
-
-ggplot(sd_long2, aes(x = gender, fill=gender)) + 
-  geom_bar(show.legend = FALSE) +   
-  scale_x_discrete(name = "Gender",                     
-                   labels = c("Female", "Male")) +   # make sure this is correct
-  scale_y_continuous(name = "Number of speed daters")
-```
-
-There's also the counterparts `scale_x_continuous()` and `scale_y_discrete()`. What do you think, why do we use the ones mentioned above and when would we use the other ones?
-
-## Themes: Changing the Appearance
-
-There are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.
-
-We will now change the default theme to `theme_minimal()`, but you can also try other themes (just type "theme\_" and see what the autocomplete brings up).
-
-```{r}
-#| echo: true 
-#| output-location: column-fragment 
-#| code-line-numbers: "6" 
-ggplot(sd_long2, aes(x = gender, fill=gender)) +   
-  geom_bar(show.legend = FALSE) +   
-  scale_x_discrete(name = "Participant Sex",                     
-                   labels = c("Female", "Male")) +   
-  scale_y_continuous(name = "Number of participants") +   
-  theme_minimal()
-```
-
-## Colors
-
-There are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.
-
-A popular palette is **viridis**. We can simply add a function/layer to your ggplot named `scale_fill_viridis_d()` (d for discrete). The function hast 5 color options (A - E).
-
--   Type and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!
-
-```{r}
-#| echo: true 
-#| output-location: column-fragment 
-#| code-line-numbers: "7" 
-#
-ggplot(sd_long2, aes(x = gender, fill=gender)) +   
-  geom_bar(show.legend = FALSE) +   
-  scale_x_discrete(name = "Participant Sex",                     
-                   labels = c("Female", "Male")) +   
-  scale_y_continuous(name = "Number of participants") +   
-  theme_minimal() +   
-  scale_fill_viridis_d(option = "E") 
-```
-
-## Transparency
-
-You can also add transparency to your plot, which can be helpful if you plot several layers of data.
-
-To do so, you can simply add `alpha` to the `geom_bar()`:
-
-```{r}
-#| echo: true 
-#| output-location: column-fragment 
-#| code-line-numbers: "3"  
-#| 
-ggplot(sd_long2, aes(x = gender, fill=gender)) +   
-geom_bar(show.legend = FALSE,            
-         alpha = .8) +   
-  scale_x_discrete(name = "Participant Sex",                    
-                   labels = c("Female", "Male")) +   
-  scale_y_continuous(name = "Number of participants") +  
-  theme_minimal() +   
-  scale_fill_viridis_d(option = "E") 
-```
 
 ## 
