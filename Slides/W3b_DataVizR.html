@@ -8,10 +8,10 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.549">
+  <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Dr.&nbsp;Lea Hildebrandt">
-  <meta name="dcterms.date" content="2024-01-30">
+  <meta name="dcterms.date" content="2024-02-27">
   <title>R Club Würzburg - Data Visualization</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,10 +407,10 @@ Dr.&nbsp;Lea Hildebrandt
 </div>
 </div>
 
-  <p class="date">2024-01-30</p>
+  <p class="date">2024-02-27</p>
 </section>
-<section id="quiz" class="title-slide slide level1 center">
-<h1>Quiz</h1>
+<section id="warm-up" class="title-slide slide level1 center">
+<h1>Warm-up</h1>
 <div class="cell">
 <style type="text/css">
 code.sourceCode {
@@ -430,6 +430,9 @@ dat &lt;- summarise(.data = babynames, mean_n = mean(n))
 
 Error in summarise(.data = babynames, mean_n = mean(n)) : 
   could not find function "summarise"</code></pre>
+<ul>
+<li>How to load (and save?) data - Data Wrangling 3</li>
+</ul>
 </div>
 </section>
 
@@ -466,8 +469,8 @@ Error in summarise(.data = babynames, mean_n = mean(n)) :
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">library</span>(tidyverse) </span>
 <span id="cb2-2"><a></a></span>
-<span id="cb2-3"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ahi-cesd.csv"</span>)</span>
-<span id="cb2-4"><a></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participant-info.csv"</span>)</span>
+<span id="cb2-3"><a></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/ahi-cesd.csv"</span>)</span>
+<span id="cb2-4"><a></a>pinfo <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/participant-info.csv"</span>)</span>
 <span id="cb2-5"><a></a></span>
 <span id="cb2-6"><a></a>all_dat <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(dat, </span>
 <span id="cb2-7"><a></a>                      pinfo, </span>
@@ -969,7 +972,7 @@ $ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.09688
 <div class="fragment">
 <p><strong>Next:</strong></p>
 <ul>
-<li>?</li>
+<li>? (More data wrangling? Data viz?)</li>
 </ul>
 
 <div class="quarto-auto-generated-content">

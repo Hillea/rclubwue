@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://Hillea.github.io/rclubwue/about.html</loc>
-    <lastmod>2024-02-01T17:27:02.801Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Hillea.github.io/rclubwue/index.html</loc>
-    <lastmod>2024-02-01T17:27:02.865Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Hillea.github.io/rclubwue/Slides/W3_Randomize.html</loc>
-    <lastmod>2024-02-01T17:27:02.725Z</lastmod>
-  </url>
-  <url>
-    <loc>https://Hillea.github.io/rclubwue/Slides/W3b_DataVizR.html</loc>
-    <lastmod>2024-02-01T17:27:02.725Z</lastmod>
+    <loc>https://Hillea.github.io/rclubwue/Slides/W4_WrangleViz.html</loc>
+    <lastmod>2024-02-21T16:46:07.132Z</lastmod>
   </url>
   <url>
     <loc>https://Hillea.github.io/rclubwue/Slides/W1_IntroR.html</loc>
-    <lastmod>2024-02-01T17:27:02.725Z</lastmod>
+    <lastmod>2024-02-21T16:46:07.132Z</lastmod>
   </url>
   <url>
-    <loc>https://Hillea.github.io/rclubwue/Slides/W2b_DataWranglingR.html</loc>
-    <lastmod>2024-02-01T17:27:02.725Z</lastmod>
+    <loc>https://Hillea.github.io/rclubwue/Slides/W3b_DataVizR.html</loc>
+    <lastmod>2024-02-21T16:46:07.132Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Hillea.github.io/rclubwue/Slides/Exercises/W3_Randomize_exercises.html</loc>
+    <lastmod>2024-02-21T16:46:07.132Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Hillea.github.io/rclubwue/index.html</loc>
+    <lastmod>2024-02-21T16:46:07.276Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Hillea.github.io/rclubwue/about.html</loc>
+    <lastmod>2024-02-21T16:46:07.208Z</lastmod>
   </url>
   <url>
     <loc>https://Hillea.github.io/rclubwue/slides.html</loc>
-    <lastmod>2024-02-01T17:27:02.865Z</lastmod>
+    <lastmod>2024-02-21T16:46:07.276Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Hillea.github.io/rclubwue/Slides/Exercises/W4_exercises.html</loc>
+    <lastmod>2024-02-21T16:46:07.132Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Hillea.github.io/rclubwue/Slides/W2b_DataWranglingR.html</loc>
+    <lastmod>2024-02-21T16:46:07.132Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Hillea.github.io/rclubwue/Slides/W3_Randomize.html</loc>
+    <lastmod>2024-02-21T16:46:07.132Z</lastmod>
   </url>
 </urlset>

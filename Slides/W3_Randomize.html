@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.549">
+  <meta name="generator" content="quarto-1.4.550">
 
   <meta name="author" content="Dr.&nbsp;Lea Hildebrandt">
   <meta name="dcterms.date" content="2024-02-06">
@@ -423,7 +423,6 @@ div.cell-output-stdout {
 }
 </style>
 </div>
-<p><em>. . .</em></p>
 <p><em>Randomization/random assignment</em>: Determining completely at random (or pseudorandom) e.g.&nbsp;which condition a participant belongs to/which stimulus is shown… (Block randomization = all conditions occur once before being repeated.)</p>
 <p><em>Counterbalancing</em>: Determining how many conditions etc. there are and making sure that all orders are seen by the same number of participants. (This term is often used for within-subjects designs!)</p>
 <aside class="notes">
@@ -444,6 +443,7 @@ div.cell-output-stdout {
 <section id="lets-dive-in-with-an-example" class="slide level2">
 <h2>Let’s dive in with an example</h2>
 <p>We have three conditions (between-subject) and we want to randomly assign each participant to a condition.</p>
+<p>What kind of function would you need for this?</p>
 <div class="fragment">
 <p>We would use a function called <code>sample()</code>, which will be our best friend for today:<br>
 It allows us to draw from a vector (think of drawing a paper slip from a hat), either with or without replacement.</p>
@@ -547,13 +547,15 @@ condition A condition B condition C
 <p>In R, you can use certain functions that start with an “r” (e.g.&nbsp;<code>rnorm()</code>, <code>runif()</code>, <code>rbinom()</code>) to draw random numbers from distributions.</p>
 <div class="fragment">
 <p>Let’s start with the coin toss, as it is similar to using <code>sample()</code>. The binomial distribution gives you the “successes” (vs.&nbsp;failure, so 1 vs.&nbsp;0 or heads vs.&nbsp;tails) in a row of “experiments” (coin tosses).</p>
-<p>You could of course determine the condition by “tossing a coin”. The “problem” is that the count of each outcome will be different for each participant.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># repeat a study 10 times in which 100 fair coins are tossed -out of the 100, how often do we get heads?</span></span>
 <span id="cb14-2"><a></a><span class="fu">rbinom</span>(<span class="dv">10</span>,<span class="dv">100</span>,.<span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 51 41 51 44 43 46 43 48 51 41</code></pre>
 </div>
+</div>
+<p>You could of course determine the condition by “tossing a coin”. The “problem” is that the count of each outcome will be different for each participant.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># For one participant, determine whether 10 trials are condition 0 or 1 (with 60% probability for cond. 1)</span></span>
 <span id="cb16-2"><a></a><span class="fu">rbinom</span>(<span class="dv">10</span>,<span class="dv">1</span>,.<span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -751,8 +753,8 @@ condition A condition B condition C
 <section id="make-the-trial-list-per-participant" class="slide level2">
 <h2>Make the trial list per participant</h2>
 <p>Now that we know which stimulus is used for which category for each participant, we can generate the stimulus list. In Ecem’s study, we have 2 blocks à 100 trials (after the first block, the stimulus type changes). Let’s focus on the first block.</p>
-<p>We have different trial types: 60 single and 40 multi cue. For the single cues, each of the 4 stimulus types is shown 15x, for the multicue, a combination of two types (threat or safety with each amb) is shown 10x. In the multi cue trials, other stimuli are also shown, which are the other combinations of shape and color.</p>
-<p><strong>Task: How can we make an individual trial list per subject? (2 min.)</strong></p>
+<p>We have different trial types: 60 single- and 40 multi-cue. For the single cues, each of the 4 stimulus types is shown 15x, for the multi-cue, a combination of two types (threat or safety with each amb) is shown 10x. In the multi-cue trials, other stimuli are also shown, which are the other combinations of shape and color.</p>
+<p><strong>Task: How can we make an individual trial list per subject (i.e.&nbsp;an order of trials)? (2 min.)</strong></p>
 <div class="fragment">
 <p>We first simply list all possibilities and repeat them as often as needed:</p>
 <div class="cell">
@@ -916,7 +918,7 @@ condition A condition B condition C
 <h2>Bring it all together for all participants</h2>
 <p>We can use the <code>overall_stimlist</code> we already made for all (four) participants. We could do the same without the for-loop (just have another column for participant and more rows), but we will use a for loop for now so you can practice it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43" data-code-line-numbers="|1-2|4|5-11|13-17|19-21|23-28|30-41|43|45-47|48|50-51|53-54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>ntrials <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<div class="sourceCode cell-code" id="cb43" data-code-line-numbers="|1-2|4|5-11|13-17|19-21|23-28|30-41|43|45-46|47-48|50-51|53-54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>ntrials <span class="ot">&lt;-</span> <span class="dv">100</span></span>
 <span id="cb43-2"><a></a>nsubjects <span class="ot">&lt;-</span> <span class="dv">4</span></span>
 <span id="cb43-3"><a></a></span>
 <span id="cb43-4"><a></a><span class="cf">for</span> (s <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsubjects) {</span>
@@ -940,7 +942,7 @@ condition A condition B condition C
 <span id="cb43-22"><a></a>    </span>
 <span id="cb43-23"><a></a>     <span class="co"># also add shape and color for 2nd stimulus in MC trials - could use ifelse(), case_when() or join again</span></span>
 <span id="cb43-24"><a></a>    <span class="fu">left_join</span>(overall_stimlist <span class="sc">%&gt;%</span> </span>
-<span id="cb43-25"><a></a>                <span class="fu">filter</span>(ID<span class="sc">==</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-25"><a></a>                <span class="fu">filter</span>(ID<span class="sc">==</span>s) <span class="sc">%&gt;%</span> </span>
 <span id="cb43-26"><a></a>                <span class="fu">select</span>(stim_shape, stim_col, combi, CS_type), </span>
 <span id="cb43-27"><a></a>              <span class="at">by =</span> <span class="fu">join_by</span>(CS_type2 <span class="sc">==</span> CS_type), <span class="co"># now pick CS_type2</span></span>
 <span id="cb43-28"><a></a>              <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"2"</span>)) <span class="sc">%&gt;%</span>  <span class="co"># adds a 2 for the new columns added </span></span>
@@ -960,8 +962,8 @@ condition A condition B condition C
 <span id="cb43-42"><a></a>      </span>
 <span id="cb43-43"><a></a>      <span class="at">shock =</span> <span class="fu">coalesce</span>(shock2, shock1)) <span class="sc">%&gt;%</span> <span class="co"># uses "shock2" unless there's NA, then shock1</span></span>
 <span id="cb43-44"><a></a>    </span>
-<span id="cb43-45"><a></a>    <span class="fu">mutate</span>(<span class="at">combi3 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(combi2), <span class="cn">NA</span>, <span class="fu">str_c</span>(stim_shape, stim_col2, <span class="at">sep =</span> <span class="st">"_"</span>)),</span>
-<span id="cb43-46"><a></a>           <span class="at">combi4 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(combi2), <span class="cn">NA</span>, <span class="fu">str_c</span>(stim_shape2, stim_col, <span class="at">sep =</span> <span class="st">"_"</span>)),</span>
+<span id="cb43-45"><a></a>    <span class="fu">mutate</span>(<span class="at">combi3 =</span> <span class="fu">ifelse</span>(trial_type <span class="sc">==</span> <span class="st">"mc"</span>, <span class="fu">str_c</span>(stim_shape, stim_col2, <span class="at">sep =</span> <span class="st">"_"</span>), <span class="cn">NA</span>),</span>
+<span id="cb43-46"><a></a>           <span class="at">combi4 =</span> <span class="fu">ifelse</span>(trial_type <span class="sc">==</span> <span class="st">"mc"</span>, <span class="fu">str_c</span>(stim_shape2, stim_col, <span class="at">sep =</span> <span class="st">"_"</span>), <span class="cn">NA</span>),</span>
 <span id="cb43-47"><a></a>           <span class="at">allcombisshuffled =</span> <span class="fu">str_c</span>(<span class="fu">sample</span>(<span class="fu">c</span>(combi, combi2, combi3, combi4)), <span class="at">collapse =</span> <span class="st">";"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb43-48"><a></a>    <span class="fu">separate_wider_delim</span>(allcombisshuffled, <span class="at">delim =</span> <span class="st">";"</span>, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"combi5"</span>, <span class="st">"combi6"</span>, <span class="st">"combi7"</span>, <span class="st">"combi8"</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb43-49"><a></a>    </span>
@@ -993,6 +995,12 @@ condition A condition B condition C
 <span id="cb45-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"CS_type"</span>),</span>
 <span id="cb45-3"><a></a>               <span class="at">names_to =</span> <span class="st">"block"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="thanks" class="slide level2">
+<h2>Thanks!</h2>
+<p>No R club next week! (Carnival)</p>
+<p>Homework: Please have a look at the <a href="https://hillea.github.io/rclubwue/Slides/W2b_DataWranglingR.html#/data-wrangling-3">rest of last week’s presentation</a> and/or <a href="https://psyteachr.github.io/quant-fun-v2/data-wrangling-3.html">chapter 6 of Fundamentals of Quantitative Analysis</a>!<br>
+(We’ve covered a lot of it today, but it will help you understand joins and bringing data in long format etc. better!)</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
