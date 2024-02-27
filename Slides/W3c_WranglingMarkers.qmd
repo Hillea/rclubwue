@@ -1,0 +1,300 @@
+---
+title: "Wrangling Physio Markers"
+subtitle: |
+   | R Coding Club 
+   | RTG 2660
+author: "Dr. Lea Hildebrandt"
+date: 2024/02/14
+description: "Defining phases and calculating things"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: simple
+    chalkboard: true
+editor: visual
+from: markdown+emoji
+---
+
+## Warm up?
+
+Did anyone bring a problem?
+
+```{r}
+#| echo: false
+
+library(tidyverse)
+
+```
+
+```{css}
+code.sourceCode {   font-size: 1.4em; }   
+div.cell-output-stdout {   font-size: 1.4em; }
+```
+
+## Problem Definition (1)
+
+You have collected data, let's say Skin Conductance, during your experiment with several trials. In each participant's file, you thus have (at least) two columns: `SC` and `markers`, and probably `time`. Markers are numbers that denote certain events, such as the start of a phase or trial.
+
+The data set could thus like this:
+
+| time | SC    | markers |
+|------|-------|---------|
+| 100  | 1.964 | 10      |
+| 200  | 2.004 | 0       |
+| 300  | 2.365 | 0       |
+| 400  | 2.201 | 5       |
+| 500  | 2.589 | 0       |
+| 600  | 2.662 | 0       |
+| 700  | 2.803 | 0       |
+| 800  | 2.754 | 0       |
+| 900  | 2.839 | 6       |
+| 1000 | 2.915 | 0       |
+
+Let's say 10 is the onset of the block, 5 the onset of the trial, and 6 the end of the trial or onset of the next phase.
+
+How can we make sure we know which rows belong to which phase of the experiment, e.g. which data points we need to use if we want to calculate something for the trial starting with marker 5?
+
+**In small groups, brainstorm how you solve this!\
+**(Break it down in little steps, pseudo-code)
+
+## Francesco's Data
+
+We will use Francesco's data of his pilot participant 2 (*VP02.txt*) to solve this problem.
+
+However, this brings us to a different problem, because his data are in a weird format! The actual data only start after a number of rows with channel information...
+
+**How can we read in the data well??**
+
+![Francesco's data](images/Francescos.PNG)
+
+## One possible solution - reading in data
+
+First one to finish: Share solution! :grin:
+
+. . .
+
+```{r}
+#| echo: true
+  library(tidyverse)
+  VPcode <- "VP02"
+  
+  # find the onset of the data to skip long header (may vary per file, but starts with min or CH1)
+  findstart <-  read_lines(paste0("Data/", paste0(VPcode,".txt")), n_max = 50)
+  header_idx <- str_which(findstart, "^min|CH1")
+  
+  # read in data from the next line and the header from that line
+  header <- read_delim(paste0("Data/", paste0(VPcode,".txt")), delim = "\t", skip = header_idx-1, n_max = 1)
+  
+  phy_data <- read_delim(paste0("Data/", paste0(VPcode,".txt")), delim = "\t", skip = header_idx)
+  
+  names(phy_data) <- names(header)
+  
+  head(phy_data)
+```
+
+## Get the correct markers
+
+Remember a few weeks ago when we talked about how to transform the binary values in the eight channels to markers? Do that now!
+
+Reminder:\
+Channel 1 = value 1\
+Channel 2 = 2\
+Channel 3 = 4\
+Channel 4 = 8\
+Channel 5 = 16\
+Channel 6 = 32\
+Channel 7 = 64\
+Channel 8 = 128.\
+\
+So if there's a signal (which will have the value "5") in channel 1, 3, and 6, the resulting marker should be 1+4+32=37.
+
+**Implement this now in R code!\
+Also check whether it worked correctly.**
+
+## Possible solution - markers
+
+. . .
+
+```{r}
+#| echo: true
+
+phy_data <- phy_data %>% 
+    
+    # rename channels to more sensible names
+    rename(#time = min,  # doesn't exist in all files
+      SC = CH13,
+      HR = CH14,  # is this HR?
+      one = CH28,
+      two = CH29,
+      four = CH30,
+      eight = CH31,
+      sixteen = CH32,
+      thirtytwo = CH33,
+      sixtyfour = CH34,
+      hundredtwentyeight = CH35) %>% 
+    
+    # get time from start (make it based on sampling rate of 2000Hz --> 0.5msec between samples) and triggers
+    mutate(# combine digital input channels from 8-bit binary to decimal
+           marker = (1*one + 2*two + 4*four + 8*eight + 16*sixteen + 32*thirtytwo + 64*sixtyfour + 128*hundredtwentyeight) / 5)
+
+# check whether markers were calculated correctly
+unique(phy_data$marker)
+idx_first_marker <- which(phy_data$marker != 0)[c(1,1000,2000)]
+phy_data[idx_first_marker,]
+```
+
+## Get trial onsets
+
+For Francesco's data, the markers 90 (CS+) and 7 (CS-) are of interest, as they denote the trial onsets.
+
+**First check out whether and how often these markers exist.**
+
+The markers are shown for \~55 samples each. **How can we get the onset only (i.e. only one sample/row)?**
+
+How many trials do we have?
+
+## Possible solutions - get onsets
+
+Who has a good solution?
+
+. . .
+
+One option is to get the streaks of the marker column using the `rle()` function in base R (there's also an even handier `rleid()` function in the data.table package...).
+
+```{r}
+#| echo: true  
+#| 
+streaks <- rle(phy_data$marker) # gives two lists: lenght and value, you'd still have to add the lengths up again 
+```
+
+Or you could simply get the difference in marker value to previous sample. All values in a streak will be 0, every onset will be different from 0. We can then filter either by the value of this difference (e.g. -7, but we don't know exactly!) or by != 0 + marker == 7.
+
+```{r}
+#| echo: true  
+#| 
+
+phy_data <- phy_data %>% 
+  mutate(diffs = marker - lag(marker),         
+         onsets7 = (diffs != 0) & (marker == 7),          
+         onsets90 = (diffs != 0) & (marker == 90),          
+         # or we combine it in one column:          
+         onsets = ifelse((diffs != 0) & (marker != 0), marker, NA)) 
+```
+
+## Time column
+
+There is no time column! It might make sense to make an artificial time column (if we know the sampling rate, this would be possible) or we can simply add the rownumber as a separate column.
+
+**How would you do this?**
+
+## Solution - time
+
+. . .
+
+```{r}
+#| echo: true
+
+phy_data <- phy_data %>% 
+  mutate(time = 1:nrow(phy_data),
+         time2 = 1:n(),
+         time3 = row_number()) %>% 
+  rownames_to_column("time4")
+
+```
+
+## Get the offset markers
+
+In Francesco's case, there is not necessarily an "end-marker" (or the onset of the next phase), but we know that each trial is 8 sec. long. It might make sense to add this offset to the data.
+
+**Come up with a way to add offset markers to the dara 8 sec after the 7 or 90 onsets!**
+
+## Possible solution - offset markers
+
+Please share ideas!
+
+. . .
+
+I would probably simply get the indeces of the markers, add the correct number of samples - based on new time column (if it is really time) or sampling rate - to these, and add markers to these new indices (but there might be a tidyverse-isher way as well!):
+
+```{r}
+#| echo: true
+
+# helpers
+sampling_rate <- 2000
+eight_sec <- sampling_rate * 8
+
+onsets790 <- which(phy_data$onsets %in% c(7,90))
+offsets790 <- onsets790 + eight_sec
+
+phy_data$onsets[offsets790] <- 150
+
+
+# check wether correct
+test <- filter(phy_data, !is.na(onsets) & onsets != 0) %>% select(onsets)
+```
+
+## Get the correct phases
+
+Back to the original problem: We want to get the correct "phases" of the experiment to do calculations (e.g. calculate the mean within the phase) with, e.g. the trials.
+
+**Calculate the mean SC for each trial (starting with either 7 or 90).** \
+You might have to take different intermediate steps, depending on your solution!
+
+## Possible solutions - get trials
+
+Show all your solutions!
+
+. . .
+
+There are a number of different ways to achieve this. You could use a for-loop to loop through all onsets, get the index and the index of the offset marker and calculate the mean of that period:
+
+```{r}
+#| echo: true
+
+means <- tibble(means = rep(NA, length(onsets790)),
+                marker = rep(NA, length(onsets790)))
+
+for (i in seq(onsets790)) {
+  means$means[i] <- mean(phy_data$SC[onsets790[i]]:phy_data$SC[offsets790[i]]) 
+  means$marker[i] <- phy_data$marker[onsets790[i]]
+}
+
+#possibly add other info like what kind of marker/trial etc.
+```
+
+Another (tidyverse) solution would be to get the trial number, fill in the onsets (so that all samples until the next marker are filled in with e.g. 7), group_by the marker number and trial, and summarize:
+
+```{r}
+#| echo: true
+
+means2 <- phy_data %>% 
+  # use cumsum() to get a trial number
+  mutate(trial_onset = ifelse(is.na(onsets), 0, 1),
+           trial = cumsum(trial_onset)) %>% 
+  fill(onsets) %>% 
+  group_by(trial, onsets) %>% 
+  summarise(means = mean(SC)) %>% 
+  # possibly filter to only keep 7 and 90
+  filter(onsets %in% c(90,7))
+
+```
+
+## Extra task: Get min and max within window
+
+For the SC data, we don't only need the mean, but rather the local minimum and maximum 1-5 sec. after stimulus onset (or rather, the maximum after the minimum, but let's start with overall min and max).
+
+**Try to find the min. and max. in the 1-5 sec. window!**
+
+## Possible solutions - min and max
+
+Any ideas?
+
+. . .
+
+Similar to above!
+
+## Thanks!
+
+Next week: Data Viz (really!)

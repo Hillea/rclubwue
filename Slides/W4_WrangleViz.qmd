@@ -17,7 +17,7 @@ editor: visual
 from: markdown+emoji
 ---
 
-# More Data Wrangling 
+# More Data Wrangling
 
 (see worksheet!)
 
