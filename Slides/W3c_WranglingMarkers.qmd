@@ -4,7 +4,7 @@ subtitle: |
    | R Coding Club 
    | RTG 2660
 author: "Dr. Lea Hildebrandt"
-date: 2024/02/14
+date: 2024/02/27
 description: "Defining phases and calculating things"
 format: 
   revealjs:
