@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "The R Club is part of the Research Training Group 2660. The target group are PhD researchers in psychology and neuroscience. Responsible for organizing the R Club is Lea Hildebrandt, but all participants are very welcome to contribute."
+  },
+  {
     "objectID": "Slides/W4_WrangleViz.html#warm-up",
     "href": "Slides/W4_WrangleViz.html#warm-up",
     "title": "W4_WrangleViz",
@@ -131,153 +138,6 @@
     "title": "W4_WrangleViz",
     "section": "Transparency",
     "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(sd_long2, aes(x = gender, fill=gender)) +   \ngeom_bar(show.legend = FALSE,            \n         alpha = .8) +   \n  scale_x_discrete(name = \"Participant Sex\",                    \n                   labels = c(\"Female\", \"Male\")) +   \n  scale_y_continuous(name = \"Number of participants\") +  \n  theme_minimal() +   \n  scale_fill_viridis_d(option = \"E\")"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#schedule-preliminary",
-    "href": "Slides/W1_IntroR.html#schedule-preliminary",
-    "title": "Intro to R",
-    "section": "Schedule (preliminary)",
-    "text": "Schedule (preliminary)\nHow often do we want to meet? (Beginning weekly, maybe later bi-weekly?)\nSemester break?\n\n\n\nSession\nDate\nTopic\nPreparation/Notes\n\n\n\n\n1\n16.01.24\nIntro to R & RStudio\nInstall R and RStudio, download Dataset1, Dataset2\n\n\n2\n23.01.24\nData Wrangling\n\n\n\n3\n30.01.24\nRandomization & Counterbalancing\n(Ecem)\n\n\n4\n06.02.24\nData Visualization\n\n\n\n5\n13.02.24\nPreprocessing, e.g. physio data\n(Francesco)\n(Semester break or continue?)\n\n\n6\n20.02.24\nNo R Club!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#why-write-code",
-    "href": "Slides/W1_IntroR.html#why-write-code",
-    "title": "Intro to R",
-    "section": "Why write code?",
-    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g. SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nYou’ll learn to program!\n\n\n\nChat: What are advantages (or disadvantages!) of coding?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#install-r-rstudio",
-    "href": "Slides/W1_IntroR.html#install-r-rstudio",
-    "title": "Intro to R",
-    "section": "Install R & RStudio",
-    "text": "Install R & RStudio\nYou should all have installed both by now! Who had problems doing so?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#overview-rstudio",
-    "href": "Slides/W1_IntroR.html#overview-rstudio",
-    "title": "Intro to R",
-    "section": "Overview RStudio",
-    "text": "Overview RStudio\n\nRStudio Interface\nopen RStudio!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#rstudio-panes",
-    "href": "Slides/W1_IntroR.html#rstudio-panes",
-    "title": "Intro to R",
-    "section": "RStudio Panes",
-    "text": "RStudio Panes\n\n\n\nScript pane/window -&gt; to save your code\nConsole -&gt; here the commands are run\nEnvironment -&gt; which variables/dataframes are saved\nFiles, plots, help etc. -&gt; files shows you the files in the folder you’re currently in\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\n\nConsole vs. Script (Rmarkdown later)"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
-    "href": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
-    "title": "Intro to R",
-    "section": "Using the Console as a Calculator",
-    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
-    "href": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
-    "title": "Intro to R",
-    "section": "Saving the Results as a Variable/Object",
-    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n“&lt;-” is used to assign values to variables (“=” is also possible but not preferred)\n\nHint: use Alt + - as a shortcut\n\na, multi etc. are the variable names, which can be words, no whitespace allowed\n\nYou can find those now in your Environment!\n\nas you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.\nno output in console!\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\nYou can use those variables for further calculations, e.g. a + multi\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#working-directory",
-    "href": "Slides/W1_IntroR.html#working-directory",
-    "title": "Intro to R",
-    "section": "Working Directory",
-    "text": "Working Directory\n\nIt makes sense to save all your scripts etc. in a folder specifically dedicated to this course.\n\nMake sure that R knows that you want to work in this folder, i.e. set your working directory:\n\nSession -&gt; Set Working Directory -&gt; Choose Directory\n\nAssignment: Please make a folder, e.g. called “R_Club” (but not “R” or anything with spaces in it). Then set your working directory to this folder."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#scripts",
-    "href": "Slides/W1_IntroR.html#scripts",
-    "title": "Intro to R",
-    "section": "Scripts",
-    "text": "Scripts\nIf you type in all your commands/code in the console, it might get lost/you might not remember what you did, and you always have to type it in again if you want to run it again with slight changes. Also, the code in the console is not save-able.\nTherefore, it is better practice to write scripts. Scripts are basically text files that contain your code.\n\nTo open a new script, click File -&gt; New File -&gt; R Script.\nTo run a line of the script, you can either click Run at the top right of the pane or press ctrl + enter. It will always run the line where the cursor is located (or the lines that you have selected with the mouse). To run the whole script, press ctrl + shift + enter."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#scripts-2",
-    "href": "Slides/W1_IntroR.html#scripts-2",
-    "title": "Intro to R",
-    "section": "Scripts 2",
-    "text": "Scripts 2\nAssignment: Open a new file. In this file, write down some of the code (one command per line) that we have used so far and save the file.\nNow run the code (either by pressing “run” at the top right of the script or ctrl + enter)."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#functions",
-    "href": "Slides/W1_IntroR.html#functions",
-    "title": "Intro to R",
-    "section": "Functions",
-    "text": "Functions\nYou might have noticed sqrt(9) earlier. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type ?functionname() in the console, e.g.\n\n?sqrt()\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\n\nDo this now! Anything unclear?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#functions-2",
-    "href": "Slides/W1_IntroR.html#functions-2",
-    "title": "Intro to R",
-    "section": "Functions 2",
-    "text": "Functions 2\nFunctions often take more than one argument:\n\nrnorm(n = 6, mean = 3, sd = 1)\n# rnorm(6, 3, 1)\n\n# By the way, # denotes a comment (ignored by R), which can be helpful for scripting!\n\nYou can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file)."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#packages",
-    "href": "Slides/W1_IntroR.html#packages",
-    "title": "Intro to R",
-    "section": "Packages",
-    "text": "Packages\nThere are a number of functions that are already included with Base R, but you can greatly extend the power of R by loading packages. Packages are like libraries of functions that someone else wrote.\nYou can load a package using the install.packages() function:\n\ninstall.packages(\"tidyverse\")\n\n(It may be necessary to install Rtools: https://cran.r-project.org/bin/windows/Rtools/)\nBut installing is not enough to be able to actually use the functions from that package. You’d also need to load the package with the libary() function:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\nAssignment: Install and load the tidyverse package (which we will use a lot in this course).\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#read-in-data",
-    "href": "Slides/W1_IntroR.html#read-in-data",
-    "title": "Intro to R",
-    "section": "Read in Data",
-    "text": "Read in Data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats.\nWe will use the files from Fundamentals of Quantitative Analysis. Save these in your course folder on your computer (do not open them!). Set your working directory to the course folder.\n\nDelete the text/code in the R Script you just worked on (and add a comment as a header: “Working with data”). Underneath, add the following code:\n\n# library(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#looking-at-the-data",
-    "href": "Slides/W1_IntroR.html#looking-at-the-data",
-    "title": "Intro to R",
-    "section": "Looking at the Data",
-    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on the object/variable name in your Environment.\nType View(NameOfObject) in your console, e.g. View(dat).\nIn the console, type in str(dat) or str(pinfo) to get an overview of the data.\nIn the console, type in summary(dat).\nIn the console, type in head(dat).\nWhat is the difference between these commands?\n\n\n\nglimpse() is also possible, but not in base R (dplyr)"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#looking-at-the-data-2",
-    "href": "Slides/W1_IntroR.html#looking-at-the-data-2",
-    "title": "Intro to R",
-    "section": "Looking at the Data 2",
-    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nThe two objects we just read in are data frames, which consists of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown",
-    "href": "Slides/W1_IntroR.html#r-markdown",
-    "title": "Intro to R",
-    "section": "R Markdown",
-    "text": "R Markdown\nR scripts are a good way to save your code. However, you’d better heavily comment in your scripts, so that future you (and potentially collaborators) know what happens in your script.\nAn alternative is an R Markdown file. This is also a sort of script, but you can write text (like in a word processor) and mix it with code chunks, where you can write your R code. R Markdown is the “language” you use to write in these files, which is a variety of Markdown.\nThe advantage of R Markdown files (ending with .Rmd) is that they increase reproducibility. For example, you can write whole reports in R Markdown (and also these slides are made with it!).\nA newer variant is called quarto, which works very similar (but is more flexible) to R Markdown."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-2",
-    "href": "Slides/W1_IntroR.html#r-markdown-2",
-    "title": "Intro to R",
-    "section": "R Markdown 2",
-    "text": "R Markdown 2\n\n\n\nR script\n\n\n\n\n\nR Markdown\n\n\n\n\n\nR Markdown rendered as html report"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-3",
-    "href": "Slides/W1_IntroR.html#r-markdown-3",
-    "title": "Intro to R",
-    "section": "R Markdown 3",
-    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\n\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\nClick on the little arrow next to knit and select “Knit to PDF”\n\ninsert inline code"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-4",
-    "href": "Slides/W1_IntroR.html#r-markdown-4",
-    "title": "Intro to R",
-    "section": "R Markdown 4",
-    "text": "R Markdown 4\nThere are many useful things you can so with R Markdown: Adding different headers, adding inline code, knitting as a PDF, adding pictures or tables…You can also decide whether the code chunks should be visible in the output etc.\nFor further information, check out the R Markdown cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#thanks",
-    "href": "Slides/W1_IntroR.html#thanks",
-    "title": "Intro to R",
-    "section": "Thanks!",
-    "text": "Thanks!\nThat’s the lesson on “Getting started with R”!\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
   },
   {
     "objectID": "Slides/W2b_DataWranglingR.html#data-wrangling",
@@ -518,88 +378,123 @@
     "text": "Thanks!\nLearning objectives:\n\nLearn about tidyverse vs. base R\nLearn and apply the six basic dplyr “verbs”\nLearn how to join data frames\n\n\nNext week:\nData Visualization in R"
   },
   {
-    "objectID": "Slides/Exercises/W4_exercises.html",
-    "href": "Slides/Exercises/W4_exercises.html",
-    "title": "W4_WrangleViz",
-    "section": "",
-    "text": "Today, we’re going to work with a data set on speed dating together. Feel free to google (coding is 90% googling…) or use AI as much as you want (but also think about the steps you need to take yourself…).\nFirst of all, possibly download (or locate) the data and load it into R:\n\n# load data into RStudio"
+    "objectID": "Slides/W3c_WranglingMarkers.html#warm-up",
+    "href": "Slides/W3c_WranglingMarkers.html#warm-up",
+    "title": "Wrangling Physio Markers",
+    "section": "Warm up?",
+    "text": "Warm up?\nDid anyone bring a problem?"
   },
   {
-    "objectID": "Slides/Exercises/W4_exercises.html#valentines-day",
-    "href": "Slides/Exercises/W4_exercises.html#valentines-day",
-    "title": "W4_WrangleViz",
-    "section": "",
-    "text": "Today, we’re going to work with a data set on speed dating together. Feel free to google (coding is 90% googling…) or use AI as much as you want (but also think about the steps you need to take yourself…).\nFirst of all, possibly download (or locate) the data and load it into R:\n\n# load data into RStudio"
+    "objectID": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
+    "href": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
+    "title": "Wrangling Physio Markers",
+    "section": "Problem Definition (1)",
+    "text": "Problem Definition (1)\nYou have collected data, let’s say Skin Conductance, during your experiment with several trials. In each participant’s file, you thus have (at least) two columns: SC and markers, and probably time. Markers are numbers that denote certain events, such as the start of a phase or trial.\nThe data set could thus like this:\n\n\n\ntime\nSC\nmarkers\n\n\n\n\n100\n1.964\n10\n\n\n200\n2.004\n0\n\n\n300\n2.365\n0\n\n\n400\n2.201\n5\n\n\n500\n2.589\n0\n\n\n600\n2.662\n0\n\n\n700\n2.803\n0\n\n\n800\n2.754\n0\n\n\n900\n2.839\n6\n\n\n1000\n2.915\n0\n\n\n\nLet’s say 10 is the onset of the block, 5 the onset of the trial, and 6 the end of the trial or onset of the next phase.\nHow can we make sure we know which rows belong to which phase of the experiment, e.g. which data points we need to use if we want to calculate something for the trial starting with marker 5?\nIn small groups, brainstorm how you solve this!\n(Break it down in little steps, pseudo-code)"
   },
   {
-    "objectID": "Slides/Exercises/W4_exercises.html#what-can-we-do-with-this-data-set",
-    "href": "Slides/Exercises/W4_exercises.html#what-can-we-do-with-this-data-set",
-    "title": "W4_WrangleViz",
-    "section": "What can we do with this data set?",
-    "text": "What can we do with this data set?\nCheck out the data set (and possibly the codebook), and decide what aspects (a.k.a. columns/variables) of the data would interest you (as a group!).\n195 columns are a lot, so maybe only keep those columns that are interesting for you.\n\n# check out data"
+    "objectID": "Slides/W3c_WranglingMarkers.html#francescos-data",
+    "href": "Slides/W3c_WranglingMarkers.html#francescos-data",
+    "title": "Wrangling Physio Markers",
+    "section": "Francesco’s Data",
+    "text": "Francesco’s Data\nWe will use Francesco’s data of his pilot participant 2 (VP02.txt) to solve this problem.\nHowever, this brings us to a different problem, because his data are in a weird format! The actual data only start after a number of rows with channel information…\nHow can we read in the data well??\n\nFrancesco’s data"
   },
   {
-    "objectID": "Slides/Exercises/W4_exercises.html#renaming-columns",
-    "href": "Slides/Exercises/W4_exercises.html#renaming-columns",
-    "title": "W4_WrangleViz",
-    "section": "Renaming columns",
-    "text": "Renaming columns\nThese column names might not be very helpful to remember what the names stand for. If you want to, try to change the names of a few of these columns!"
+    "objectID": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
+    "href": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
+    "title": "Wrangling Physio Markers",
+    "section": "One possible solution - reading in data",
+    "text": "One possible solution - reading in data\nFirst one to finish: Share solution! 😁\n\n\n  library(tidyverse)\n  VPcode &lt;- \"VP02\"\n  \n  # find the onset of the data to skip long header (may vary per file, but starts with min or CH1)\n  findstart &lt;-  read_lines(paste0(\"Data/\", paste0(VPcode,\".txt\")), n_max = 50)\n  header_idx &lt;- str_which(findstart, \"^min|CH1\")\n  \n  # read in data from the next line and the header from that line\n  header &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx-1, n_max = 1)\n  \n  phy_data &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx)\n  \n  names(phy_data) &lt;- names(header)\n  \n  head(phy_data)\n\n# A tibble: 6 × 11\n    CH13   CH14  CH28  CH29  CH30  CH31  CH32  CH33  CH34  CH35 ...11\n   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;\n1 0.0258 0.0674     0     0     0     0     0     0     0     0 NA   \n2 0.0288 0.0681     0     0     0     0     0     0     0     0 NA   \n3 0.0258 0.0681     0     0     0     0     0     0     0     0 NA   \n4 0.0273 0.0652     0     0     0     0     0     0     0     0 NA   \n5 0.0258 0.0627     0     0     0     0     0     0     0     0 NA   \n6 0.0212 0.0581     0     0     0     0     0     0     0     0 NA"
   },
   {
-    "objectID": "Slides/Exercises/W4_exercises.html#tidying-the-data",
-    "href": "Slides/Exercises/W4_exercises.html#tidying-the-data",
-    "title": "W4_WrangleViz",
-    "section": "Tidying the data",
-    "text": "Tidying the data\nIs the data in a tidy format?\nWhat is a tidy format? (Slides)\nIf not, reshape the data. (And if yes, reshape it anyway to practice! :D)\n(You might merge data frames at some point, possibly here, how do you da that?)"
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
+    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Get the correct markers",
+    "text": "Get the correct markers\nRemember a few weeks ago when we talked about how to transform the binary values in the eight channels to markers? Do that now!\nReminder:\nChannel 1 = value 1\nChannel 2 = 2\nChannel 3 = 4\nChannel 4 = 8\nChannel 5 = 16\nChannel 6 = 32\nChannel 7 = 64\nChannel 8 = 128.\n\nSo if there’s a signal (which will have the value “5”) in channel 1, 3, and 6, the resulting marker should be 1+4+32=37.\nImplement this now in R code!\nAlso check whether it worked correctly."
   },
   {
-    "objectID": "Slides/Exercises/W4_exercises.html#calculating-the-average-ratings",
-    "href": "Slides/Exercises/W4_exercises.html#calculating-the-average-ratings",
-    "title": "W4_WrangleViz",
-    "section": "Calculating the average ratings",
-    "text": "Calculating the average ratings\nWe might want to calculate the average of the ratings, e.g. attractiveness across time points.\nFirst of all, unfortunately the ratings are on different scales between waves:\n\nWaves 6-9: Please rate the importance of the following attributes in a potential date on a scale of 1-10 (1=not at all important, 10=extremely important):\nWaves 1-5, 10-21: You have 100 points to distribute among the following attributes – give more points to those attributes that are more important in a potential date, and fewer points to those attributes that are less important in a potential date.  Total points must equal 100.\n\n\nTransform these ratings to scales that are somewhat comparable!\n\n\nNow calculate the average ratings across time points per speed dater."
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solution - markers",
+    "text": "Possible solution - markers\n\n\nphy_data &lt;- phy_data %&gt;% \n    \n    # rename channels to more sensible names\n    rename(#time = min,  # doesn't exist in all files\n      SC = CH13,\n      HR = CH14,  # is this HR?\n      one = CH28,\n      two = CH29,\n      four = CH30,\n      eight = CH31,\n      sixteen = CH32,\n      thirtytwo = CH33,\n      sixtyfour = CH34,\n      hundredtwentyeight = CH35) %&gt;% \n    \n    # get time from start (make it based on sampling rate of 2000Hz --&gt; 0.5msec between samples) and triggers\n    mutate(# combine digital input channels from 8-bit binary to decimal\n           marker = (1*one + 2*two + 4*four + 8*eight + 16*sixteen + 32*thirtytwo + 64*sixtyfour + 128*hundredtwentyeight) / 5)\n\n# check whether markers were calculated correctly\nunique(phy_data$marker)\n\n [1]   0 128  11   4   1  16  22  33  90   7  32   8  44  55  64   2  66\n\nidx_first_marker &lt;- which(phy_data$marker != 0)[c(1,1000,2000)]\nphy_data[idx_first_marker,]\n\n# A tibble: 3 × 12\n     SC      HR   one   two  four eight sixteen thirtytwo sixtyfour\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1  3.63  0.0221     0     0     0     0       0         0         0\n2  9.56  0.0584     5     0     0     0       0         0         0\n3 11.3  -0.0713     0     5     0     5       5         0         5\n# ℹ 3 more variables: hundredtwentyeight &lt;dbl&gt;, ...11 &lt;lgl&gt;, marker &lt;dbl&gt;"
   },
   {
-    "objectID": "Slides/Exercises/W4_exercises.html#filtering-the-speed-daters",
-    "href": "Slides/Exercises/W4_exercises.html#filtering-the-speed-daters",
-    "title": "W4_WrangleViz",
-    "section": "Filtering the speed daters",
-    "text": "Filtering the speed daters\nMake a new data frame that only consists of female speed daters! Also filter out those where the partner is older than the speed dater."
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
+    "href": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
+    "title": "Wrangling Physio Markers",
+    "section": "Get trial onsets",
+    "text": "Get trial onsets\nFor Francesco’s data, the markers 90 (CS+) and 7 (CS-) are of interest, as they denote the trial onsets.\nFirst check out whether and how often these markers exist.\nThe markers are shown for ~55 samples each. How can we get the onset only (i.e. only one sample/row)?\nHow many trials do we have?"
   },
   {
-    "objectID": "Slides/Exercises/W4_exercises.html#sort-the-data-frame",
-    "href": "Slides/Exercises/W4_exercises.html#sort-the-data-frame",
-    "title": "W4_WrangleViz",
-    "section": "Sort the data frame",
-    "text": "Sort the data frame\nSort the data frame based on the correlation between the interests, from highest to lowest."
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solutions - get onsets",
+    "text": "Possible solutions - get onsets\nWho has a good solution?\n\nOne option is to get the streaks of the marker column using the rle() function in base R (there’s also an even handier rleid() function in the data.table package…).\n\nstreaks &lt;- rle(phy_data$marker) # gives two lists: lenght and value, you'd still have to add the lengths up again \n\nOr you could simply get the difference in marker value to previous sample. All values in a streak will be 0, every onset will be different from 0. We can then filter either by the value of this difference (e.g. -7, but we don’t know exactly!) or by != 0 + marker == 7.\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(diffs = marker - lag(marker),         \n         onsets7 = (diffs != 0) & (marker == 7),          \n         onsets90 = (diffs != 0) & (marker == 90),          \n         # or we combine it in one column:          \n         onsets = ifelse((diffs != 0) & (marker != 0), marker, NA))"
   },
   {
-    "objectID": "Slides/Exercises/W4_exercises.html#visualize",
-    "href": "Slides/Exercises/W4_exercises.html#visualize",
-    "title": "W4_WrangleViz",
-    "section": "Visualize!",
-    "text": "Visualize!\n(Small Intro –&gt; Visualization Slides!)\nNow decide - as a group - what kind of plot to make!\nMake this plot, layer by layer."
+    "objectID": "Slides/W3c_WranglingMarkers.html#time-column",
+    "href": "Slides/W3c_WranglingMarkers.html#time-column",
+    "title": "Wrangling Physio Markers",
+    "section": "Time column",
+    "text": "Time column\nThere is no time column! It might make sense to make an artificial time column (if we know the sampling rate, this would be possible) or we can simply add the rownumber as a separate column.\nHow would you do this?"
   },
   {
-    "objectID": "slides.html",
-    "href": "slides.html",
-    "title": "Slides",
-    "section": "",
-    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet Randomization\n\n\n\n\n\n\nyour name\n\n\nFeb 2, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet More Wrangling\n\n\n\n\n\n\nR Club\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nMore Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nWrangling Physio Markers\n\n\nDefining phases and calculating things\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 27, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "objectID": "Slides/W3c_WranglingMarkers.html#solution---time",
+    "href": "Slides/W3c_WranglingMarkers.html#solution---time",
+    "title": "Wrangling Physio Markers",
+    "section": "Solution - time",
+    "text": "Solution - time\n\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(time = 1:nrow(phy_data),\n         time2 = 1:n(),\n         time3 = row_number()) %&gt;% \n  rownames_to_column(\"time4\")"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "The R Club is part of the Research Training Group 2660. The target group are PhD researchers in psychology and neuroscience. Responsible for organizing the R Club is Lea Hildebrandt, but all participants are very welcome to contribute."
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
+    "href": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Get the offset markers",
+    "text": "Get the offset markers\nIn Francesco’s case, there is not necessarily an “end-marker” (or the onset of the next phase), but we know that each trial is 8 sec. long. It might make sense to add this offset to the data.\nCome up with a way to add offset markers to the dara 8 sec after the 7 or 90 onsets!"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "R Club Würzburg",
-    "section": "",
-    "text": "This is the course website of the R Club of the Research Training Group 2660 at the University and University Clinic in Würzburg, Germany - but it’s open to everyone if space is available!\nThe R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. We may end up as a Data Dojo/Coding Club, where we work on problems together. This way, we can all learn together!\nWe meet weekly on Tuesdays, 16:00 - 18:00 in Room 213 at the Marcusstr, starting in January 2024. The syllabus can be found here. On this page, the slides etc. will be linked.\n\n\n\nSession\n1\nDate\n16.01.24\nTopic\nIntro to R & RStudio\nPreparation/Notes\nInstall R and RStudio, download Dataset1, Dataset2\n\n\n2\n23.01.24\nData Wrangling\nDownload Datasets 1, 2, 3, & 4 (click on link and symbol for “download raw file” on the top-right)\n\n\n3\n30.01.24\nNo R Club! (Clinical Research Workshop)\nSelf-study instead: Please have a look at the rest of the data wrangling presentation and/or chapter 6 of Fundamentals of Quantitative Analysis!\n\n\n4\n06.02.24\nRandomization & Counterbalancing\n(Ecem)\n\n\n5\n14.02.24\nData Wrangling 2 & first Visualization\n(Uni closed in the afternoon - carnival? Meet on Wednesday, 14th, 15:00 in 213)\nDownload Datasets: participant-info.csv & ahi-cesd.csv / Speed Dating Data & Codebook\n\nUse the exercise.Rmd and the speed dating data!\n\n\n6\n20.02.24\nNo R Club!\n\n\n\n7\n27.02.24\nPreprocessing, e.g. physio data?\n(Francesco)\n\n\n8\n5.03.24\nData Viz\nData: participant-info.csv & ahi-cesd.csv\n\n\n9\n12.03.24\nNo R Club!\n\n\n\n10\n19.03.24\nNo R Club, 20th?\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\""
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solution - offset markers",
+    "text": "Possible solution - offset markers\nPlease share ideas!\n\nI would probably simply get the indeces of the markers, add the correct number of samples - based on new time column (if it is really time) or sampling rate - to these, and add markers to these new indices (but there might be a tidyverse-isher way as well!):\n\n# helpers\nsampling_rate &lt;- 2000\neight_sec &lt;- sampling_rate * 8\n\nonsets790 &lt;- which(phy_data$onsets %in% c(7,90))\noffsets790 &lt;- onsets790 + eight_sec\n\nphy_data$onsets[offsets790] &lt;- 150\n\n\n# check wether correct\ntest &lt;- filter(phy_data, !is.na(onsets) & onsets != 0) %&gt;% select(onsets)"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
+    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
+    "title": "Wrangling Physio Markers",
+    "section": "Get the correct phases",
+    "text": "Get the correct phases\nBack to the original problem: We want to get the correct “phases” of the experiment to do calculations (e.g. calculate the mean within the phase) with, e.g. the trials.\nCalculate the mean SC for each trial (starting with either 7 or 90).\nYou might have to take different intermediate steps, depending on your solution!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solutions - get trials",
+    "text": "Possible solutions - get trials\nShow all your solutions!\n\nThere are a number of different ways to achieve this. You could use a for-loop to loop through all onsets, get the index and the index of the offset marker and calculate the mean of that period:\n\nmeans &lt;- tibble(means = rep(NA, length(onsets790)),\n                marker = rep(NA, length(onsets790)))\n\nfor (i in seq(onsets790)) {\n  means$means[i] &lt;- mean(phy_data$SC[onsets790[i]]:phy_data$SC[offsets790[i]]) \n  means$marker[i] &lt;- phy_data$marker[onsets790[i]]\n}\n\n#possibly add other info like what kind of marker/trial etc.\n\nAnother (tidyverse) solution would be to get the trial number, fill in the onsets (so that all samples until the next marker are filled in with e.g. 7), group_by the marker number and trial, and summarize:\n\nmeans2 &lt;- phy_data %&gt;% \n  # use cumsum() to get a trial number\n  mutate(trial_onset = ifelse(is.na(onsets), 0, 1),\n           trial = cumsum(trial_onset)) %&gt;% \n  fill(onsets) %&gt;% \n  group_by(trial, onsets) %&gt;% \n  summarise(means = mean(SC)) %&gt;% \n  # possibly filter to only keep 7 and 90\n  filter(onsets %in% c(90,7))"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
+    "href": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
+    "title": "Wrangling Physio Markers",
+    "section": "Extra task: Get min and max within window",
+    "text": "Extra task: Get min and max within window\nFor the SC data, we don’t only need the mean, but rather the local minimum and maximum 1-5 sec. after stimulus onset (or rather, the maximum after the minimum, but let’s start with overall min and max).\nTry to find the min. and max. in the 1-5 sec. window!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solutions - min and max",
+    "text": "Possible solutions - min and max\nAny ideas?\n\nSimilar to above!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#thanks",
+    "href": "Slides/W3c_WranglingMarkers.html#thanks",
+    "title": "Wrangling Physio Markers",
+    "section": "Thanks!",
+    "text": "Thanks!\nNext week: Data Viz (really!)"
   },
   {
     "objectID": "Slides/Exercises/W3_Randomize_exercises.html",
@@ -670,6 +565,223 @@
     "title": "W3_Randomize_Worksheet",
     "section": "Task 8",
     "text": "Task 8\nIn the multi-cue trials, Ecem also wants to show two more stimuli: The other combinations of color and shape (e.g. color1 with shape2).\n\nHow can we add these other two combinations of shape and color as new columns?"
+  },
+  {
+    "objectID": "slides.html",
+    "href": "slides.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet Randomization\n\n\n\n\n\n\nyour name\n\n\nFeb 2, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet More Wrangling\n\n\n\n\n\n\nR Club\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nMore Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nWrangling Physio Markers\n\n\nDefining phases and calculating things\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 27, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html",
+    "href": "Slides/Exercises/W4_exercises.html",
+    "title": "W4_WrangleViz",
+    "section": "",
+    "text": "Today, we’re going to work with a data set on speed dating together. Feel free to google (coding is 90% googling…) or use AI as much as you want (but also think about the steps you need to take yourself…).\nFirst of all, possibly download (or locate) the data and load it into R:\n\n# load data into RStudio"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#valentines-day",
+    "href": "Slides/Exercises/W4_exercises.html#valentines-day",
+    "title": "W4_WrangleViz",
+    "section": "",
+    "text": "Today, we’re going to work with a data set on speed dating together. Feel free to google (coding is 90% googling…) or use AI as much as you want (but also think about the steps you need to take yourself…).\nFirst of all, possibly download (or locate) the data and load it into R:\n\n# load data into RStudio"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#what-can-we-do-with-this-data-set",
+    "href": "Slides/Exercises/W4_exercises.html#what-can-we-do-with-this-data-set",
+    "title": "W4_WrangleViz",
+    "section": "What can we do with this data set?",
+    "text": "What can we do with this data set?\nCheck out the data set (and possibly the codebook), and decide what aspects (a.k.a. columns/variables) of the data would interest you (as a group!).\n195 columns are a lot, so maybe only keep those columns that are interesting for you.\n\n# check out data"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#renaming-columns",
+    "href": "Slides/Exercises/W4_exercises.html#renaming-columns",
+    "title": "W4_WrangleViz",
+    "section": "Renaming columns",
+    "text": "Renaming columns\nThese column names might not be very helpful to remember what the names stand for. If you want to, try to change the names of a few of these columns!"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#tidying-the-data",
+    "href": "Slides/Exercises/W4_exercises.html#tidying-the-data",
+    "title": "W4_WrangleViz",
+    "section": "Tidying the data",
+    "text": "Tidying the data\nIs the data in a tidy format?\nWhat is a tidy format? (Slides)\nIf not, reshape the data. (And if yes, reshape it anyway to practice! :D)\n(You might merge data frames at some point, possibly here, how do you da that?)"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#calculating-the-average-ratings",
+    "href": "Slides/Exercises/W4_exercises.html#calculating-the-average-ratings",
+    "title": "W4_WrangleViz",
+    "section": "Calculating the average ratings",
+    "text": "Calculating the average ratings\nWe might want to calculate the average of the ratings, e.g. attractiveness across time points.\nFirst of all, unfortunately the ratings are on different scales between waves:\n\nWaves 6-9: Please rate the importance of the following attributes in a potential date on a scale of 1-10 (1=not at all important, 10=extremely important):\nWaves 1-5, 10-21: You have 100 points to distribute among the following attributes – give more points to those attributes that are more important in a potential date, and fewer points to those attributes that are less important in a potential date.  Total points must equal 100.\n\n\nTransform these ratings to scales that are somewhat comparable!\n\n\nNow calculate the average ratings across time points per speed dater."
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#filtering-the-speed-daters",
+    "href": "Slides/Exercises/W4_exercises.html#filtering-the-speed-daters",
+    "title": "W4_WrangleViz",
+    "section": "Filtering the speed daters",
+    "text": "Filtering the speed daters\nMake a new data frame that only consists of female speed daters! Also filter out those where the partner is older than the speed dater."
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#sort-the-data-frame",
+    "href": "Slides/Exercises/W4_exercises.html#sort-the-data-frame",
+    "title": "W4_WrangleViz",
+    "section": "Sort the data frame",
+    "text": "Sort the data frame\nSort the data frame based on the correlation between the interests, from highest to lowest."
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#visualize",
+    "href": "Slides/Exercises/W4_exercises.html#visualize",
+    "title": "W4_WrangleViz",
+    "section": "Visualize!",
+    "text": "Visualize!\n(Small Intro –&gt; Visualization Slides!)\nNow decide - as a group - what kind of plot to make!\nMake this plot, layer by layer."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#schedule-preliminary",
+    "href": "Slides/W1_IntroR.html#schedule-preliminary",
+    "title": "Intro to R",
+    "section": "Schedule (preliminary)",
+    "text": "Schedule (preliminary)\nHow often do we want to meet? (Beginning weekly, maybe later bi-weekly?)\nSemester break?\n\n\n\nSession\nDate\nTopic\nPreparation/Notes\n\n\n\n\n1\n16.01.24\nIntro to R & RStudio\nInstall R and RStudio, download Dataset1, Dataset2\n\n\n2\n23.01.24\nData Wrangling\n\n\n\n3\n30.01.24\nRandomization & Counterbalancing\n(Ecem)\n\n\n4\n06.02.24\nData Visualization\n\n\n\n5\n13.02.24\nPreprocessing, e.g. physio data\n(Francesco)\n(Semester break or continue?)\n\n\n6\n20.02.24\nNo R Club!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#why-write-code",
+    "href": "Slides/W1_IntroR.html#why-write-code",
+    "title": "Intro to R",
+    "section": "Why write code?",
+    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g. SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nYou’ll learn to program!\n\n\n\nChat: What are advantages (or disadvantages!) of coding?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#install-r-rstudio",
+    "href": "Slides/W1_IntroR.html#install-r-rstudio",
+    "title": "Intro to R",
+    "section": "Install R & RStudio",
+    "text": "Install R & RStudio\nYou should all have installed both by now! Who had problems doing so?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#overview-rstudio",
+    "href": "Slides/W1_IntroR.html#overview-rstudio",
+    "title": "Intro to R",
+    "section": "Overview RStudio",
+    "text": "Overview RStudio\n\nRStudio Interface\nopen RStudio!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#rstudio-panes",
+    "href": "Slides/W1_IntroR.html#rstudio-panes",
+    "title": "Intro to R",
+    "section": "RStudio Panes",
+    "text": "RStudio Panes\n\n\n\nScript pane/window -&gt; to save your code\nConsole -&gt; here the commands are run\nEnvironment -&gt; which variables/dataframes are saved\nFiles, plots, help etc. -&gt; files shows you the files in the folder you’re currently in\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\n\nConsole vs. Script (Rmarkdown later)"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
+    "href": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
+    "title": "Intro to R",
+    "section": "Using the Console as a Calculator",
+    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
+    "href": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
+    "title": "Intro to R",
+    "section": "Saving the Results as a Variable/Object",
+    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n“&lt;-” is used to assign values to variables (“=” is also possible but not preferred)\n\nHint: use Alt + - as a shortcut\n\na, multi etc. are the variable names, which can be words, no whitespace allowed\n\nYou can find those now in your Environment!\n\nas you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.\nno output in console!\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\nYou can use those variables for further calculations, e.g. a + multi\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#working-directory",
+    "href": "Slides/W1_IntroR.html#working-directory",
+    "title": "Intro to R",
+    "section": "Working Directory",
+    "text": "Working Directory\n\nIt makes sense to save all your scripts etc. in a folder specifically dedicated to this course.\n\nMake sure that R knows that you want to work in this folder, i.e. set your working directory:\n\nSession -&gt; Set Working Directory -&gt; Choose Directory\n\nAssignment: Please make a folder, e.g. called “R_Club” (but not “R” or anything with spaces in it). Then set your working directory to this folder."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#scripts",
+    "href": "Slides/W1_IntroR.html#scripts",
+    "title": "Intro to R",
+    "section": "Scripts",
+    "text": "Scripts\nIf you type in all your commands/code in the console, it might get lost/you might not remember what you did, and you always have to type it in again if you want to run it again with slight changes. Also, the code in the console is not save-able.\nTherefore, it is better practice to write scripts. Scripts are basically text files that contain your code.\n\nTo open a new script, click File -&gt; New File -&gt; R Script.\nTo run a line of the script, you can either click Run at the top right of the pane or press ctrl + enter. It will always run the line where the cursor is located (or the lines that you have selected with the mouse). To run the whole script, press ctrl + shift + enter."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#scripts-2",
+    "href": "Slides/W1_IntroR.html#scripts-2",
+    "title": "Intro to R",
+    "section": "Scripts 2",
+    "text": "Scripts 2\nAssignment: Open a new file. In this file, write down some of the code (one command per line) that we have used so far and save the file.\nNow run the code (either by pressing “run” at the top right of the script or ctrl + enter)."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#functions",
+    "href": "Slides/W1_IntroR.html#functions",
+    "title": "Intro to R",
+    "section": "Functions",
+    "text": "Functions\nYou might have noticed sqrt(9) earlier. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type ?functionname() in the console, e.g.\n\n?sqrt()\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\n\nDo this now! Anything unclear?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#functions-2",
+    "href": "Slides/W1_IntroR.html#functions-2",
+    "title": "Intro to R",
+    "section": "Functions 2",
+    "text": "Functions 2\nFunctions often take more than one argument:\n\nrnorm(n = 6, mean = 3, sd = 1)\n# rnorm(6, 3, 1)\n\n# By the way, # denotes a comment (ignored by R), which can be helpful for scripting!\n\nYou can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file)."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#packages",
+    "href": "Slides/W1_IntroR.html#packages",
+    "title": "Intro to R",
+    "section": "Packages",
+    "text": "Packages\nThere are a number of functions that are already included with Base R, but you can greatly extend the power of R by loading packages. Packages are like libraries of functions that someone else wrote.\nYou can load a package using the install.packages() function:\n\ninstall.packages(\"tidyverse\")\n\n(It may be necessary to install Rtools: https://cran.r-project.org/bin/windows/Rtools/)\nBut installing is not enough to be able to actually use the functions from that package. You’d also need to load the package with the libary() function:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\nAssignment: Install and load the tidyverse package (which we will use a lot in this course).\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#read-in-data",
+    "href": "Slides/W1_IntroR.html#read-in-data",
+    "title": "Intro to R",
+    "section": "Read in Data",
+    "text": "Read in Data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats.\nWe will use the files from Fundamentals of Quantitative Analysis. Save these in your course folder on your computer (do not open them!). Set your working directory to the course folder.\n\nDelete the text/code in the R Script you just worked on (and add a comment as a header: “Working with data”). Underneath, add the following code:\n\n# library(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#looking-at-the-data",
+    "href": "Slides/W1_IntroR.html#looking-at-the-data",
+    "title": "Intro to R",
+    "section": "Looking at the Data",
+    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on the object/variable name in your Environment.\nType View(NameOfObject) in your console, e.g. View(dat).\nIn the console, type in str(dat) or str(pinfo) to get an overview of the data.\nIn the console, type in summary(dat).\nIn the console, type in head(dat).\nWhat is the difference between these commands?\n\n\n\nglimpse() is also possible, but not in base R (dplyr)"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#looking-at-the-data-2",
+    "href": "Slides/W1_IntroR.html#looking-at-the-data-2",
+    "title": "Intro to R",
+    "section": "Looking at the Data 2",
+    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nThe two objects we just read in are data frames, which consists of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown",
+    "href": "Slides/W1_IntroR.html#r-markdown",
+    "title": "Intro to R",
+    "section": "R Markdown",
+    "text": "R Markdown\nR scripts are a good way to save your code. However, you’d better heavily comment in your scripts, so that future you (and potentially collaborators) know what happens in your script.\nAn alternative is an R Markdown file. This is also a sort of script, but you can write text (like in a word processor) and mix it with code chunks, where you can write your R code. R Markdown is the “language” you use to write in these files, which is a variety of Markdown.\nThe advantage of R Markdown files (ending with .Rmd) is that they increase reproducibility. For example, you can write whole reports in R Markdown (and also these slides are made with it!).\nA newer variant is called quarto, which works very similar (but is more flexible) to R Markdown."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-2",
+    "href": "Slides/W1_IntroR.html#r-markdown-2",
+    "title": "Intro to R",
+    "section": "R Markdown 2",
+    "text": "R Markdown 2\n\n\n\nR script\n\n\n\n\n\nR Markdown\n\n\n\n\n\nR Markdown rendered as html report"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-3",
+    "href": "Slides/W1_IntroR.html#r-markdown-3",
+    "title": "Intro to R",
+    "section": "R Markdown 3",
+    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\n\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\nClick on the little arrow next to knit and select “Knit to PDF”\n\ninsert inline code"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-4",
+    "href": "Slides/W1_IntroR.html#r-markdown-4",
+    "title": "Intro to R",
+    "section": "R Markdown 4",
+    "text": "R Markdown 4\nThere are many useful things you can so with R Markdown: Adding different headers, adding inline code, knitting as a PDF, adding pictures or tables…You can also decide whether the code chunks should be visible in the output etc.\nFor further information, check out the R Markdown cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#thanks",
+    "href": "Slides/W1_IntroR.html#thanks",
+    "title": "Intro to R",
+    "section": "Thanks!",
+    "text": "Thanks!\nThat’s the lesson on “Getting started with R”!\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
   },
   {
     "objectID": "Slides/W3b_DataVizR.html#ggplot",
@@ -798,125 +910,6 @@
     "text": "Thanks!\nCheck out Chapter 13 of QuantFun for further exercises and tips for data visualization!\nAlso keep in mind: Coding is a lot of googling things!\nYou can also check out the R Graph Gallery for code for different types of plots.\n\nLearning objectives\n\nKnow how to transform (pivot) and join data\nUnderstand the basics of a ggplot (layers etc.)\nBe able to make your first own plots, such as bar charts, violin + boxplots, scatterplots\nKnow what a grouped plot and a facetted plot is\n\n\n\nNext:\n\n? (More data wrangling? Data viz?)\nShould we make a plot with real data from one of you?\nWhen? 19th -&gt; defense, 26th -&gt; easter break… Wednesday, 20th?\n\nGeneral Question:\n\nOnline?\nIs this ~every other week fine?"
   },
   {
-    "objectID": "Slides/W3c_WranglingMarkers.html#warm-up",
-    "href": "Slides/W3c_WranglingMarkers.html#warm-up",
-    "title": "Wrangling Physio Markers",
-    "section": "Warm up?",
-    "text": "Warm up?\nDid anyone bring a problem?"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
-    "href": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
-    "title": "Wrangling Physio Markers",
-    "section": "Problem Definition (1)",
-    "text": "Problem Definition (1)\nYou have collected data, let’s say Skin Conductance, during your experiment with several trials. In each participant’s file, you thus have (at least) two columns: SC and markers, and probably time. Markers are numbers that denote certain events, such as the start of a phase or trial.\nThe data set could thus like this:\n\n\n\ntime\nSC\nmarkers\n\n\n\n\n100\n1.964\n10\n\n\n200\n2.004\n0\n\n\n300\n2.365\n0\n\n\n400\n2.201\n5\n\n\n500\n2.589\n0\n\n\n600\n2.662\n0\n\n\n700\n2.803\n0\n\n\n800\n2.754\n0\n\n\n900\n2.839\n6\n\n\n1000\n2.915\n0\n\n\n\nLet’s say 10 is the onset of the block, 5 the onset of the trial, and 6 the end of the trial or onset of the next phase.\nHow can we make sure we know which rows belong to which phase of the experiment, e.g. which data points we need to use if we want to calculate something for the trial starting with marker 5?\nIn small groups, brainstorm how you solve this!\n(Break it down in little steps, pseudo-code)"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#francescos-data",
-    "href": "Slides/W3c_WranglingMarkers.html#francescos-data",
-    "title": "Wrangling Physio Markers",
-    "section": "Francesco’s Data",
-    "text": "Francesco’s Data\nWe will use Francesco’s data of his pilot participant 2 (VP02.txt) to solve this problem.\nHowever, this brings us to a different problem, because his data are in a weird format! The actual data only start after a number of rows with channel information…\nHow can we read in the data well??\n\nFrancesco’s data"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
-    "href": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
-    "title": "Wrangling Physio Markers",
-    "section": "One possible solution - reading in data",
-    "text": "One possible solution - reading in data\nFirst one to finish: Share solution! 😁\n\n\n  library(tidyverse)\n  VPcode &lt;- \"VP02\"\n  \n  # find the onset of the data to skip long header (may vary per file, but starts with min or CH1)\n  findstart &lt;-  read_lines(paste0(\"Data/\", paste0(VPcode,\".txt\")), n_max = 50)\n  header_idx &lt;- str_which(findstart, \"^min|CH1\")\n  \n  # read in data from the next line and the header from that line\n  header &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx-1, n_max = 1)\n  \n  phy_data &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx)\n  \n  names(phy_data) &lt;- names(header)\n  \n  head(phy_data)\n\n# A tibble: 6 × 11\n    CH13   CH14  CH28  CH29  CH30  CH31  CH32  CH33  CH34  CH35 ...11\n   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;\n1 0.0258 0.0674     0     0     0     0     0     0     0     0 NA   \n2 0.0288 0.0681     0     0     0     0     0     0     0     0 NA   \n3 0.0258 0.0681     0     0     0     0     0     0     0     0 NA   \n4 0.0273 0.0652     0     0     0     0     0     0     0     0 NA   \n5 0.0258 0.0627     0     0     0     0     0     0     0     0 NA   \n6 0.0212 0.0581     0     0     0     0     0     0     0     0 NA"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
-    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Get the correct markers",
-    "text": "Get the correct markers\nRemember a few weeks ago when we talked about how to transform the binary values in the eight channels to markers? Do that now!\nReminder:\nChannel 1 = value 1\nChannel 2 = 2\nChannel 3 = 4\nChannel 4 = 8\nChannel 5 = 16\nChannel 6 = 32\nChannel 7 = 64\nChannel 8 = 128.\n\nSo if there’s a signal (which will have the value “5”) in channel 1, 3, and 6, the resulting marker should be 1+4+32=37.\nImplement this now in R code!\nAlso check whether it worked correctly."
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solution - markers",
-    "text": "Possible solution - markers\n\n\nphy_data &lt;- phy_data %&gt;% \n    \n    # rename channels to more sensible names\n    rename(#time = min,  # doesn't exist in all files\n      SC = CH13,\n      HR = CH14,  # is this HR?\n      one = CH28,\n      two = CH29,\n      four = CH30,\n      eight = CH31,\n      sixteen = CH32,\n      thirtytwo = CH33,\n      sixtyfour = CH34,\n      hundredtwentyeight = CH35) %&gt;% \n    \n    # get time from start (make it based on sampling rate of 2000Hz --&gt; 0.5msec between samples) and triggers\n    mutate(# combine digital input channels from 8-bit binary to decimal\n           marker = (1*one + 2*two + 4*four + 8*eight + 16*sixteen + 32*thirtytwo + 64*sixtyfour + 128*hundredtwentyeight) / 5)\n\n# check whether markers were calculated correctly\nunique(phy_data$marker)\n\n [1]   0 128  11   4   1  16  22  33  90   7  32   8  44  55  64   2  66\n\nidx_first_marker &lt;- which(phy_data$marker != 0)[c(1,1000,2000)]\nphy_data[idx_first_marker,]\n\n# A tibble: 3 × 12\n     SC      HR   one   two  four eight sixteen thirtytwo sixtyfour\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1  3.63  0.0221     0     0     0     0       0         0         0\n2  9.56  0.0584     5     0     0     0       0         0         0\n3 11.3  -0.0713     0     5     0     5       5         0         5\n# ℹ 3 more variables: hundredtwentyeight &lt;dbl&gt;, ...11 &lt;lgl&gt;, marker &lt;dbl&gt;"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
-    "href": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
-    "title": "Wrangling Physio Markers",
-    "section": "Get trial onsets",
-    "text": "Get trial onsets\nFor Francesco’s data, the markers 90 (CS+) and 7 (CS-) are of interest, as they denote the trial onsets.\nFirst check out whether and how often these markers exist.\nThe markers are shown for ~55 samples each. How can we get the onset only (i.e. only one sample/row)?\nHow many trials do we have?"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solutions - get onsets",
-    "text": "Possible solutions - get onsets\nWho has a good solution?\n\nOne option is to get the streaks of the marker column using the rle() function in base R (there’s also an even handier rleid() function in the data.table package…).\n\nstreaks &lt;- rle(phy_data$marker) # gives two lists: lenght and value, you'd still have to add the lengths up again \n\nOr you could simply get the difference in marker value to previous sample. All values in a streak will be 0, every onset will be different from 0. We can then filter either by the value of this difference (e.g. -7, but we don’t know exactly!) or by != 0 + marker == 7.\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(diffs = marker - lag(marker),         \n         onsets7 = (diffs != 0) & (marker == 7),          \n         onsets90 = (diffs != 0) & (marker == 90),          \n         # or we combine it in one column:          \n         onsets = ifelse((diffs != 0) & (marker != 0), marker, NA))"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#time-column",
-    "href": "Slides/W3c_WranglingMarkers.html#time-column",
-    "title": "Wrangling Physio Markers",
-    "section": "Time column",
-    "text": "Time column\nThere is no time column! It might make sense to make an artificial time column (if we know the sampling rate, this would be possible) or we can simply add the rownumber as a separate column.\nHow would you do this?"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#solution---time",
-    "href": "Slides/W3c_WranglingMarkers.html#solution---time",
-    "title": "Wrangling Physio Markers",
-    "section": "Solution - time",
-    "text": "Solution - time\n\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(time = 1:nrow(phy_data),\n         time2 = 1:n(),\n         time3 = row_number()) %&gt;% \n  rownames_to_column(\"time4\")"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
-    "href": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Get the offset markers",
-    "text": "Get the offset markers\nIn Francesco’s case, there is not necessarily an “end-marker” (or the onset of the next phase), but we know that each trial is 8 sec. long. It might make sense to add this offset to the data.\nCome up with a way to add offset markers to the dara 8 sec after the 7 or 90 onsets!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solution - offset markers",
-    "text": "Possible solution - offset markers\nPlease share ideas!\n\nI would probably simply get the indeces of the markers, add the correct number of samples - based on new time column (if it is really time) or sampling rate - to these, and add markers to these new indices (but there might be a tidyverse-isher way as well!):\n\n# helpers\nsampling_rate &lt;- 2000\neight_sec &lt;- sampling_rate * 8\n\nonsets790 &lt;- which(phy_data$onsets %in% c(7,90))\noffsets790 &lt;- onsets790 + eight_sec\n\nphy_data$onsets[offsets790] &lt;- 150\n\n\n# check wether correct\ntest &lt;- filter(phy_data, !is.na(onsets) & onsets != 0) %&gt;% select(onsets)"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
-    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
-    "title": "Wrangling Physio Markers",
-    "section": "Get the correct phases",
-    "text": "Get the correct phases\nBack to the original problem: We want to get the correct “phases” of the experiment to do calculations (e.g. calculate the mean within the phase) with, e.g. the trials.\nCalculate the mean SC for each trial (starting with either 7 or 90).\nYou might have to take different intermediate steps, depending on your solution!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solutions - get trials",
-    "text": "Possible solutions - get trials\nShow all your solutions!\n\nThere are a number of different ways to achieve this. You could use a for-loop to loop through all onsets, get the index and the index of the offset marker and calculate the mean of that period:\n\nmeans &lt;- tibble(means = rep(NA, length(onsets790)),\n                marker = rep(NA, length(onsets790)))\n\nfor (i in seq(onsets790)) {\n  means$means[i] &lt;- mean(phy_data$SC[onsets790[i]]:phy_data$SC[offsets790[i]]) \n  means$marker[i] &lt;- phy_data$marker[onsets790[i]]\n}\n\n#possibly add other info like what kind of marker/trial etc.\n\nAnother (tidyverse) solution would be to get the trial number, fill in the onsets (so that all samples until the next marker are filled in with e.g. 7), group_by the marker number and trial, and summarize:\n\nmeans2 &lt;- phy_data %&gt;% \n  # use cumsum() to get a trial number\n  mutate(trial_onset = ifelse(is.na(onsets), 0, 1),\n           trial = cumsum(trial_onset)) %&gt;% \n  fill(onsets) %&gt;% \n  group_by(trial, onsets) %&gt;% \n  summarise(means = mean(SC)) %&gt;% \n  # possibly filter to only keep 7 and 90\n  filter(onsets %in% c(90,7))"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
-    "href": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
-    "title": "Wrangling Physio Markers",
-    "section": "Extra task: Get min and max within window",
-    "text": "Extra task: Get min and max within window\nFor the SC data, we don’t only need the mean, but rather the local minimum and maximum 1-5 sec. after stimulus onset (or rather, the maximum after the minimum, but let’s start with overall min and max).\nTry to find the min. and max. in the 1-5 sec. window!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solutions - min and max",
-    "text": "Possible solutions - min and max\nAny ideas?\n\nSimilar to above!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#thanks",
-    "href": "Slides/W3c_WranglingMarkers.html#thanks",
-    "title": "Wrangling Physio Markers",
-    "section": "Thanks!",
-    "text": "Thanks!\nNext week: Data Viz (really!)"
-  },
-  {
     "objectID": "Slides/W3_Randomize.html#lets-dive-in-with-an-example",
     "href": "Slides/W3_Randomize.html#lets-dive-in-with-an-example",
     "title": "Randomization and Counterbalancing",
@@ -1027,5 +1020,12 @@
     "title": "Randomization and Counterbalancing",
     "section": "Thanks!",
     "text": "Thanks!\nNo R club next week! (Carnival)\nHomework: Please have a look at the rest of last week’s presentation and/or chapter 6 of Fundamentals of Quantitative Analysis!\n(We’ve covered a lot of it today, but it will help you understand joins and bringing data in long format etc. better!)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R Club Würzburg",
+    "section": "",
+    "text": "This is the course website of the R Club of the Research Training Group 2660 at the University and University Clinic in Würzburg, Germany - but it’s open to everyone if space is available!\nThe R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. We may end up as a Data Dojo/Coding Club, where we work on problems together. This way, we can all learn together!\nWe meet weekly on Tuesdays, 16:00 - 18:00 in Room 213 at the Marcusstr, starting in January 2024. The syllabus can be found here. On this page, the slides etc. will be linked.\n\n\n\nSession\n1\nDate\n16.01.24\nTopic\nIntro to R & RStudio\nPreparation/Notes\nInstall R and RStudio, download Dataset1, Dataset2\n\n\n2\n23.01.24\nData Wrangling\nDownload Datasets 1, 2, 3, & 4 (click on link and symbol for “download raw file” on the top-right)\n\n\n\n30.01.24\nNo R Club! (Clinical Research Workshop)\nSelf-study instead: Please have a look at the rest of the data wrangling presentation and/or chapter 6 of Fundamentals of Quantitative Analysis!\n\n\n3\n06.02.24\nRandomization & Counterbalancing\n(Ecem)\n\n\n4\n14.02.24\nData Wrangling 2 & first Visualization\n(Uni closed in the afternoon - carnival? Meet on Wednesday, 14th, 15:00 in 213)\nDownload Datasets: participant-info.csv & ahi-cesd.csv / Speed Dating Data & Codebook\n\nUse the exercise.Rmd and the speed dating data!\n\n\n\n20.02.24\nNo R Club!\n\n\n\n5\n27.02.24\nPreprocessing, e.g. physio data?\n(Francesco)\n\n\n6\n5.03.24\nData Viz\nData: participant-info.csv & ahi-cesd.csv\n\n\n\n12.03.24\nNo R Club!\n\n\n\n7\n21.03.24\nData Viz 2\nWe’ll meet on Thursday, 21st of March, at 15:00. You may join via Zoom (but it might be more difficult to follow).\n\nWe will make a nice plot with Ulkar’s real data!\n\n\n8\n\nStats 1?\nQuick intro with a focus on ANOVA, or start with t-tests and do it in-depths across several weeks?\n\n\n9\n\nFunctions?\n\n\n\n10\n\nWriting Reports\n\n\n\n11\n\nR Projects, Git\n\n\n\n12\n\n\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\""
   }
 ]
