@@ -1,0 +1,1296 @@
+---
+title: "Stats 1 - General Linear Model"
+subtitle: |
+   | R Coding Club 
+   | RTG 2660
+author: "Dr. Lea Hildebrandt"
+date: 2024/04/16
+description: "Brief Overview Basic Statistics"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: simple
+    embed-resources: true
+editor: visual
+from: markdown+emoji
+---
+
+# Basic Statistics
+
+```{css}
+code.sourceCode {   font-size: 1.4em; }   
+div.cell-output-stdout {   font-size: 1.4em; }
+```
+
+No warm-up today! It will be a bit more input today...
+
+Today (and next week), we will try to cover a lot!
+
+# Fitting Models to Data
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+library(NHANES)
+library(cowplot)
+library(mapproj)
+library(pander)
+library(knitr)
+library(modelr)
+panderOptions('round',2)
+panderOptions('digits',7)
+options(digits = 2)
+set.seed(123456) # set random seed to exactly replicate results
+```
+
+::: notes
+no interactions planned, a lot of input
+
+but feel free to ask questions anytime! It's important that you understand the concepts!
+
+(We might not manage to go through all the slides, but still ask questions - slides/video online)
+:::
+
+## What is a Model?
+
+> " "models" are generally simplifications of things in the real world that nonetheless convey the essence of the thing being modeled"
+>
+> "All models are wrong but some are useful" (G. Box)
+
+(ST21, Ch 5)
+
+**Aim**: Find the model that most efficiently and accurately summarizes the way in which the data were actually generated.
+
+Basic structure of statistical models:
+
+$$
+data=model+error
+$$
+
+::: notes
+a statistical model is generally much simpler than the data being described; it is meant to capture the structure of the data as simply as possible.
+
+Two parts:
+
+-   one portion that is described by a statistical model, which expresses the values that we expect the data to take given our knowledge,
+
+-   *error* that reflects the difference between the model's predictions and the observed data.
+:::
+
+## Statistical Models
+
+In general, we want to predict single observations (denoted by i) from the model. The fact that we are looking at predictions of observations and not actual values of the data is denoted by the "hat":
+
+$$
+\widehat{data_i} = model_i
+$$ The error is then simply the deviation of the actual data from the predicted values:
+
+$$ 
+error_i = data_i - \widehat{data_i}
+$$ If this doesn't make much sense yet, let's look at an example.
+
+::: notes
+This means that the predicted value of the data for observation i is equal to the value of the model for that observation.
+:::
+
+## A Simple Model
+
+Let's say we want to have a model of height of children (in the NHANES dataset also used in ST21).
+
+What do you think would be a good model?
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# drop duplicates
+NHANES <- 
+  NHANES %>% 
+  dplyr::distinct(ID, .keep_all = TRUE)
+
+# select the appropriate children with good height measurements
+NHANES_child <- 
+  NHANES %>%
+  drop_na(Height) %>%
+  subset(Age < 18)
+NHANES_child %>% 
+  ggplot(aes(Height)) + 
+  geom_histogram(bins = 100)
+```
+
+## A Simple Model 2
+
+The simplest model would be... the mean of the height values! This would imply that the model would predict the same height for everyone - and all individual deviations would be part of the error term.
+
+We can write such a simple model as a formula:
+
+$$
+y_i = \beta + \epsilon
+$$
+
+$y_i$ denotes the individual observations (hence the $i$) of heights, $\beta$ is a so-called parameter, and $\epsilon$ is the error term. In this example, the parameter $\beta$ would be the same value (= the mean height) for everyone (hence it doesn't need a $i$ subscript). *Parameters* are values that we estimate to find the best model.
+
+## A Simple Model 3
+
+How do we find parameters that belong to the best fitting model?
+
+. . .
+
+We try to minimize the error!
+
+Remember, the error is the difference between the actual and predicted values of $y$ (height):
+
+$$
+error_i = y_i - \hat{y_i}
+$$
+
+If we select a predicted value of 400cm, all individuals' errors would hugely deviate (because no one is 4m tall). If we average these errors, it would still be a big value.
+
+A better candidate for such a simple model is thus the arithmetic mean or average:
+
+$$
+\bar{X} = \frac{\sum_{i=1}^{n}x_i}{n}
+$$
+
+Summing up all individual's heights and dividing that number by the number of individuals gives us the mean. By definition (see book for proof, the individual errors cancel out), the average error is now 0!
+
+## A Note on Errors
+
+We usually don't simply average across the individual errors, but across the squared errors.
+
+The reason is that positive and negative errors cancel each other out, which is not the case when squared.
+
+The *mean squared error* would be in a different unit then the data (squared!), which is why we usually take the square root of that value to bring it back to the original unit: This leaves us with the *root mean squared error (RMSE)*!
+
+## A Slightly More Complex Model
+
+Obviously, the model for predicting height from the average is not very good: It predicts the same height for all children! (The RMSE is 27 cm!)
+
+How can we improve this model?
+
+. . .
+
+We can account for other information that we might have!\
+For example, to account for age might be a good idea: Older children are likely taller than younger ones. We plot height against age to visually inspect the relationship:
+
+```{r}
+#| echo: false
+
+p1 <- NHANES_child %>% 
+  ggplot(aes(x = Age, y = Height)) +
+  geom_point(position = "jitter",size=0.05) +
+  scale_x_continuous(breaks = seq.int(0, 20, 2)) +
+  ggtitle('A: original data')
+
+lmResultHeightOnly <- lm(Height ~ Age + 0, data=NHANES_child)
+rmse_heightOnly <- sqrt(mean(lmResultHeightOnly$residuals**2))
+
+p2 <- NHANES_child %>% 
+  ggplot(aes(x = Age, y = Height)) +
+  geom_point(position = "jitter",size=0.05) +
+  scale_x_continuous(breaks = seq.int(0, 20, 2)) + 
+  annotate('segment',x=0,xend=max(NHANES_child$Age),
+           y=0,yend=max(lmResultHeightOnly$fitted.values),
+           color='blue',lwd=1) + 
+  ggtitle('B: age')
+
+p3 <- NHANES_child %>% 
+  ggplot(aes(x = Age, y = Height)) +
+  geom_point(position = "jitter",size=0.05) +
+  scale_x_continuous(breaks = seq.int(0, 20, 2)) + 
+  geom_smooth(method='lm',se=FALSE) + 
+  ggtitle('C: age + constant')
+
+p4 <- NHANES_child %>% 
+  ggplot(aes(x = Age, y = Height)) +
+  geom_point(aes(colour = factor(Gender)), 
+             position = "jitter", 
+             alpha = 0.8,
+             size=0.05) +
+  geom_smooth(method='lm',aes(group = factor(Gender), 
+                              colour = factor(Gender))) + 
+  theme(legend.position = c(0.25,0.8)) + 
+  ggtitle('D: age + constant + gender')
+
+plot_grid(p1,p2,p3,p4,ncol=2)
+
+```
+
+::: notes
+RMSE: On average, 27 cm "wrong" per individual!
+
+A: raw data, visible strong relationship\
+B: only age (linear relationship)\
+C: intercept/constant\
+D: also account for gender
+
+--\> line fits data increasingly better!
+:::
+
+## A Slightly More Complex Model 2
+
+As we can see, the line (\~ model) fits the data points increasingly well, e.g. if we include a constant (or intercept) and age. We would write this as this formula:
+
+$$
+\hat{y_i} = \hat{\beta_0} + \hat{\beta_1} * age_i
+$$
+
+Remember from linear algebra that this defines a line:
+
+$$
+y = slope * x + intercept
+$$
+
+Thus $\beta_0$ is the parameter for the intercept and $\beta_1$ for the slope of age!
+
+The model fit is now much better: RMSE = 8.36 cm.
+
+. . .
+
+Adding gender? Does not improve model too much!
+
+::: notes
+w/o intercept: A, no $\beta_0$
+
+Stats Software will estimate best values for $\beta$'s
+:::
+
+## What is a "Good" Model?
+
+Two aims:
+
+1.  Describe data well (= low error/RMSE)
+
+2.  Generalize to new data (low error when applied to new data)
+
+Can be conflicting!
+
+. . .
+
+Where does error come from? (In addition to individual differences!)
+
+::: incremental
+-   measurement error (noise): random variation in data
+
+    -   actual measurement is biased (broken device, bias etc.)
+
+    -   "thing measured" may be biased/varies a lot
+
+-   wrong model specification
+
+    -   e.g. height goes *down* with age
+
+    -   important variable is missing from model (age!)
+:::
+
+## Examples Measurement Error
+
+```{r BACrt,echo=FALSE,message=FALSE, fig.cap="Simulated relationship between blood alcohol content and reaction time on a driving test, with best-fitting linear model represented by the line. A: linear relationship with low measurement error.  B: linear relationship with higher measurement error.  C: Nonlinear relationship with low measurement error and (incorrect) linear model"}
+
+dataDf <-  
+  tibble(
+    BAC = runif(100) * 0.3,
+    ReactionTime = BAC * 1 + 1 + rnorm(100) * 0.01
+  )
+
+p1 <- dataDf %>% 
+  ggplot(aes(x = BAC, y = ReactionTime)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) + 
+  ggtitle('A: linear, low noise')
+# noisy version
+dataDf <-  
+  tibble(
+    BAC = runif(100) * 0.3,
+    ReactionTime = BAC * 2 + 1 + rnorm(100) * 0.2
+  )
+p2 <- dataDf %>% 
+  ggplot(aes(x = BAC, y = ReactionTime)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) + 
+  ggtitle('B: linear, high noise')
+# nonlinear (inverted-U) function
+dataDf <-
+  dataDf %>% 
+  mutate(
+    caffeineLevel = runif(100) * 10,
+    caffeineLevelInvertedU = (caffeineLevel - mean(caffeineLevel))**2,
+    testPerformance = -1 * caffeineLevelInvertedU + rnorm(100) * 0.5
+  )
+p3 <- dataDf %>% 
+  ggplot(aes(x = caffeineLevel, y = testPerformance)) + 
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) + 
+  ggtitle('C: nonlinear')
+plot_grid(p1,p2,p3)
+```
+
+::: notes
+A: very little error, all points close to fitted line\
+B: same relationship much more variability across individuals\
+C. wrongly specified model (caffeine!), not a linear relationship. Error high (deviations points - line)
+:::
+
+## Can a Model be too Good?
+
+Yes! This is called overfitting.
+
+. . .
+
+If we fit a line too closely to the data, the model might not be able to generalize to other data well.
+
+```{r Overfitting,echo=FALSE,message=FALSE,warning=FALSE, fig.cap='An example of overfitting. Both datasets were generated using the same model, with different random noise added to generate each set.  The left panel shows the data used to fit the model, with a simple linear fit in blue and a complex (8th order polynomial) fit in red.  The root mean square error (RMSE) values for each model are shown in the figure; in this case, the complex model has a lower RMSE than the simple model.  The right panel shows the second dataset, with the same model overlaid on it and the RMSE values computed using the model obtained from the first dataset.  Here we see that the simpler model actually fits the new dataset better than the more complex model, which was overfitted to the first dataset.',fig.width=8,fig.height=4,out.height='50%'}
+
+#parameters for simulation
+set.seed(1122)
+sampleSize <- 16
+#build a dataframe of simulated data
+simData <- 
+  tibble(
+    X = rnorm(sampleSize),
+    Y = X + rnorm(sampleSize, sd = 1),
+    Ynew = X + rnorm(sampleSize, sd = 1)
+  )
+#fit models to these data
+simpleModel <- lm(Y ~ X, data = simData)
+complexModel <- lm(Y ~ poly(X, 8), data = simData)
+#calculate root mean squared error for "current" dataset
+rmse_simple <- sqrt(mean(simpleModel$residuals**2))
+rmse_complex <- sqrt(mean(complexModel$residuals**2))
+#calculate root mean squared error for "new" dataset
+rmse_prediction_simple <- sqrt(mean((simpleModel$fitted.values - simData$Ynew)**2))
+rmse_prediction_complex <- sqrt(mean((complexModel$fitted.values - simData$Ynew)**2))
+#visualize
+plot_original_data <- 
+  simData %>% 
+  ggplot(aes(X, Y)) +
+  geom_point() +
+  geom_smooth(
+    method = "lm", 
+    formula = y ~ poly(x, 8), 
+    color = "red", 
+    se = FALSE
+  ) +
+  geom_smooth(
+    method = "lm", 
+    color = "blue", 
+    se = FALSE
+  ) +
+  ylim(-3, 3) +
+  annotate(
+    "text",
+    x = -1.25, 
+    y = 2.5, 
+    label = sprintf("RMSE=%0.1f", rmse_simple),
+    color = "blue", 
+    hjust = 0, 
+    cex = 4
+  ) +
+  annotate(
+    "text",
+    x = -1.25, 
+    y = 2, 
+    label = sprintf("RMSE=%0.1f", rmse_complex),
+    color = "red", 
+    hjust = 0, 
+    cex = 4
+  ) +
+  ggtitle("original data") 
+plot_new_data  <- 
+  simData %>% 
+  ggplot(aes(X, Ynew)) +
+  geom_point() +
+  geom_smooth(
+    aes(X, Y), 
+    method = "lm", 
+    formula = y ~ poly(x, 8), 
+    color = "red", 
+    se = FALSE
+  ) +
+  geom_smooth(
+    aes(X, Y), 
+    method = "lm", 
+    color = "blue", 
+    se = FALSE
+  ) +
+  ylim(-3, 3) +
+  annotate(
+    "text",
+    x = -1.25, 
+    y = 2.5, 
+    label = sprintf("RMSE=%0.1f", rmse_prediction_simple),
+    color = "blue", 
+    hjust = 0, 
+    cex = 4
+  ) +
+  annotate(
+    "text",
+    x = -1.25, 
+    y = 2, 
+    label = sprintf("RMSE=%0.1f", rmse_prediction_complex),
+    color = "red", 
+    hjust = 0, 
+    cex = 4
+  ) +
+  ggtitle("new data") 
+plot_grid(plot_original_data, plot_new_data)
+```
+
+::: notes
+same formula, different noise (simulation) \~ different individuals
+
+simpler model fits new data better!
+:::
+
+# Summarizing Data
+
+## Central Tendency
+
+Why summarize data?
+
+. . .
+
+It's a model & describes the data! E.g. the mean = central tendency of the data
+
+. . .
+
+Mean, Median, Mode?
+
+. . .
+
+**Mean** = minimizes sum of squared error, but highly influenced by outliers!\
+**Median** = "middle" value if ranked, minimizes sum of absolute error, less influenced by extreme values\
+**Mode** = most often occurring value
+
+. . .
+
+Example:
+
+If 3 people earn 10,000 Euros per *year* and 1 person earns 1,000,000:\
+Mean: 257,500 Euros\
+Median: (Rank: 10,000; 10,000; 10,000; 1,000,000 -\> middle value = )10,000 Euros\
+Mode: 10,000 Euros
+
+::: notes
+examples
+
+mean: income --\> if one person earns a million and 3 only 10.000 --\> mean = 257.500
+:::
+
+## Variability
+
+How widespread are the data?
+
+. . .
+
+**Variance** and **Standard Deviation**
+
+**Variance** ≊ Mean Squared Error
+
+$$
+\sigma^2 = \frac{SSE}{N} = \frac{\sum_{i=1}^n (x_i - \mu)^2}{N}
+$$
+
+(Note: $x_i$ = value of ind. observation, $\mu$ = *population* mean instead of $\hat{X}$ = *sample* mean)
+
+. . .
+
+**Standard Deviation** ≊ Root Mean Squared Error
+
+$$
+SD = \sigma = \sqrt{\sigma^2}
+$$
+
+. . .
+
+We usually don't know the population mean $\mu$, thats why we estimate the sample variance (with the "hat"):
+
+$$
+\hat\sigma^2 = \frac{\sum_{i=1}^n (x_i - \hat{X})^2}{n-1}
+$$
+
+Note: we now use $\hat{X}$ and $n$ for the *sample* size. $n-1$ is used to make the estimate more robust/less biased.
+
+::: notes
+Remember plot above: Points either close to line or wide-spread
+
+Variance = sigma\^2, deviations of data points from mean ($\mu$) squared and summed, divided by number of oberservations
+
+$n-1$ = Degrees of Freedom, one value is fixed if we know the mean.
+
+Difference MSE: MSE is diff to predicted value, not necessarily mean (based on formula w/intercept and slope, –\> n-2)
+:::
+
+## Z-Scores
+
+$$
+Z(x) = \frac{x - \mu}{\sigma}
+$$
+
+::: incremental
+-   standardizes the distribution: How far is any data point from the mean in units of SD?
+-   doesn't change original relationship of data points!
+    -   shifts distribution to have a mean = 0 and SD = 1.
+-   useful if we compare (or use in a model) variables on different scales/units!
+:::
+
+. . .
+
+```{r zDensityCDF,echo=FALSE,fig.width=5,fig.height=3, fig.cap="Density (top) and cumulative distribution (bottom) of a standard normal distribution, with cutoffs at one standard deviation above/below the mean."}
+
+# First, create a function to generate plots of the density and CDF
+dnormfun <- function(x) {
+  return(dnorm(x, 248))
+}
+plot_density_and_cdf <- 
+  function(zcut, zmin = -4, zmax = 4, plot_cdf = TRUE, zmean = 0, zsd = 1) {
+    zmin <- zmin * zsd + zmean
+    zmax <- zmax * zsd + zmean
+    x <- seq(zmin, zmax, 0.1 * zsd)
+    zdist <- dnorm(x, mean = zmean, sd = zsd)
+    area <- pnorm(zcut) - pnorm(-zcut)
+    
+    p2 <- 
+      tibble(
+        zdist = zdist, 
+        x = x
+      ) %>% 
+      ggplot(aes(x, zdist)) +
+      geom_line(
+        aes(x, zdist), 
+        color = "red", 
+        size = 2
+      ) +
+      stat_function(
+        fun = dnorm, args = list(mean = zmean, sd = zsd),
+        xlim = c(zmean - zcut * zsd, zmean + zsd * zcut),
+        geom = "area", fill = "orange"
+      ) +
+      stat_function(
+        fun = dnorm, args = list(mean = zmean, sd = zsd),
+        xlim = c(zmin, zmean - zcut * zsd),
+        geom = "area", fill = "green"
+      ) +
+      stat_function(
+        fun = dnorm, args = list(mean = zmean, sd = zsd),
+        xlim = c(zmean + zcut * zsd, zmax),
+        geom = "area", fill = "green"
+      ) +
+      annotate(
+        "text",
+        x = zmean,
+        y = dnorm(zmean, mean = zmean, sd = zsd) / 2,
+        label = sprintf("%0.1f%%", area * 100)
+      ) +
+      annotate(
+        "text",
+        x = zmean - zsd * zcut - 0.5 * zsd,
+        y = dnorm(zmean - zcut * zsd, mean = zmean, sd = zsd) + 0.01 / zsd,
+        label = sprintf("%0.1f%%", pnorm(zmean - zsd * zcut, mean = zmean, sd = zsd) * 100)
+      ) +
+      annotate(
+        "text",
+        x = zmean + zsd * zcut + 0.5 * zsd,
+        y = dnorm(zmean - zcut * zsd, mean = zmean, sd = zsd) + 0.01 / zsd,
+        label = sprintf("%0.1f%%", (1 - pnorm(zmean + zsd * zcut, mean = zmean, sd = zsd)) * 100)
+      ) +
+      xlim(zmin, zmax) +
+      labs(
+        x = "Z score",
+        y = "density"
+      )
+    
+    if (plot_cdf) {
+      cdf2 <- 
+        tibble(
+          zdist = zdist, 
+          x = x, 
+          zcdf = pnorm(x, mean = zmean, sd = zsd)
+        ) %>% 
+        ggplot(aes(x, zcdf)) +
+        geom_line() +
+        annotate(
+          "segment",
+          x = zmin, 
+          xend = zmean + zsd * zcut,
+          y = pnorm(zmean + zsd * zcut, mean = zmean, sd = zsd),
+          yend = pnorm(zmean + zsd * zcut, mean = zmean, sd = zsd),
+          color = "red", 
+          linetype = "dashed"
+        ) +
+        annotate(
+          "segment",
+          x = zmean + zsd * zcut, 
+          xend = zmean + zsd * zcut,
+          y = 0, yend = pnorm(zmean + zsd * zcut, mean = zmean, sd = zsd),
+          color = "red", 
+          linetype = "dashed"
+        ) +
+        annotate(
+          "segment",
+          x = zmin, 
+          xend = zmean - zcut * zsd,
+          y = pnorm(zmean - zcut * zsd, mean = zmean, sd = zsd),
+          yend = pnorm(zmean - zcut * zsd, mean = zmean, sd = zsd),
+          color = "blue", 
+          linetype = "dashed"
+        ) +
+        annotate(
+          "segment",
+          x = zmean - zcut * zsd, 
+          xend = zmean - zcut * zsd,
+          y = 0, 
+          yend = pnorm(zmean - zcut * zsd, mean = zmean, sd = zsd),
+          color = "blue", 
+          linetype = "dashed"
+        ) +
+        ylab("Cumulative density")
+      
+      plot_grid(p2, cdf2, nrow = 2)
+    } else {
+      print(p2)
+    }
+  }
+plot_density_and_cdf(1, plot_cdf = FALSE)
+```
+
+::: notes
+Z of x
+
+x is single value/data point\
+mu, sigma
+
+z-scores directly comparable
+:::
+
+# Probability, Sampling, Null-Hypothesis Testing...
+
+Let's skip this (for now?) - but you should know that there are different probability distributions (normal, uniform etc.) and that we draw samples from the population when we run experiments...\
+(Also, some classical probability theory and resampling methods like Monte Carlo simulations are helpful to know).
+
+We also skip Null Hypothesis Significance Testing, which is the main approach we're using in psychology etc., as well as Confidence Intervals, Effect Sizes... You should have a rough idea of these concepts.
+
+# The General Linear Model
+
+```{r}
+#| message: false
+
+library(tidyverse)
+library(ggplot2)
+library(fivethirtyeight)
+#library(caret)
+library(MASS)
+library(cowplot)
+library(knitr)
+set.seed(123456) # set random seed to exactly replicate results
+opts_chunk$set(tidy.opts=list(width.cutoff=80))
+options(tibble.width = 60)
+# load the NHANES data library
+library(NHANES)
+# drop duplicated IDs within the NHANES dataset
+NHANES <- 
+  NHANES %>% 
+  dplyr::distinct(ID,.keep_all=TRUE)
+NHANES_adult <- 
+  NHANES %>%
+  drop_na(Weight) %>%
+  subset(Age>=18)
+```
+
+Remember the basic model of statistics:
+
+$$ data = model + error $$
+
+Our general goal is to find the model with the *best fit*, i.e. that minimizes the error.
+
+. . .
+
+One approach is the GLM. You might be surprised that a lot of the common models can be viewed as linear models:
+
+::: scrollable
+![All models can be thought of as linear models](images/linear_tests_cheat_sheet.png)
+:::
+
+## Definitions
+
+**Dependent variable (DV)**: The outcome variable that the model aims to explain ($Y$).
+
+**Independent variable (IV)**: The variable that we use to explain the DV ($X$).
+
+**Linear model**: The model for the DV is composed of a *linear combination* of IVs (that are multiplied by different [weights]{.underline}!)
+
+. . .
+
+The weights are the *parameters* $\beta$ and determine the relative contribution of each IV. (This is what the model estimates! The weights thus give us the important information we're usually interested in: How strong are IV and DV related.)
+
+There may be several DVs, but usually that's not the case and we will focus on those cases with one DV!
+
+## Example
+
+::: columns
+::: column
+Let's use some simulated data:
+
+```{r}
+#| echo: false
+#| fig.width: 3
+#| fig.height: 3
+#| out.height: '50%'
+#| 
+# create simulated data for example
+set.seed(12345)
+# the number of points that having a prior class increases grades
+betas <- c(6, 5)
+df <-
+  tibble(
+    studyTime = c(2, 3, 5, 6, 6, 8, 10, 12) / 3,
+    priorClass = c(0, 1, 1, 0, 1, 0, 1, 0)
+  ) %>%
+  mutate(
+    grade = 
+      studyTime * betas[1] + 
+      priorClass * betas[2] + 
+      round(rnorm(8, mean = 70, sd = 5))
+  )
+
+p <- ggplot(df,aes(studyTime,grade)) +
+  geom_point(size=3) +
+  xlab('Study time (hours)') +
+  ylab('Grade (percent)') +
+  xlim(0,5) + 
+  ylim(70,100)
+print(p)
+```
+:::
+
+::: column
+We can calculate the *correlation* between the two variables:
+
+```{r}
+#| echo: false
+# compute correlation between grades and study time
+corTestResult <- cor.test(df$grade, df$studyTime)
+corTestResult
+```
+
+The correlation is quite high (.63), but the CI is also pretty wide.
+:::
+:::
+
+. . .
+
+Fundamental activities of statistics:
+
+-   *Describe*: How strong is the relationship between grade and study time?
+
+-   *Decide*: Is there a statistically significant relationship between grade and study time?
+
+-   *Predict*: Given a particular amount of study time, what grade do we expect?
+
+## Linear Regression
+
+Use the GLM (\~synonymous to linear regression) to...
+
+::: incremental
+-   decribe the relation between two variables (similar to correlation)
+
+-   predict DV for new values of IV (new observations)
+
+-   add multiple IVs!
+:::
+
+. . .
+
+::: columns
+::: column
+Simple GLM:
+
+$$ y = \beta_0+ x * \beta_x + \epsilon $$
+
+$\beta_0$ = *intercept*, the overall offset of the line when $x=0$ (even if that is impossible)\
+$\beta_x$ = *slope*, how much do we expect $y$ to change with each change in $x$?\
+$y$ = *DV*\
+$x$ = *IV* or *predictor\
+*$\epsilon$ = *error term*, whatever variance is left over once the model is fit, *residuals*! (Think of the model as the line that is fitted and the residuals are the vertical deviations of the data points from the line!)
+
+(If we refer to *predicted* $y$-values, after we have estimated the model fit/line, we can drop the error term: $\hat{y} = \hat{\beta_0} + x * \hat{\beta_x}$.)
+:::
+
+::: column
+```{r}
+#| echo: false
+
+lmResult <- lm(grade~studyTime,data=df)
+p2 <- p+geom_abline(slope=lmResult$coefficients[2],
+                  intercept=lmResult$coefficients[1],
+                  color='blue')
+p3 <- p2 +
+  geom_hline(yintercept=lmResult$coefficients[1],color='black',size=0.5,linetype='dotted') +
+  annotate('segment',x=2,xend=3,color='red',linetype='dashed',
+           y=predict(lmResult,newdata=data.frame(studyTime=2))[1],
+           yend=predict(lmResult,newdata=data.frame(studyTime=2))[1]) +
+   annotate('segment',x=3,xend=3,color='red',linetype='dashed',
+           y=predict(lmResult,newdata=data.frame(studyTime=2))[1],
+           yend=predict(lmResult,newdata=data.frame(studyTime=3))[1])
+ 
+print(p3)
+```
+:::
+:::
+
+## The Relation Between Correlation and Regression
+
+There is a close relation and we can convert $r$ to $\hat{\beta_x}$.
+
+$\hat{r} = \frac{covariance_{xy}}{s_x * s_y}$
+
+$\hat{\beta_x} = \frac{covariance_{xy}}{s_x*s_x}$
+
+$covariance_{xy} = \hat{r} * s_x * s_y$
+
+$\hat{\beta_x} = \frac{\hat{r} * s_x * s_y}{s_x * s_x} = r * \frac{s_y}{s_x}$
+
+--\> Regression slope = correlation multiplied by ratio of SDs (if SDs are equal, $r$ = $\hat{\beta}$ )
+
+::: notes
+Estimation of GLM:
+
+linear algebra (R will do that for us!) --\> Appendix book
+:::
+
+## Standard Errors for Regression Models
+
+We usually want to make inferences about the regression parameter estimates. For this we need an estimate of their variability.
+
+We first need an estimate of how much variability is *not* explained by the model: the **residual variance** (or **error variance**):
+
+Compute *residuals*:
+
+$$ residual = y - \hat{y} = y - (x*\hat{\beta_x} + \hat{\beta_0}) $$
+
+Compute *Sum of Squared Errors* (remember?):
+
+$$ SS_{error} = \sum_{i=1}^n{(y_i - \hat{y_i})^2} = \sum_{i=1}^n{residuals^2} $$
+
+Compute *Mean Squared Error*:
+
+$$ MS_{error} = \frac{SS_{error}}{df} = \frac{\sum_{i=1}^n{(y_i - \hat{y_i})^2} }{N - p} $$
+
+where the $df$ are the number of observations $N$ - the number of estimated parameter $p$ (in this case 2: $\hat{\beta_0}$ and $\hat{\beta_x}$).
+
+Finally, we can calculate the *standard error* for the *full* model:
+
+$$ SE_{model} = \sqrt{MS_{error}} $$
+
+We can also calculate the SE for specific regression parameter estimates by rescaling the $SE_{model}$:
+
+$$ SE_{\hat{\beta_x}} = \frac{SE_{model}}{\sqrt{\sum{(x_i - \bar{x})^2}}} $$
+
+::: notes
+::: notes
+rescaling SE: by square root of the SS of the X variable
+:::
+:::
+
+## Statistical Tests for Regression Parameters
+
+With the parameter estimates and their standard errors, we can compute $t$-statistics, which represent the likelihood of the observed estimate vs. the expected value under $H_0$ (usually 0, no effect).
+
+$$ \begin{array}{c} t_{N - p} = \frac{\hat{\beta} - \beta_{expected}}{SE_{\hat{\beta}}}\\ t_{N - p} = \frac{\hat{\beta} - 0}{SE_{\hat{\beta}}}\\ t_{N - p} = \frac{\hat{\beta} }{SE_{\hat{\beta}}} \end{array} $$
+
+Usually, we would just let R do the calculations:
+
+```{r}
+summary(lmResult)
+```
+
+The intercept is significantly different from zero (which is usually not very relevant) and the effect of `studyTime` is not significant. So for every hour that we study more, the effect on the grade is rather small (4...) but possibly not present.
+
+::: notes
+$t$ ratio of $\beta$ to its $SE$!
+
+intercept: expected grade without studying at all
+:::
+
+## Quantifying Goodness of Fit of the Model
+
+Often, it is useful to check how good the model we estimated fits the data.
+
+. . .
+
+We can do that easily by asking *how much of the variability in the data is accounted for by the model?*
+
+. . .
+
+If we only have one IV ($x$), then we can simply square the correlation coefficient:
+
+$$ R^2 = r^2 $$
+
+In study time example, $R^2$ = 0.4 --\> we accounted for 40% of the overall variance in grades!
+
+. . .
+
+More generally, we can calculate $R^2$ with the Sum of Squared Variances:
+
+$$ R^2 = \frac{SS_{model}}{SS_{total}} = 1-\frac{SS_{error}}{SS_{total}} $$
+
+::: notes
+$R^2$ is the name of the GoF stat!
+
+A small R² tells us that even though a model might be significant, it may only explain a small amount of information in the DV
+:::
+
+## Fitting More Complex Models
+
+Often we want to know the effects of *multiple variables* (IVs) on some outcome.
+
+Example:\
+Some students have taken a very similar class before, so there might not only be the effect of `studyTime` on `grades`, but also of having taken a `priorClass`.
+
+. . .
+
+::: columns
+::: column
+We can built a model that takes both into account by simply adding the "weight" and the IV (`priorClass`) to the model:
+
+$\hat{y} = \hat{\beta_1}*studyTime + \hat{\beta_2}*priorClass + \hat{\beta_0}$
+
+::: incremental
+-   To model `priorClass`, i.e. whether each individual has taken a previous class or not, we use **dummy coding** (0=no, 1=yes).
+-   This means, for those who have *not* taken a class, the whole part of the equation ($\hat{\beta_2} * priorClass$) will be zero - we will add it for the others.
+-   $\hat{\beta_2}$ is thus the difference in means between the two groups!
+-   $\hat{\beta_1}$ is the regression slope of `studyTime` across data points/regardless of whether someone has taken a class before.
+:::
+:::
+
+::: column
+If we plot the data, we can see that both IVs seem to have an effect on grades:
+
+```{r, fig.width=5, fig.height=3}
+df$priorClass <- as.factor(df$priorClass)
+lmResultTwoVars <- lm(grade ~ studyTime + priorClass, data = df)
+# summary(lmResultTwoVars)
+
+p <- ggplot(df,aes(studyTime,grade,shape=priorClass)) +
+  geom_point(size=3) + xlim(0,5) + ylim(70,100)
+p <- p+
+  geom_abline(slope=lmResultTwoVars$coefficients[2],
+              intercept=lmResultTwoVars$coefficients[1],lineype='dotted')
+# p <- p+
+#   annotate('segment',x=2,xend=3,
+#            y=lmResultTwoVars$coefficients[1]+
+#              2*lmResultTwoVars$coefficients[2],
+#            yend=lmResultTwoVars$coefficients[1]+
+#              2*lmResultTwoVars$coefficients[2],
+#            color='blue') +
+#   annotate('segment',x=3,xend=3,
+#            y=lmResultTwoVars$coefficients[1]+
+#              2*lmResultTwoVars$coefficients[2],
+#            yend=lmResultTwoVars$coefficients[1]+
+#              3*lmResultTwoVars$coefficients[2],
+#            color='blue')
+p <- p+
+  geom_abline(slope=lmResultTwoVars$coefficients[2],
+              intercept=lmResultTwoVars$coefficients[1]+
+                lmResultTwoVars$coefficients[3],
+              linetype='dashed') 
+p <- p+
+  annotate('segment',x=2,xend=2,
+           y=lmResultTwoVars$coefficients[1]+
+             2*lmResultTwoVars$coefficients[2],
+           yend=lmResultTwoVars$coefficients[1]+
+             lmResultTwoVars$coefficients[3] +
+             2*lmResultTwoVars$coefficients[2],
+           linetype='dotted',size=1) +
+  scale_color_discrete(
+    limits = c(0, 1),
+    labels = c("No", "Yes")
+  ) +
+  labs(
+    color = "Previous course"
+  )
+print(p)
+```
+:::
+:::
+
+How can we tell from the plot that both IVs might have an effect?
+
+## Interactions Between Variables
+
+We previously assumed that the effect of `studyTime` on `grade` was the same for both groups - but sometimes we expect that this regression slope differs per group!
+
+. . .
+
+This is what we call an **interaction**: The effect of one variable depends on the value of another variable.
+
+. . .
+
+Example: What is the effect of caffeine on public speaking?\
+There doesn't seem to be an effect:
+
+::: columns
+::: column
+```{r}
+set.seed(1234567)
+df <- 
+  data.frame(
+    group=c(rep(-1,10),
+            rep(1,10)
+          )
+  ) %>%
+  mutate(caffeine=runif(n())*100) %>%
+  mutate(speaking=0.5*caffeine*-group + group*20 + rnorm(20)*10) %>%
+  mutate(anxiety=ifelse(group==1,'anxious','notAnxious'))
+```
+
+```{r}
+#| echo: true
+# perform linear regression with caffeine as independent variable
+lmResultCaffeine <- lm(speaking ~ caffeine, data = df)
+summary(lmResultCaffeine)
+```
+:::
+
+::: column
+```{r, fig.width=4, fig.height=3}
+p1 <- ggplot(df,aes(caffeine,speaking)) +
+  geom_point()
+p1
+```
+:::
+:::
+
+## Interactions 2
+
+What if we find research suggesting that *anxious* people react differently to caffeine than non-anxious people?
+
+Let's include `anxiety` in the model:
+
+::: columns
+::: column
+```{r}
+#| echo: true
+# compute linear regression adding anxiety to model
+lmResultCafAnx <- lm(speaking ~ caffeine + anxiety, data = df)
+summary(lmResultCafAnx)
+```
+:::
+
+::: column
+```{r, fig.width=4, fig.height=3}
+p2 <- ggplot(df,aes(caffeine,speaking,shape=anxiety)) +
+  geom_point() + 
+  theme(legend.position = c(0.1, 0.9))
+p2
+```
+:::
+:::
+
+. . .
+
+It looks like the effect of caffeine is indeed different for the two anxiety groups: Increasing for non-anxious people and decreasing for anxious ones.
+
+However, the model is not significant!
+
+. . .
+
+This is due to the fact that we only look at **additive effects** (main effects) with this model. *Overall*, neither caffeine nor anxiety predicts grades.
+
+In other words: The model tries to fit the same slope for both groups, which is a flat line.
+
+::: notes
+explain additive effects: flat line for average caffeine effect, no difference for means of anxiety groups
+:::
+
+## Interactions 3
+
+To allow for different slopes for each group (i.e. for the effect of caffeine to vary between the anxiety groups), we have to model the *interaction* as well.
+
+The interaction is simply the product of the two variables:
+
+::: columns
+::: column
+```{r}
+#| echo: true
+# compute linear regression including caffeine X anxiety interaction
+lmResultInteraction <- lm(
+  speaking ~ caffeine + anxiety + caffeine:anxiety,
+  # speaking ~ caffeine * anxiety,  # same!
+  data = df
+)
+summary(lmResultInteraction)
+```
+:::
+
+::: column
+```{r, fig.width=4, fig.height=3}
+df_anx <- 
+  df %>%
+  subset(anxiety=='anxious') %>%
+  mutate(y=lmResultInteraction$fitted.values[df$anxiety=='anxious'])
+
+df_notanx <- 
+  df %>%
+  subset(anxiety=='notAnxious')%>%
+  mutate(y=lmResultInteraction$fitted.values[df$anxiety=='notAnxious'])
+
+p3 <- ggplot(df,aes(caffeine,speaking,shape=anxiety)) +
+   geom_point() + 
+   theme(legend.position = c(0.1, 0.9)) +
+  geom_line(data=df_anx,
+             aes(caffeine,y),linetype='dashed') +
+  geom_line(data=df_notanx,
+             aes(caffeine,y),linetype='dotted')
+
+p3
+```
+:::
+:::
+
+. . .
+
+We now see that there are significant *main effects* for both `caffeine` and `anxiety`, as well as the significant *interaction* between both variables. (We have to be careful of interpreting the main effects when an interaction is also significant!)
+
+. . .
+
+The interpretation of the coefficients when interactions are included is not as straight forward!
+
+. . .
+
+If you want to report the "typical" ANOVA table with main effects and the general interaction:
+
+```{r}
+#| eval: true 
+#| echo: true 
+#| 
+anova(lmResultInteraction)
+```
+
+::: notes
+interpretation coefficients:
+
+intercept: intercept of anxious group!
+
+intercept not anxious: difference intercept anxiousnotanxious
+
+slope anxious: only for the anxious group!
+
+slope not anxious: diff in slopes
+
+no main effects!!!
+:::
+
+## Model Comparison
+
+Sometimes, we want to compare two (*nested*!) models to see which one fits the data better.
+
+We can do so by using the `anova()`\* function in R:
+
+```{r}
+#| echo: true
+anova(lmResultCafAnx, lmResultInteraction) 
+```
+
+This shows that Model 2, incl. the interaction, is to be preferred.
+
+. . .
+
+*Note*: We can only use this method with nested models, which means that the simpler (*reduced*) model only contains variables also included in the more complex (*full*) model.
+
+::: aside
+\*Yes, it is *kind of* an ANOVA as well, in that (a ratio of) squared errors is compared to an $F$-distribution...
+:::
+
+::: notes
+Wald compares the ratio of squared errors to an F-distribution (sound familiar from ANOVA?), while likelihood ratio compares the ratio of likelihoods to a χ2 distribution
+:::
+
+## Criticizing Our Model and Checking Assumptions
+
+"Garbage in, garbage out" - we have to make sure our model is properly specified!
+
+. . .
+
+*Properly specified* = having included the appropriate IVs.
+
+. . .
+
+The model also needs to satisfy the **assumptions** of the statistical method (= GLM).
+
+One important assumption of the GLM is that *the residuals are normally distributed* (NOT necessarily the data!).
+
+This assumption can be violated by a not properly specified model or because the data are inappropriate for the statistical model.
+
+. . .
+
+We can use a **Q-Q plot**, which represents the quantiles of two distributions/variables (e.g. the data and a normal distribution of the same data) against each other.
+
+If the data points diverge substantially from the line (especially in the extremes), we can conclude that the residuals are not normally distributed.
+
+## Model Diagnostics 2
+
+To check the assumptions, we can easily run a function for model diagnostics (incl. Q-Q plots) in R. The function, `check_model()`, is included in the `performance` package by the [*easystats*](https://easystats.github.io/easystats/index.html) team (who make great packages for everything related to statistical modeling!)
+
+```{r}
+#| echo: true  
+# install.packages("easystats) 
+library(performance)  
+
+check_model(lmResultInteraction)
+```
+
+We're not going into detail about all these diagnostics (and hard to see!), but it is always a good idea to run diagnostics/check assumptions for your models!
+
+## What Does "Predict" Really Mean?
+
+We neither mean "predicting before seeing the data/in the future" nor mean to imply *causality*!
+
+. . .
+
+It simply refers to fitting a model to the data: We estimate (or predict) values for the DV ($\hat{y}$) and the IVs are often referred to as *predictors*.
+
+Related to: predicting future values
+
+## ANOVA
+
+As you saw earlier, the "normal" ANOVA is a special case of the linear model.
+
+The difference is that the linear model is a bit more flexible in terms of including different IVs/predictors (continuous & categorical), whereas the ANOVA can only use categorical IVs (unless you run an ANCOVA).
+
+. . .
+
+An ANOVA is basically an F-Test that we have used previously (e.g. anova(modelfit)).
+
+The F statistic is calculated by differentiating Sum of Squares Within (SSW) and Sum of Squares Between (SSB) categories/factor levels:
+
+$$
+SSW = \sum_{i=1}^n{(y_{ij} - \bar{y_j})^2}
+$$
+
+SSW is the (squared and summed) difference between each data point and it's category's mean.
+
+$$
+SSB = \sum_{i=1}^n{(\bar{y_j} - \bar{y})^2}
+$$
+
+SSB is the (squared and summed) difference between each category's mean and the overall mean.
+
+$$
+F = \frac{SSB/(M*(N-1))}{SSW/(M-1)}
+$$
+
+M = number of categories/groups/factor levels; N = number of participants/observations
+
+# Repeated Measures ANOVA & Linear Mixed Model
+
+Next time?
+
+Problem: Dependent measures!
+
+# Thanks!

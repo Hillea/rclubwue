@@ -1,0 +1,76 @@
+---
+title: "Visualizing Ulkar's Data"
+subtitle: |
+   | R Coding Club 
+   | RTG 2660
+author: "Dr. Lea Hildebrandt"
+date: 2024/01/16
+description: "Making some real DataViz"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: simple
+    embed-resources: true
+editor: visual
+from: markdown+emoji
+---
+
+# Warm-Up
+
+```{css}
+code.sourceCode {
+  font-size: 1.4em;
+}
+
+div.cell-output-stdout {
+  font-size: 1.4em;
+}
+```
+
+I don't think we'll need a warm up today!\
+If anyone brought a problem, let me know and we cover it next time.
+
+## Ulkar's Data
+
+What is the content of the four files we have? What do we need to know about the paradigm and data? What do all the variables/columns stand for?
+
+-   expactacy_ratings.txt
+
+    -   
+
+-   PIT-Transfer-only.txt
+
+-   pit-transfer-all.txt
+
+-   learning.txt
+
+Read in and inspect data:
+
+```{r}
+#| echo: true
+library(tidyverse) 
+
+expectancy_ratings <- read_delim("Data/expactacy_ratings.txt", delim = "\t")
+transfer <- read_delim("Data/PIT-Transfer-only.txt", delim = "\t")
+transfer_all <- read_delim("Data/pit-transfer-all.txt", delim = "\t")
+learning <- read_delim("Data/learning.txt", delim = "\t")
+
+glimpse(expectancy_ratings)
+unique(expectancy_ratings$Subject)
+```
+
+## What do we want to visualize?
+
+## Further Data Wrangling?
+
+## DataViz
+
+## Next Meeting?
+
+When?
+
+What should we cover?
+
+Basic stats (how basic?), functions, R Projects, writing reports..?

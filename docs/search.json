@@ -4,7 +4,7 @@
     "href": "slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet Randomization\n\n\n\n\n\n\nyour name\n\n\nFeb 2, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet More Wrangling\n\n\n\n\n\n\nR Club\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nMore Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nWrangling Physio Markers\n\n\nDefining phases and calculating things\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 27, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nVisualizing Ulkar’s Data\n\n\nMaking some real DataViz\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet Randomization\n\n\n\n\n\n\nyour name\n\n\nFeb 2, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet More Wrangling\n\n\n\n\n\n\nR Club\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nMore Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nWrangling Physio Markers\n\n\nDefining phases and calculating things\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 27, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\nStats 1 - General Linear Model\n\n\nBrief Overview Basic Statistics\n\n\n\nDr. Lea Hildebrandt\n\n\nApr 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nStats 2 - Linear Mixed Models\n\n\nIntro to rmANOVA and LMM\n\n\n\nDr. Lea Hildebrandt\n\n\nApr 16, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Slides/W3b_DataVizR.html#ggplot",
@@ -1062,5 +1062,250 @@
     "title": "Data Visualization",
     "section": "",
     "text": "Any problems?\n. . .\nImagine you have the following data frame/tibble with animal names, and you want to print to the console the name of the animal and the sound it makes, such as “The dog barks” - but for all animals, one per row. How would you do this?\n\ndf &lt;- tibble(\n  animal = c(\"dog\", \"cat\", \"cow\")\n)"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#ulkars-data",
+    "href": "Slides/UlkarsViz.html#ulkars-data",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "Ulkar’s Data",
+    "text": "Ulkar’s Data\nWhat is the content of the four files we have? What do we need to know about the paradigm and data? What do all the variables/columns stand for?\n\nexpactacy_ratings.txt\n\n\n\nPIT-Transfer-only.txt\npit-transfer-all.txt\nlearning.txt\n\nRead in and inspect data:\n\nlibrary(tidyverse) \n\nexpectancy_ratings &lt;- read_delim(\"Data/expactacy_ratings.txt\", delim = \"\\t\")\ntransfer &lt;- read_delim(\"Data/PIT-Transfer-only.txt\", delim = \"\\t\")\ntransfer_all &lt;- read_delim(\"Data/pit-transfer-all.txt\", delim = \"\\t\")\nlearning &lt;- read_delim(\"Data/learning.txt\", delim = \"\\t\")\n\nglimpse(expectancy_ratings)\n\nRows: 1,674\nColumns: 7\n$ Subject           &lt;dbl&gt; 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001…\n$ Pavlovian_Stimuli &lt;chr&gt; \"Triangle1.bmp\", \"Triangle1.bmp\", \"Star1.bmp\", \"Star…\n$ Procedure         &lt;chr&gt; \"ExpectancyRate\", \"ExpectancyRate\", \"ExpectancyRate\"…\n$ Expectancy_Rating &lt;dbl&gt; 5, 5, 3, 3, 5, 5, 2, 2, 2, 3, 5, 3, 2, 5, 5, 5, 5, 3…\n$ Responses         &lt;dbl&gt; 2, 3, 3, 1, 1, 1, 1, 1, 3, 2, 3, 2, 2, 2, 3, 3, 2, 1…\n$ Group             &lt;chr&gt; \"Crash/Load\", \"Crash/Load\", \"Crash/Load\", \"Crash/Loa…\n$ CS                &lt;chr&gt; \"CS3\", \"CS3\", \"CS2\", \"CS2\", \"CS3\", \"CS2\", \"CS1\", \"CS…\n\nunique(expectancy_ratings$Subject)\n\n [1] 1001 1004 1005 1006 1008 1009 1010 1011 1012 1013 1014 1016 1017 1018 1019\n[16] 1020 1025 1026 1027 1028 1029 1031 1032 1033 1034 1035 1036 2001 2002 2008\n[31] 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2025 2026\n[46] 2027 2028 2029 2030 2031 2032 2033 2035 2037 2038 3001 3003 3004 3005 3006\n[61] 3007 3008 3009 3010 3011 3012 3013 3014 3015 3016 3018 3019 3020 3021 3022\n[76] 3023 3024 3025 3026 3027 3028 3029 3030 3031 3032 3033 3034 3036 1021 1022\n[91] 1023 3002 3017"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#what-do-we-want-to-visualize",
+    "href": "Slides/UlkarsViz.html#what-do-we-want-to-visualize",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "What do we want to visualize?",
+    "text": "What do we want to visualize?"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#further-data-wrangling",
+    "href": "Slides/UlkarsViz.html#further-data-wrangling",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "Further Data Wrangling?",
+    "text": "Further Data Wrangling?"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#dataviz",
+    "href": "Slides/UlkarsViz.html#dataviz",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "DataViz",
+    "text": "DataViz"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#next-meeting",
+    "href": "Slides/UlkarsViz.html#next-meeting",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "Next Meeting?",
+    "text": "Next Meeting?\nWhen?\nWhat should we cover?\nBasic stats (how basic?), functions, R Projects, writing reports..?"
+  },
+  {
+    "objectID": "Slides/Stats1.html#what-is-a-model",
+    "href": "Slides/Stats1.html#what-is-a-model",
+    "title": "Stats 1 - General Linear Model",
+    "section": "What is a Model?",
+    "text": "What is a Model?\n\n” “models” are generally simplifications of things in the real world that nonetheless convey the essence of the thing being modeled”\n“All models are wrong but some are useful” (G. Box)\n\n(ST21, Ch 5)\nAim: Find the model that most efficiently and accurately summarizes the way in which the data were actually generated.\nBasic structure of statistical models:\n\\[\ndata=model+error\n\\]\n\na statistical model is generally much simpler than the data being described; it is meant to capture the structure of the data as simply as possible.\nTwo parts:\n\none portion that is described by a statistical model, which expresses the values that we expect the data to take given our knowledge,\nerror that reflects the difference between the model’s predictions and the observed data."
+  },
+  {
+    "objectID": "Slides/Stats1.html#statistical-models",
+    "href": "Slides/Stats1.html#statistical-models",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Statistical Models",
+    "text": "Statistical Models\nIn general, we want to predict single observations (denoted by i) from the model. The fact that we are looking at predictions of observations and not actual values of the data is denoted by the “hat”:\n\\[\n\\widehat{data_i} = model_i\n\\] The error is then simply the deviation of the actual data from the predicted values:\n\\[\nerror_i = data_i - \\widehat{data_i}\n\\] If this doesn’t make much sense yet, let’s look at an example.\n\nThis means that the predicted value of the data for observation i is equal to the value of the model for that observation."
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-simple-model",
+    "href": "Slides/Stats1.html#a-simple-model",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Simple Model",
+    "text": "A Simple Model\nLet’s say we want to have a model of height of children (in the NHANES dataset also used in ST21).\nWhat do you think would be a good model?"
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-simple-model-2",
+    "href": "Slides/Stats1.html#a-simple-model-2",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Simple Model 2",
+    "text": "A Simple Model 2\nThe simplest model would be… the mean of the height values! This would imply that the model would predict the same height for everyone - and all individual deviations would be part of the error term.\nWe can write such a simple model as a formula:\n\\[\ny_i = \\beta + \\epsilon\n\\]\n\\(y_i\\) denotes the individual observations (hence the \\(i\\)) of heights, \\(\\beta\\) is a so-called parameter, and \\(\\epsilon\\) is the error term. In this example, the parameter \\(\\beta\\) would be the same value (= the mean height) for everyone (hence it doesn’t need a \\(i\\) subscript). Parameters are values that we estimate to find the best model."
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-simple-model-3",
+    "href": "Slides/Stats1.html#a-simple-model-3",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Simple Model 3",
+    "text": "A Simple Model 3\nHow do we find parameters that belong to the best fitting model?\n\nWe try to minimize the error!\nRemember, the error is the difference between the actual and predicted values of \\(y\\) (height):\n\\[\nerror_i = y_i - \\hat{y_i}\n\\]\nIf we select a predicted value of 400cm, all individuals’ errors would hugely deviate (because no one is 4m tall). If we average these errors, it would still be a big value.\nA better candidate for such a simple model is thus the arithmetic mean or average:\n\\[\n\\bar{X} = \\frac{\\sum_{i=1}^{n}x_i}{n}\n\\]\nSumming up all individual’s heights and dividing that number by the number of individuals gives us the mean. By definition (see book for proof, the individual errors cancel out), the average error is now 0!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-note-on-errors",
+    "href": "Slides/Stats1.html#a-note-on-errors",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Note on Errors",
+    "text": "A Note on Errors\nWe usually don’t simply average across the individual errors, but across the squared errors.\nThe reason is that positive and negative errors cancel each other out, which is not the case when squared.\nThe mean squared error would be in a different unit then the data (squared!), which is why we usually take the square root of that value to bring it back to the original unit: This leaves us with the root mean squared error (RMSE)!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-slightly-more-complex-model",
+    "href": "Slides/Stats1.html#a-slightly-more-complex-model",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Slightly More Complex Model",
+    "text": "A Slightly More Complex Model\nObviously, the model for predicting height from the average is not very good: It predicts the same height for all children! (The RMSE is 27 cm!)\nHow can we improve this model?\n\nWe can account for other information that we might have!\nFor example, to account for age might be a good idea: Older children are likely taller than younger ones. We plot height against age to visually inspect the relationship:\n\n\n\n\n\n\nRMSE: On average, 27 cm “wrong” per individual!\nA: raw data, visible strong relationship\nB: only age (linear relationship)\nC: intercept/constant\nD: also account for gender\n–&gt; line fits data increasingly better!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-slightly-more-complex-model-2",
+    "href": "Slides/Stats1.html#a-slightly-more-complex-model-2",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Slightly More Complex Model 2",
+    "text": "A Slightly More Complex Model 2\nAs we can see, the line (~ model) fits the data points increasingly well, e.g. if we include a constant (or intercept) and age. We would write this as this formula:\n\\[\n\\hat{y_i} = \\hat{\\beta_0} + \\hat{\\beta_1} * age_i\n\\]\nRemember from linear algebra that this defines a line:\n\\[\ny = slope * x + intercept\n\\]\nThus \\(\\beta_0\\) is the parameter for the intercept and \\(\\beta_1\\) for the slope of age!\nThe model fit is now much better: RMSE = 8.36 cm.\n\nAdding gender? Does not improve model too much!\n\nw/o intercept: A, no \\(\\beta_0\\)\nStats Software will estimate best values for \\(\\beta\\)’s"
+  },
+  {
+    "objectID": "Slides/Stats1.html#what-is-a-good-model",
+    "href": "Slides/Stats1.html#what-is-a-good-model",
+    "title": "Stats 1 - General Linear Model",
+    "section": "What is a “Good” Model?",
+    "text": "What is a “Good” Model?\nTwo aims:\n\nDescribe data well (= low error/RMSE)\nGeneralize to new data (low error when applied to new data)\n\nCan be conflicting!\n\nWhere does error come from? (In addition to individual differences!)\n\n\nmeasurement error (noise): random variation in data\n\nactual measurement is biased (broken device, bias etc.)\n“thing measured” may be biased/varies a lot\n\nwrong model specification\n\ne.g. height goes down with age\nimportant variable is missing from model (age!)"
+  },
+  {
+    "objectID": "Slides/Stats1.html#examples-measurement-error",
+    "href": "Slides/Stats1.html#examples-measurement-error",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Examples Measurement Error",
+    "text": "Examples Measurement Error\n\nSimulated relationship between blood alcohol content and reaction time on a driving test, with best-fitting linear model represented by the line. A: linear relationship with low measurement error. B: linear relationship with higher measurement error. C: Nonlinear relationship with low measurement error and (incorrect) linear model\nA: very little error, all points close to fitted line\nB: same relationship much more variability across individuals\nC. wrongly specified model (caffeine!), not a linear relationship. Error high (deviations points - line)"
+  },
+  {
+    "objectID": "Slides/Stats1.html#can-a-model-be-too-good",
+    "href": "Slides/Stats1.html#can-a-model-be-too-good",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Can a Model be too Good?",
+    "text": "Can a Model be too Good?\nYes! This is called overfitting.\n\nIf we fit a line too closely to the data, the model might not be able to generalize to other data well.\n\n\n\n\n\nAn example of overfitting. Both datasets were generated using the same model, with different random noise added to generate each set. The left panel shows the data used to fit the model, with a simple linear fit in blue and a complex (8th order polynomial) fit in red. The root mean square error (RMSE) values for each model are shown in the figure; in this case, the complex model has a lower RMSE than the simple model. The right panel shows the second dataset, with the same model overlaid on it and the RMSE values computed using the model obtained from the first dataset. Here we see that the simpler model actually fits the new dataset better than the more complex model, which was overfitted to the first dataset.\n\n\n\n\n\nsame formula, different noise (simulation) ~ different individuals\nsimpler model fits new data better!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#central-tendency",
+    "href": "Slides/Stats1.html#central-tendency",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Central Tendency",
+    "text": "Central Tendency\nWhy summarize data?\n\nIt’s a model & describes the data! E.g. the mean = central tendency of the data\n\n\nMean, Median, Mode?\n\n\nMean = minimizes sum of squared error, but highly influenced by outliers!\nMedian = “middle” value if ranked, minimizes sum of absolute error, less influenced by extreme values\nMode = most often occurring value\n\n\nExample:\nIf 3 people earn 10,000 Euros per year and 1 person earns 1,000,000:\nMean: 257,500 Euros\nMedian: (Rank: 10,000; 10,000; 10,000; 1,000,000 -&gt; middle value = )10,000 Euros\nMode: 10,000 Euros\n\nexamples\nmean: income –&gt; if one person earns a million and 3 only 10.000 –&gt; mean = 257.500"
+  },
+  {
+    "objectID": "Slides/Stats1.html#variability",
+    "href": "Slides/Stats1.html#variability",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Variability",
+    "text": "Variability\nHow widespread are the data?\n\nVariance and Standard Deviation\nVariance ≊ Mean Squared Error\n\\[\n\\sigma^2 = \\frac{SSE}{N} = \\frac{\\sum_{i=1}^n (x_i - \\mu)^2}{N}\n\\]\n(Note: \\(x_i\\) = value of ind. observation, \\(\\mu\\) = population mean instead of \\(\\hat{X}\\) = sample mean)\n\n\nStandard Deviation ≊ Root Mean Squared Error\n\\[\nSD = \\sigma = \\sqrt{\\sigma^2}\n\\]\n\n\nWe usually don’t know the population mean \\(\\mu\\), thats why we estimate the sample variance (with the “hat”):\n\\[\n\\hat\\sigma^2 = \\frac{\\sum_{i=1}^n (x_i - \\hat{X})^2}{n-1}\n\\]\nNote: we now use \\(\\hat{X}\\) and \\(n\\) for the sample size. \\(n-1\\) is used to make the estimate more robust/less biased.\n\nRemember plot above: Points either close to line or wide-spread\nVariance = sigma^2, deviations of data points from mean (\\(\\mu\\)) squared and summed, divided by number of oberservations\n\\(n-1\\) = Degrees of Freedom, one value is fixed if we know the mean.\nDifference MSE: MSE is diff to predicted value, not necessarily mean (based on formula w/intercept and slope, –&gt; n-2)"
+  },
+  {
+    "objectID": "Slides/Stats1.html#z-scores",
+    "href": "Slides/Stats1.html#z-scores",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Z-Scores",
+    "text": "Z-Scores\n\\[\nZ(x) = \\frac{x - \\mu}{\\sigma}\n\\]\n\n\nstandardizes the distribution: How far is any data point from the mean in units of SD?\ndoesn’t change original relationship of data points!\n\nshifts distribution to have a mean = 0 and SD = 1.\n\nuseful if we compare (or use in a model) variables on different scales/units!\n\n\n\n\n\n\n\n\nDensity (top) and cumulative distribution (bottom) of a standard normal distribution, with cutoffs at one standard deviation above/below the mean.\n\n\n\n\n\nZ of x\nx is single value/data point\nmu, sigma\nz-scores directly comparable"
+  },
+  {
+    "objectID": "Slides/Stats1.html#definitions",
+    "href": "Slides/Stats1.html#definitions",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Definitions",
+    "text": "Definitions\nDependent variable (DV): The outcome variable that the model aims to explain (\\(Y\\)).\nIndependent variable (IV): The variable that we use to explain the DV (\\(X\\)).\nLinear model: The model for the DV is composed of a linear combination of IVs (that are multiplied by different weights!)\n\nThe weights are the parameters \\(\\beta\\) and determine the relative contribution of each IV. (This is what the model estimates! The weights thus give us the important information we’re usually interested in: How strong are IV and DV related.)\nThere may be several DVs, but usually that’s not the case and we will focus on those cases with one DV!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#example",
+    "href": "Slides/Stats1.html#example",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Example",
+    "text": "Example\n\n\nLet’s use some simulated data:\n\n\n\n\n\n\nWe can calculate the correlation between the two variables:\n\n\n\n    Pearson's product-moment correlation\n\ndata:  df$grade and df$studyTime\nt = 2, df = 6, p-value = 0.09\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n -0.13  0.93\nsample estimates:\n cor \n0.63 \n\n\nThe correlation is quite high (.63), but the CI is also pretty wide.\n\n\n\nFundamental activities of statistics:\n\nDescribe: How strong is the relationship between grade and study time?\nDecide: Is there a statistically significant relationship between grade and study time?\nPredict: Given a particular amount of study time, what grade do we expect?"
+  },
+  {
+    "objectID": "Slides/Stats1.html#linear-regression",
+    "href": "Slides/Stats1.html#linear-regression",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Linear Regression",
+    "text": "Linear Regression\nUse the GLM (~synonymous to linear regression) to…\n\n\ndecribe the relation between two variables (similar to correlation)\npredict DV for new values of IV (new observations)\nadd multiple IVs!\n\n\n\n\n\nSimple GLM:\n\\[ y = \\beta_0+ x * \\beta_x + \\epsilon \\]\n\\(\\beta_0\\) = intercept, the overall offset of the line when \\(x=0\\) (even if that is impossible)\n\\(\\beta_x\\) = slope, how much do we expect \\(y\\) to change with each change in \\(x\\)?\n\\(y\\) = DV\n\\(x\\) = IV or predictor\n\\(\\epsilon\\) = error term, whatever variance is left over once the model is fit, residuals! (Think of the model as the line that is fitted and the residuals are the vertical deviations of the data points from the line!)\n(If we refer to predicted \\(y\\)-values, after we have estimated the model fit/line, we can drop the error term: \\(\\hat{y} = \\hat{\\beta_0} + x * \\hat{\\beta_x}\\).)"
+  },
+  {
+    "objectID": "Slides/Stats1.html#the-relation-between-correlation-and-regression",
+    "href": "Slides/Stats1.html#the-relation-between-correlation-and-regression",
+    "title": "Stats 1 - General Linear Model",
+    "section": "The Relation Between Correlation and Regression",
+    "text": "The Relation Between Correlation and Regression\nThere is a close relation and we can convert \\(r\\) to \\(\\hat{\\beta_x}\\).\n\\(\\hat{r} = \\frac{covariance_{xy}}{s_x * s_y}\\)\n\\(\\hat{\\beta_x} = \\frac{covariance_{xy}}{s_x*s_x}\\)\n\\(covariance_{xy} = \\hat{r} * s_x * s_y\\)\n\\(\\hat{\\beta_x} = \\frac{\\hat{r} * s_x * s_y}{s_x * s_x} = r * \\frac{s_y}{s_x}\\)\n–&gt; Regression slope = correlation multiplied by ratio of SDs (if SDs are equal, \\(r\\) = \\(\\hat{\\beta}\\) )\n\nEstimation of GLM:\nlinear algebra (R will do that for us!) –&gt; Appendix book"
+  },
+  {
+    "objectID": "Slides/Stats1.html#standard-errors-for-regression-models",
+    "href": "Slides/Stats1.html#standard-errors-for-regression-models",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Standard Errors for Regression Models",
+    "text": "Standard Errors for Regression Models\nWe usually want to make inferences about the regression parameter estimates. For this we need an estimate of their variability.\nWe first need an estimate of how much variability is not explained by the model: the residual variance (or error variance):\nCompute residuals:\n\\[ residual = y - \\hat{y} = y - (x*\\hat{\\beta_x} + \\hat{\\beta_0}) \\]\nCompute Sum of Squared Errors (remember?):\n\\[ SS_{error} = \\sum_{i=1}^n{(y_i - \\hat{y_i})^2} = \\sum_{i=1}^n{residuals^2} \\]\nCompute Mean Squared Error:\n\\[ MS_{error} = \\frac{SS_{error}}{df} = \\frac{\\sum_{i=1}^n{(y_i - \\hat{y_i})^2} }{N - p} \\]\nwhere the \\(df\\) are the number of observations \\(N\\) - the number of estimated parameter \\(p\\) (in this case 2: \\(\\hat{\\beta_0}\\) and \\(\\hat{\\beta_x}\\)).\nFinally, we can calculate the standard error for the full model:\n\\[ SE_{model} = \\sqrt{MS_{error}} \\]\nWe can also calculate the SE for specific regression parameter estimates by rescaling the \\(SE_{model}\\):\n\\[ SE_{\\hat{\\beta_x}} = \\frac{SE_{model}}{\\sqrt{\\sum{(x_i - \\bar{x})^2}}} \\]\n\n\nrescaling SE: by square root of the SS of the X variable"
+  },
+  {
+    "objectID": "Slides/Stats1.html#statistical-tests-for-regression-parameters",
+    "href": "Slides/Stats1.html#statistical-tests-for-regression-parameters",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Statistical Tests for Regression Parameters",
+    "text": "Statistical Tests for Regression Parameters\nWith the parameter estimates and their standard errors, we can compute \\(t\\)-statistics, which represent the likelihood of the observed estimate vs. the expected value under \\(H_0\\) (usually 0, no effect).\n\\[ \\begin{array}{c} t_{N - p} = \\frac{\\hat{\\beta} - \\beta_{expected}}{SE_{\\hat{\\beta}}}\\\\ t_{N - p} = \\frac{\\hat{\\beta} - 0}{SE_{\\hat{\\beta}}}\\\\ t_{N - p} = \\frac{\\hat{\\beta} }{SE_{\\hat{\\beta}}} \\end{array} \\]\nUsually, we would just let R do the calculations:\n\n\n\nCall:\nlm(formula = grade ~ studyTime, data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-10.656  -2.719   0.125   4.703   7.469 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)    76.16       5.16   14.76  6.1e-06 ***\nstudyTime       4.31       2.14    2.01    0.091 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.4 on 6 degrees of freedom\nMultiple R-squared:  0.403, Adjusted R-squared:  0.304 \nF-statistic: 4.05 on 1 and 6 DF,  p-value: 0.0907\n\n\nThe intercept is significantly different from zero (which is usually not very relevant) and the effect of studyTime is not significant. So for every hour that we study more, the effect on the grade is rather small (4…) but possibly not present.\n\n\\(t\\) ratio of \\(\\beta\\) to its \\(SE\\)!\nintercept: expected grade without studying at all"
+  },
+  {
+    "objectID": "Slides/Stats1.html#quantifying-goodness-of-fit-of-the-model",
+    "href": "Slides/Stats1.html#quantifying-goodness-of-fit-of-the-model",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Quantifying Goodness of Fit of the Model",
+    "text": "Quantifying Goodness of Fit of the Model\nOften, it is useful to check how good the model we estimated fits the data.\n\nWe can do that easily by asking how much of the variability in the data is accounted for by the model?\n\n\nIf we only have one IV (\\(x\\)), then we can simply square the correlation coefficient:\n\\[ R^2 = r^2 \\]\nIn study time example, \\(R^2\\) = 0.4 –&gt; we accounted for 40% of the overall variance in grades!\n\n\nMore generally, we can calculate \\(R^2\\) with the Sum of Squared Variances:\n\\[ R^2 = \\frac{SS_{model}}{SS_{total}} = 1-\\frac{SS_{error}}{SS_{total}} \\]\n\n\\(R^2\\) is the name of the GoF stat!\nA small R² tells us that even though a model might be significant, it may only explain a small amount of information in the DV"
+  },
+  {
+    "objectID": "Slides/Stats1.html#fitting-more-complex-models",
+    "href": "Slides/Stats1.html#fitting-more-complex-models",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Fitting More Complex Models",
+    "text": "Fitting More Complex Models\nOften we want to know the effects of multiple variables (IVs) on some outcome.\nExample:\nSome students have taken a very similar class before, so there might not only be the effect of studyTime on grades, but also of having taken a priorClass.\n\n\n\nWe can built a model that takes both into account by simply adding the “weight” and the IV (priorClass) to the model:\n\\(\\hat{y} = \\hat{\\beta_1}*studyTime + \\hat{\\beta_2}*priorClass + \\hat{\\beta_0}\\)\n\n\nTo model priorClass, i.e. whether each individual has taken a previous class or not, we use dummy coding (0=no, 1=yes).\nThis means, for those who have not taken a class, the whole part of the equation (\\(\\hat{\\beta_2} * priorClass\\)) will be zero - we will add it for the others.\n\\(\\hat{\\beta_2}\\) is thus the difference in means between the two groups!\n\\(\\hat{\\beta_1}\\) is the regression slope of studyTime across data points/regardless of whether someone has taken a class before.\n\n\n\nIf we plot the data, we can see that both IVs seem to have an effect on grades:\n\n\n\n\n\n\n\nHow can we tell from the plot that both IVs might have an effect?"
+  },
+  {
+    "objectID": "Slides/Stats1.html#interactions-between-variables",
+    "href": "Slides/Stats1.html#interactions-between-variables",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Interactions Between Variables",
+    "text": "Interactions Between Variables\nWe previously assumed that the effect of studyTime on grade was the same for both groups - but sometimes we expect that this regression slope differs per group!\n\nThis is what we call an interaction: The effect of one variable depends on the value of another variable.\n\n\nExample: What is the effect of caffeine on public speaking?\nThere doesn’t seem to be an effect:\n\n\n\n# perform linear regression with caffeine as independent variable\nlmResultCaffeine &lt;- lm(speaking ~ caffeine, data = df)\nsummary(lmResultCaffeine)\n\n\nCall:\nlm(formula = speaking ~ caffeine, data = df)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-33.10 -16.02   5.01  16.45  26.98 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)   -7.413      9.165   -0.81     0.43\ncaffeine       0.168      0.151    1.11     0.28\n\nResidual standard error: 19 on 18 degrees of freedom\nMultiple R-squared:  0.0642,    Adjusted R-squared:  0.0122 \nF-statistic: 1.23 on 1 and 18 DF,  p-value: 0.281"
+  },
+  {
+    "objectID": "Slides/Stats1.html#interactions-2",
+    "href": "Slides/Stats1.html#interactions-2",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Interactions 2",
+    "text": "Interactions 2\nWhat if we find research suggesting that anxious people react differently to caffeine than non-anxious people?\nLet’s include anxiety in the model:\n\n\n\n# compute linear regression adding anxiety to model\nlmResultCafAnx &lt;- lm(speaking ~ caffeine + anxiety, data = df)\nsummary(lmResultCafAnx)\n\n\nCall:\nlm(formula = speaking ~ caffeine + anxiety, data = df)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-32.97  -9.74   1.35  10.53  25.36 \n\nCoefficients:\n                  Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)        -12.581      9.197   -1.37     0.19\ncaffeine             0.131      0.145    0.91     0.38\nanxietynotAnxious   14.233      8.232    1.73     0.10\n\nResidual standard error: 18 on 17 degrees of freedom\nMultiple R-squared:  0.204, Adjusted R-squared:  0.11 \nF-statistic: 2.18 on 2 and 17 DF,  p-value: 0.144\n\n\n\n\n\n\n\n\n\n\n\nIt looks like the effect of caffeine is indeed different for the two anxiety groups: Increasing for non-anxious people and decreasing for anxious ones.\nHowever, the model is not significant!\n\n\nThis is due to the fact that we only look at additive effects (main effects) with this model. Overall, neither caffeine nor anxiety predicts grades.\nIn other words: The model tries to fit the same slope for both groups, which is a flat line.\n\nexplain additive effects: flat line for average caffeine effect, no difference for means of anxiety groups"
+  },
+  {
+    "objectID": "Slides/Stats1.html#interactions-3",
+    "href": "Slides/Stats1.html#interactions-3",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Interactions 3",
+    "text": "Interactions 3\nTo allow for different slopes for each group (i.e. for the effect of caffeine to vary between the anxiety groups), we have to model the interaction as well.\nThe interaction is simply the product of the two variables:\n\n\n\n# compute linear regression including caffeine X anxiety interaction\nlmResultInteraction &lt;- lm(\n  speaking ~ caffeine + anxiety + caffeine:anxiety,\n  # speaking ~ caffeine * anxiety,  # same!\n  data = df\n)\nsummary(lmResultInteraction)\n\n\nCall:\nlm(formula = speaking ~ caffeine + anxiety + caffeine:anxiety, \n    data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-11.385  -7.103  -0.444   6.171  13.458 \n\nCoefficients:\n                           Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)                 17.4308     5.4301    3.21  0.00546 ** \ncaffeine                    -0.4742     0.0966   -4.91  0.00016 ***\nanxietynotAnxious          -43.4487     7.7914   -5.58  4.2e-05 ***\ncaffeine:anxietynotAnxious   1.0839     0.1293    8.38  3.0e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 8.1 on 16 degrees of freedom\nMultiple R-squared:  0.852, Adjusted R-squared:  0.825 \nF-statistic: 30.8 on 3 and 16 DF,  p-value: 7.01e-07\n\n\n\n\n\n\n\n\n\n\n\nWe now see that there are significant main effects for both caffeine and anxiety, as well as the significant interaction between both variables. (We have to be careful of interpreting the main effects when an interaction is also significant!)\n\n\nThe interpretation of the coefficients when interactions are included is not as straight forward!\n\n\nIf you want to report the “typical” ANOVA table with main effects and the general interaction:\n\nanova(lmResultInteraction)\n\nAnalysis of Variance Table\n\nResponse: speaking\n                 Df Sum Sq Mean Sq F value Pr(&gt;F)    \ncaffeine          1    455     455    6.96 0.0179 *  \nanxiety           1    992     992   15.17 0.0013 ** \ncaffeine:anxiety  1   4593    4593   70.27  3e-07 ***\nResiduals        16   1046      65                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\ninterpretation coefficients:\nintercept: intercept of anxious group!\nintercept not anxious: difference intercept anxiousnotanxious\nslope anxious: only for the anxious group!\nslope not anxious: diff in slopes\nno main effects!!!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#model-comparison",
+    "href": "Slides/Stats1.html#model-comparison",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Model Comparison",
+    "text": "Model Comparison\nSometimes, we want to compare two (nested!) models to see which one fits the data better.\nWe can do so by using the anova()* function in R:\n\nanova(lmResultCafAnx, lmResultInteraction) \n\nAnalysis of Variance Table\n\nModel 1: speaking ~ caffeine + anxiety\nModel 2: speaking ~ caffeine + anxiety + caffeine:anxiety\n  Res.Df  RSS Df Sum of Sq    F Pr(&gt;F)    \n1     17 5639                             \n2     16 1046  1      4593 70.3  3e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThis shows that Model 2, incl. the interaction, is to be preferred.\n\nNote: We can only use this method with nested models, which means that the simpler (reduced) model only contains variables also included in the more complex (full) model.\n\n\nWald compares the ratio of squared errors to an F-distribution (sound familiar from ANOVA?), while likelihood ratio compares the ratio of likelihoods to a χ2 distribution\n\n\n\n*Yes, it is kind of an ANOVA as well, in that (a ratio of) squared errors is compared to an \\(F\\)-distribution…"
+  },
+  {
+    "objectID": "Slides/Stats1.html#criticizing-our-model-and-checking-assumptions",
+    "href": "Slides/Stats1.html#criticizing-our-model-and-checking-assumptions",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Criticizing Our Model and Checking Assumptions",
+    "text": "Criticizing Our Model and Checking Assumptions\n“Garbage in, garbage out” - we have to make sure our model is properly specified!\n\nProperly specified = having included the appropriate IVs.\n\n\nThe model also needs to satisfy the assumptions of the statistical method (= GLM).\nOne important assumption of the GLM is that the residuals are normally distributed (NOT necessarily the data!).\nThis assumption can be violated by a not properly specified model or because the data are inappropriate for the statistical model.\n\n\nWe can use a Q-Q plot, which represents the quantiles of two distributions/variables (e.g. the data and a normal distribution of the same data) against each other.\nIf the data points diverge substantially from the line (especially in the extremes), we can conclude that the residuals are not normally distributed."
+  },
+  {
+    "objectID": "Slides/Stats1.html#model-diagnostics-2",
+    "href": "Slides/Stats1.html#model-diagnostics-2",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Model Diagnostics 2",
+    "text": "Model Diagnostics 2\nTo check the assumptions, we can easily run a function for model diagnostics (incl. Q-Q plots) in R. The function, check_model(), is included in the performance package by the easystats team (who make great packages for everything related to statistical modeling!)\n\n# install.packages(\"easystats) \nlibrary(performance)  \n\ncheck_model(lmResultInteraction)\n\n\nWe’re not going into detail about all these diagnostics (and hard to see!), but it is always a good idea to run diagnostics/check assumptions for your models!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#what-does-predict-really-mean",
+    "href": "Slides/Stats1.html#what-does-predict-really-mean",
+    "title": "Stats 1 - General Linear Model",
+    "section": "What Does “Predict” Really Mean?",
+    "text": "What Does “Predict” Really Mean?\nWe neither mean “predicting before seeing the data/in the future” nor mean to imply causality!\n\nIt simply refers to fitting a model to the data: We estimate (or predict) values for the DV (\\(\\hat{y}\\)) and the IVs are often referred to as predictors.\nRelated to: predicting future values"
+  },
+  {
+    "objectID": "Slides/Stats1.html#anova",
+    "href": "Slides/Stats1.html#anova",
+    "title": "Stats 1 - General Linear Model",
+    "section": "ANOVA",
+    "text": "ANOVA\nAs you saw earlier, the “normal” ANOVA is a special case of the linear model.\nThe difference is that the linear model is a bit more flexible in terms of including different IVs/predictors (continuous & categorical), whereas the ANOVA can only use categorical IVs (unless you run an ANCOVA).\n\nAn ANOVA is basically an F-Test that we have used previously (e.g. anova(modelfit)).\nThe F statistic is calculated by differentiating Sum of Squares Within (SSW) and Sum of Squares Between (SSB) categories/factor levels:\n\\[\nSSW = \\sum_{i=1}^n{(y_{ij} - \\bar{y_j})^2}\n\\]\nSSW is the (squared and summed) difference between each data point and it’s category’s mean.\n\\[\nSSB = \\sum_{i=1}^n{(\\bar{y_j} - \\bar{y})^2}\n\\]\nSSB is the (squared and summed) difference between each category’s mean and the overall mean.\n\\[\nF = \\frac{SSB/(M*(N-1))}{SSW/(M-1)}\n\\]\nM = number of categories/groups/factor levels; N = number of participants/observations"
   }
 ]
