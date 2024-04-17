@@ -11,7 +11,7 @@
     "href": "slides.html",
     "title": "Slides",
     "section": "",
-    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nVisualizing Ulkar’s Data\n\n\nMaking some real DataViz\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet Randomization\n\n\n\n\n\n\nyour name\n\n\nFeb 2, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet More Wrangling\n\n\n\n\n\n\nR Club\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nMore Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nWrangling Physio Markers\n\n\nDefining phases and calculating things\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 27, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\nStats 1 - General Linear Model\n\n\nBrief Overview Basic Statistics\n\n\n\nDr. Lea Hildebrandt\n\n\nApr 16, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet Randomization\n\n\n\n\n\n\nyour name\n\n\nFeb 2, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet More Wrangling\n\n\n\n\n\n\nR Club\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nMore Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nWrangling Physio Markers\n\n\nDefining phases and calculating things\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 27, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\nVisualizing Ulkar’s Data\n\n\nMaking some real DataViz\n\n\n\nDr. Lea Hildebrandt\n\n\nMar 19, 2024\n\n\n\n\n\n\n\n\n\n\n\nStats 1 - General Linear Model\n\n\nBrief Overview Basic Statistics\n\n\n\nDr. Lea Hildebrandt\n\n\nApr 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nStats 2 - Linear Mixed Models\n\n\nIntro to rmANOVA and LMM\n\n\n\nDr. Lea Hildebrandt\n\n\nApr 30, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Slides/W4_WrangleViz.html#warm-up",
@@ -364,6 +364,286 @@
     "text": "Task 8\nIn the multi-cue trials, Ecem also wants to show two more stimuli: The other combinations of color and shape (e.g. color1 with shape2).\n\nHow can we add these other two combinations of shape and color as new columns?"
   },
   {
+    "objectID": "Slides/UlkarsViz.html#ulkars-data",
+    "href": "Slides/UlkarsViz.html#ulkars-data",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "Ulkar’s Data",
+    "text": "Ulkar’s Data\nWhat is the content of the four files we have? What do we need to know about the paradigm and data? What do all the variables/columns stand for?\n\nexpactacy_ratings.txt\n\n\n\nPIT-Transfer-only.txt\npit-transfer-all.txt\nlearning.txt\n\nRead in and inspect data:\n\nlibrary(tidyverse) \n\nexpectancy_ratings &lt;- read_delim(\"Data/expactacy_ratings.txt\", delim = \"\\t\")\ntransfer &lt;- read_delim(\"Data/PIT-Transfer-only.txt\", delim = \"\\t\")\ntransfer_all &lt;- read_delim(\"Data/pit-transfer-all.txt\", delim = \"\\t\")\nlearning &lt;- read_delim(\"Data/learning.txt\", delim = \"\\t\")\n\nglimpse(expectancy_ratings)\n\nRows: 1,674\nColumns: 7\n$ Subject           &lt;dbl&gt; 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001…\n$ Pavlovian_Stimuli &lt;chr&gt; \"Triangle1.bmp\", \"Triangle1.bmp\", \"Star1.bmp\", \"Star…\n$ Procedure         &lt;chr&gt; \"ExpectancyRate\", \"ExpectancyRate\", \"ExpectancyRate\"…\n$ Expectancy_Rating &lt;dbl&gt; 5, 5, 3, 3, 5, 5, 2, 2, 2, 3, 5, 3, 2, 5, 5, 5, 5, 3…\n$ Responses         &lt;dbl&gt; 2, 3, 3, 1, 1, 1, 1, 1, 3, 2, 3, 2, 2, 2, 3, 3, 2, 1…\n$ Group             &lt;chr&gt; \"Crash/Load\", \"Crash/Load\", \"Crash/Load\", \"Crash/Loa…\n$ CS                &lt;chr&gt; \"CS3\", \"CS3\", \"CS2\", \"CS2\", \"CS3\", \"CS2\", \"CS1\", \"CS…\n\nunique(expectancy_ratings$Subject)\n\n [1] 1001 1004 1005 1006 1008 1009 1010 1011 1012 1013 1014 1016 1017 1018 1019\n[16] 1020 1025 1026 1027 1028 1029 1031 1032 1033 1034 1035 1036 2001 2002 2008\n[31] 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2025 2026\n[46] 2027 2028 2029 2030 2031 2032 2033 2035 2037 2038 3001 3003 3004 3005 3006\n[61] 3007 3008 3009 3010 3011 3012 3013 3014 3015 3016 3018 3019 3020 3021 3022\n[76] 3023 3024 3025 3026 3027 3028 3029 3030 3031 3032 3033 3034 3036 1021 1022\n[91] 1023 3002 3017"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#what-do-we-want-to-visualize",
+    "href": "Slides/UlkarsViz.html#what-do-we-want-to-visualize",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "What do we want to visualize?",
+    "text": "What do we want to visualize?"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#further-data-wrangling",
+    "href": "Slides/UlkarsViz.html#further-data-wrangling",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "Further Data Wrangling?",
+    "text": "Further Data Wrangling?"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#dataviz",
+    "href": "Slides/UlkarsViz.html#dataviz",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "DataViz",
+    "text": "DataViz"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#next-meeting",
+    "href": "Slides/UlkarsViz.html#next-meeting",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "Next Meeting?",
+    "text": "Next Meeting?\nWhen?\nWhat should we cover?\nBasic stats (how basic?), functions, R Projects, writing reports..?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#ggplot",
+    "href": "Slides/W3b_DataVizR.html#ggplot",
+    "title": "Data Visualization",
+    "section": "ggplot",
+    "text": "ggplot\nWe will use a package called ggplot2 (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful, publication ready figures.\nThe main function to “start” plotting is ggplot() - we will then add layers of data and layers to tweak the appearance.\n\nLayers of a ggplot"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#activity-1-set-up",
+    "href": "Slides/W3b_DataVizR.html#activity-1-set-up",
+    "title": "Data Visualization",
+    "section": "Activity 1: Set Up",
+    "text": "Activity 1: Set Up\n\nDownload ahi-cesd.csv and participant-info.csv into the folder on your computer for this chapter!\nOpen RStudio and set the working directory to your chapter folder. Ensure the environment is clear.\nOpen a new R Markdown document and save it in your working directory. Call the file “DataVisualisation1”.\nDelete the default R Markdown welcome text and insert a new code chunk.\nLoad the data into your environment and join the two datasets. Keep only the columns ahiTotal, cesdTotal, sex, age, educ, income, occasion, elapsed.days.\n\n\n\nlibrary(tidyverse) \n\ndat &lt;- read_csv(\"Data/ahi-cesd.csv\")\npinfo &lt;- read_csv(\"Data/participant-info.csv\")\n\nall_dat &lt;- inner_join(dat, \n                      pinfo, \n                      by= c(\"id\", \"intervention\"))\n\nsummarydata &lt;- select(.data = all_dat, \n                      ahiTotal, \n                      cesdTotal, \n                      sex, \n                      age, \n                      educ, \n                      income, \n                      occasion, \n                      elapsed.days) \n\n\nwhat happens in the code chunk?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#look-at-the-data",
+    "href": "Slides/W3b_DataVizR.html#look-at-the-data",
+    "title": "Data Visualization",
+    "section": "Look at the Data",
+    "text": "Look at the Data\nHave a look at the types of data:\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;dbl&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;dbl&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…\n\n\nWhat do you see?\n\nAll variables are loaded as numeric. However, are all of those numeric?\n\n\nsex, educ and income are categories, not numbers per se. We call these variables factors! We need to correct R and convert the data type to factor. Checking and adjusting the data types will be important for plotting and analyzing the data, you might otherwise get strange/wrong results!\nHow would you convert them to factors?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
+    "href": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
+    "title": "Data Visualization",
+    "section": "Activity 2: Transform Data Type",
+    "text": "Activity 2: Transform Data Type\nType and run the below code to change the categories to factors.\n\nYou can read each line of the mutate as “overwrite the data that is in that column with the same values now considered factors and not doubles”\nSo for example, the 1s in sex change to categorical factors instead of numerical 1s.\nRemember if you mutate a new column with the same name as the old one, it will overwrite the column.\n\n\nsummarydata &lt;- summarydata %&gt;%\n  mutate(sex = as_factor(sex),\n         educ = as_factor(educ),\n         income = as_factor(income))\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;fct&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;fct&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;fct&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-first-layer",
+    "href": "Slides/W3b_DataVizR.html#the-first-layer",
+    "title": "Data Visualization",
+    "section": "The First Layer",
+    "text": "The First Layer\n\nThe first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).\naes() can take both an x and y argument, however, with a bar plot you are just asking R to count the number of data points in each group so you don’t need to specify this.\n\n\n\nggplot(summarydata, aes(x = sex))"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-second-layer",
+    "href": "Slides/W3b_DataVizR.html#the-second-layer",
+    "title": "Data Visualization",
+    "section": "The Second Layer",
+    "text": "The Second Layer\nThe next layer adds a geom or a shape, in this case we use geom_bar() as we want to draw a bar plot.\n\nNote that we are adding layers, using a + between layers. This is a very important difference between pipes and visualization.\n\n\n\nggplot(summarydata, aes(x = sex)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\n\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE)"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
+    "href": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
+    "title": "Data Visualization",
+    "section": "The Next Layers - Improving the Plot",
+    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
+    "href": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
+    "title": "Data Visualization",
+    "section": "Themes: Changing the Appearance",
+    "text": "Themes: Changing the Appearance\nThere are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.\nWe will now change the default theme to theme_minimal(), but you can also try other themes (just type “theme_” and see what the autocomplete brings up).\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#colors",
+    "href": "Slides/W3b_DataVizR.html#colors",
+    "title": "Data Visualization",
+    "section": "Colors",
+    "text": "Colors\nThere are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.\nA popular palette is viridis. We can simply add a function/layer to your ggplot named scale_fill_viridis_d() (d for discrete). The function hast 5 color options (A - E).\n\nType and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#transparency",
+    "href": "Slides/W3b_DataVizR.html#transparency",
+    "title": "Data Visualization",
+    "section": "Transparency",
+    "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#grouped-plots",
+    "href": "Slides/W3b_DataVizR.html#grouped-plots",
+    "title": "Data Visualization",
+    "section": "Grouped Plots",
+    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\",\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#facetting",
+    "href": "Slides/W3b_DataVizR.html#facetting",
+    "title": "Data Visualization",
+    "section": "Facetting",
+    "text": "Facetting\nYou could also use facets to divide your data visualizations:\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_wrap(~income)\n\n\n\n\n\n\n\n\n\n\nTry to switch sex and income!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#violin-boxplot",
+    "href": "Slides/W3b_DataVizR.html#violin-boxplot",
+    "title": "Data Visualization",
+    "section": "Violin-Boxplot",
+    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot before?\n\n\nggplot(summarydata, aes(x = income, \n                        y = ahiTotal, \n                        fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#layer-order",
+    "href": "Slides/W3b_DataVizR.html#layer-order",
+    "title": "Data Visualization",
+    "section": "Layer Order",
+    "text": "Layer Order\nThe order of layers is crucial, as the plot will be built up in that order:\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_violin() +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_boxplot() +\n  geom_violin()"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#scatterplot",
+    "href": "Slides/W3b_DataVizR.html#scatterplot",
+    "title": "Data Visualization",
+    "section": "Scatterplot",
+    "text": "Scatterplot\nIf we have continuous data of two variables, we often want to make a scatter plot:\n\n\nggplot(summarydata, aes(x = age, y = cesdTotal))+\n  geom_point()+\n  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures",
+    "href": "Slides/W3b_DataVizR.html#saving-your-figures",
+    "title": "Data Visualization",
+    "section": "Saving your Figures",
+    "text": "Saving your Figures\nYou can use ggsave() to save your plots. If you don’t tell ggsave() which plot you want to save, by default it will save the last plot you created.\nYou just have to enter the name of the file to be saved (in your working directory) like this:\n\nggsave(\"violin-boxplot.png\")\n\nCheck whether indeed the last plot was saved!\n\nYou can also specify the dimensions of your plot to be saved:\n\nggsave(\"violin-boxplot.png\",\n       width = 10,\n       height = 8,\n       units = \"cm\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures-2",
+    "href": "Slides/W3b_DataVizR.html#saving-your-figures-2",
+    "title": "Data Visualization",
+    "section": "Saving your Figures 2",
+    "text": "Saving your Figures 2\nYou can also assign the plot to an object in your environment (just like we did with the tibbles previously) and then tell ggsave() which object to save. This is a bit safer.\nRun the code for the violin-boxplot again and save the plot in an object called viobox. You’d then have to explicitly tell ggsave() to save the object viobox:\n\n\nviobox &lt;- summarydata %&gt;%\n  ggplot(aes(x = income,\n             y = ahiTotal,\n             fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\nggsave(\"violin-boxplot-stored.png\", plot = viobox)\n\n\n\n\n\nDo not add ggsave() to the plot with a +. Instead run it on a separate line!\nIf plot is assigned to object, it won’t be displayed unless you type viobox in the console!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#thanks",
+    "href": "Slides/W3b_DataVizR.html#thanks",
+    "title": "Data Visualization",
+    "section": "Thanks!",
+    "text": "Thanks!\nCheck out Chapter 13 of QuantFun for further exercises and tips for data visualization!\nAlso keep in mind: Coding is a lot of googling things!\nYou can also check out the R Graph Gallery for code for different types of plots.\n\nLearning objectives\n\nKnow how to transform (pivot) and join data\nUnderstand the basics of a ggplot (layers etc.)\nBe able to make your first own plots, such as bar charts, violin + boxplots, scatterplots\nKnow what a grouped plot and a facetted plot is\n\n\n\nNext:\n\n? (More data wrangling? Data viz?)\nShould we make a plot with real data from one of you?\nWhen? 19th -&gt; defense, 26th -&gt; easter break… Wednesday, 20th?\n\nGeneral Question:\n\nOnline?\nIs this ~every other week fine?"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#warm-up",
+    "href": "Slides/W3c_WranglingMarkers.html#warm-up",
+    "title": "Wrangling Physio Markers",
+    "section": "Warm up?",
+    "text": "Warm up?\nDid anyone bring a problem?"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
+    "href": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
+    "title": "Wrangling Physio Markers",
+    "section": "Problem Definition (1)",
+    "text": "Problem Definition (1)\nYou have collected data, let’s say Skin Conductance, during your experiment with several trials. In each participant’s file, you thus have (at least) two columns: SC and markers, and probably time. Markers are numbers that denote certain events, such as the start of a phase or trial.\nThe data set could thus like this:\n\n\n\ntime\nSC\nmarkers\n\n\n\n\n100\n1.964\n10\n\n\n200\n2.004\n0\n\n\n300\n2.365\n0\n\n\n400\n2.201\n5\n\n\n500\n2.589\n0\n\n\n600\n2.662\n0\n\n\n700\n2.803\n0\n\n\n800\n2.754\n0\n\n\n900\n2.839\n6\n\n\n1000\n2.915\n0\n\n\n\nLet’s say 10 is the onset of the block, 5 the onset of the trial, and 6 the end of the trial or onset of the next phase.\nHow can we make sure we know which rows belong to which phase of the experiment, e.g. which data points we need to use if we want to calculate something for the trial starting with marker 5?\nIn small groups, brainstorm how you solve this!\n(Break it down in little steps, pseudo-code)"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#francescos-data",
+    "href": "Slides/W3c_WranglingMarkers.html#francescos-data",
+    "title": "Wrangling Physio Markers",
+    "section": "Francesco’s Data",
+    "text": "Francesco’s Data\nWe will use Francesco’s data of his pilot participant 2 (VP02.txt) to solve this problem.\nHowever, this brings us to a different problem, because his data are in a weird format! The actual data only start after a number of rows with channel information…\nHow can we read in the data well??\n\nFrancesco’s data"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
+    "href": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
+    "title": "Wrangling Physio Markers",
+    "section": "One possible solution - reading in data",
+    "text": "One possible solution - reading in data\nFirst one to finish: Share solution! 😁\n\n\n  library(tidyverse)\n  VPcode &lt;- \"VP02\"\n  \n  # find the onset of the data to skip long header (may vary per file, but starts with min or CH1)\n  findstart &lt;-  read_lines(paste0(\"Data/\", paste0(VPcode,\".txt\")), n_max = 50)\n  header_idx &lt;- str_which(findstart, \"^min|CH1\")\n  \n  # read in data from the next line and the header from that line\n  header &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx-1, n_max = 1)\n  \n  phy_data &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx)\n  \n  names(phy_data) &lt;- names(header)\n  \n  head(phy_data)\n\n# A tibble: 6 × 11\n    CH13   CH14  CH28  CH29  CH30  CH31  CH32  CH33  CH34  CH35 ...11\n   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;\n1 0.0258 0.0674     0     0     0     0     0     0     0     0 NA   \n2 0.0288 0.0681     0     0     0     0     0     0     0     0 NA   \n3 0.0258 0.0681     0     0     0     0     0     0     0     0 NA   \n4 0.0273 0.0652     0     0     0     0     0     0     0     0 NA   \n5 0.0258 0.0627     0     0     0     0     0     0     0     0 NA   \n6 0.0212 0.0581     0     0     0     0     0     0     0     0 NA"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
+    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Get the correct markers",
+    "text": "Get the correct markers\nRemember a few weeks ago when we talked about how to transform the binary values in the eight channels to markers? Do that now!\nReminder:\nChannel 1 = value 1\nChannel 2 = 2\nChannel 3 = 4\nChannel 4 = 8\nChannel 5 = 16\nChannel 6 = 32\nChannel 7 = 64\nChannel 8 = 128.\n\nSo if there’s a signal (which will have the value “5”) in channel 1, 3, and 6, the resulting marker should be 1+4+32=37.\nImplement this now in R code!\nAlso check whether it worked correctly."
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solution - markers",
+    "text": "Possible solution - markers\n\n\nphy_data &lt;- phy_data %&gt;% \n    \n    # rename channels to more sensible names\n    rename(#time = min,  # doesn't exist in all files\n      SC = CH13,\n      HR = CH14,  # is this HR?\n      one = CH28,\n      two = CH29,\n      four = CH30,\n      eight = CH31,\n      sixteen = CH32,\n      thirtytwo = CH33,\n      sixtyfour = CH34,\n      hundredtwentyeight = CH35) %&gt;% \n    \n    # get time from start (make it based on sampling rate of 2000Hz --&gt; 0.5msec between samples) and triggers\n    mutate(# combine digital input channels from 8-bit binary to decimal\n           marker = (1*one + 2*two + 4*four + 8*eight + 16*sixteen + 32*thirtytwo + 64*sixtyfour + 128*hundredtwentyeight) / 5)\n\n# check whether markers were calculated correctly\nunique(phy_data$marker)\n\n [1]   0 128  11   4   1  16  22  33  90   7  32   8  44  55  64   2  66\n\nidx_first_marker &lt;- which(phy_data$marker != 0)[c(1,1000,2000)]\nphy_data[idx_first_marker,]\n\n# A tibble: 3 × 12\n     SC      HR   one   two  four eight sixteen thirtytwo sixtyfour\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1  3.63  0.0221     0     0     0     0       0         0         0\n2  9.56  0.0584     5     0     0     0       0         0         0\n3 11.3  -0.0713     0     5     0     5       5         0         5\n# ℹ 3 more variables: hundredtwentyeight &lt;dbl&gt;, ...11 &lt;lgl&gt;, marker &lt;dbl&gt;"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
+    "href": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
+    "title": "Wrangling Physio Markers",
+    "section": "Get trial onsets",
+    "text": "Get trial onsets\nFor Francesco’s data, the markers 90 (CS+) and 7 (CS-) are of interest, as they denote the trial onsets.\nFirst check out whether and how often these markers exist.\nThe markers are shown for ~55 samples each. How can we get the onset only (i.e. only one sample/row)?\nHow many trials do we have?"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solutions - get onsets",
+    "text": "Possible solutions - get onsets\nWho has a good solution?\n\nOne option is to get the streaks of the marker column using the rle() function in base R (there’s also an even handier rleid() function in the data.table package…).\n\nstreaks &lt;- rle(phy_data$marker) # gives two lists: lenght and value, you'd still have to add the lengths up again \n\nOr you could simply get the difference in marker value to previous sample. All values in a streak will be 0, every onset will be different from 0. We can then filter either by the value of this difference (e.g. -7, but we don’t know exactly!) or by != 0 + marker == 7.\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(diffs = marker - lag(marker),         \n         onsets7 = (diffs != 0) & (marker == 7),          \n         onsets90 = (diffs != 0) & (marker == 90),          \n         # or we combine it in one column:          \n         onsets = ifelse((diffs != 0) & (marker != 0), marker, NA))"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#time-column",
+    "href": "Slides/W3c_WranglingMarkers.html#time-column",
+    "title": "Wrangling Physio Markers",
+    "section": "Time column",
+    "text": "Time column\nThere is no time column! It might make sense to make an artificial time column (if we know the sampling rate, this would be possible) or we can simply add the rownumber as a separate column.\nHow would you do this?"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#solution---time",
+    "href": "Slides/W3c_WranglingMarkers.html#solution---time",
+    "title": "Wrangling Physio Markers",
+    "section": "Solution - time",
+    "text": "Solution - time\n\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(time = 1:nrow(phy_data),\n         time2 = 1:n(),\n         time3 = row_number()) %&gt;% \n  rownames_to_column(\"time4\")"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
+    "href": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Get the offset markers",
+    "text": "Get the offset markers\nIn Francesco’s case, there is not necessarily an “end-marker” (or the onset of the next phase), but we know that each trial is 8 sec. long. It might make sense to add this offset to the data.\nCome up with a way to add offset markers to the dara 8 sec after the 7 or 90 onsets!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solution - offset markers",
+    "text": "Possible solution - offset markers\nPlease share ideas!\n\nI would probably simply get the indeces of the markers, add the correct number of samples - based on new time column (if it is really time) or sampling rate - to these, and add markers to these new indices (but there might be a tidyverse-isher way as well!):\n\n# helpers\nsampling_rate &lt;- 2000\neight_sec &lt;- sampling_rate * 8\n\nonsets790 &lt;- which(phy_data$onsets %in% c(7,90))\noffsets790 &lt;- onsets790 + eight_sec\n\nphy_data$onsets[offsets790] &lt;- 150\n\n\n# check wether correct\ntest &lt;- filter(phy_data, !is.na(onsets) & onsets != 0) %&gt;% select(onsets)"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
+    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
+    "title": "Wrangling Physio Markers",
+    "section": "Get the correct phases",
+    "text": "Get the correct phases\nBack to the original problem: We want to get the correct “phases” of the experiment to do calculations (e.g. calculate the mean within the phase) with, e.g. the trials.\nCalculate the mean SC for each trial (starting with either 7 or 90).\nYou might have to take different intermediate steps, depending on your solution!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solutions - get trials",
+    "text": "Possible solutions - get trials\nShow all your solutions!\n\nThere are a number of different ways to achieve this. You could use a for-loop to loop through all onsets, get the index and the index of the offset marker and calculate the mean of that period:\n\nmeans &lt;- tibble(means = rep(NA, length(onsets790)),\n                marker = rep(NA, length(onsets790)))\n\nfor (i in seq(onsets790)) {\n  means$means[i] &lt;- mean(phy_data$SC[onsets790[i]]:phy_data$SC[offsets790[i]]) \n  means$marker[i] &lt;- phy_data$marker[onsets790[i]]\n}\n\n#possibly add other info like what kind of marker/trial etc.\n\nAnother (tidyverse) solution would be to get the trial number, fill in the onsets (so that all samples until the next marker are filled in with e.g. 7), group_by the marker number and trial, and summarize:\n\nmeans2 &lt;- phy_data %&gt;% \n  # use cumsum() to get a trial number\n  mutate(trial_onset = ifelse(is.na(onsets), 0, 1),\n           trial = cumsum(trial_onset)) %&gt;% \n  fill(onsets) %&gt;% \n  group_by(trial, onsets) %&gt;% \n  summarise(means = mean(SC)) %&gt;% \n  # possibly filter to only keep 7 and 90\n  filter(onsets %in% c(90,7))"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
+    "href": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
+    "title": "Wrangling Physio Markers",
+    "section": "Extra task: Get min and max within window",
+    "text": "Extra task: Get min and max within window\nFor the SC data, we don’t only need the mean, but rather the local minimum and maximum 1-5 sec. after stimulus onset (or rather, the maximum after the minimum, but let’s start with overall min and max).\nTry to find the min. and max. in the 1-5 sec. window!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solutions - min and max",
+    "text": "Possible solutions - min and max\nAny ideas?\n\nSimilar to above!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#thanks",
+    "href": "Slides/W3c_WranglingMarkers.html#thanks",
+    "title": "Wrangling Physio Markers",
+    "section": "Thanks!",
+    "text": "Thanks!\nNext week: Data Viz (really!)"
+  },
+  {
     "objectID": "Slides/Stats1.html#what-is-a-model",
     "href": "Slides/Stats1.html#what-is-a-model",
     "title": "Stats 1 - General Linear Model",
@@ -572,286 +852,6 @@
     "title": "Stats 1 - General Linear Model",
     "section": "ANOVA",
     "text": "ANOVA\nAs you saw earlier, the “normal” ANOVA is a special case of the linear model.\nThe difference is that the linear model is a bit more flexible in terms of including different IVs/predictors (continuous & categorical), whereas the ANOVA can only use categorical IVs (unless you run an ANCOVA).\n\nAn ANOVA is basically an F-Test that we have used previously (e.g. anova(modelfit)).\nThe F statistic is calculated by differentiating Sum of Squares Within (SSW) and Sum of Squares Between (SSB) categories/factor levels:\n\\[\nSSW = \\sum_{i=1}^n{(y_{ij} - \\bar{y_j})^2}\n\\]\nSSW is the (squared and summed) difference between each data point and it’s category’s mean.\n\\[\nSSB = \\sum_{i=1}^n{(\\bar{y_j} - \\bar{y})^2}\n\\]\nSSB is the (squared and summed) difference between each category’s mean and the overall mean.\n\\[\nF = \\frac{SSB/(M*(N-1))}{SSW/(M-1)}\n\\]\nM = number of categories/groups/factor levels; N = number of participants/observations"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#warm-up",
-    "href": "Slides/W3c_WranglingMarkers.html#warm-up",
-    "title": "Wrangling Physio Markers",
-    "section": "Warm up?",
-    "text": "Warm up?\nDid anyone bring a problem?"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
-    "href": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
-    "title": "Wrangling Physio Markers",
-    "section": "Problem Definition (1)",
-    "text": "Problem Definition (1)\nYou have collected data, let’s say Skin Conductance, during your experiment with several trials. In each participant’s file, you thus have (at least) two columns: SC and markers, and probably time. Markers are numbers that denote certain events, such as the start of a phase or trial.\nThe data set could thus like this:\n\n\n\ntime\nSC\nmarkers\n\n\n\n\n100\n1.964\n10\n\n\n200\n2.004\n0\n\n\n300\n2.365\n0\n\n\n400\n2.201\n5\n\n\n500\n2.589\n0\n\n\n600\n2.662\n0\n\n\n700\n2.803\n0\n\n\n800\n2.754\n0\n\n\n900\n2.839\n6\n\n\n1000\n2.915\n0\n\n\n\nLet’s say 10 is the onset of the block, 5 the onset of the trial, and 6 the end of the trial or onset of the next phase.\nHow can we make sure we know which rows belong to which phase of the experiment, e.g. which data points we need to use if we want to calculate something for the trial starting with marker 5?\nIn small groups, brainstorm how you solve this!\n(Break it down in little steps, pseudo-code)"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#francescos-data",
-    "href": "Slides/W3c_WranglingMarkers.html#francescos-data",
-    "title": "Wrangling Physio Markers",
-    "section": "Francesco’s Data",
-    "text": "Francesco’s Data\nWe will use Francesco’s data of his pilot participant 2 (VP02.txt) to solve this problem.\nHowever, this brings us to a different problem, because his data are in a weird format! The actual data only start after a number of rows with channel information…\nHow can we read in the data well??\n\nFrancesco’s data"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
-    "href": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
-    "title": "Wrangling Physio Markers",
-    "section": "One possible solution - reading in data",
-    "text": "One possible solution - reading in data\nFirst one to finish: Share solution! 😁\n\n\n  library(tidyverse)\n  VPcode &lt;- \"VP02\"\n  \n  # find the onset of the data to skip long header (may vary per file, but starts with min or CH1)\n  findstart &lt;-  read_lines(paste0(\"Data/\", paste0(VPcode,\".txt\")), n_max = 50)\n  header_idx &lt;- str_which(findstart, \"^min|CH1\")\n  \n  # read in data from the next line and the header from that line\n  header &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx-1, n_max = 1)\n  \n  phy_data &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx)\n  \n  names(phy_data) &lt;- names(header)\n  \n  head(phy_data)\n\n# A tibble: 6 × 11\n    CH13   CH14  CH28  CH29  CH30  CH31  CH32  CH33  CH34  CH35 ...11\n   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;\n1 0.0258 0.0674     0     0     0     0     0     0     0     0 NA   \n2 0.0288 0.0681     0     0     0     0     0     0     0     0 NA   \n3 0.0258 0.0681     0     0     0     0     0     0     0     0 NA   \n4 0.0273 0.0652     0     0     0     0     0     0     0     0 NA   \n5 0.0258 0.0627     0     0     0     0     0     0     0     0 NA   \n6 0.0212 0.0581     0     0     0     0     0     0     0     0 NA"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
-    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Get the correct markers",
-    "text": "Get the correct markers\nRemember a few weeks ago when we talked about how to transform the binary values in the eight channels to markers? Do that now!\nReminder:\nChannel 1 = value 1\nChannel 2 = 2\nChannel 3 = 4\nChannel 4 = 8\nChannel 5 = 16\nChannel 6 = 32\nChannel 7 = 64\nChannel 8 = 128.\n\nSo if there’s a signal (which will have the value “5”) in channel 1, 3, and 6, the resulting marker should be 1+4+32=37.\nImplement this now in R code!\nAlso check whether it worked correctly."
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solution - markers",
-    "text": "Possible solution - markers\n\n\nphy_data &lt;- phy_data %&gt;% \n    \n    # rename channels to more sensible names\n    rename(#time = min,  # doesn't exist in all files\n      SC = CH13,\n      HR = CH14,  # is this HR?\n      one = CH28,\n      two = CH29,\n      four = CH30,\n      eight = CH31,\n      sixteen = CH32,\n      thirtytwo = CH33,\n      sixtyfour = CH34,\n      hundredtwentyeight = CH35) %&gt;% \n    \n    # get time from start (make it based on sampling rate of 2000Hz --&gt; 0.5msec between samples) and triggers\n    mutate(# combine digital input channels from 8-bit binary to decimal\n           marker = (1*one + 2*two + 4*four + 8*eight + 16*sixteen + 32*thirtytwo + 64*sixtyfour + 128*hundredtwentyeight) / 5)\n\n# check whether markers were calculated correctly\nunique(phy_data$marker)\n\n [1]   0 128  11   4   1  16  22  33  90   7  32   8  44  55  64   2  66\n\nidx_first_marker &lt;- which(phy_data$marker != 0)[c(1,1000,2000)]\nphy_data[idx_first_marker,]\n\n# A tibble: 3 × 12\n     SC      HR   one   two  four eight sixteen thirtytwo sixtyfour\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1  3.63  0.0221     0     0     0     0       0         0         0\n2  9.56  0.0584     5     0     0     0       0         0         0\n3 11.3  -0.0713     0     5     0     5       5         0         5\n# ℹ 3 more variables: hundredtwentyeight &lt;dbl&gt;, ...11 &lt;lgl&gt;, marker &lt;dbl&gt;"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
-    "href": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
-    "title": "Wrangling Physio Markers",
-    "section": "Get trial onsets",
-    "text": "Get trial onsets\nFor Francesco’s data, the markers 90 (CS+) and 7 (CS-) are of interest, as they denote the trial onsets.\nFirst check out whether and how often these markers exist.\nThe markers are shown for ~55 samples each. How can we get the onset only (i.e. only one sample/row)?\nHow many trials do we have?"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solutions - get onsets",
-    "text": "Possible solutions - get onsets\nWho has a good solution?\n\nOne option is to get the streaks of the marker column using the rle() function in base R (there’s also an even handier rleid() function in the data.table package…).\n\nstreaks &lt;- rle(phy_data$marker) # gives two lists: lenght and value, you'd still have to add the lengths up again \n\nOr you could simply get the difference in marker value to previous sample. All values in a streak will be 0, every onset will be different from 0. We can then filter either by the value of this difference (e.g. -7, but we don’t know exactly!) or by != 0 + marker == 7.\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(diffs = marker - lag(marker),         \n         onsets7 = (diffs != 0) & (marker == 7),          \n         onsets90 = (diffs != 0) & (marker == 90),          \n         # or we combine it in one column:          \n         onsets = ifelse((diffs != 0) & (marker != 0), marker, NA))"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#time-column",
-    "href": "Slides/W3c_WranglingMarkers.html#time-column",
-    "title": "Wrangling Physio Markers",
-    "section": "Time column",
-    "text": "Time column\nThere is no time column! It might make sense to make an artificial time column (if we know the sampling rate, this would be possible) or we can simply add the rownumber as a separate column.\nHow would you do this?"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#solution---time",
-    "href": "Slides/W3c_WranglingMarkers.html#solution---time",
-    "title": "Wrangling Physio Markers",
-    "section": "Solution - time",
-    "text": "Solution - time\n\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(time = 1:nrow(phy_data),\n         time2 = 1:n(),\n         time3 = row_number()) %&gt;% \n  rownames_to_column(\"time4\")"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
-    "href": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Get the offset markers",
-    "text": "Get the offset markers\nIn Francesco’s case, there is not necessarily an “end-marker” (or the onset of the next phase), but we know that each trial is 8 sec. long. It might make sense to add this offset to the data.\nCome up with a way to add offset markers to the dara 8 sec after the 7 or 90 onsets!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solution - offset markers",
-    "text": "Possible solution - offset markers\nPlease share ideas!\n\nI would probably simply get the indeces of the markers, add the correct number of samples - based on new time column (if it is really time) or sampling rate - to these, and add markers to these new indices (but there might be a tidyverse-isher way as well!):\n\n# helpers\nsampling_rate &lt;- 2000\neight_sec &lt;- sampling_rate * 8\n\nonsets790 &lt;- which(phy_data$onsets %in% c(7,90))\noffsets790 &lt;- onsets790 + eight_sec\n\nphy_data$onsets[offsets790] &lt;- 150\n\n\n# check wether correct\ntest &lt;- filter(phy_data, !is.na(onsets) & onsets != 0) %&gt;% select(onsets)"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
-    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
-    "title": "Wrangling Physio Markers",
-    "section": "Get the correct phases",
-    "text": "Get the correct phases\nBack to the original problem: We want to get the correct “phases” of the experiment to do calculations (e.g. calculate the mean within the phase) with, e.g. the trials.\nCalculate the mean SC for each trial (starting with either 7 or 90).\nYou might have to take different intermediate steps, depending on your solution!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solutions - get trials",
-    "text": "Possible solutions - get trials\nShow all your solutions!\n\nThere are a number of different ways to achieve this. You could use a for-loop to loop through all onsets, get the index and the index of the offset marker and calculate the mean of that period:\n\nmeans &lt;- tibble(means = rep(NA, length(onsets790)),\n                marker = rep(NA, length(onsets790)))\n\nfor (i in seq(onsets790)) {\n  means$means[i] &lt;- mean(phy_data$SC[onsets790[i]]:phy_data$SC[offsets790[i]]) \n  means$marker[i] &lt;- phy_data$marker[onsets790[i]]\n}\n\n#possibly add other info like what kind of marker/trial etc.\n\nAnother (tidyverse) solution would be to get the trial number, fill in the onsets (so that all samples until the next marker are filled in with e.g. 7), group_by the marker number and trial, and summarize:\n\nmeans2 &lt;- phy_data %&gt;% \n  # use cumsum() to get a trial number\n  mutate(trial_onset = ifelse(is.na(onsets), 0, 1),\n           trial = cumsum(trial_onset)) %&gt;% \n  fill(onsets) %&gt;% \n  group_by(trial, onsets) %&gt;% \n  summarise(means = mean(SC)) %&gt;% \n  # possibly filter to only keep 7 and 90\n  filter(onsets %in% c(90,7))"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
-    "href": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
-    "title": "Wrangling Physio Markers",
-    "section": "Extra task: Get min and max within window",
-    "text": "Extra task: Get min and max within window\nFor the SC data, we don’t only need the mean, but rather the local minimum and maximum 1-5 sec. after stimulus onset (or rather, the maximum after the minimum, but let’s start with overall min and max).\nTry to find the min. and max. in the 1-5 sec. window!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solutions - min and max",
-    "text": "Possible solutions - min and max\nAny ideas?\n\nSimilar to above!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#thanks",
-    "href": "Slides/W3c_WranglingMarkers.html#thanks",
-    "title": "Wrangling Physio Markers",
-    "section": "Thanks!",
-    "text": "Thanks!\nNext week: Data Viz (really!)"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#ggplot",
-    "href": "Slides/W3b_DataVizR.html#ggplot",
-    "title": "Data Visualization",
-    "section": "ggplot",
-    "text": "ggplot\nWe will use a package called ggplot2 (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful, publication ready figures.\nThe main function to “start” plotting is ggplot() - we will then add layers of data and layers to tweak the appearance.\n\nLayers of a ggplot"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#activity-1-set-up",
-    "href": "Slides/W3b_DataVizR.html#activity-1-set-up",
-    "title": "Data Visualization",
-    "section": "Activity 1: Set Up",
-    "text": "Activity 1: Set Up\n\nDownload ahi-cesd.csv and participant-info.csv into the folder on your computer for this chapter!\nOpen RStudio and set the working directory to your chapter folder. Ensure the environment is clear.\nOpen a new R Markdown document and save it in your working directory. Call the file “DataVisualisation1”.\nDelete the default R Markdown welcome text and insert a new code chunk.\nLoad the data into your environment and join the two datasets. Keep only the columns ahiTotal, cesdTotal, sex, age, educ, income, occasion, elapsed.days.\n\n\n\nlibrary(tidyverse) \n\ndat &lt;- read_csv(\"Data/ahi-cesd.csv\")\npinfo &lt;- read_csv(\"Data/participant-info.csv\")\n\nall_dat &lt;- inner_join(dat, \n                      pinfo, \n                      by= c(\"id\", \"intervention\"))\n\nsummarydata &lt;- select(.data = all_dat, \n                      ahiTotal, \n                      cesdTotal, \n                      sex, \n                      age, \n                      educ, \n                      income, \n                      occasion, \n                      elapsed.days) \n\n\nwhat happens in the code chunk?"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#look-at-the-data",
-    "href": "Slides/W3b_DataVizR.html#look-at-the-data",
-    "title": "Data Visualization",
-    "section": "Look at the Data",
-    "text": "Look at the Data\nHave a look at the types of data:\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;dbl&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;dbl&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…\n\n\nWhat do you see?\n\nAll variables are loaded as numeric. However, are all of those numeric?\n\n\nsex, educ and income are categories, not numbers per se. We call these variables factors! We need to correct R and convert the data type to factor. Checking and adjusting the data types will be important for plotting and analyzing the data, you might otherwise get strange/wrong results!\nHow would you convert them to factors?"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
-    "href": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
-    "title": "Data Visualization",
-    "section": "Activity 2: Transform Data Type",
-    "text": "Activity 2: Transform Data Type\nType and run the below code to change the categories to factors.\n\nYou can read each line of the mutate as “overwrite the data that is in that column with the same values now considered factors and not doubles”\nSo for example, the 1s in sex change to categorical factors instead of numerical 1s.\nRemember if you mutate a new column with the same name as the old one, it will overwrite the column.\n\n\nsummarydata &lt;- summarydata %&gt;%\n  mutate(sex = as_factor(sex),\n         educ = as_factor(educ),\n         income = as_factor(income))\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;fct&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;fct&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;fct&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#the-first-layer",
-    "href": "Slides/W3b_DataVizR.html#the-first-layer",
-    "title": "Data Visualization",
-    "section": "The First Layer",
-    "text": "The First Layer\n\nThe first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).\naes() can take both an x and y argument, however, with a bar plot you are just asking R to count the number of data points in each group so you don’t need to specify this.\n\n\n\nggplot(summarydata, aes(x = sex))"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#the-second-layer",
-    "href": "Slides/W3b_DataVizR.html#the-second-layer",
-    "title": "Data Visualization",
-    "section": "The Second Layer",
-    "text": "The Second Layer\nThe next layer adds a geom or a shape, in this case we use geom_bar() as we want to draw a bar plot.\n\nNote that we are adding layers, using a + between layers. This is a very important difference between pipes and visualization.\n\n\n\nggplot(summarydata, aes(x = sex)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\n\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE)"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
-    "href": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
-    "title": "Data Visualization",
-    "section": "The Next Layers - Improving the Plot",
-    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
-    "href": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
-    "title": "Data Visualization",
-    "section": "Themes: Changing the Appearance",
-    "text": "Themes: Changing the Appearance\nThere are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.\nWe will now change the default theme to theme_minimal(), but you can also try other themes (just type “theme_” and see what the autocomplete brings up).\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal()"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#colors",
-    "href": "Slides/W3b_DataVizR.html#colors",
-    "title": "Data Visualization",
-    "section": "Colors",
-    "text": "Colors\nThere are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.\nA popular palette is viridis. We can simply add a function/layer to your ggplot named scale_fill_viridis_d() (d for discrete). The function hast 5 color options (A - E).\n\nType and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#transparency",
-    "href": "Slides/W3b_DataVizR.html#transparency",
-    "title": "Data Visualization",
-    "section": "Transparency",
-    "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#grouped-plots",
-    "href": "Slides/W3b_DataVizR.html#grouped-plots",
-    "title": "Data Visualization",
-    "section": "Grouped Plots",
-    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\",\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#facetting",
-    "href": "Slides/W3b_DataVizR.html#facetting",
-    "title": "Data Visualization",
-    "section": "Facetting",
-    "text": "Facetting\nYou could also use facets to divide your data visualizations:\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_wrap(~income)\n\n\n\n\n\n\n\n\n\n\nTry to switch sex and income!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#violin-boxplot",
-    "href": "Slides/W3b_DataVizR.html#violin-boxplot",
-    "title": "Data Visualization",
-    "section": "Violin-Boxplot",
-    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot before?\n\n\nggplot(summarydata, aes(x = income, \n                        y = ahiTotal, \n                        fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#layer-order",
-    "href": "Slides/W3b_DataVizR.html#layer-order",
-    "title": "Data Visualization",
-    "section": "Layer Order",
-    "text": "Layer Order\nThe order of layers is crucial, as the plot will be built up in that order:\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_violin() +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_boxplot() +\n  geom_violin()"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#scatterplot",
-    "href": "Slides/W3b_DataVizR.html#scatterplot",
-    "title": "Data Visualization",
-    "section": "Scatterplot",
-    "text": "Scatterplot\nIf we have continuous data of two variables, we often want to make a scatter plot:\n\n\nggplot(summarydata, aes(x = age, y = cesdTotal))+\n  geom_point()+\n  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures",
-    "href": "Slides/W3b_DataVizR.html#saving-your-figures",
-    "title": "Data Visualization",
-    "section": "Saving your Figures",
-    "text": "Saving your Figures\nYou can use ggsave() to save your plots. If you don’t tell ggsave() which plot you want to save, by default it will save the last plot you created.\nYou just have to enter the name of the file to be saved (in your working directory) like this:\n\nggsave(\"violin-boxplot.png\")\n\nCheck whether indeed the last plot was saved!\n\nYou can also specify the dimensions of your plot to be saved:\n\nggsave(\"violin-boxplot.png\",\n       width = 10,\n       height = 8,\n       units = \"cm\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures-2",
-    "href": "Slides/W3b_DataVizR.html#saving-your-figures-2",
-    "title": "Data Visualization",
-    "section": "Saving your Figures 2",
-    "text": "Saving your Figures 2\nYou can also assign the plot to an object in your environment (just like we did with the tibbles previously) and then tell ggsave() which object to save. This is a bit safer.\nRun the code for the violin-boxplot again and save the plot in an object called viobox. You’d then have to explicitly tell ggsave() to save the object viobox:\n\n\nviobox &lt;- summarydata %&gt;%\n  ggplot(aes(x = income,\n             y = ahiTotal,\n             fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\nggsave(\"violin-boxplot-stored.png\", plot = viobox)\n\n\n\n\n\nDo not add ggsave() to the plot with a +. Instead run it on a separate line!\nIf plot is assigned to object, it won’t be displayed unless you type viobox in the console!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#thanks",
-    "href": "Slides/W3b_DataVizR.html#thanks",
-    "title": "Data Visualization",
-    "section": "Thanks!",
-    "text": "Thanks!\nCheck out Chapter 13 of QuantFun for further exercises and tips for data visualization!\nAlso keep in mind: Coding is a lot of googling things!\nYou can also check out the R Graph Gallery for code for different types of plots.\n\nLearning objectives\n\nKnow how to transform (pivot) and join data\nUnderstand the basics of a ggplot (layers etc.)\nBe able to make your first own plots, such as bar charts, violin + boxplots, scatterplots\nKnow what a grouped plot and a facetted plot is\n\n\n\nNext:\n\n? (More data wrangling? Data viz?)\nShould we make a plot with real data from one of you?\nWhen? 19th -&gt; defense, 26th -&gt; easter break… Wednesday, 20th?\n\nGeneral Question:\n\nOnline?\nIs this ~every other week fine?"
-  },
-  {
-    "objectID": "Slides/UlkarsViz.html#ulkars-data",
-    "href": "Slides/UlkarsViz.html#ulkars-data",
-    "title": "Visualizing Ulkar’s Data",
-    "section": "Ulkar’s Data",
-    "text": "Ulkar’s Data\nWhat is the content of the four files we have? What do we need to know about the paradigm and data? What do all the variables/columns stand for?\n\nexpactacy_ratings.txt\n\n\n\nPIT-Transfer-only.txt\npit-transfer-all.txt\nlearning.txt\n\nRead in and inspect data:\n\nlibrary(tidyverse) \n\nexpectancy_ratings &lt;- read_delim(\"Data/expactacy_ratings.txt\", delim = \"\\t\")\ntransfer &lt;- read_delim(\"Data/PIT-Transfer-only.txt\", delim = \"\\t\")\ntransfer_all &lt;- read_delim(\"Data/pit-transfer-all.txt\", delim = \"\\t\")\nlearning &lt;- read_delim(\"Data/learning.txt\", delim = \"\\t\")\n\nglimpse(expectancy_ratings)\n\nRows: 1,674\nColumns: 7\n$ Subject           &lt;dbl&gt; 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001…\n$ Pavlovian_Stimuli &lt;chr&gt; \"Triangle1.bmp\", \"Triangle1.bmp\", \"Star1.bmp\", \"Star…\n$ Procedure         &lt;chr&gt; \"ExpectancyRate\", \"ExpectancyRate\", \"ExpectancyRate\"…\n$ Expectancy_Rating &lt;dbl&gt; 5, 5, 3, 3, 5, 5, 2, 2, 2, 3, 5, 3, 2, 5, 5, 5, 5, 3…\n$ Responses         &lt;dbl&gt; 2, 3, 3, 1, 1, 1, 1, 1, 3, 2, 3, 2, 2, 2, 3, 3, 2, 1…\n$ Group             &lt;chr&gt; \"Crash/Load\", \"Crash/Load\", \"Crash/Load\", \"Crash/Loa…\n$ CS                &lt;chr&gt; \"CS3\", \"CS3\", \"CS2\", \"CS2\", \"CS3\", \"CS2\", \"CS1\", \"CS…\n\nunique(expectancy_ratings$Subject)\n\n [1] 1001 1004 1005 1006 1008 1009 1010 1011 1012 1013 1014 1016 1017 1018 1019\n[16] 1020 1025 1026 1027 1028 1029 1031 1032 1033 1034 1035 1036 2001 2002 2008\n[31] 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2025 2026\n[46] 2027 2028 2029 2030 2031 2032 2033 2035 2037 2038 3001 3003 3004 3005 3006\n[61] 3007 3008 3009 3010 3011 3012 3013 3014 3015 3016 3018 3019 3020 3021 3022\n[76] 3023 3024 3025 3026 3027 3028 3029 3030 3031 3032 3033 3034 3036 1021 1022\n[91] 1023 3002 3017"
-  },
-  {
-    "objectID": "Slides/UlkarsViz.html#what-do-we-want-to-visualize",
-    "href": "Slides/UlkarsViz.html#what-do-we-want-to-visualize",
-    "title": "Visualizing Ulkar’s Data",
-    "section": "What do we want to visualize?",
-    "text": "What do we want to visualize?"
-  },
-  {
-    "objectID": "Slides/UlkarsViz.html#further-data-wrangling",
-    "href": "Slides/UlkarsViz.html#further-data-wrangling",
-    "title": "Visualizing Ulkar’s Data",
-    "section": "Further Data Wrangling?",
-    "text": "Further Data Wrangling?"
-  },
-  {
-    "objectID": "Slides/UlkarsViz.html#dataviz",
-    "href": "Slides/UlkarsViz.html#dataviz",
-    "title": "Visualizing Ulkar’s Data",
-    "section": "DataViz",
-    "text": "DataViz"
-  },
-  {
-    "objectID": "Slides/UlkarsViz.html#next-meeting",
-    "href": "Slides/UlkarsViz.html#next-meeting",
-    "title": "Visualizing Ulkar’s Data",
-    "section": "Next Meeting?",
-    "text": "Next Meeting?\nWhen?\nWhat should we cover?\nBasic stats (how basic?), functions, R Projects, writing reports..?"
   },
   {
     "objectID": "Slides/Exercises/W4_exercises.html",
