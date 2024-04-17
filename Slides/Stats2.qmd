@@ -1,0 +1,22 @@
+---
+title: "Stats 2 - Linear Mixed Models"
+subtitle: |
+   | R Coding Club 
+   | RTG 2660
+author: "Dr. Lea Hildebrandt"
+date: 2024/04/30
+description: "Intro to rmANOVA and LMM"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: simple
+    embed-resources: true
+editor: visual
+from: markdown+emoji
+---
+
+# Problem: Dependent Measures
+
+`{css} code.sourceCode {   font-size: 1.4em; }    div.cell-output-stdout {   font-size: 1.4em; }`
