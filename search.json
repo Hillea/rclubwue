@@ -1,10 +1,17 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "R Club Würzburg",
     "section": "",
-    "text": "The R Club is part of the Research Training Group 2660. The target group are PhD researchers in psychology and neuroscience. Responsible for organizing the R Club is Lea Hildebrandt, but all participants are very welcome to contribute."
+    "text": "This is the course website of the R Club of the Research Training Group 2660 at the University and University Clinic in Würzburg, Germany - but it’s open to everyone if space is available!\nThe R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. We may end up as a Data Dojo/Coding Club, where we work on problems together. This way, we can all learn together!\nWe meet weekly on Tuesdays, 16:00 - 18:00 in Room 213 at the Marcusstr, starting in January 2024. The syllabus can be found here. On this page, the slides etc. will be linked.\n\n\n\nSession\n1\nDate\n16.01.24\nTopic\nIntro to R & RStudio\nPreparation/Notes\nInstall R and RStudio, download Dataset1, Dataset2\n\n\n2\n23.01.24\nData Wrangling\nDownload Datasets 1, 2, 3, & 4 (click on link and symbol for “download raw file” on the top-right)\n\n\n\n30.01.24\nNo R Club! (Clinical Research Workshop)\nSelf-study instead: Please have a look at the rest of the data wrangling presentation and/or chapter 6 of Fundamentals of Quantitative Analysis!\n\n\n3\n06.02.24\nRandomization & Counterbalancing\n(Ecem)\n\n\n4\n14.02.24\nData Wrangling 2 & first Visualization\n(Uni closed in the afternoon - carnival? Meet on Wednesday, 14th, 15:00 in 213)\nDownload Datasets: participant-info.csv & ahi-cesd.csv / Speed Dating Data & Codebook\n\nUse the exercise.Rmd and the speed dating data!\n\n\n\n20.02.24\nNo R Club!\n\n\n\n5\n27.02.24\nPreprocessing, e.g. physio data?\n(Francesco)\n\n\n6\n5.03.24\nData Viz\nData: participant-info.csv & ahi-cesd.csv\n\n\n\n12.03.24\nNo R Club!\n\n\n\n7\n21.03.24\nData Viz 2\nWe’ll meet on Thursday, 21st of March, at 15:00. You may join via Zoom (but it might be more difficult to follow).\n\nWe will make a nice plot with Ulkar’s real data!\n\n\n8\n\nStats 1?\nQuick intro with a focus on ANOVA, or start with t-tests and do it in-depths across several weeks?\n\n\n9\n\nFunctions?\n\n\n\n10\n\nWriting Reports\n\n\n\n11\n\nR Projects, Git\n\n\n\n12\n\n\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\""
+  },
+  {
+    "objectID": "slides.html",
+    "href": "slides.html",
+    "title": "Slides",
+    "section": "",
+    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nVisualizing Ulkar’s Data\n\n\nMaking some real DataViz\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet Randomization\n\n\n\n\n\n\nyour name\n\n\nFeb 2, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet More Wrangling\n\n\n\n\n\n\nR Club\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nMore Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nWrangling Physio Markers\n\n\nDefining phases and calculating things\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 27, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\n\n\n\nStats 1 - General Linear Model\n\n\nBrief Overview Basic Statistics\n\n\n\nDr. Lea Hildebrandt\n\n\nApr 16, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "Slides/W4_WrangleViz.html#warm-up",
@@ -138,6 +145,776 @@
     "title": "W4_WrangleViz",
     "section": "Transparency",
     "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(sd_long2, aes(x = gender, fill=gender)) +   \ngeom_bar(show.legend = FALSE,            \n         alpha = .8) +   \n  scale_x_discrete(name = \"Participant Sex\",                    \n                   labels = c(\"Female\", \"Male\")) +   \n  scale_y_continuous(name = \"Number of participants\") +  \n  theme_minimal() +   \n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#schedule-preliminary",
+    "href": "Slides/W1_IntroR.html#schedule-preliminary",
+    "title": "Intro to R",
+    "section": "Schedule (preliminary)",
+    "text": "Schedule (preliminary)\nHow often do we want to meet? (Beginning weekly, maybe later bi-weekly?)\nSemester break?\n\n\n\nSession\nDate\nTopic\nPreparation/Notes\n\n\n\n\n1\n16.01.24\nIntro to R & RStudio\nInstall R and RStudio, download Dataset1, Dataset2\n\n\n2\n23.01.24\nData Wrangling\n\n\n\n3\n30.01.24\nRandomization & Counterbalancing\n(Ecem)\n\n\n4\n06.02.24\nData Visualization\n\n\n\n5\n13.02.24\nPreprocessing, e.g. physio data\n(Francesco)\n(Semester break or continue?)\n\n\n6\n20.02.24\nNo R Club!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#why-write-code",
+    "href": "Slides/W1_IntroR.html#why-write-code",
+    "title": "Intro to R",
+    "section": "Why write code?",
+    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g. SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nYou’ll learn to program!\n\n\n\nChat: What are advantages (or disadvantages!) of coding?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#install-r-rstudio",
+    "href": "Slides/W1_IntroR.html#install-r-rstudio",
+    "title": "Intro to R",
+    "section": "Install R & RStudio",
+    "text": "Install R & RStudio\nYou should all have installed both by now! Who had problems doing so?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#overview-rstudio",
+    "href": "Slides/W1_IntroR.html#overview-rstudio",
+    "title": "Intro to R",
+    "section": "Overview RStudio",
+    "text": "Overview RStudio\n\nRStudio Interface\nopen RStudio!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#rstudio-panes",
+    "href": "Slides/W1_IntroR.html#rstudio-panes",
+    "title": "Intro to R",
+    "section": "RStudio Panes",
+    "text": "RStudio Panes\n\n\n\nScript pane/window -&gt; to save your code\nConsole -&gt; here the commands are run\nEnvironment -&gt; which variables/dataframes are saved\nFiles, plots, help etc. -&gt; files shows you the files in the folder you’re currently in\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\n\nConsole vs. Script (Rmarkdown later)"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
+    "href": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
+    "title": "Intro to R",
+    "section": "Using the Console as a Calculator",
+    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
+    "href": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
+    "title": "Intro to R",
+    "section": "Saving the Results as a Variable/Object",
+    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n“&lt;-” is used to assign values to variables (“=” is also possible but not preferred)\n\nHint: use Alt + - as a shortcut\n\na, multi etc. are the variable names, which can be words, no whitespace allowed\n\nYou can find those now in your Environment!\n\nas you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.\nno output in console!\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\nYou can use those variables for further calculations, e.g. a + multi\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#working-directory",
+    "href": "Slides/W1_IntroR.html#working-directory",
+    "title": "Intro to R",
+    "section": "Working Directory",
+    "text": "Working Directory\n\nIt makes sense to save all your scripts etc. in a folder specifically dedicated to this course.\n\nMake sure that R knows that you want to work in this folder, i.e. set your working directory:\n\nSession -&gt; Set Working Directory -&gt; Choose Directory\n\nAssignment: Please make a folder, e.g. called “R_Club” (but not “R” or anything with spaces in it). Then set your working directory to this folder."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#scripts",
+    "href": "Slides/W1_IntroR.html#scripts",
+    "title": "Intro to R",
+    "section": "Scripts",
+    "text": "Scripts\nIf you type in all your commands/code in the console, it might get lost/you might not remember what you did, and you always have to type it in again if you want to run it again with slight changes. Also, the code in the console is not save-able.\nTherefore, it is better practice to write scripts. Scripts are basically text files that contain your code.\n\nTo open a new script, click File -&gt; New File -&gt; R Script.\nTo run a line of the script, you can either click Run at the top right of the pane or press ctrl + enter. It will always run the line where the cursor is located (or the lines that you have selected with the mouse). To run the whole script, press ctrl + shift + enter."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#scripts-2",
+    "href": "Slides/W1_IntroR.html#scripts-2",
+    "title": "Intro to R",
+    "section": "Scripts 2",
+    "text": "Scripts 2\nAssignment: Open a new file. In this file, write down some of the code (one command per line) that we have used so far and save the file.\nNow run the code (either by pressing “run” at the top right of the script or ctrl + enter)."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#functions",
+    "href": "Slides/W1_IntroR.html#functions",
+    "title": "Intro to R",
+    "section": "Functions",
+    "text": "Functions\nYou might have noticed sqrt(9) earlier. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type ?functionname() in the console, e.g.\n\n?sqrt()\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\n\nDo this now! Anything unclear?"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#functions-2",
+    "href": "Slides/W1_IntroR.html#functions-2",
+    "title": "Intro to R",
+    "section": "Functions 2",
+    "text": "Functions 2\nFunctions often take more than one argument:\n\nrnorm(n = 6, mean = 3, sd = 1)\n# rnorm(6, 3, 1)\n\n# By the way, # denotes a comment (ignored by R), which can be helpful for scripting!\n\nYou can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file)."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#packages",
+    "href": "Slides/W1_IntroR.html#packages",
+    "title": "Intro to R",
+    "section": "Packages",
+    "text": "Packages\nThere are a number of functions that are already included with Base R, but you can greatly extend the power of R by loading packages. Packages are like libraries of functions that someone else wrote.\nYou can load a package using the install.packages() function:\n\ninstall.packages(\"tidyverse\")\n\n(It may be necessary to install Rtools: https://cran.r-project.org/bin/windows/Rtools/)\nBut installing is not enough to be able to actually use the functions from that package. You’d also need to load the package with the libary() function:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\nAssignment: Install and load the tidyverse package (which we will use a lot in this course).\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#read-in-data",
+    "href": "Slides/W1_IntroR.html#read-in-data",
+    "title": "Intro to R",
+    "section": "Read in Data",
+    "text": "Read in Data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats.\nWe will use the files from Fundamentals of Quantitative Analysis. Save these in your course folder on your computer (do not open them!). Set your working directory to the course folder.\n\nDelete the text/code in the R Script you just worked on (and add a comment as a header: “Working with data”). Underneath, add the following code:\n\n# library(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code!"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#looking-at-the-data",
+    "href": "Slides/W1_IntroR.html#looking-at-the-data",
+    "title": "Intro to R",
+    "section": "Looking at the Data",
+    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on the object/variable name in your Environment.\nType View(NameOfObject) in your console, e.g. View(dat).\nIn the console, type in str(dat) or str(pinfo) to get an overview of the data.\nIn the console, type in summary(dat).\nIn the console, type in head(dat).\nWhat is the difference between these commands?\n\n\n\nglimpse() is also possible, but not in base R (dplyr)"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#looking-at-the-data-2",
+    "href": "Slides/W1_IntroR.html#looking-at-the-data-2",
+    "title": "Intro to R",
+    "section": "Looking at the Data 2",
+    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nThe two objects we just read in are data frames, which consists of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown",
+    "href": "Slides/W1_IntroR.html#r-markdown",
+    "title": "Intro to R",
+    "section": "R Markdown",
+    "text": "R Markdown\nR scripts are a good way to save your code. However, you’d better heavily comment in your scripts, so that future you (and potentially collaborators) know what happens in your script.\nAn alternative is an R Markdown file. This is also a sort of script, but you can write text (like in a word processor) and mix it with code chunks, where you can write your R code. R Markdown is the “language” you use to write in these files, which is a variety of Markdown.\nThe advantage of R Markdown files (ending with .Rmd) is that they increase reproducibility. For example, you can write whole reports in R Markdown (and also these slides are made with it!).\nA newer variant is called quarto, which works very similar (but is more flexible) to R Markdown."
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-2",
+    "href": "Slides/W1_IntroR.html#r-markdown-2",
+    "title": "Intro to R",
+    "section": "R Markdown 2",
+    "text": "R Markdown 2\n\n\n\nR script\n\n\n\n\n\nR Markdown\n\n\n\n\n\nR Markdown rendered as html report"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-3",
+    "href": "Slides/W1_IntroR.html#r-markdown-3",
+    "title": "Intro to R",
+    "section": "R Markdown 3",
+    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\n\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\nClick on the little arrow next to knit and select “Knit to PDF”\n\ninsert inline code"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#r-markdown-4",
+    "href": "Slides/W1_IntroR.html#r-markdown-4",
+    "title": "Intro to R",
+    "section": "R Markdown 4",
+    "text": "R Markdown 4\nThere are many useful things you can so with R Markdown: Adding different headers, adding inline code, knitting as a PDF, adding pictures or tables…You can also decide whether the code chunks should be visible in the output etc.\nFor further information, check out the R Markdown cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"
+  },
+  {
+    "objectID": "Slides/W1_IntroR.html#thanks",
+    "href": "Slides/W1_IntroR.html#thanks",
+    "title": "Intro to R",
+    "section": "Thanks!",
+    "text": "Thanks!\nThat’s the lesson on “Getting started with R”!\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
+  },
+  {
+    "objectID": "Slides/Exercises/W3_Randomize_exercises.html",
+    "href": "Slides/Exercises/W3_Randomize_exercises.html",
+    "title": "W3_Randomize_Worksheet",
+    "section": "",
+    "text": "# test &lt;- tibble(\n#   ch1 = c(5,0,0),\n#   ch2 = c(5,5,5),\n#   ch3 = c(5,0,5) %&gt;% \n#      mutate(ch2b = ifelse(ch2==5, 2, ch2),\n#          marker = ch1 + ch2 + ch3)\n# )\n# # 1. Divide every column by 5 to get 0/1 (or if 5 make it 1)\n# test2 &lt;- test %&gt;% \n#   mutate(across(ch1:ch3, ~ .x/5),\n#          marker = ch1*1 + ch2*2 + ch3*4,\n#          ch2b = ifelse(ch2==1, 2, ch2),\n#          marker = ch1 + ch2 + ch3)\n#     #ch1 = ch1/5,\n#      #    ch2 = ch2/5,\n#       #   ch3 = ch3/5)\n# \n# # 2. Multiply columns by column name/value"
+  },
+  {
+    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#francesco",
+    "href": "Slides/Exercises/W3_Randomize_exercises.html#francesco",
+    "title": "W3_Randomize_Worksheet",
+    "section": "",
+    "text": "# test &lt;- tibble(\n#   ch1 = c(5,0,0),\n#   ch2 = c(5,5,5),\n#   ch3 = c(5,0,5) %&gt;% \n#      mutate(ch2b = ifelse(ch2==5, 2, ch2),\n#          marker = ch1 + ch2 + ch3)\n# )\n# # 1. Divide every column by 5 to get 0/1 (or if 5 make it 1)\n# test2 &lt;- test %&gt;% \n#   mutate(across(ch1:ch3, ~ .x/5),\n#          marker = ch1*1 + ch2*2 + ch3*4,\n#          ch2b = ifelse(ch2==1, 2, ch2),\n#          marker = ch1 + ch2 + ch3)\n#     #ch1 = ch1/5,\n#      #    ch2 = ch2/5,\n#       #   ch3 = ch3/5)\n# \n# # 2. Multiply columns by column name/value"
+  },
+  {
+    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-1",
+    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-1",
+    "title": "W3_Randomize_Worksheet",
+    "section": "Task 1",
+    "text": "Task 1\n\nDiscuss with everyone where and how you need randomization or counterbalancing in your study designs. Feel free to take notes below.\n\nNotes:"
+  },
+  {
+    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-2",
+    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-2",
+    "title": "W3_Randomize_Worksheet",
+    "section": "Task 2",
+    "text": "Task 2\n\nWhat kind of function would you need for assigning conditions to participants?\nHow can we solve this problem if we have two different things we want to randomize/counterbalance across two factors (e.g. treatment/control and blue/yellow)?"
+  },
+  {
+    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-3",
+    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-3",
+    "title": "W3_Randomize_Worksheet",
+    "section": "Task 3",
+    "text": "Task 3\n\nWhat are specific problems with randomization/counterbalancing in your study design?"
+  },
+  {
+    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-4",
+    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-4",
+    "title": "W3_Randomize_Worksheet",
+    "section": "Task 4",
+    "text": "Task 4\nLet’s have a look at Ecem’s study, which has a complicated structure for (pseudo-)random assignment of stimuli.\nEcem has 2x4 stimulus characteristics that should vary:\n\nshape: heart, sacral, throat, solar\ncolor: yellow, purple, orange, blue\n\nEach participant should have 4 stimuli assigned, each color and shape should be represented once. In addition, no stimuli (combination of color&shape) should be the same across participants. There are thus 4*4=16 unique stimuli available.\n\nHow would you assign four stimuli to four different participants, making sure that every participant sees every color & shape but no combination is used more than once across participants?\nWrite your solution as pseudo-code as comments: Break it down in little steps and describe which computation should happen at each step/what the code should do.\n\n\n# 1. create vectors for shape and color\n\n# 2. ...\n\n\n# 3. ..."
+  },
+  {
+    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-5",
+    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-5",
+    "title": "W3_Randomize_Worksheet",
+    "section": "Task 5",
+    "text": "Task 5\nIn Ecem’s study, we want to have 100 trials (in Block 1): 60 “single-cue” and 40 “multi-cue” trials.\nFor the 60 single-cue trials, each of the four stimulus types is supposed to be shown 15 time.\nFor the multi-cue trials, each combination (threat-amb1, threat-amb2, safety-amb1, safety-amb2) should be shown 10x.\n\nHow can we make an individual trial list for one participant?\n\n\n# 1. ...\n\n\n# 2. ..."
+  },
+  {
+    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-6",
+    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-6",
+    "title": "W3_Randomize_Worksheet",
+    "section": "Task 6",
+    "text": "Task 6\nWe furthermore want to add the following information for the single-cue trials:\n\nHow can we get the further stimulus information (color, shape) into this list?\nHow can we add the info whether it’s a “sc” or a “mc” trial\nHow can we determine whether a shock should be given in each trial?"
+  },
+  {
+    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-7",
+    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-7",
+    "title": "W3_Randomize_Worksheet",
+    "section": "Task 7",
+    "text": "Task 7\nFor the multi-cue trials, we have two stimuli per trial.\n\nHow can we add the information (color, shape, shock given) for the multi-cue trials?"
+  },
+  {
+    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-8",
+    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-8",
+    "title": "W3_Randomize_Worksheet",
+    "section": "Task 8",
+    "text": "Task 8\nIn the multi-cue trials, Ecem also wants to show two more stimuli: The other combinations of color and shape (e.g. color1 with shape2).\n\nHow can we add these other two combinations of shape and color as new columns?"
+  },
+  {
+    "objectID": "Slides/Stats1.html#what-is-a-model",
+    "href": "Slides/Stats1.html#what-is-a-model",
+    "title": "Stats 1 - General Linear Model",
+    "section": "What is a Model?",
+    "text": "What is a Model?\n\n” “models” are generally simplifications of things in the real world that nonetheless convey the essence of the thing being modeled”\n“All models are wrong but some are useful” (G. Box)\n\n(ST21, Ch 5)\nAim: Find the model that most efficiently and accurately summarizes the way in which the data were actually generated.\nBasic structure of statistical models:\n\\[\ndata=model+error\n\\]\n\na statistical model is generally much simpler than the data being described; it is meant to capture the structure of the data as simply as possible.\nTwo parts:\n\none portion that is described by a statistical model, which expresses the values that we expect the data to take given our knowledge,\nerror that reflects the difference between the model’s predictions and the observed data."
+  },
+  {
+    "objectID": "Slides/Stats1.html#statistical-models",
+    "href": "Slides/Stats1.html#statistical-models",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Statistical Models",
+    "text": "Statistical Models\nIn general, we want to predict single observations (denoted by i) from the model. The fact that we are looking at predictions of observations and not actual values of the data is denoted by the “hat”:\n\\[\n\\widehat{data_i} = model_i\n\\] The error is then simply the deviation of the actual data from the predicted values:\n\\[\nerror_i = data_i - \\widehat{data_i}\n\\] If this doesn’t make much sense yet, let’s look at an example.\n\nThis means that the predicted value of the data for observation i is equal to the value of the model for that observation."
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-simple-model",
+    "href": "Slides/Stats1.html#a-simple-model",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Simple Model",
+    "text": "A Simple Model\nLet’s say we want to have a model of height of children (in the NHANES dataset also used in ST21).\nWhat do you think would be a good model?"
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-simple-model-2",
+    "href": "Slides/Stats1.html#a-simple-model-2",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Simple Model 2",
+    "text": "A Simple Model 2\nThe simplest model would be… the mean of the height values! This would imply that the model would predict the same height for everyone - and all individual deviations would be part of the error term.\nWe can write such a simple model as a formula:\n\\[\ny_i = \\beta + \\epsilon\n\\]\n\\(y_i\\) denotes the individual observations (hence the \\(i\\)) of heights, \\(\\beta\\) is a so-called parameter, and \\(\\epsilon\\) is the error term. In this example, the parameter \\(\\beta\\) would be the same value (= the mean height) for everyone (hence it doesn’t need a \\(i\\) subscript). Parameters are values that we estimate to find the best model."
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-simple-model-3",
+    "href": "Slides/Stats1.html#a-simple-model-3",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Simple Model 3",
+    "text": "A Simple Model 3\nHow do we find parameters that belong to the best fitting model?\n\nWe try to minimize the error!\nRemember, the error is the difference between the actual and predicted values of \\(y\\) (height):\n\\[\nerror_i = y_i - \\hat{y_i}\n\\]\nIf we select a predicted value of 400cm, all individuals’ errors would hugely deviate (because no one is 4m tall). If we average these errors, it would still be a big value.\nA better candidate for such a simple model is thus the arithmetic mean or average:\n\\[\n\\bar{X} = \\frac{\\sum_{i=1}^{n}x_i}{n}\n\\]\nSumming up all individual’s heights and dividing that number by the number of individuals gives us the mean. By definition (see book for proof, the individual errors cancel out), the average error is now 0!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-note-on-errors",
+    "href": "Slides/Stats1.html#a-note-on-errors",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Note on Errors",
+    "text": "A Note on Errors\nWe usually don’t simply average across the individual errors, but across the squared errors.\nThe reason is that positive and negative errors cancel each other out, which is not the case when squared.\nThe mean squared error would be in a different unit then the data (squared!), which is why we usually take the square root of that value to bring it back to the original unit: This leaves us with the root mean squared error (RMSE)!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-slightly-more-complex-model",
+    "href": "Slides/Stats1.html#a-slightly-more-complex-model",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Slightly More Complex Model",
+    "text": "A Slightly More Complex Model\nObviously, the model for predicting height from the average is not very good: It predicts the same height for all children! (The RMSE is 27 cm!)\nHow can we improve this model?\n\nWe can account for other information that we might have!\nFor example, to account for age might be a good idea: Older children are likely taller than younger ones. We plot height against age to visually inspect the relationship:\n\n\n\n\n\n\n\n\n\n\nRMSE: On average, 27 cm “wrong” per individual!\nA: raw data, visible strong relationship\nB: only age (linear relationship)\nC: intercept/constant\nD: also account for gender\n–&gt; line fits data increasingly better!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#a-slightly-more-complex-model-2",
+    "href": "Slides/Stats1.html#a-slightly-more-complex-model-2",
+    "title": "Stats 1 - General Linear Model",
+    "section": "A Slightly More Complex Model 2",
+    "text": "A Slightly More Complex Model 2\nAs we can see, the line (~ model) fits the data points increasingly well, e.g. if we include a constant (or intercept) and age. We would write this as this formula:\n\\[\n\\hat{y_i} = \\hat{\\beta_0} + \\hat{\\beta_1} * age_i\n\\]\nRemember from linear algebra that this defines a line:\n\\[\ny = slope * x + intercept\n\\]\nThus \\(\\beta_0\\) is the parameter for the intercept and \\(\\beta_1\\) for the slope of age!\nThe model fit is now much better: RMSE = 8.36 cm.\n\nAdding gender? Does not improve model too much!\n\nw/o intercept: A, no \\(\\beta_0\\)\nStats Software will estimate best values for \\(\\beta\\)’s"
+  },
+  {
+    "objectID": "Slides/Stats1.html#what-is-a-good-model",
+    "href": "Slides/Stats1.html#what-is-a-good-model",
+    "title": "Stats 1 - General Linear Model",
+    "section": "What is a “Good” Model?",
+    "text": "What is a “Good” Model?\nTwo aims:\n\nDescribe data well (= low error/RMSE)\nGeneralize to new data (low error when applied to new data)\n\nCan be conflicting!\n\nWhere does error come from? (In addition to individual differences!)\n\n\nmeasurement error (noise): random variation in data\n\nactual measurement is biased (broken device, bias etc.)\n“thing measured” may be biased/varies a lot\n\nwrong model specification\n\ne.g. height goes down with age\nimportant variable is missing from model (age!)"
+  },
+  {
+    "objectID": "Slides/Stats1.html#examples-measurement-error",
+    "href": "Slides/Stats1.html#examples-measurement-error",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Examples Measurement Error",
+    "text": "Examples Measurement Error\n\nSimulated relationship between blood alcohol content and reaction time on a driving test, with best-fitting linear model represented by the line. A: linear relationship with low measurement error. B: linear relationship with higher measurement error. C: Nonlinear relationship with low measurement error and (incorrect) linear model\nA: very little error, all points close to fitted line\nB: same relationship much more variability across individuals\nC. wrongly specified model (caffeine!), not a linear relationship. Error high (deviations points - line)"
+  },
+  {
+    "objectID": "Slides/Stats1.html#can-a-model-be-too-good",
+    "href": "Slides/Stats1.html#can-a-model-be-too-good",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Can a Model be too Good?",
+    "text": "Can a Model be too Good?\nYes! This is called overfitting.\n\nIf we fit a line too closely to the data, the model might not be able to generalize to other data well.\n\n\n\n\n\nAn example of overfitting. Both datasets were generated using the same model, with different random noise added to generate each set. The left panel shows the data used to fit the model, with a simple linear fit in blue and a complex (8th order polynomial) fit in red. The root mean square error (RMSE) values for each model are shown in the figure; in this case, the complex model has a lower RMSE than the simple model. The right panel shows the second dataset, with the same model overlaid on it and the RMSE values computed using the model obtained from the first dataset. Here we see that the simpler model actually fits the new dataset better than the more complex model, which was overfitted to the first dataset.\n\n\n\n\n\nsame formula, different noise (simulation) ~ different individuals\nsimpler model fits new data better!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#central-tendency",
+    "href": "Slides/Stats1.html#central-tendency",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Central Tendency",
+    "text": "Central Tendency\nWhy summarize data?\n\nIt’s a model & describes the data! E.g. the mean = central tendency of the data\n\n\nMean, Median, Mode?\n\n\nMean = minimizes sum of squared error, but highly influenced by outliers!\nMedian = “middle” value if ranked, minimizes sum of absolute error, less influenced by extreme values\nMode = most often occurring value\n\n\nExample:\nIf 3 people earn 10,000 Euros per year and 1 person earns 1,000,000:\nMean: 257,500 Euros\nMedian: (Rank: 10,000; 10,000; 10,000; 1,000,000 -&gt; middle value = )10,000 Euros\nMode: 10,000 Euros\n\nexamples\nmean: income –&gt; if one person earns a million and 3 only 10.000 –&gt; mean = 257.500"
+  },
+  {
+    "objectID": "Slides/Stats1.html#variability",
+    "href": "Slides/Stats1.html#variability",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Variability",
+    "text": "Variability\nHow widespread are the data?\n\nVariance and Standard Deviation\nVariance ≊ Mean Squared Error\n\\[\n\\sigma^2 = \\frac{SSE}{N} = \\frac{\\sum_{i=1}^n (x_i - \\mu)^2}{N}\n\\]\n(Note: \\(x_i\\) = value of ind. observation, \\(\\mu\\) = population mean instead of \\(\\hat{X}\\) = sample mean)\n\n\nStandard Deviation ≊ Root Mean Squared Error\n\\[\nSD = \\sigma = \\sqrt{\\sigma^2}\n\\]\n\n\nWe usually don’t know the population mean \\(\\mu\\), thats why we estimate the sample variance (with the “hat”):\n\\[\n\\hat\\sigma^2 = \\frac{\\sum_{i=1}^n (x_i - \\hat{X})^2}{n-1}\n\\]\nNote: we now use \\(\\hat{X}\\) and \\(n\\) for the sample size. \\(n-1\\) is used to make the estimate more robust/less biased.\n\nRemember plot above: Points either close to line or wide-spread\nVariance = sigma^2, deviations of data points from mean (\\(\\mu\\)) squared and summed, divided by number of oberservations\n\\(n-1\\) = Degrees of Freedom, one value is fixed if we know the mean.\nDifference MSE: MSE is diff to predicted value, not necessarily mean (based on formula w/intercept and slope, –&gt; n-2)"
+  },
+  {
+    "objectID": "Slides/Stats1.html#z-scores",
+    "href": "Slides/Stats1.html#z-scores",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Z-Scores",
+    "text": "Z-Scores\n\\[\nZ(x) = \\frac{x - \\mu}{\\sigma}\n\\]\n\n\nstandardizes the distribution: How far is any data point from the mean in units of SD?\ndoesn’t change original relationship of data points!\n\nshifts distribution to have a mean = 0 and SD = 1.\n\nuseful if we compare (or use in a model) variables on different scales/units!\n\n\n\n\n\n\n\n\nDensity (top) and cumulative distribution (bottom) of a standard normal distribution, with cutoffs at one standard deviation above/below the mean.\n\n\n\n\n\nZ of x\nx is single value/data point\nmu, sigma\nz-scores directly comparable"
+  },
+  {
+    "objectID": "Slides/Stats1.html#definitions",
+    "href": "Slides/Stats1.html#definitions",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Definitions",
+    "text": "Definitions\nDependent variable (DV): The outcome variable that the model aims to explain (\\(Y\\)).\nIndependent variable (IV): The variable that we use to explain the DV (\\(X\\)).\nLinear model: The model for the DV is composed of a linear combination of IVs (that are multiplied by different weights!)\n\nThe weights are the parameters \\(\\beta\\) and determine the relative contribution of each IV. (This is what the model estimates! The weights thus give us the important information we’re usually interested in: How strong are IV and DV related.)\nThere may be several DVs, but usually that’s not the case and we will focus on those cases with one DV!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#example",
+    "href": "Slides/Stats1.html#example",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Example",
+    "text": "Example\n\n\nLet’s use some simulated data:\n\n\n\n\n\n\n\n\n\n\nWe can calculate the correlation between the two variables:\n\n\n\n    Pearson's product-moment correlation\n\ndata:  df$grade and df$studyTime\nt = 2, df = 6, p-value = 0.09\nalternative hypothesis: true correlation is not equal to 0\n95 percent confidence interval:\n -0.13  0.93\nsample estimates:\n cor \n0.63 \n\n\nThe correlation is quite high (.63), but the CI is also pretty wide.\n\n\n\nFundamental activities of statistics:\n\nDescribe: How strong is the relationship between grade and study time?\nDecide: Is there a statistically significant relationship between grade and study time?\nPredict: Given a particular amount of study time, what grade do we expect?"
+  },
+  {
+    "objectID": "Slides/Stats1.html#linear-regression",
+    "href": "Slides/Stats1.html#linear-regression",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Linear Regression",
+    "text": "Linear Regression\nUse the GLM (~synonymous to linear regression) to…\n\n\ndecribe the relation between two variables (similar to correlation)\npredict DV for new values of IV (new observations)\nadd multiple IVs!\n\n\n\n\n\nSimple GLM:\n\\[ y = \\beta_0+ x * \\beta_x + \\epsilon \\]\n\\(\\beta_0\\) = intercept, the overall offset of the line when \\(x=0\\) (even if that is impossible)\n\\(\\beta_x\\) = slope, how much do we expect \\(y\\) to change with each change in \\(x\\)?\n\\(y\\) = DV\n\\(x\\) = IV or predictor\n\\(\\epsilon\\) = error term, whatever variance is left over once the model is fit, residuals! (Think of the model as the line that is fitted and the residuals are the vertical deviations of the data points from the line!)\n(If we refer to predicted \\(y\\)-values, after we have estimated the model fit/line, we can drop the error term: \\(\\hat{y} = \\hat{\\beta_0} + x * \\hat{\\beta_x}\\).)"
+  },
+  {
+    "objectID": "Slides/Stats1.html#the-relation-between-correlation-and-regression",
+    "href": "Slides/Stats1.html#the-relation-between-correlation-and-regression",
+    "title": "Stats 1 - General Linear Model",
+    "section": "The Relation Between Correlation and Regression",
+    "text": "The Relation Between Correlation and Regression\nThere is a close relation and we can convert \\(r\\) to \\(\\hat{\\beta_x}\\).\n\\(\\hat{r} = \\frac{covariance_{xy}}{s_x * s_y}\\)\n\\(\\hat{\\beta_x} = \\frac{covariance_{xy}}{s_x*s_x}\\)\n\\(covariance_{xy} = \\hat{r} * s_x * s_y\\)\n\\(\\hat{\\beta_x} = \\frac{\\hat{r} * s_x * s_y}{s_x * s_x} = r * \\frac{s_y}{s_x}\\)\n–&gt; Regression slope = correlation multiplied by ratio of SDs (if SDs are equal, \\(r\\) = \\(\\hat{\\beta}\\) )\n\nEstimation of GLM:\nlinear algebra (R will do that for us!) –&gt; Appendix book"
+  },
+  {
+    "objectID": "Slides/Stats1.html#standard-errors-for-regression-models",
+    "href": "Slides/Stats1.html#standard-errors-for-regression-models",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Standard Errors for Regression Models",
+    "text": "Standard Errors for Regression Models\nWe usually want to make inferences about the regression parameter estimates. For this we need an estimate of their variability.\nWe first need an estimate of how much variability is not explained by the model: the residual variance (or error variance):\nCompute residuals:\n\\[ residual = y - \\hat{y} = y - (x*\\hat{\\beta_x} + \\hat{\\beta_0}) \\]\nCompute Sum of Squared Errors (remember?):\n\\[ SS_{error} = \\sum_{i=1}^n{(y_i - \\hat{y_i})^2} = \\sum_{i=1}^n{residuals^2} \\]\nCompute Mean Squared Error:\n\\[ MS_{error} = \\frac{SS_{error}}{df} = \\frac{\\sum_{i=1}^n{(y_i - \\hat{y_i})^2} }{N - p} \\]\nwhere the \\(df\\) are the number of observations \\(N\\) - the number of estimated parameter \\(p\\) (in this case 2: \\(\\hat{\\beta_0}\\) and \\(\\hat{\\beta_x}\\)).\nFinally, we can calculate the standard error for the full model:\n\\[ SE_{model} = \\sqrt{MS_{error}} \\]\nWe can also calculate the SE for specific regression parameter estimates by rescaling the \\(SE_{model}\\):\n\\[ SE_{\\hat{\\beta_x}} = \\frac{SE_{model}}{\\sqrt{\\sum{(x_i - \\bar{x})^2}}} \\]\n\n\nrescaling SE: by square root of the SS of the X variable"
+  },
+  {
+    "objectID": "Slides/Stats1.html#statistical-tests-for-regression-parameters",
+    "href": "Slides/Stats1.html#statistical-tests-for-regression-parameters",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Statistical Tests for Regression Parameters",
+    "text": "Statistical Tests for Regression Parameters\nWith the parameter estimates and their standard errors, we can compute \\(t\\)-statistics, which represent the likelihood of the observed estimate vs. the expected value under \\(H_0\\) (usually 0, no effect).\n\\[ \\begin{array}{c} t_{N - p} = \\frac{\\hat{\\beta} - \\beta_{expected}}{SE_{\\hat{\\beta}}}\\\\ t_{N - p} = \\frac{\\hat{\\beta} - 0}{SE_{\\hat{\\beta}}}\\\\ t_{N - p} = \\frac{\\hat{\\beta} }{SE_{\\hat{\\beta}}} \\end{array} \\]\nUsually, we would just let R do the calculations:\n\n\n\nCall:\nlm(formula = grade ~ studyTime, data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-10.656  -2.719   0.125   4.703   7.469 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)    76.16       5.16   14.76  6.1e-06 ***\nstudyTime       4.31       2.14    2.01    0.091 .  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 6.4 on 6 degrees of freedom\nMultiple R-squared:  0.403, Adjusted R-squared:  0.304 \nF-statistic: 4.05 on 1 and 6 DF,  p-value: 0.0907\n\n\nThe intercept is significantly different from zero (which is usually not very relevant) and the effect of studyTime is not significant. So for every hour that we study more, the effect on the grade is rather small (4…) but possibly not present.\n\n\\(t\\) ratio of \\(\\beta\\) to its \\(SE\\)!\nintercept: expected grade without studying at all"
+  },
+  {
+    "objectID": "Slides/Stats1.html#quantifying-goodness-of-fit-of-the-model",
+    "href": "Slides/Stats1.html#quantifying-goodness-of-fit-of-the-model",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Quantifying Goodness of Fit of the Model",
+    "text": "Quantifying Goodness of Fit of the Model\nOften, it is useful to check how good the model we estimated fits the data.\n\nWe can do that easily by asking how much of the variability in the data is accounted for by the model?\n\n\nIf we only have one IV (\\(x\\)), then we can simply square the correlation coefficient:\n\\[ R^2 = r^2 \\]\nIn study time example, \\(R^2\\) = 0.4 –&gt; we accounted for 40% of the overall variance in grades!\n\n\nMore generally, we can calculate \\(R^2\\) with the Sum of Squared Variances:\n\\[ R^2 = \\frac{SS_{model}}{SS_{total}} = 1-\\frac{SS_{error}}{SS_{total}} \\]\n\n\\(R^2\\) is the name of the GoF stat!\nA small R² tells us that even though a model might be significant, it may only explain a small amount of information in the DV"
+  },
+  {
+    "objectID": "Slides/Stats1.html#fitting-more-complex-models",
+    "href": "Slides/Stats1.html#fitting-more-complex-models",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Fitting More Complex Models",
+    "text": "Fitting More Complex Models\nOften we want to know the effects of multiple variables (IVs) on some outcome.\nExample:\nSome students have taken a very similar class before, so there might not only be the effect of studyTime on grades, but also of having taken a priorClass.\n\n\n\nWe can built a model that takes both into account by simply adding the “weight” and the IV (priorClass) to the model:\n\\(\\hat{y} = \\hat{\\beta_1}*studyTime + \\hat{\\beta_2}*priorClass + \\hat{\\beta_0}\\)\n\n\nTo model priorClass, i.e. whether each individual has taken a previous class or not, we use dummy coding (0=no, 1=yes).\nThis means, for those who have not taken a class, the whole part of the equation (\\(\\hat{\\beta_2} * priorClass\\)) will be zero - we will add it for the others.\n\\(\\hat{\\beta_2}\\) is thus the difference in means between the two groups!\n\\(\\hat{\\beta_1}\\) is the regression slope of studyTime across data points/regardless of whether someone has taken a class before.\n\n\n\nIf we plot the data, we can see that both IVs seem to have an effect on grades:\n\n\n\n\n\n\n\n\n\n\n\nHow can we tell from the plot that both IVs might have an effect?"
+  },
+  {
+    "objectID": "Slides/Stats1.html#interactions-between-variables",
+    "href": "Slides/Stats1.html#interactions-between-variables",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Interactions Between Variables",
+    "text": "Interactions Between Variables\nWe previously assumed that the effect of studyTime on grade was the same for both groups - but sometimes we expect that this regression slope differs per group!\n\nThis is what we call an interaction: The effect of one variable depends on the value of another variable.\n\n\nExample: What is the effect of caffeine on public speaking?\nThere doesn’t seem to be an effect:\n\n\n\n# perform linear regression with caffeine as independent variable\nlmResultCaffeine &lt;- lm(speaking ~ caffeine, data = df)\nsummary(lmResultCaffeine)\n\n\nCall:\nlm(formula = speaking ~ caffeine, data = df)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-33.10 -16.02   5.01  16.45  26.98 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)   -7.413      9.165   -0.81     0.43\ncaffeine       0.168      0.151    1.11     0.28\n\nResidual standard error: 19 on 18 degrees of freedom\nMultiple R-squared:  0.0642,    Adjusted R-squared:  0.0122 \nF-statistic: 1.23 on 1 and 18 DF,  p-value: 0.281"
+  },
+  {
+    "objectID": "Slides/Stats1.html#interactions-2",
+    "href": "Slides/Stats1.html#interactions-2",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Interactions 2",
+    "text": "Interactions 2\nWhat if we find research suggesting that anxious people react differently to caffeine than non-anxious people?\nLet’s include anxiety in the model:\n\n\n\n# compute linear regression adding anxiety to model\nlmResultCafAnx &lt;- lm(speaking ~ caffeine + anxiety, data = df)\nsummary(lmResultCafAnx)\n\n\nCall:\nlm(formula = speaking ~ caffeine + anxiety, data = df)\n\nResiduals:\n   Min     1Q Median     3Q    Max \n-32.97  -9.74   1.35  10.53  25.36 \n\nCoefficients:\n                  Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)        -12.581      9.197   -1.37     0.19\ncaffeine             0.131      0.145    0.91     0.38\nanxietynotAnxious   14.233      8.232    1.73     0.10\n\nResidual standard error: 18 on 17 degrees of freedom\nMultiple R-squared:  0.204, Adjusted R-squared:  0.11 \nF-statistic: 2.18 on 2 and 17 DF,  p-value: 0.144\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIt looks like the effect of caffeine is indeed different for the two anxiety groups: Increasing for non-anxious people and decreasing for anxious ones.\nHowever, the model is not significant!\n\n\nThis is due to the fact that we only look at additive effects (main effects) with this model. Overall, neither caffeine nor anxiety predicts grades.\nIn other words: The model tries to fit the same slope for both groups, which is a flat line.\n\nexplain additive effects: flat line for average caffeine effect, no difference for means of anxiety groups"
+  },
+  {
+    "objectID": "Slides/Stats1.html#interactions-3",
+    "href": "Slides/Stats1.html#interactions-3",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Interactions 3",
+    "text": "Interactions 3\nTo allow for different slopes for each group (i.e. for the effect of caffeine to vary between the anxiety groups), we have to model the interaction as well.\nThe interaction is simply the product of the two variables:\n\n\n\n# compute linear regression including caffeine X anxiety interaction\nlmResultInteraction &lt;- lm(\n  speaking ~ caffeine + anxiety + caffeine:anxiety,\n  # speaking ~ caffeine * anxiety,  # same!\n  data = df\n)\nsummary(lmResultInteraction)\n\n\nCall:\nlm(formula = speaking ~ caffeine + anxiety + caffeine:anxiety, \n    data = df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-11.385  -7.103  -0.444   6.171  13.458 \n\nCoefficients:\n                           Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)                 17.4308     5.4301    3.21  0.00546 ** \ncaffeine                    -0.4742     0.0966   -4.91  0.00016 ***\nanxietynotAnxious          -43.4487     7.7914   -5.58  4.2e-05 ***\ncaffeine:anxietynotAnxious   1.0839     0.1293    8.38  3.0e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 8.1 on 16 degrees of freedom\nMultiple R-squared:  0.852, Adjusted R-squared:  0.825 \nF-statistic: 30.8 on 3 and 16 DF,  p-value: 7.01e-07\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe now see that there are significant main effects for both caffeine and anxiety, as well as the significant interaction between both variables. (We have to be careful of interpreting the main effects when an interaction is also significant!)\n\n\nThe interpretation of the coefficients when interactions are included is not as straight forward!\n\n\nIf you want to report the “typical” ANOVA table with main effects and the general interaction:\n\nanova(lmResultInteraction)\n\nAnalysis of Variance Table\n\nResponse: speaking\n                 Df Sum Sq Mean Sq F value Pr(&gt;F)    \ncaffeine          1    455     455    6.96 0.0179 *  \nanxiety           1    992     992   15.17 0.0013 ** \ncaffeine:anxiety  1   4593    4593   70.27  3e-07 ***\nResiduals        16   1046      65                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\ninterpretation coefficients:\nintercept: intercept of anxious group!\nintercept not anxious: difference intercept anxiousnotanxious\nslope anxious: only for the anxious group!\nslope not anxious: diff in slopes\nno main effects!!!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#model-comparison",
+    "href": "Slides/Stats1.html#model-comparison",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Model Comparison",
+    "text": "Model Comparison\nSometimes, we want to compare two (nested!) models to see which one fits the data better.\nWe can do so by using the anova()* function in R:\n\nanova(lmResultCafAnx, lmResultInteraction) \n\nAnalysis of Variance Table\n\nModel 1: speaking ~ caffeine + anxiety\nModel 2: speaking ~ caffeine + anxiety + caffeine:anxiety\n  Res.Df  RSS Df Sum of Sq    F Pr(&gt;F)    \n1     17 5639                             \n2     16 1046  1      4593 70.3  3e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThis shows that Model 2, incl. the interaction, is to be preferred.\n\nNote: We can only use this method with nested models, which means that the simpler (reduced) model only contains variables also included in the more complex (full) model.\n\n\nWald compares the ratio of squared errors to an F-distribution (sound familiar from ANOVA?), while likelihood ratio compares the ratio of likelihoods to a χ2 distribution\n\n\n\n*Yes, it is kind of an ANOVA as well, in that (a ratio of) squared errors is compared to an \\(F\\)-distribution…"
+  },
+  {
+    "objectID": "Slides/Stats1.html#criticizing-our-model-and-checking-assumptions",
+    "href": "Slides/Stats1.html#criticizing-our-model-and-checking-assumptions",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Criticizing Our Model and Checking Assumptions",
+    "text": "Criticizing Our Model and Checking Assumptions\n“Garbage in, garbage out” - we have to make sure our model is properly specified!\n\nProperly specified = having included the appropriate IVs.\n\n\nThe model also needs to satisfy the assumptions of the statistical method (= GLM).\nOne important assumption of the GLM is that the residuals are normally distributed (NOT necessarily the data!).\nThis assumption can be violated by a not properly specified model or because the data are inappropriate for the statistical model.\n\n\nWe can use a Q-Q plot, which represents the quantiles of two distributions/variables (e.g. the data and a normal distribution of the same data) against each other.\nIf the data points diverge substantially from the line (especially in the extremes), we can conclude that the residuals are not normally distributed."
+  },
+  {
+    "objectID": "Slides/Stats1.html#model-diagnostics-2",
+    "href": "Slides/Stats1.html#model-diagnostics-2",
+    "title": "Stats 1 - General Linear Model",
+    "section": "Model Diagnostics 2",
+    "text": "Model Diagnostics 2\nTo check the assumptions, we can easily run a function for model diagnostics (incl. Q-Q plots) in R. The function, check_model(), is included in the performance package by the easystats team (who make great packages for everything related to statistical modeling!)\n\n# install.packages(\"easystats) \nlibrary(performance)  \n\ncheck_model(lmResultInteraction)\n\n\nWe’re not going into detail about all these diagnostics (and hard to see!), but it is always a good idea to run diagnostics/check assumptions for your models!"
+  },
+  {
+    "objectID": "Slides/Stats1.html#what-does-predict-really-mean",
+    "href": "Slides/Stats1.html#what-does-predict-really-mean",
+    "title": "Stats 1 - General Linear Model",
+    "section": "What Does “Predict” Really Mean?",
+    "text": "What Does “Predict” Really Mean?\nWe neither mean “predicting before seeing the data/in the future” nor mean to imply causality!\n\nIt simply refers to fitting a model to the data: We estimate (or predict) values for the DV (\\(\\hat{y}\\)) and the IVs are often referred to as predictors.\nRelated to: predicting future values"
+  },
+  {
+    "objectID": "Slides/Stats1.html#anova",
+    "href": "Slides/Stats1.html#anova",
+    "title": "Stats 1 - General Linear Model",
+    "section": "ANOVA",
+    "text": "ANOVA\nAs you saw earlier, the “normal” ANOVA is a special case of the linear model.\nThe difference is that the linear model is a bit more flexible in terms of including different IVs/predictors (continuous & categorical), whereas the ANOVA can only use categorical IVs (unless you run an ANCOVA).\n\nAn ANOVA is basically an F-Test that we have used previously (e.g. anova(modelfit)).\nThe F statistic is calculated by differentiating Sum of Squares Within (SSW) and Sum of Squares Between (SSB) categories/factor levels:\n\\[\nSSW = \\sum_{i=1}^n{(y_{ij} - \\bar{y_j})^2}\n\\]\nSSW is the (squared and summed) difference between each data point and it’s category’s mean.\n\\[\nSSB = \\sum_{i=1}^n{(\\bar{y_j} - \\bar{y})^2}\n\\]\nSSB is the (squared and summed) difference between each category’s mean and the overall mean.\n\\[\nF = \\frac{SSB/(M*(N-1))}{SSW/(M-1)}\n\\]\nM = number of categories/groups/factor levels; N = number of participants/observations"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#warm-up",
+    "href": "Slides/W3c_WranglingMarkers.html#warm-up",
+    "title": "Wrangling Physio Markers",
+    "section": "Warm up?",
+    "text": "Warm up?\nDid anyone bring a problem?"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
+    "href": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
+    "title": "Wrangling Physio Markers",
+    "section": "Problem Definition (1)",
+    "text": "Problem Definition (1)\nYou have collected data, let’s say Skin Conductance, during your experiment with several trials. In each participant’s file, you thus have (at least) two columns: SC and markers, and probably time. Markers are numbers that denote certain events, such as the start of a phase or trial.\nThe data set could thus like this:\n\n\n\ntime\nSC\nmarkers\n\n\n\n\n100\n1.964\n10\n\n\n200\n2.004\n0\n\n\n300\n2.365\n0\n\n\n400\n2.201\n5\n\n\n500\n2.589\n0\n\n\n600\n2.662\n0\n\n\n700\n2.803\n0\n\n\n800\n2.754\n0\n\n\n900\n2.839\n6\n\n\n1000\n2.915\n0\n\n\n\nLet’s say 10 is the onset of the block, 5 the onset of the trial, and 6 the end of the trial or onset of the next phase.\nHow can we make sure we know which rows belong to which phase of the experiment, e.g. which data points we need to use if we want to calculate something for the trial starting with marker 5?\nIn small groups, brainstorm how you solve this!\n(Break it down in little steps, pseudo-code)"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#francescos-data",
+    "href": "Slides/W3c_WranglingMarkers.html#francescos-data",
+    "title": "Wrangling Physio Markers",
+    "section": "Francesco’s Data",
+    "text": "Francesco’s Data\nWe will use Francesco’s data of his pilot participant 2 (VP02.txt) to solve this problem.\nHowever, this brings us to a different problem, because his data are in a weird format! The actual data only start after a number of rows with channel information…\nHow can we read in the data well??\n\nFrancesco’s data"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
+    "href": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
+    "title": "Wrangling Physio Markers",
+    "section": "One possible solution - reading in data",
+    "text": "One possible solution - reading in data\nFirst one to finish: Share solution! 😁\n\n\n  library(tidyverse)\n  VPcode &lt;- \"VP02\"\n  \n  # find the onset of the data to skip long header (may vary per file, but starts with min or CH1)\n  findstart &lt;-  read_lines(paste0(\"Data/\", paste0(VPcode,\".txt\")), n_max = 50)\n  header_idx &lt;- str_which(findstart, \"^min|CH1\")\n  \n  # read in data from the next line and the header from that line\n  header &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx-1, n_max = 1)\n  \n  phy_data &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx)\n  \n  names(phy_data) &lt;- names(header)\n  \n  head(phy_data)\n\n# A tibble: 6 × 11\n    CH13   CH14  CH28  CH29  CH30  CH31  CH32  CH33  CH34  CH35 ...11\n   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;\n1 0.0258 0.0674     0     0     0     0     0     0     0     0 NA   \n2 0.0288 0.0681     0     0     0     0     0     0     0     0 NA   \n3 0.0258 0.0681     0     0     0     0     0     0     0     0 NA   \n4 0.0273 0.0652     0     0     0     0     0     0     0     0 NA   \n5 0.0258 0.0627     0     0     0     0     0     0     0     0 NA   \n6 0.0212 0.0581     0     0     0     0     0     0     0     0 NA"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
+    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Get the correct markers",
+    "text": "Get the correct markers\nRemember a few weeks ago when we talked about how to transform the binary values in the eight channels to markers? Do that now!\nReminder:\nChannel 1 = value 1\nChannel 2 = 2\nChannel 3 = 4\nChannel 4 = 8\nChannel 5 = 16\nChannel 6 = 32\nChannel 7 = 64\nChannel 8 = 128.\n\nSo if there’s a signal (which will have the value “5”) in channel 1, 3, and 6, the resulting marker should be 1+4+32=37.\nImplement this now in R code!\nAlso check whether it worked correctly."
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solution - markers",
+    "text": "Possible solution - markers\n\n\nphy_data &lt;- phy_data %&gt;% \n    \n    # rename channels to more sensible names\n    rename(#time = min,  # doesn't exist in all files\n      SC = CH13,\n      HR = CH14,  # is this HR?\n      one = CH28,\n      two = CH29,\n      four = CH30,\n      eight = CH31,\n      sixteen = CH32,\n      thirtytwo = CH33,\n      sixtyfour = CH34,\n      hundredtwentyeight = CH35) %&gt;% \n    \n    # get time from start (make it based on sampling rate of 2000Hz --&gt; 0.5msec between samples) and triggers\n    mutate(# combine digital input channels from 8-bit binary to decimal\n           marker = (1*one + 2*two + 4*four + 8*eight + 16*sixteen + 32*thirtytwo + 64*sixtyfour + 128*hundredtwentyeight) / 5)\n\n# check whether markers were calculated correctly\nunique(phy_data$marker)\n\n [1]   0 128  11   4   1  16  22  33  90   7  32   8  44  55  64   2  66\n\nidx_first_marker &lt;- which(phy_data$marker != 0)[c(1,1000,2000)]\nphy_data[idx_first_marker,]\n\n# A tibble: 3 × 12\n     SC      HR   one   two  four eight sixteen thirtytwo sixtyfour\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1  3.63  0.0221     0     0     0     0       0         0         0\n2  9.56  0.0584     5     0     0     0       0         0         0\n3 11.3  -0.0713     0     5     0     5       5         0         5\n# ℹ 3 more variables: hundredtwentyeight &lt;dbl&gt;, ...11 &lt;lgl&gt;, marker &lt;dbl&gt;"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
+    "href": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
+    "title": "Wrangling Physio Markers",
+    "section": "Get trial onsets",
+    "text": "Get trial onsets\nFor Francesco’s data, the markers 90 (CS+) and 7 (CS-) are of interest, as they denote the trial onsets.\nFirst check out whether and how often these markers exist.\nThe markers are shown for ~55 samples each. How can we get the onset only (i.e. only one sample/row)?\nHow many trials do we have?"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solutions - get onsets",
+    "text": "Possible solutions - get onsets\nWho has a good solution?\n\nOne option is to get the streaks of the marker column using the rle() function in base R (there’s also an even handier rleid() function in the data.table package…).\n\nstreaks &lt;- rle(phy_data$marker) # gives two lists: lenght and value, you'd still have to add the lengths up again \n\nOr you could simply get the difference in marker value to previous sample. All values in a streak will be 0, every onset will be different from 0. We can then filter either by the value of this difference (e.g. -7, but we don’t know exactly!) or by != 0 + marker == 7.\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(diffs = marker - lag(marker),         \n         onsets7 = (diffs != 0) & (marker == 7),          \n         onsets90 = (diffs != 0) & (marker == 90),          \n         # or we combine it in one column:          \n         onsets = ifelse((diffs != 0) & (marker != 0), marker, NA))"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#time-column",
+    "href": "Slides/W3c_WranglingMarkers.html#time-column",
+    "title": "Wrangling Physio Markers",
+    "section": "Time column",
+    "text": "Time column\nThere is no time column! It might make sense to make an artificial time column (if we know the sampling rate, this would be possible) or we can simply add the rownumber as a separate column.\nHow would you do this?"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#solution---time",
+    "href": "Slides/W3c_WranglingMarkers.html#solution---time",
+    "title": "Wrangling Physio Markers",
+    "section": "Solution - time",
+    "text": "Solution - time\n\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(time = 1:nrow(phy_data),\n         time2 = 1:n(),\n         time3 = row_number()) %&gt;% \n  rownames_to_column(\"time4\")"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
+    "href": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Get the offset markers",
+    "text": "Get the offset markers\nIn Francesco’s case, there is not necessarily an “end-marker” (or the onset of the next phase), but we know that each trial is 8 sec. long. It might make sense to add this offset to the data.\nCome up with a way to add offset markers to the dara 8 sec after the 7 or 90 onsets!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solution - offset markers",
+    "text": "Possible solution - offset markers\nPlease share ideas!\n\nI would probably simply get the indeces of the markers, add the correct number of samples - based on new time column (if it is really time) or sampling rate - to these, and add markers to these new indices (but there might be a tidyverse-isher way as well!):\n\n# helpers\nsampling_rate &lt;- 2000\neight_sec &lt;- sampling_rate * 8\n\nonsets790 &lt;- which(phy_data$onsets %in% c(7,90))\noffsets790 &lt;- onsets790 + eight_sec\n\nphy_data$onsets[offsets790] &lt;- 150\n\n\n# check wether correct\ntest &lt;- filter(phy_data, !is.na(onsets) & onsets != 0) %&gt;% select(onsets)"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
+    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
+    "title": "Wrangling Physio Markers",
+    "section": "Get the correct phases",
+    "text": "Get the correct phases\nBack to the original problem: We want to get the correct “phases” of the experiment to do calculations (e.g. calculate the mean within the phase) with, e.g. the trials.\nCalculate the mean SC for each trial (starting with either 7 or 90).\nYou might have to take different intermediate steps, depending on your solution!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solutions - get trials",
+    "text": "Possible solutions - get trials\nShow all your solutions!\n\nThere are a number of different ways to achieve this. You could use a for-loop to loop through all onsets, get the index and the index of the offset marker and calculate the mean of that period:\n\nmeans &lt;- tibble(means = rep(NA, length(onsets790)),\n                marker = rep(NA, length(onsets790)))\n\nfor (i in seq(onsets790)) {\n  means$means[i] &lt;- mean(phy_data$SC[onsets790[i]]:phy_data$SC[offsets790[i]]) \n  means$marker[i] &lt;- phy_data$marker[onsets790[i]]\n}\n\n#possibly add other info like what kind of marker/trial etc.\n\nAnother (tidyverse) solution would be to get the trial number, fill in the onsets (so that all samples until the next marker are filled in with e.g. 7), group_by the marker number and trial, and summarize:\n\nmeans2 &lt;- phy_data %&gt;% \n  # use cumsum() to get a trial number\n  mutate(trial_onset = ifelse(is.na(onsets), 0, 1),\n           trial = cumsum(trial_onset)) %&gt;% \n  fill(onsets) %&gt;% \n  group_by(trial, onsets) %&gt;% \n  summarise(means = mean(SC)) %&gt;% \n  # possibly filter to only keep 7 and 90\n  filter(onsets %in% c(90,7))"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
+    "href": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
+    "title": "Wrangling Physio Markers",
+    "section": "Extra task: Get min and max within window",
+    "text": "Extra task: Get min and max within window\nFor the SC data, we don’t only need the mean, but rather the local minimum and maximum 1-5 sec. after stimulus onset (or rather, the maximum after the minimum, but let’s start with overall min and max).\nTry to find the min. and max. in the 1-5 sec. window!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
+    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
+    "title": "Wrangling Physio Markers",
+    "section": "Possible solutions - min and max",
+    "text": "Possible solutions - min and max\nAny ideas?\n\nSimilar to above!"
+  },
+  {
+    "objectID": "Slides/W3c_WranglingMarkers.html#thanks",
+    "href": "Slides/W3c_WranglingMarkers.html#thanks",
+    "title": "Wrangling Physio Markers",
+    "section": "Thanks!",
+    "text": "Thanks!\nNext week: Data Viz (really!)"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#ggplot",
+    "href": "Slides/W3b_DataVizR.html#ggplot",
+    "title": "Data Visualization",
+    "section": "ggplot",
+    "text": "ggplot\nWe will use a package called ggplot2 (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful, publication ready figures.\nThe main function to “start” plotting is ggplot() - we will then add layers of data and layers to tweak the appearance.\n\nLayers of a ggplot"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#activity-1-set-up",
+    "href": "Slides/W3b_DataVizR.html#activity-1-set-up",
+    "title": "Data Visualization",
+    "section": "Activity 1: Set Up",
+    "text": "Activity 1: Set Up\n\nDownload ahi-cesd.csv and participant-info.csv into the folder on your computer for this chapter!\nOpen RStudio and set the working directory to your chapter folder. Ensure the environment is clear.\nOpen a new R Markdown document and save it in your working directory. Call the file “DataVisualisation1”.\nDelete the default R Markdown welcome text and insert a new code chunk.\nLoad the data into your environment and join the two datasets. Keep only the columns ahiTotal, cesdTotal, sex, age, educ, income, occasion, elapsed.days.\n\n\n\nlibrary(tidyverse) \n\ndat &lt;- read_csv(\"Data/ahi-cesd.csv\")\npinfo &lt;- read_csv(\"Data/participant-info.csv\")\n\nall_dat &lt;- inner_join(dat, \n                      pinfo, \n                      by= c(\"id\", \"intervention\"))\n\nsummarydata &lt;- select(.data = all_dat, \n                      ahiTotal, \n                      cesdTotal, \n                      sex, \n                      age, \n                      educ, \n                      income, \n                      occasion, \n                      elapsed.days) \n\n\nwhat happens in the code chunk?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#look-at-the-data",
+    "href": "Slides/W3b_DataVizR.html#look-at-the-data",
+    "title": "Data Visualization",
+    "section": "Look at the Data",
+    "text": "Look at the Data\nHave a look at the types of data:\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;dbl&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;dbl&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…\n\n\nWhat do you see?\n\nAll variables are loaded as numeric. However, are all of those numeric?\n\n\nsex, educ and income are categories, not numbers per se. We call these variables factors! We need to correct R and convert the data type to factor. Checking and adjusting the data types will be important for plotting and analyzing the data, you might otherwise get strange/wrong results!\nHow would you convert them to factors?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
+    "href": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
+    "title": "Data Visualization",
+    "section": "Activity 2: Transform Data Type",
+    "text": "Activity 2: Transform Data Type\nType and run the below code to change the categories to factors.\n\nYou can read each line of the mutate as “overwrite the data that is in that column with the same values now considered factors and not doubles”\nSo for example, the 1s in sex change to categorical factors instead of numerical 1s.\nRemember if you mutate a new column with the same name as the old one, it will overwrite the column.\n\n\nsummarydata &lt;- summarydata %&gt;%\n  mutate(sex = as_factor(sex),\n         educ = as_factor(educ),\n         income = as_factor(income))\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;fct&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;fct&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;fct&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-first-layer",
+    "href": "Slides/W3b_DataVizR.html#the-first-layer",
+    "title": "Data Visualization",
+    "section": "The First Layer",
+    "text": "The First Layer\n\nThe first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).\naes() can take both an x and y argument, however, with a bar plot you are just asking R to count the number of data points in each group so you don’t need to specify this.\n\n\n\nggplot(summarydata, aes(x = sex))"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-second-layer",
+    "href": "Slides/W3b_DataVizR.html#the-second-layer",
+    "title": "Data Visualization",
+    "section": "The Second Layer",
+    "text": "The Second Layer\nThe next layer adds a geom or a shape, in this case we use geom_bar() as we want to draw a bar plot.\n\nNote that we are adding layers, using a + between layers. This is a very important difference between pipes and visualization.\n\n\n\nggplot(summarydata, aes(x = sex)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\n\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE)"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
+    "href": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
+    "title": "Data Visualization",
+    "section": "The Next Layers - Improving the Plot",
+    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
+    "href": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
+    "title": "Data Visualization",
+    "section": "Themes: Changing the Appearance",
+    "text": "Themes: Changing the Appearance\nThere are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.\nWe will now change the default theme to theme_minimal(), but you can also try other themes (just type “theme_” and see what the autocomplete brings up).\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#colors",
+    "href": "Slides/W3b_DataVizR.html#colors",
+    "title": "Data Visualization",
+    "section": "Colors",
+    "text": "Colors\nThere are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.\nA popular palette is viridis. We can simply add a function/layer to your ggplot named scale_fill_viridis_d() (d for discrete). The function hast 5 color options (A - E).\n\nType and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#transparency",
+    "href": "Slides/W3b_DataVizR.html#transparency",
+    "title": "Data Visualization",
+    "section": "Transparency",
+    "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#grouped-plots",
+    "href": "Slides/W3b_DataVizR.html#grouped-plots",
+    "title": "Data Visualization",
+    "section": "Grouped Plots",
+    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\",\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#facetting",
+    "href": "Slides/W3b_DataVizR.html#facetting",
+    "title": "Data Visualization",
+    "section": "Facetting",
+    "text": "Facetting\nYou could also use facets to divide your data visualizations:\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_wrap(~income)\n\n\n\n\n\n\n\n\n\n\nTry to switch sex and income!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#violin-boxplot",
+    "href": "Slides/W3b_DataVizR.html#violin-boxplot",
+    "title": "Data Visualization",
+    "section": "Violin-Boxplot",
+    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot before?\n\n\nggplot(summarydata, aes(x = income, \n                        y = ahiTotal, \n                        fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#layer-order",
+    "href": "Slides/W3b_DataVizR.html#layer-order",
+    "title": "Data Visualization",
+    "section": "Layer Order",
+    "text": "Layer Order\nThe order of layers is crucial, as the plot will be built up in that order:\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_violin() +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_boxplot() +\n  geom_violin()"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#scatterplot",
+    "href": "Slides/W3b_DataVizR.html#scatterplot",
+    "title": "Data Visualization",
+    "section": "Scatterplot",
+    "text": "Scatterplot\nIf we have continuous data of two variables, we often want to make a scatter plot:\n\n\nggplot(summarydata, aes(x = age, y = cesdTotal))+\n  geom_point()+\n  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures",
+    "href": "Slides/W3b_DataVizR.html#saving-your-figures",
+    "title": "Data Visualization",
+    "section": "Saving your Figures",
+    "text": "Saving your Figures\nYou can use ggsave() to save your plots. If you don’t tell ggsave() which plot you want to save, by default it will save the last plot you created.\nYou just have to enter the name of the file to be saved (in your working directory) like this:\n\nggsave(\"violin-boxplot.png\")\n\nCheck whether indeed the last plot was saved!\n\nYou can also specify the dimensions of your plot to be saved:\n\nggsave(\"violin-boxplot.png\",\n       width = 10,\n       height = 8,\n       units = \"cm\")"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures-2",
+    "href": "Slides/W3b_DataVizR.html#saving-your-figures-2",
+    "title": "Data Visualization",
+    "section": "Saving your Figures 2",
+    "text": "Saving your Figures 2\nYou can also assign the plot to an object in your environment (just like we did with the tibbles previously) and then tell ggsave() which object to save. This is a bit safer.\nRun the code for the violin-boxplot again and save the plot in an object called viobox. You’d then have to explicitly tell ggsave() to save the object viobox:\n\n\nviobox &lt;- summarydata %&gt;%\n  ggplot(aes(x = income,\n             y = ahiTotal,\n             fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\nggsave(\"violin-boxplot-stored.png\", plot = viobox)\n\n\n\n\n\nDo not add ggsave() to the plot with a +. Instead run it on a separate line!\nIf plot is assigned to object, it won’t be displayed unless you type viobox in the console!"
+  },
+  {
+    "objectID": "Slides/W3b_DataVizR.html#thanks",
+    "href": "Slides/W3b_DataVizR.html#thanks",
+    "title": "Data Visualization",
+    "section": "Thanks!",
+    "text": "Thanks!\nCheck out Chapter 13 of QuantFun for further exercises and tips for data visualization!\nAlso keep in mind: Coding is a lot of googling things!\nYou can also check out the R Graph Gallery for code for different types of plots.\n\nLearning objectives\n\nKnow how to transform (pivot) and join data\nUnderstand the basics of a ggplot (layers etc.)\nBe able to make your first own plots, such as bar charts, violin + boxplots, scatterplots\nKnow what a grouped plot and a facetted plot is\n\n\n\nNext:\n\n? (More data wrangling? Data viz?)\nShould we make a plot with real data from one of you?\nWhen? 19th -&gt; defense, 26th -&gt; easter break… Wednesday, 20th?\n\nGeneral Question:\n\nOnline?\nIs this ~every other week fine?"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#ulkars-data",
+    "href": "Slides/UlkarsViz.html#ulkars-data",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "Ulkar’s Data",
+    "text": "Ulkar’s Data\nWhat is the content of the four files we have? What do we need to know about the paradigm and data? What do all the variables/columns stand for?\n\nexpactacy_ratings.txt\n\n\n\nPIT-Transfer-only.txt\npit-transfer-all.txt\nlearning.txt\n\nRead in and inspect data:\n\nlibrary(tidyverse) \n\nexpectancy_ratings &lt;- read_delim(\"Data/expactacy_ratings.txt\", delim = \"\\t\")\ntransfer &lt;- read_delim(\"Data/PIT-Transfer-only.txt\", delim = \"\\t\")\ntransfer_all &lt;- read_delim(\"Data/pit-transfer-all.txt\", delim = \"\\t\")\nlearning &lt;- read_delim(\"Data/learning.txt\", delim = \"\\t\")\n\nglimpse(expectancy_ratings)\n\nRows: 1,674\nColumns: 7\n$ Subject           &lt;dbl&gt; 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001…\n$ Pavlovian_Stimuli &lt;chr&gt; \"Triangle1.bmp\", \"Triangle1.bmp\", \"Star1.bmp\", \"Star…\n$ Procedure         &lt;chr&gt; \"ExpectancyRate\", \"ExpectancyRate\", \"ExpectancyRate\"…\n$ Expectancy_Rating &lt;dbl&gt; 5, 5, 3, 3, 5, 5, 2, 2, 2, 3, 5, 3, 2, 5, 5, 5, 5, 3…\n$ Responses         &lt;dbl&gt; 2, 3, 3, 1, 1, 1, 1, 1, 3, 2, 3, 2, 2, 2, 3, 3, 2, 1…\n$ Group             &lt;chr&gt; \"Crash/Load\", \"Crash/Load\", \"Crash/Load\", \"Crash/Loa…\n$ CS                &lt;chr&gt; \"CS3\", \"CS3\", \"CS2\", \"CS2\", \"CS3\", \"CS2\", \"CS1\", \"CS…\n\nunique(expectancy_ratings$Subject)\n\n [1] 1001 1004 1005 1006 1008 1009 1010 1011 1012 1013 1014 1016 1017 1018 1019\n[16] 1020 1025 1026 1027 1028 1029 1031 1032 1033 1034 1035 1036 2001 2002 2008\n[31] 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2025 2026\n[46] 2027 2028 2029 2030 2031 2032 2033 2035 2037 2038 3001 3003 3004 3005 3006\n[61] 3007 3008 3009 3010 3011 3012 3013 3014 3015 3016 3018 3019 3020 3021 3022\n[76] 3023 3024 3025 3026 3027 3028 3029 3030 3031 3032 3033 3034 3036 1021 1022\n[91] 1023 3002 3017"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#what-do-we-want-to-visualize",
+    "href": "Slides/UlkarsViz.html#what-do-we-want-to-visualize",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "What do we want to visualize?",
+    "text": "What do we want to visualize?"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#further-data-wrangling",
+    "href": "Slides/UlkarsViz.html#further-data-wrangling",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "Further Data Wrangling?",
+    "text": "Further Data Wrangling?"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#dataviz",
+    "href": "Slides/UlkarsViz.html#dataviz",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "DataViz",
+    "text": "DataViz"
+  },
+  {
+    "objectID": "Slides/UlkarsViz.html#next-meeting",
+    "href": "Slides/UlkarsViz.html#next-meeting",
+    "title": "Visualizing Ulkar’s Data",
+    "section": "Next Meeting?",
+    "text": "Next Meeting?\nWhen?\nWhat should we cover?\nBasic stats (how basic?), functions, R Projects, writing reports..?"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html",
+    "href": "Slides/Exercises/W4_exercises.html",
+    "title": "W4_WrangleViz",
+    "section": "",
+    "text": "Today, we’re going to work with a data set on speed dating together. Feel free to google (coding is 90% googling…) or use AI as much as you want (but also think about the steps you need to take yourself…).\nFirst of all, possibly download (or locate) the data and load it into R:\n\n# load data into RStudio"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#valentines-day",
+    "href": "Slides/Exercises/W4_exercises.html#valentines-day",
+    "title": "W4_WrangleViz",
+    "section": "",
+    "text": "Today, we’re going to work with a data set on speed dating together. Feel free to google (coding is 90% googling…) or use AI as much as you want (but also think about the steps you need to take yourself…).\nFirst of all, possibly download (or locate) the data and load it into R:\n\n# load data into RStudio"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#what-can-we-do-with-this-data-set",
+    "href": "Slides/Exercises/W4_exercises.html#what-can-we-do-with-this-data-set",
+    "title": "W4_WrangleViz",
+    "section": "What can we do with this data set?",
+    "text": "What can we do with this data set?\nCheck out the data set (and possibly the codebook), and decide what aspects (a.k.a. columns/variables) of the data would interest you (as a group!).\n195 columns are a lot, so maybe only keep those columns that are interesting for you.\n\n# check out data"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#renaming-columns",
+    "href": "Slides/Exercises/W4_exercises.html#renaming-columns",
+    "title": "W4_WrangleViz",
+    "section": "Renaming columns",
+    "text": "Renaming columns\nThese column names might not be very helpful to remember what the names stand for. If you want to, try to change the names of a few of these columns!"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#tidying-the-data",
+    "href": "Slides/Exercises/W4_exercises.html#tidying-the-data",
+    "title": "W4_WrangleViz",
+    "section": "Tidying the data",
+    "text": "Tidying the data\nIs the data in a tidy format?\nWhat is a tidy format? (Slides)\nIf not, reshape the data. (And if yes, reshape it anyway to practice! :D)\n(You might merge data frames at some point, possibly here, how do you da that?)"
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#calculating-the-average-ratings",
+    "href": "Slides/Exercises/W4_exercises.html#calculating-the-average-ratings",
+    "title": "W4_WrangleViz",
+    "section": "Calculating the average ratings",
+    "text": "Calculating the average ratings\nWe might want to calculate the average of the ratings, e.g. attractiveness across time points.\nFirst of all, unfortunately the ratings are on different scales between waves:\n\nWaves 6-9: Please rate the importance of the following attributes in a potential date on a scale of 1-10 (1=not at all important, 10=extremely important):\nWaves 1-5, 10-21: You have 100 points to distribute among the following attributes – give more points to those attributes that are more important in a potential date, and fewer points to those attributes that are less important in a potential date.  Total points must equal 100.\n\n\nTransform these ratings to scales that are somewhat comparable!\n\n\nNow calculate the average ratings across time points per speed dater."
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#filtering-the-speed-daters",
+    "href": "Slides/Exercises/W4_exercises.html#filtering-the-speed-daters",
+    "title": "W4_WrangleViz",
+    "section": "Filtering the speed daters",
+    "text": "Filtering the speed daters\nMake a new data frame that only consists of female speed daters! Also filter out those where the partner is older than the speed dater."
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#sort-the-data-frame",
+    "href": "Slides/Exercises/W4_exercises.html#sort-the-data-frame",
+    "title": "W4_WrangleViz",
+    "section": "Sort the data frame",
+    "text": "Sort the data frame\nSort the data frame based on the correlation between the interests, from highest to lowest."
+  },
+  {
+    "objectID": "Slides/Exercises/W4_exercises.html#visualize",
+    "href": "Slides/Exercises/W4_exercises.html#visualize",
+    "title": "W4_WrangleViz",
+    "section": "Visualize!",
+    "text": "Visualize!\n(Small Intro –&gt; Visualization Slides!)\nNow decide - as a group - what kind of plot to make!\nMake this plot, layer by layer."
   },
   {
     "objectID": "Slides/W2b_DataWranglingR.html#data-wrangling",
@@ -378,538 +1155,6 @@
     "text": "Thanks!\nLearning objectives:\n\nLearn about tidyverse vs. base R\nLearn and apply the six basic dplyr “verbs”\nLearn how to join data frames\n\n\nNext week:\nData Visualization in R"
   },
   {
-    "objectID": "Slides/W3c_WranglingMarkers.html#warm-up",
-    "href": "Slides/W3c_WranglingMarkers.html#warm-up",
-    "title": "Wrangling Physio Markers",
-    "section": "Warm up?",
-    "text": "Warm up?\nDid anyone bring a problem?"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
-    "href": "Slides/W3c_WranglingMarkers.html#problem-definition-1",
-    "title": "Wrangling Physio Markers",
-    "section": "Problem Definition (1)",
-    "text": "Problem Definition (1)\nYou have collected data, let’s say Skin Conductance, during your experiment with several trials. In each participant’s file, you thus have (at least) two columns: SC and markers, and probably time. Markers are numbers that denote certain events, such as the start of a phase or trial.\nThe data set could thus like this:\n\n\n\ntime\nSC\nmarkers\n\n\n\n\n100\n1.964\n10\n\n\n200\n2.004\n0\n\n\n300\n2.365\n0\n\n\n400\n2.201\n5\n\n\n500\n2.589\n0\n\n\n600\n2.662\n0\n\n\n700\n2.803\n0\n\n\n800\n2.754\n0\n\n\n900\n2.839\n6\n\n\n1000\n2.915\n0\n\n\n\nLet’s say 10 is the onset of the block, 5 the onset of the trial, and 6 the end of the trial or onset of the next phase.\nHow can we make sure we know which rows belong to which phase of the experiment, e.g. which data points we need to use if we want to calculate something for the trial starting with marker 5?\nIn small groups, brainstorm how you solve this!\n(Break it down in little steps, pseudo-code)"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#francescos-data",
-    "href": "Slides/W3c_WranglingMarkers.html#francescos-data",
-    "title": "Wrangling Physio Markers",
-    "section": "Francesco’s Data",
-    "text": "Francesco’s Data\nWe will use Francesco’s data of his pilot participant 2 (VP02.txt) to solve this problem.\nHowever, this brings us to a different problem, because his data are in a weird format! The actual data only start after a number of rows with channel information…\nHow can we read in the data well??\n\nFrancesco’s data"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
-    "href": "Slides/W3c_WranglingMarkers.html#one-possible-solution---reading-in-data",
-    "title": "Wrangling Physio Markers",
-    "section": "One possible solution - reading in data",
-    "text": "One possible solution - reading in data\nFirst one to finish: Share solution! 😁\n\n\n  library(tidyverse)\n  VPcode &lt;- \"VP02\"\n  \n  # find the onset of the data to skip long header (may vary per file, but starts with min or CH1)\n  findstart &lt;-  read_lines(paste0(\"Data/\", paste0(VPcode,\".txt\")), n_max = 50)\n  header_idx &lt;- str_which(findstart, \"^min|CH1\")\n  \n  # read in data from the next line and the header from that line\n  header &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx-1, n_max = 1)\n  \n  phy_data &lt;- read_delim(paste0(\"Data/\", paste0(VPcode,\".txt\")), delim = \"\\t\", skip = header_idx)\n  \n  names(phy_data) &lt;- names(header)\n  \n  head(phy_data)\n\n# A tibble: 6 × 11\n    CH13   CH14  CH28  CH29  CH30  CH31  CH32  CH33  CH34  CH35 ...11\n   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;\n1 0.0258 0.0674     0     0     0     0     0     0     0     0 NA   \n2 0.0288 0.0681     0     0     0     0     0     0     0     0 NA   \n3 0.0258 0.0681     0     0     0     0     0     0     0     0 NA   \n4 0.0273 0.0652     0     0     0     0     0     0     0     0 NA   \n5 0.0258 0.0627     0     0     0     0     0     0     0     0 NA   \n6 0.0212 0.0581     0     0     0     0     0     0     0     0 NA"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
-    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Get the correct markers",
-    "text": "Get the correct markers\nRemember a few weeks ago when we talked about how to transform the binary values in the eight channels to markers? Do that now!\nReminder:\nChannel 1 = value 1\nChannel 2 = 2\nChannel 3 = 4\nChannel 4 = 8\nChannel 5 = 16\nChannel 6 = 32\nChannel 7 = 64\nChannel 8 = 128.\n\nSo if there’s a signal (which will have the value “5”) in channel 1, 3, and 6, the resulting marker should be 1+4+32=37.\nImplement this now in R code!\nAlso check whether it worked correctly."
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solution - markers",
-    "text": "Possible solution - markers\n\n\nphy_data &lt;- phy_data %&gt;% \n    \n    # rename channels to more sensible names\n    rename(#time = min,  # doesn't exist in all files\n      SC = CH13,\n      HR = CH14,  # is this HR?\n      one = CH28,\n      two = CH29,\n      four = CH30,\n      eight = CH31,\n      sixteen = CH32,\n      thirtytwo = CH33,\n      sixtyfour = CH34,\n      hundredtwentyeight = CH35) %&gt;% \n    \n    # get time from start (make it based on sampling rate of 2000Hz --&gt; 0.5msec between samples) and triggers\n    mutate(# combine digital input channels from 8-bit binary to decimal\n           marker = (1*one + 2*two + 4*four + 8*eight + 16*sixteen + 32*thirtytwo + 64*sixtyfour + 128*hundredtwentyeight) / 5)\n\n# check whether markers were calculated correctly\nunique(phy_data$marker)\n\n [1]   0 128  11   4   1  16  22  33  90   7  32   8  44  55  64   2  66\n\nidx_first_marker &lt;- which(phy_data$marker != 0)[c(1,1000,2000)]\nphy_data[idx_first_marker,]\n\n# A tibble: 3 × 12\n     SC      HR   one   two  four eight sixteen thirtytwo sixtyfour\n  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;\n1  3.63  0.0221     0     0     0     0       0         0         0\n2  9.56  0.0584     5     0     0     0       0         0         0\n3 11.3  -0.0713     0     5     0     5       5         0         5\n# ℹ 3 more variables: hundredtwentyeight &lt;dbl&gt;, ...11 &lt;lgl&gt;, marker &lt;dbl&gt;"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
-    "href": "Slides/W3c_WranglingMarkers.html#get-trial-onsets",
-    "title": "Wrangling Physio Markers",
-    "section": "Get trial onsets",
-    "text": "Get trial onsets\nFor Francesco’s data, the markers 90 (CS+) and 7 (CS-) are of interest, as they denote the trial onsets.\nFirst check out whether and how often these markers exist.\nThe markers are shown for ~55 samples each. How can we get the onset only (i.e. only one sample/row)?\nHow many trials do we have?"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-onsets",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solutions - get onsets",
-    "text": "Possible solutions - get onsets\nWho has a good solution?\n\nOne option is to get the streaks of the marker column using the rle() function in base R (there’s also an even handier rleid() function in the data.table package…).\n\nstreaks &lt;- rle(phy_data$marker) # gives two lists: lenght and value, you'd still have to add the lengths up again \n\nOr you could simply get the difference in marker value to previous sample. All values in a streak will be 0, every onset will be different from 0. We can then filter either by the value of this difference (e.g. -7, but we don’t know exactly!) or by != 0 + marker == 7.\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(diffs = marker - lag(marker),         \n         onsets7 = (diffs != 0) & (marker == 7),          \n         onsets90 = (diffs != 0) & (marker == 90),          \n         # or we combine it in one column:          \n         onsets = ifelse((diffs != 0) & (marker != 0), marker, NA))"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#time-column",
-    "href": "Slides/W3c_WranglingMarkers.html#time-column",
-    "title": "Wrangling Physio Markers",
-    "section": "Time column",
-    "text": "Time column\nThere is no time column! It might make sense to make an artificial time column (if we know the sampling rate, this would be possible) or we can simply add the rownumber as a separate column.\nHow would you do this?"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#solution---time",
-    "href": "Slides/W3c_WranglingMarkers.html#solution---time",
-    "title": "Wrangling Physio Markers",
-    "section": "Solution - time",
-    "text": "Solution - time\n\n\nphy_data &lt;- phy_data %&gt;% \n  mutate(time = 1:nrow(phy_data),\n         time2 = 1:n(),\n         time3 = row_number()) %&gt;% \n  rownames_to_column(\"time4\")"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
-    "href": "Slides/W3c_WranglingMarkers.html#get-the-offset-markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Get the offset markers",
-    "text": "Get the offset markers\nIn Francesco’s case, there is not necessarily an “end-marker” (or the onset of the next phase), but we know that each trial is 8 sec. long. It might make sense to add this offset to the data.\nCome up with a way to add offset markers to the dara 8 sec after the 7 or 90 onsets!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solution---offset-markers",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solution - offset markers",
-    "text": "Possible solution - offset markers\nPlease share ideas!\n\nI would probably simply get the indeces of the markers, add the correct number of samples - based on new time column (if it is really time) or sampling rate - to these, and add markers to these new indices (but there might be a tidyverse-isher way as well!):\n\n# helpers\nsampling_rate &lt;- 2000\neight_sec &lt;- sampling_rate * 8\n\nonsets790 &lt;- which(phy_data$onsets %in% c(7,90))\noffsets790 &lt;- onsets790 + eight_sec\n\nphy_data$onsets[offsets790] &lt;- 150\n\n\n# check wether correct\ntest &lt;- filter(phy_data, !is.na(onsets) & onsets != 0) %&gt;% select(onsets)"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
-    "href": "Slides/W3c_WranglingMarkers.html#get-the-correct-phases",
-    "title": "Wrangling Physio Markers",
-    "section": "Get the correct phases",
-    "text": "Get the correct phases\nBack to the original problem: We want to get the correct “phases” of the experiment to do calculations (e.g. calculate the mean within the phase) with, e.g. the trials.\nCalculate the mean SC for each trial (starting with either 7 or 90).\nYou might have to take different intermediate steps, depending on your solution!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---get-trials",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solutions - get trials",
-    "text": "Possible solutions - get trials\nShow all your solutions!\n\nThere are a number of different ways to achieve this. You could use a for-loop to loop through all onsets, get the index and the index of the offset marker and calculate the mean of that period:\n\nmeans &lt;- tibble(means = rep(NA, length(onsets790)),\n                marker = rep(NA, length(onsets790)))\n\nfor (i in seq(onsets790)) {\n  means$means[i] &lt;- mean(phy_data$SC[onsets790[i]]:phy_data$SC[offsets790[i]]) \n  means$marker[i] &lt;- phy_data$marker[onsets790[i]]\n}\n\n#possibly add other info like what kind of marker/trial etc.\n\nAnother (tidyverse) solution would be to get the trial number, fill in the onsets (so that all samples until the next marker are filled in with e.g. 7), group_by the marker number and trial, and summarize:\n\nmeans2 &lt;- phy_data %&gt;% \n  # use cumsum() to get a trial number\n  mutate(trial_onset = ifelse(is.na(onsets), 0, 1),\n           trial = cumsum(trial_onset)) %&gt;% \n  fill(onsets) %&gt;% \n  group_by(trial, onsets) %&gt;% \n  summarise(means = mean(SC)) %&gt;% \n  # possibly filter to only keep 7 and 90\n  filter(onsets %in% c(90,7))"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
-    "href": "Slides/W3c_WranglingMarkers.html#extra-task-get-min-and-max-within-window",
-    "title": "Wrangling Physio Markers",
-    "section": "Extra task: Get min and max within window",
-    "text": "Extra task: Get min and max within window\nFor the SC data, we don’t only need the mean, but rather the local minimum and maximum 1-5 sec. after stimulus onset (or rather, the maximum after the minimum, but let’s start with overall min and max).\nTry to find the min. and max. in the 1-5 sec. window!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
-    "href": "Slides/W3c_WranglingMarkers.html#possible-solutions---min-and-max",
-    "title": "Wrangling Physio Markers",
-    "section": "Possible solutions - min and max",
-    "text": "Possible solutions - min and max\nAny ideas?\n\nSimilar to above!"
-  },
-  {
-    "objectID": "Slides/W3c_WranglingMarkers.html#thanks",
-    "href": "Slides/W3c_WranglingMarkers.html#thanks",
-    "title": "Wrangling Physio Markers",
-    "section": "Thanks!",
-    "text": "Thanks!\nNext week: Data Viz (really!)"
-  },
-  {
-    "objectID": "Slides/Exercises/W3_Randomize_exercises.html",
-    "href": "Slides/Exercises/W3_Randomize_exercises.html",
-    "title": "W3_Randomize_Worksheet",
-    "section": "",
-    "text": "# test &lt;- tibble(\n#   ch1 = c(5,0,0),\n#   ch2 = c(5,5,5),\n#   ch3 = c(5,0,5) %&gt;% \n#      mutate(ch2b = ifelse(ch2==5, 2, ch2),\n#          marker = ch1 + ch2 + ch3)\n# )\n# # 1. Divide every column by 5 to get 0/1 (or if 5 make it 1)\n# test2 &lt;- test %&gt;% \n#   mutate(across(ch1:ch3, ~ .x/5),\n#          marker = ch1*1 + ch2*2 + ch3*4,\n#          ch2b = ifelse(ch2==1, 2, ch2),\n#          marker = ch1 + ch2 + ch3)\n#     #ch1 = ch1/5,\n#      #    ch2 = ch2/5,\n#       #   ch3 = ch3/5)\n# \n# # 2. Multiply columns by column name/value"
-  },
-  {
-    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#francesco",
-    "href": "Slides/Exercises/W3_Randomize_exercises.html#francesco",
-    "title": "W3_Randomize_Worksheet",
-    "section": "",
-    "text": "# test &lt;- tibble(\n#   ch1 = c(5,0,0),\n#   ch2 = c(5,5,5),\n#   ch3 = c(5,0,5) %&gt;% \n#      mutate(ch2b = ifelse(ch2==5, 2, ch2),\n#          marker = ch1 + ch2 + ch3)\n# )\n# # 1. Divide every column by 5 to get 0/1 (or if 5 make it 1)\n# test2 &lt;- test %&gt;% \n#   mutate(across(ch1:ch3, ~ .x/5),\n#          marker = ch1*1 + ch2*2 + ch3*4,\n#          ch2b = ifelse(ch2==1, 2, ch2),\n#          marker = ch1 + ch2 + ch3)\n#     #ch1 = ch1/5,\n#      #    ch2 = ch2/5,\n#       #   ch3 = ch3/5)\n# \n# # 2. Multiply columns by column name/value"
-  },
-  {
-    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-1",
-    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-1",
-    "title": "W3_Randomize_Worksheet",
-    "section": "Task 1",
-    "text": "Task 1\n\nDiscuss with everyone where and how you need randomization or counterbalancing in your study designs. Feel free to take notes below.\n\nNotes:"
-  },
-  {
-    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-2",
-    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-2",
-    "title": "W3_Randomize_Worksheet",
-    "section": "Task 2",
-    "text": "Task 2\n\nWhat kind of function would you need for assigning conditions to participants?\nHow can we solve this problem if we have two different things we want to randomize/counterbalance across two factors (e.g. treatment/control and blue/yellow)?"
-  },
-  {
-    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-3",
-    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-3",
-    "title": "W3_Randomize_Worksheet",
-    "section": "Task 3",
-    "text": "Task 3\n\nWhat are specific problems with randomization/counterbalancing in your study design?"
-  },
-  {
-    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-4",
-    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-4",
-    "title": "W3_Randomize_Worksheet",
-    "section": "Task 4",
-    "text": "Task 4\nLet’s have a look at Ecem’s study, which has a complicated structure for (pseudo-)random assignment of stimuli.\nEcem has 2x4 stimulus characteristics that should vary:\n\nshape: heart, sacral, throat, solar\ncolor: yellow, purple, orange, blue\n\nEach participant should have 4 stimuli assigned, each color and shape should be represented once. In addition, no stimuli (combination of color&shape) should be the same across participants. There are thus 4*4=16 unique stimuli available.\n\nHow would you assign four stimuli to four different participants, making sure that every participant sees every color & shape but no combination is used more than once across participants?\nWrite your solution as pseudo-code as comments: Break it down in little steps and describe which computation should happen at each step/what the code should do.\n\n\n# 1. create vectors for shape and color\n\n# 2. ...\n\n\n# 3. ..."
-  },
-  {
-    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-5",
-    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-5",
-    "title": "W3_Randomize_Worksheet",
-    "section": "Task 5",
-    "text": "Task 5\nIn Ecem’s study, we want to have 100 trials (in Block 1): 60 “single-cue” and 40 “multi-cue” trials.\nFor the 60 single-cue trials, each of the four stimulus types is supposed to be shown 15 time.\nFor the multi-cue trials, each combination (threat-amb1, threat-amb2, safety-amb1, safety-amb2) should be shown 10x.\n\nHow can we make an individual trial list for one participant?\n\n\n# 1. ...\n\n\n# 2. ..."
-  },
-  {
-    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-6",
-    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-6",
-    "title": "W3_Randomize_Worksheet",
-    "section": "Task 6",
-    "text": "Task 6\nWe furthermore want to add the following information for the single-cue trials:\n\nHow can we get the further stimulus information (color, shape) into this list?\nHow can we add the info whether it’s a “sc” or a “mc” trial\nHow can we determine whether a shock should be given in each trial?"
-  },
-  {
-    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-7",
-    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-7",
-    "title": "W3_Randomize_Worksheet",
-    "section": "Task 7",
-    "text": "Task 7\nFor the multi-cue trials, we have two stimuli per trial.\n\nHow can we add the information (color, shape, shock given) for the multi-cue trials?"
-  },
-  {
-    "objectID": "Slides/Exercises/W3_Randomize_exercises.html#task-8",
-    "href": "Slides/Exercises/W3_Randomize_exercises.html#task-8",
-    "title": "W3_Randomize_Worksheet",
-    "section": "Task 8",
-    "text": "Task 8\nIn the multi-cue trials, Ecem also wants to show two more stimuli: The other combinations of color and shape (e.g. color1 with shape2).\n\nHow can we add these other two combinations of shape and color as new columns?"
-  },
-  {
-    "objectID": "slides.html",
-    "href": "slides.html",
-    "title": "Slides",
-    "section": "",
-    "text": "Note: It’s advisable to open the slides in a new tab!\n\n\n\n\n\n\n\n\n\n\n\n\nIntro to R\n\n\nGetting started with R and RStudio\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 16, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nJan 23, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet Randomization\n\n\n\n\n\n\nyour name\n\n\nFeb 2, 2024\n\n\n\n\n\n\n\n\n\n\n\nRandomization and Counterbalancing\n\n\nUsing R for e.g. your study design\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 6, 2024\n\n\n\n\n\n\n\n\n\n\n\nWorksheet More Wrangling\n\n\n\n\n\n\nR Club\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nMore Wrangling\n\n\nGetting the raw data in a useful format\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 14, 2024\n\n\n\n\n\n\n\n\n\n\n\nWrangling Physio Markers\n\n\nDefining phases and calculating things\n\n\n\nDr. Lea Hildebrandt\n\n\nFeb 27, 2024\n\n\n\n\n\n\n\n\n\n\n\nData Visualization\n\n\nMaking the first plots\n\n\n\nDr. Lea Hildebrandt\n\n\nMar 5, 2024\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "Slides/Exercises/W4_exercises.html",
-    "href": "Slides/Exercises/W4_exercises.html",
-    "title": "W4_WrangleViz",
-    "section": "",
-    "text": "Today, we’re going to work with a data set on speed dating together. Feel free to google (coding is 90% googling…) or use AI as much as you want (but also think about the steps you need to take yourself…).\nFirst of all, possibly download (or locate) the data and load it into R:\n\n# load data into RStudio"
-  },
-  {
-    "objectID": "Slides/Exercises/W4_exercises.html#valentines-day",
-    "href": "Slides/Exercises/W4_exercises.html#valentines-day",
-    "title": "W4_WrangleViz",
-    "section": "",
-    "text": "Today, we’re going to work with a data set on speed dating together. Feel free to google (coding is 90% googling…) or use AI as much as you want (but also think about the steps you need to take yourself…).\nFirst of all, possibly download (or locate) the data and load it into R:\n\n# load data into RStudio"
-  },
-  {
-    "objectID": "Slides/Exercises/W4_exercises.html#what-can-we-do-with-this-data-set",
-    "href": "Slides/Exercises/W4_exercises.html#what-can-we-do-with-this-data-set",
-    "title": "W4_WrangleViz",
-    "section": "What can we do with this data set?",
-    "text": "What can we do with this data set?\nCheck out the data set (and possibly the codebook), and decide what aspects (a.k.a. columns/variables) of the data would interest you (as a group!).\n195 columns are a lot, so maybe only keep those columns that are interesting for you.\n\n# check out data"
-  },
-  {
-    "objectID": "Slides/Exercises/W4_exercises.html#renaming-columns",
-    "href": "Slides/Exercises/W4_exercises.html#renaming-columns",
-    "title": "W4_WrangleViz",
-    "section": "Renaming columns",
-    "text": "Renaming columns\nThese column names might not be very helpful to remember what the names stand for. If you want to, try to change the names of a few of these columns!"
-  },
-  {
-    "objectID": "Slides/Exercises/W4_exercises.html#tidying-the-data",
-    "href": "Slides/Exercises/W4_exercises.html#tidying-the-data",
-    "title": "W4_WrangleViz",
-    "section": "Tidying the data",
-    "text": "Tidying the data\nIs the data in a tidy format?\nWhat is a tidy format? (Slides)\nIf not, reshape the data. (And if yes, reshape it anyway to practice! :D)\n(You might merge data frames at some point, possibly here, how do you da that?)"
-  },
-  {
-    "objectID": "Slides/Exercises/W4_exercises.html#calculating-the-average-ratings",
-    "href": "Slides/Exercises/W4_exercises.html#calculating-the-average-ratings",
-    "title": "W4_WrangleViz",
-    "section": "Calculating the average ratings",
-    "text": "Calculating the average ratings\nWe might want to calculate the average of the ratings, e.g. attractiveness across time points.\nFirst of all, unfortunately the ratings are on different scales between waves:\n\nWaves 6-9: Please rate the importance of the following attributes in a potential date on a scale of 1-10 (1=not at all important, 10=extremely important):\nWaves 1-5, 10-21: You have 100 points to distribute among the following attributes – give more points to those attributes that are more important in a potential date, and fewer points to those attributes that are less important in a potential date.  Total points must equal 100.\n\n\nTransform these ratings to scales that are somewhat comparable!\n\n\nNow calculate the average ratings across time points per speed dater."
-  },
-  {
-    "objectID": "Slides/Exercises/W4_exercises.html#filtering-the-speed-daters",
-    "href": "Slides/Exercises/W4_exercises.html#filtering-the-speed-daters",
-    "title": "W4_WrangleViz",
-    "section": "Filtering the speed daters",
-    "text": "Filtering the speed daters\nMake a new data frame that only consists of female speed daters! Also filter out those where the partner is older than the speed dater."
-  },
-  {
-    "objectID": "Slides/Exercises/W4_exercises.html#sort-the-data-frame",
-    "href": "Slides/Exercises/W4_exercises.html#sort-the-data-frame",
-    "title": "W4_WrangleViz",
-    "section": "Sort the data frame",
-    "text": "Sort the data frame\nSort the data frame based on the correlation between the interests, from highest to lowest."
-  },
-  {
-    "objectID": "Slides/Exercises/W4_exercises.html#visualize",
-    "href": "Slides/Exercises/W4_exercises.html#visualize",
-    "title": "W4_WrangleViz",
-    "section": "Visualize!",
-    "text": "Visualize!\n(Small Intro –&gt; Visualization Slides!)\nNow decide - as a group - what kind of plot to make!\nMake this plot, layer by layer."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#schedule-preliminary",
-    "href": "Slides/W1_IntroR.html#schedule-preliminary",
-    "title": "Intro to R",
-    "section": "Schedule (preliminary)",
-    "text": "Schedule (preliminary)\nHow often do we want to meet? (Beginning weekly, maybe later bi-weekly?)\nSemester break?\n\n\n\nSession\nDate\nTopic\nPreparation/Notes\n\n\n\n\n1\n16.01.24\nIntro to R & RStudio\nInstall R and RStudio, download Dataset1, Dataset2\n\n\n2\n23.01.24\nData Wrangling\n\n\n\n3\n30.01.24\nRandomization & Counterbalancing\n(Ecem)\n\n\n4\n06.02.24\nData Visualization\n\n\n\n5\n13.02.24\nPreprocessing, e.g. physio data\n(Francesco)\n(Semester break or continue?)\n\n\n6\n20.02.24\nNo R Club!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#why-write-code",
-    "href": "Slides/W1_IntroR.html#why-write-code",
-    "title": "Intro to R",
-    "section": "Why write code?",
-    "text": "Why write code?\n\n\nDoing statistical calculation by hand? Tedious & error prone! Computer is faster…\nUsing spreadsheets? Limited options, change data accidentally…\nUsing point-and-click software (e.g. SPSS)?\n\nproprietary software = expensive\nR = open, extensible (community)\nreproducible!\n\nYou’ll learn to program!\n\n\n\nChat: What are advantages (or disadvantages!) of coding?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#install-r-rstudio",
-    "href": "Slides/W1_IntroR.html#install-r-rstudio",
-    "title": "Intro to R",
-    "section": "Install R & RStudio",
-    "text": "Install R & RStudio\nYou should all have installed both by now! Who had problems doing so?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#overview-rstudio",
-    "href": "Slides/W1_IntroR.html#overview-rstudio",
-    "title": "Intro to R",
-    "section": "Overview RStudio",
-    "text": "Overview RStudio\n\nRStudio Interface\nopen RStudio!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#rstudio-panes",
-    "href": "Slides/W1_IntroR.html#rstudio-panes",
-    "title": "Intro to R",
-    "section": "RStudio Panes",
-    "text": "RStudio Panes\n\n\n\nScript pane/window -&gt; to save your code\nConsole -&gt; here the commands are run\nEnvironment -&gt; which variables/dataframes are saved\nFiles, plots, help etc. -&gt; files shows you the files in the folder you’re currently in\n\n\n\n\n\n\n\nRStudio Interface\n\n\n\n\n\nConsole vs. Script (Rmarkdown later)"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
-    "href": "Slides/W1_IntroR.html#using-the-console-as-a-calculator",
-    "title": "Intro to R",
-    "section": "Using the Console as a Calculator",
-    "text": "Using the Console as a Calculator\n\n100 + 1\n\n[1] 101\n\n2*3\n\n[1] 6\n\nsqrt(9)\n\n[1] 3\n\n\n\nConsole used as calculator\ntry it out!\nWe can’t really do much with these values, they will just be written in the console."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
-    "href": "Slides/W1_IntroR.html#saving-the-results-as-a-variableobject",
-    "title": "Intro to R",
-    "section": "Saving the Results as a Variable/Object",
-    "text": "Saving the Results as a Variable/Object\n\na &lt;- 100 + 1\n\nmulti &lt;- 2*3\n\nSqrtOfNine &lt;- sqrt(9)\n\nword &lt;- \"Hello\"\n\n\n\n“&lt;-” is used to assign values to variables (“=” is also possible but not preferred)\n\nHint: use Alt + - as a shortcut\n\na, multi etc. are the variable names, which can be words, no whitespace allowed\n\nYou can find those now in your Environment!\n\nas you can see, the variables can contain different types: Numbers, strings/characters (= words) etc.\nno output in console!\nthe variables contain the calculated value (i.e. 101) and not the calculation/formula (100+1)\nYou can use those variables for further calculations, e.g. a + multi\n\n\n\nType first command in console, what happens?\nWhy don’t we see anything in the console?\nWhat happens if we type in a in the console?\nIs there anything else that you find interesting?\nWhat is sqrt()?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#working-directory",
-    "href": "Slides/W1_IntroR.html#working-directory",
-    "title": "Intro to R",
-    "section": "Working Directory",
-    "text": "Working Directory\n\nIt makes sense to save all your scripts etc. in a folder specifically dedicated to this course.\n\nMake sure that R knows that you want to work in this folder, i.e. set your working directory:\n\nSession -&gt; Set Working Directory -&gt; Choose Directory\n\nAssignment: Please make a folder, e.g. called “R_Club” (but not “R” or anything with spaces in it). Then set your working directory to this folder."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#scripts",
-    "href": "Slides/W1_IntroR.html#scripts",
-    "title": "Intro to R",
-    "section": "Scripts",
-    "text": "Scripts\nIf you type in all your commands/code in the console, it might get lost/you might not remember what you did, and you always have to type it in again if you want to run it again with slight changes. Also, the code in the console is not save-able.\nTherefore, it is better practice to write scripts. Scripts are basically text files that contain your code.\n\nTo open a new script, click File -&gt; New File -&gt; R Script.\nTo run a line of the script, you can either click Run at the top right of the pane or press ctrl + enter. It will always run the line where the cursor is located (or the lines that you have selected with the mouse). To run the whole script, press ctrl + shift + enter."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#scripts-2",
-    "href": "Slides/W1_IntroR.html#scripts-2",
-    "title": "Intro to R",
-    "section": "Scripts 2",
-    "text": "Scripts 2\nAssignment: Open a new file. In this file, write down some of the code (one command per line) that we have used so far and save the file.\nNow run the code (either by pressing “run” at the top right of the script or ctrl + enter)."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#functions",
-    "href": "Slides/W1_IntroR.html#functions",
-    "title": "Intro to R",
-    "section": "Functions",
-    "text": "Functions\nYou might have noticed sqrt(9) earlier. sqrt() is an R function that calculates the square root of a number. 9 is the argument that we hand over to the function.\nIf you want to know what a function does, which arguments it takes, or which output it generates, you can type ?functionname() in the console, e.g.\n\n?sqrt()\n\nThis will open the help file in the Help Pane on the lower right of RStudio.\n\nDo this now! Anything unclear?"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#functions-2",
-    "href": "Slides/W1_IntroR.html#functions-2",
-    "title": "Intro to R",
-    "section": "Functions 2",
-    "text": "Functions 2\nFunctions often take more than one argument:\n\nrnorm(n = 6, mean = 3, sd = 1)\n# rnorm(6, 3, 1)\n\n# By the way, # denotes a comment (ignored by R), which can be helpful for scripting!\n\nYou can explicitly state which argument you are handing over (check the help file for the argument names!) or just state the values (but these have to be in the correct order then! See help file)."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#packages",
-    "href": "Slides/W1_IntroR.html#packages",
-    "title": "Intro to R",
-    "section": "Packages",
-    "text": "Packages\nThere are a number of functions that are already included with Base R, but you can greatly extend the power of R by loading packages. Packages are like libraries of functions that someone else wrote.\nYou can load a package using the install.packages() function:\n\ninstall.packages(\"tidyverse\")\n\n(It may be necessary to install Rtools: https://cran.r-project.org/bin/windows/Rtools/)\nBut installing is not enough to be able to actually use the functions from that package. You’d also need to load the package with the libary() function:\n\nlibrary(\"tidyverse\") # or library(tidyverse)\n\nAssignment: Install and load the tidyverse package (which we will use a lot in this course).\n\nOpen Source! Anyone can write a package!\nBase R = mobile phone, comes with some functions, packages = apps\npossibly necessary to install Rtools!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#read-in-data",
-    "href": "Slides/W1_IntroR.html#read-in-data",
-    "title": "Intro to R",
-    "section": "Read in Data",
-    "text": "Read in Data\nTo read in data files, you need to know which format these files have, e.g. .txt. or .csv files or some other (proprietary) format. There are packages that enable you to read in data of different formats.\nWe will use the files from Fundamentals of Quantitative Analysis. Save these in your course folder on your computer (do not open them!). Set your working directory to the course folder.\n\nDelete the text/code in the R Script you just worked on (and add a comment as a header: “Working with data”). Underneath, add the following code:\n\n# library(tidyverse) # we will use a function from the tidyverse to read in the data\n\ndat &lt;- read_csv(\"ahi-cesd.csv\")\npinfo &lt;- read_csv(\"participant-info.csv\")\n\nRun the code!"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#looking-at-the-data",
-    "href": "Slides/W1_IntroR.html#looking-at-the-data",
-    "title": "Intro to R",
-    "section": "Looking at the Data",
-    "text": "Looking at the Data\n\nThere are several options to get a glimpse at the data:\n\nClick on the object/variable name in your Environment.\nType View(NameOfObject) in your console, e.g. View(dat).\nIn the console, type in str(dat) or str(pinfo) to get an overview of the data.\nIn the console, type in summary(dat).\nIn the console, type in head(dat).\nWhat is the difference between these commands?\n\n\n\nglimpse() is also possible, but not in base R (dplyr)"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#looking-at-the-data-2",
-    "href": "Slides/W1_IntroR.html#looking-at-the-data-2",
-    "title": "Intro to R",
-    "section": "Looking at the Data 2",
-    "text": "Looking at the Data 2\nWhat is the difference to the objects/variables, that you assigned/saved in your Environment earlier and these objects?\n\nThe two objects we just read in are data frames, which consists of full datasets. The objects we assigned earlier were simpler variables, which only consisted of single values/words.\nData frames usually have several rows and columns. Remember, the columns are the variables and the rows are the observations."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown",
-    "href": "Slides/W1_IntroR.html#r-markdown",
-    "title": "Intro to R",
-    "section": "R Markdown",
-    "text": "R Markdown\nR scripts are a good way to save your code. However, you’d better heavily comment in your scripts, so that future you (and potentially collaborators) know what happens in your script.\nAn alternative is an R Markdown file. This is also a sort of script, but you can write text (like in a word processor) and mix it with code chunks, where you can write your R code. R Markdown is the “language” you use to write in these files, which is a variety of Markdown.\nThe advantage of R Markdown files (ending with .Rmd) is that they increase reproducibility. For example, you can write whole reports in R Markdown (and also these slides are made with it!).\nA newer variant is called quarto, which works very similar (but is more flexible) to R Markdown."
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-2",
-    "href": "Slides/W1_IntroR.html#r-markdown-2",
-    "title": "Intro to R",
-    "section": "R Markdown 2",
-    "text": "R Markdown 2\n\n\n\nR script\n\n\n\n\n\nR Markdown\n\n\n\n\n\nR Markdown rendered as html report"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-3",
-    "href": "Slides/W1_IntroR.html#r-markdown-3",
-    "title": "Intro to R",
-    "section": "R Markdown 3",
-    "text": "R Markdown 3\n\nAssignment:\n\nOpen a new .Rmd file, change/insert the title and author.\nCheck out the content of it.\nDelete and add some of the text on the white background. Change the Header (indicated by ##) to “About me” and write something about yourself underneath.\nSwitch between “Source” and “Visual” in the top left. What changes? What is “Visual”?\nIn the grey boxes (“code chunks”), add some code. Try to find out how you can add a new code chunk.\n\nhint: The green C with the + on the top right will do so (or using “insert” in the visual view)\n\nSave the file with a sensible name.\nWhat happens when you click on “Knit” (top of Script pane)?\n\nClick on the little arrow next to knit and select “Knit to PDF”\n\ninsert inline code"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#r-markdown-4",
-    "href": "Slides/W1_IntroR.html#r-markdown-4",
-    "title": "Intro to R",
-    "section": "R Markdown 4",
-    "text": "R Markdown 4\nThere are many useful things you can so with R Markdown: Adding different headers, adding inline code, knitting as a PDF, adding pictures or tables…You can also decide whether the code chunks should be visible in the output etc.\nFor further information, check out the R Markdown cheatsheet: https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf"
-  },
-  {
-    "objectID": "Slides/W1_IntroR.html#thanks",
-    "href": "Slides/W1_IntroR.html#thanks",
-    "title": "Intro to R",
-    "section": "Thanks!",
-    "text": "Thanks!\nThat’s the lesson on “Getting started with R”!\nNext week, we’ll talk about models & probability and learn how to wrangle (= preprocess) data in R!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#ggplot",
-    "href": "Slides/W3b_DataVizR.html#ggplot",
-    "title": "Data Visualization",
-    "section": "ggplot",
-    "text": "ggplot\nWe will use a package called ggplot2 (which is part of the tidyverse). ggplot2 is a very versatile package and allows us to make beautiful, publication ready figures.\nThe main function to “start” plotting is ggplot() - we will then add layers of data and layers to tweak the appearance.\n\nLayers of a ggplot"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#activity-1-set-up",
-    "href": "Slides/W3b_DataVizR.html#activity-1-set-up",
-    "title": "Data Visualization",
-    "section": "Activity 1: Set Up",
-    "text": "Activity 1: Set Up\n\nDownload ahi-cesd.csv and participant-info.csv into the folder on your computer for this chapter!\nOpen RStudio and set the working directory to your chapter folder. Ensure the environment is clear.\nOpen a new R Markdown document and save it in your working directory. Call the file “DataVisualisation1”.\nDelete the default R Markdown welcome text and insert a new code chunk.\nLoad the data into your environment and join the two datasets. Keep only the columns ahiTotal, cesdTotal, sex, age, educ, income, occasion, elapsed.days.\n\n\n\nlibrary(tidyverse) \n\ndat &lt;- read_csv(\"Data/ahi-cesd.csv\")\npinfo &lt;- read_csv(\"Data/participant-info.csv\")\n\nall_dat &lt;- inner_join(dat, \n                      pinfo, \n                      by= c(\"id\", \"intervention\"))\n\nsummarydata &lt;- select(.data = all_dat, \n                      ahiTotal, \n                      cesdTotal, \n                      sex, \n                      age, \n                      educ, \n                      income, \n                      occasion, \n                      elapsed.days) \n\n\nwhat happens in the code chunk?"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#look-at-the-data",
-    "href": "Slides/W3b_DataVizR.html#look-at-the-data",
-    "title": "Data Visualization",
-    "section": "Look at the Data",
-    "text": "Look at the Data\nHave a look at the types of data:\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;dbl&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;dbl&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…\n\n\nWhat do you see?\n\nAll variables are loaded as numeric. However, are all of those numeric?\n\n\nsex, educ and income are categories, not numbers per se. We call these variables factors! We need to correct R and convert the data type to factor. Checking and adjusting the data types will be important for plotting and analyzing the data, you might otherwise get strange/wrong results!\nHow would you convert them to factors?"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
-    "href": "Slides/W3b_DataVizR.html#activity-2-transform-data-type",
-    "title": "Data Visualization",
-    "section": "Activity 2: Transform Data Type",
-    "text": "Activity 2: Transform Data Type\nType and run the below code to change the categories to factors.\n\nYou can read each line of the mutate as “overwrite the data that is in that column with the same values now considered factors and not doubles”\nSo for example, the 1s in sex change to categorical factors instead of numerical 1s.\nRemember if you mutate a new column with the same name as the old one, it will overwrite the column.\n\n\nsummarydata &lt;- summarydata %&gt;%\n  mutate(sex = as_factor(sex),\n         educ = as_factor(educ),\n         income = as_factor(income))\n\nglimpse(summarydata)\n\nRows: 992\nColumns: 8\n$ ahiTotal     &lt;dbl&gt; 32, 34, 34, 35, 36, 37, 38, 38, 38, 38, 39, 40, 41, 41, 4…\n$ cesdTotal    &lt;dbl&gt; 50, 49, 47, 41, 36, 35, 50, 55, 47, 39, 45, 47, 33, 27, 3…\n$ sex          &lt;fct&gt; 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, …\n$ age          &lt;dbl&gt; 46, 37, 37, 19, 40, 49, 42, 57, 41, 41, 52, 41, 52, 58, 5…\n$ educ         &lt;fct&gt; 4, 3, 3, 2, 5, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 4, 3, 4, 3, …\n$ income       &lt;fct&gt; 3, 2, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 3, 2, 2, 3, 2, 2, 2, …\n$ occasion     &lt;dbl&gt; 5, 2, 3, 0, 5, 0, 2, 2, 2, 4, 4, 0, 4, 0, 1, 4, 0, 5, 4, …\n$ elapsed.days &lt;dbl&gt; 182.025139, 14.191806, 33.033831, 0.000000, 202.096887, 0…"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#the-first-layer",
-    "href": "Slides/W3b_DataVizR.html#the-first-layer",
-    "title": "Data Visualization",
-    "section": "The First Layer",
-    "text": "The First Layer\n\nThe first line (or layer) sets up the base of the graph: the data to use and the aesthetics (what will go on the x and y axis, how the plot will be grouped).\naes() can take both an x and y argument, however, with a bar plot you are just asking R to count the number of data points in each group so you don’t need to specify this.\n\n\n\nggplot(summarydata, aes(x = sex))"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#the-second-layer",
-    "href": "Slides/W3b_DataVizR.html#the-second-layer",
-    "title": "Data Visualization",
-    "section": "The Second Layer",
-    "text": "The Second Layer\nThe next layer adds a geom or a shape, in this case we use geom_bar() as we want to draw a bar plot.\n\nNote that we are adding layers, using a + between layers. This is a very important difference between pipes and visualization.\n\n\n\nggplot(summarydata, aes(x = sex)) +\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\n\n\nAdding fill to the first layer will separate the data into each level of the grouping variable and give it a different colour. In this case, there is a different coloured bar for each level of sex.\nWe can get rid of the (in this case redundant legend) with show.legend = FALSE.\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE)"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
-    "href": "Slides/W3b_DataVizR.html#the-next-layers---improving-the-plot",
-    "title": "Data Visualization",
-    "section": "The Next Layers - Improving the Plot",
-    "text": "The Next Layers - Improving the Plot\nWe might want to make the plot a bit prettier and easier to read. What would you improve?\n\nWe might want to add better axis labels and change the colors of the bars. We can do so with the functions scale_x_discrete() and scale_y_continuous(), which will adjust the x and y axes.\nWe will use these two arguments in those functions:\n\nname controls/overwrites the axis name (e.g. Groups)\nlabels controls the break points on the axis, i.e. what are the conditions called? The order is important here!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\")\n\n\n\n\n\n\n\n\n\n\n\nThere’s also the counterparts scale_x_continuous() and scale_y_discrete(). What do you think, why do we use the ones mentioned above and when would we use the other ones?"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
-    "href": "Slides/W3b_DataVizR.html#themes-changing-the-appearance",
-    "title": "Data Visualization",
-    "section": "Themes: Changing the Appearance",
-    "text": "Themes: Changing the Appearance\nThere are a number of built-in themes that you can use to change the appearance (background, whether axes are shown etc.), but you can also tweak the themes further manually.\nWe will now change the default theme to theme_minimal(), but you can also try other themes (just type “theme_” and see what the autocomplete brings up).\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal()"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#colors",
-    "href": "Slides/W3b_DataVizR.html#colors",
-    "title": "Data Visualization",
-    "section": "Colors",
-    "text": "Colors\nThere are various ways to change the colors of the bars. You can manually indicate the colors you want to use but you can also easily use pre-determined color palettes that are already checked for color-blind friendliness.\nA popular palette is viridis. We can simply add a function/layer to your ggplot named scale_fill_viridis_d() (d for discrete). The function hast 5 color options (A - E).\n\nType and run the below code into a new code chunk. Try changing the option to either A, B, C or D and see which one you like!\n\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#transparency",
-    "href": "Slides/W3b_DataVizR.html#transparency",
-    "title": "Data Visualization",
-    "section": "Transparency",
-    "text": "Transparency\nYou can also add transparency to your plot, which can be helpful if you plot several layers of data.\nTo do so, you can simply add alpha to the geom_bar():\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#grouped-plots",
-    "href": "Slides/W3b_DataVizR.html#grouped-plots",
-    "title": "Data Visualization",
-    "section": "Grouped Plots",
-    "text": "Grouped Plots\nLet’s go back to the bar plot (but works similarly for other plots as well): Imagine that you have several factors that you want to use to group your data, such as gender and income. In this case, you could use a grouped bar plot:\n\n\nggplot(summarydata, aes(x = sex, fill = income)) +\n  geom_bar(position = \"dodge\",\n           show.legend = TRUE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#facetting",
-    "href": "Slides/W3b_DataVizR.html#facetting",
-    "title": "Data Visualization",
-    "section": "Facetting",
-    "text": "Facetting\nYou could also use facets to divide your data visualizations:\n\n\nggplot(summarydata, aes(x = sex, fill = sex)) +\n  geom_bar(show.legend = FALSE, \n           alpha = .8) +\n  scale_x_discrete(name = \"Participant Sex\", \n                   labels = c(\"Female\", \"Male\")) +\n  scale_y_continuous(name = \"Number of participants\") +\n  theme_minimal() +\n  scale_fill_viridis_d(option = \"E\")  +\n  facet_wrap(~income)\n\n\n\n\n\n\n\n\n\n\nTry to switch sex and income!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#violin-boxplot",
-    "href": "Slides/W3b_DataVizR.html#violin-boxplot",
-    "title": "Data Visualization",
-    "section": "Violin-Boxplot",
-    "text": "Violin-Boxplot\nLet’s look at the code. How does the code differ from the one for the barplot before?\n\n\nggplot(summarydata, aes(x = income, \n                        y = ahiTotal, \n                        fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\n\n\n\n\n\n\n\n\n\nIn this case, not the count on the y-axis, but another cont. variable!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#layer-order",
-    "href": "Slides/W3b_DataVizR.html#layer-order",
-    "title": "Data Visualization",
-    "section": "Layer Order",
-    "text": "Layer Order\nThe order of layers is crucial, as the plot will be built up in that order:\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_violin() +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\n\nggplot(summarydata, aes(x = income, y = ahiTotal)) +\n  geom_boxplot() +\n  geom_violin()"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#scatterplot",
-    "href": "Slides/W3b_DataVizR.html#scatterplot",
-    "title": "Data Visualization",
-    "section": "Scatterplot",
-    "text": "Scatterplot\nIf we have continuous data of two variables, we often want to make a scatter plot:\n\n\nggplot(summarydata, aes(x = age, y = cesdTotal))+\n  geom_point()+\n  geom_smooth(method=lm) # if you don't want the shaded CI, add se = FALSE to this"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures",
-    "href": "Slides/W3b_DataVizR.html#saving-your-figures",
-    "title": "Data Visualization",
-    "section": "Saving your Figures",
-    "text": "Saving your Figures\nYou can use ggsave() to save your plots. If you don’t tell ggsave() which plot you want to save, by default it will save the last plot you created.\nYou just have to enter the name of the file to be saved (in your working directory) like this:\n\nggsave(\"violin-boxplot.png\")\n\nCheck whether indeed the last plot was saved!\n\nYou can also specify the dimensions of your plot to be saved:\n\nggsave(\"violin-boxplot.png\",\n       width = 10,\n       height = 8,\n       units = \"cm\")"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#saving-your-figures-2",
-    "href": "Slides/W3b_DataVizR.html#saving-your-figures-2",
-    "title": "Data Visualization",
-    "section": "Saving your Figures 2",
-    "text": "Saving your Figures 2\nYou can also assign the plot to an object in your environment (just like we did with the tibbles previously) and then tell ggsave() which object to save. This is a bit safer.\nRun the code for the violin-boxplot again and save the plot in an object called viobox. You’d then have to explicitly tell ggsave() to save the object viobox:\n\n\nviobox &lt;- summarydata %&gt;%\n  ggplot(aes(x = income,\n             y = ahiTotal,\n             fill = income)) +\n  geom_violin(trim = FALSE, \n              show.legend = FALSE, \n              alpha = .4) +\n  geom_boxplot(width = .2, \n               show.legend = FALSE, \n               alpha = .7)+\n  scale_x_discrete(name = \"Income\",\n                   labels = c(\"Below Average\", \n                              \"Average\", \n                              \"Above Average\")) +\n  scale_y_continuous(name = \"Authentic Happiness Inventory Score\")+\n  theme_minimal() +\n  scale_fill_viridis_d()\n\n\nggsave(\"violin-boxplot-stored.png\", plot = viobox)\n\n\n\n\n\nDo not add ggsave() to the plot with a +. Instead run it on a separate line!\nIf plot is assigned to object, it won’t be displayed unless you type viobox in the console!"
-  },
-  {
-    "objectID": "Slides/W3b_DataVizR.html#thanks",
-    "href": "Slides/W3b_DataVizR.html#thanks",
-    "title": "Data Visualization",
-    "section": "Thanks!",
-    "text": "Thanks!\nCheck out Chapter 13 of QuantFun for further exercises and tips for data visualization!\nAlso keep in mind: Coding is a lot of googling things!\nYou can also check out the R Graph Gallery for code for different types of plots.\n\nLearning objectives\n\nKnow how to transform (pivot) and join data\nUnderstand the basics of a ggplot (layers etc.)\nBe able to make your first own plots, such as bar charts, violin + boxplots, scatterplots\nKnow what a grouped plot and a facetted plot is\n\n\n\nNext:\n\n? (More data wrangling? Data viz?)\nShould we make a plot with real data from one of you?\nWhen? 19th -&gt; defense, 26th -&gt; easter break… Wednesday, 20th?\n\nGeneral Question:\n\nOnline?\nIs this ~every other week fine?"
-  },
-  {
     "objectID": "Slides/W3_Randomize.html#lets-dive-in-with-an-example",
     "href": "Slides/W3_Randomize.html#lets-dive-in-with-an-example",
     "title": "Randomization and Counterbalancing",
@@ -1022,10 +1267,10 @@
     "text": "Thanks!\nNo R club next week! (Carnival)\nHomework: Please have a look at the rest of last week’s presentation and/or chapter 6 of Fundamentals of Quantitative Analysis!\n(We’ve covered a lot of it today, but it will help you understand joins and bringing data in long format etc. better!)"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "R Club Würzburg",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "This is the course website of the R Club of the Research Training Group 2660 at the University and University Clinic in Würzburg, Germany - but it’s open to everyone if space is available!\nThe R Club is a hands-on beginner-friendly R course/coding club. We will start with the basics and will switch to topics that are of interest to the majority (similar to a Journal Club). In the beginning, Lea will teach, but the format may change to others presenting solutions to problems they encountered or topics they find interesting. We may end up as a Data Dojo/Coding Club, where we work on problems together. This way, we can all learn together!\nWe meet weekly on Tuesdays, 16:00 - 18:00 in Room 213 at the Marcusstr, starting in January 2024. The syllabus can be found here. On this page, the slides etc. will be linked.\n\n\n\nSession\n1\nDate\n16.01.24\nTopic\nIntro to R & RStudio\nPreparation/Notes\nInstall R and RStudio, download Dataset1, Dataset2\n\n\n2\n23.01.24\nData Wrangling\nDownload Datasets 1, 2, 3, & 4 (click on link and symbol for “download raw file” on the top-right)\n\n\n\n30.01.24\nNo R Club! (Clinical Research Workshop)\nSelf-study instead: Please have a look at the rest of the data wrangling presentation and/or chapter 6 of Fundamentals of Quantitative Analysis!\n\n\n3\n06.02.24\nRandomization & Counterbalancing\n(Ecem)\n\n\n4\n14.02.24\nData Wrangling 2 & first Visualization\n(Uni closed in the afternoon - carnival? Meet on Wednesday, 14th, 15:00 in 213)\nDownload Datasets: participant-info.csv & ahi-cesd.csv / Speed Dating Data & Codebook\n\nUse the exercise.Rmd and the speed dating data!\n\n\n\n20.02.24\nNo R Club!\n\n\n\n5\n27.02.24\nPreprocessing, e.g. physio data?\n(Francesco)\n\n\n6\n5.03.24\nData Viz\nData: participant-info.csv & ahi-cesd.csv\n\n\n\n12.03.24\nNo R Club!\n\n\n\n7\n21.03.24\nData Viz 2\nWe’ll meet on Thursday, 21st of March, at 15:00. You may join via Zoom (but it might be more difficult to follow).\n\nWe will make a nice plot with Ulkar’s real data!\n\n\n8\n\nStats 1?\nQuick intro with a focus on ANOVA, or start with t-tests and do it in-depths across several weeks?\n\n\n9\n\nFunctions?\n\n\n\n10\n\nWriting Reports\n\n\n\n11\n\nR Projects, Git\n\n\n\n12\n\n\n\n\n\n\n\nprint(\"Hello World\")\n\n[1] \"Hello World\""
+    "text": "The R Club is part of the Research Training Group 2660. The target group are PhD researchers in psychology and neuroscience. Responsible for organizing the R Club is Lea Hildebrandt, but all participants are very welcome to contribute."
   }
 ]
