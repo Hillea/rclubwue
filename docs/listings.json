@@ -2,7 +2,6 @@
   {
     "listing": "/slides.html",
     "items": [
-      "/Slides/UlkarsViz.html",
       "/Slides/W1_IntroR.html",
       "/Slides/W2b_DataWranglingR.html",
       "/Slides/Exercises/W3_Randomize_exercises.html",
@@ -11,7 +10,9 @@
       "/Slides/W4_WrangleViz.html",
       "/Slides/W3c_WranglingMarkers.html",
       "/Slides/W3b_DataVizR.html",
+      "/Slides/UlkarsViz.html",
       "/Slides/Stats1.html",
+      "/Slides/HandsOnAnova.html",
       "/Slides/Stats2.html"
     ]
   }

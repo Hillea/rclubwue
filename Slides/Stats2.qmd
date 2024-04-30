@@ -4,7 +4,7 @@ subtitle: |
    | R Coding Club 
    | RTG 2660
 author: "Dr. Lea Hildebrandt"
-date: 2024/04/30
+date: 2024/05/14
 description: "Intro to rmANOVA and LMM"
 format: 
   revealjs:
@@ -19,4 +19,36 @@ from: markdown+emoji
 
 # Problem: Dependent Measures
 
-`{css} code.sourceCode {   font-size: 1.4em; }    div.cell-output-stdout {   font-size: 1.4em; }`
+```{css}
+code.sourceCode {   font-size: 1.4em; }   
+div.cell-output-stdout {   font-size: 1.4em; }
+```
+
+Often in our research, we have repeated measures: We collect more than one data point from each subject.
+
+Advantage: increased power and precision.\
+Disadvantage: violates **iid** (independent and identically distributed) assumption of *ordinary least squares* methods (regression, ANOVA).
+
+-   independent: probability of a data point taking on specific value is independent of of values taken by other data points.
+
+-   identically distributed: data points are samples from same underlying distribution.
+
+Problem: Observations from the same subject are usually correlated (i.e. more likely to be similar to each other than to other observations).
+
+--\> this also applies to other forms of dependency: if units of observations are clustered, e.g. mice in cage/handled by experimenter, students in classroom...
+
+. . .
+
+In contrast to violations of other assumptions (normality, homoscadicity), ANOVA is not robust against this violation! –\> increased type 1 error/false positives
+
+## Repeated Measures ANOVA
+
+## Mixed ANOVA
+
+## Linear Mixed Effects Models
+
+-   generalization of OLS, captures dependency explicitly in *random effects parameters*.
+
+    -   provide accurate and generalizable estimated of these effects, improved power, non-inflated type 1 errors.
+
+-   

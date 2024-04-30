@@ -1,0 +1,308 @@
+---
+title: "Hands-On ANOVA in R"
+subtitle: |
+   | R Coding Club 
+   | RTG 2660
+author: "Dr. Lea Hildebrandt"
+date: 2024/04/30
+description: "Intro to rmANOVA and how to run ANOVAs in R"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+    slide-number: true
+    theme: simple
+    embed-resources: true
+editor: visual
+from: markdown+emoji
+---
+
+# Repeated-Measures ANOVA
+
+```{css}
+code.sourceCode {   font-size: 1.4em; }   
+div.cell-output-stdout {   font-size: 1.4em; }
+```
+
+Often in our research, we have repeated measures: We collect more than one data point from each subject.
+
+Advantage: increased power and precision.\
+Disadvantage: violates **iid** (independent and identically distributed) assumption of *ordinary least squares* methods (regression, ANOVA).
+
+-   independent: probability of a data point taking on specific value is independent of of values taken by other data points.
+
+-   identically distributed: data points are samples from same underlying distribution.
+
+Problem: Observations from the same subject are usually correlated (i.e. more likely to be similar to each other than to other observations).
+
+--\> this also applies to other forms of dependency: if units of observations are clustered, e.g. mice in cage/handled by experimenter, students in classroom...
+
+. . .
+
+In contrast to violations of other assumptions (normality, homoscadicity), ANOVA is not robust against this violation! –\> increased type 1 error/false positives
+
+## Difference rm to "normal" ANOVA
+
+-   repeated measures: each subject provides several data points.
+
+-   F-statistic is calculated a bit differently: $$ F = MS_{conditions} / MS_{error} $$
+
+. . .
+
+![](images/clipboard-2385202742.png){width="627"}
+
+[^1]
+
+[^1]: <https://statistics.laerd.com/statistical-guides/repeated-measures-anova-statistical-guide.php>
+
+::: notes
+MS = SS/DF
+
+SSerror decreases –\> increased power (if compensates for reduction in DF: degrees of freedom go from (*n - k*) to (*n - 1*)(*k - 1*) )
+
+remove the variability due to the subject
+:::
+
+## Example Sum of Squares partitioning
+
+Imagine, we'd have a wine tasting and everyone of you tries six different wines and gives a rating from 1-10. This way, we would get the following data set:
+
+| Subject       | Wine1     | Wine2     | Wine3 | Wine4     | Wine5     | Wine6     | Mean_subject |
+|--------|--------|--------|--------|--------|--------|----------------|--------|
+| Ecem          | 5         | 6         | 7     | 6         | 3         | 5         | **5.333**    |
+| Ulkar         | 7         | 8         | 8     | 7         | 6         | 6         | **7**        |
+| Francesco     | 1         | 4         | 3     | 7         | 4         | 4         | **3.833**    |
+| Anna          | 6         | 4         | 6     | 5         | 3         | 4         | **4.667**    |
+| Nikita        | 8         | 7         | 4     | 6         | 9         | 3         | **6.167**    |
+| Zora          | 2         | 3         | 2     | 10        | 4         | 3         | **4**        |
+| **Mean_wine** | **4.833** | **5.333** | **5** | **6.833** | **4.833** | **4.167** | **5.167**    |
+
+```{r}
+# | echo: true
+
+library(tidyverse)
+
+wine_data <- tibble(
+  subject = c("Ecem", "Ulkar", "Francesco", "Anna", "Nikita", "Zora"),
+  Wine1 = c(5,7,1,6,8,2),
+  Wine2 = c(6,8,4,4,7,3),
+  Wine3 = c(7,8,3,6,4,2),
+  Wine4 = c(6,7,7,5,6,10),
+  Wine5 = c(3,6,4,3,9,4),
+  Wine6 = c(5,6,4,4,3,3)
+)
+
+wine_long <- wine_data %>% 
+  pivot_longer(cols = starts_with("Wine"))
+
+ggplot(wine_long, aes(x=name, y=value, color=subject)) +
+  geom_point(alpha=.3) +
+  geom_line(aes(group=subject)) +
+  stat_summary(geom = "point", fun.y = "mean", col = "black", size = 2)  +
+  stat_summary(aes(x=6.5, group=subject), geom = "point", fun.y = "mean", size = 2) +
+  stat_summary(aes(x=6.5), geom = "point", fun.y = "mean", size = 2, col="black", shape=24) 
+  
+```
+
+$$
+SS_{wine} = \sum_{i=1}^{n}n_i(\bar{x_i}-\bar{x})^2
+$$
+
+For every wine, we subtract the grand mean (triangle) from each wine's mean (black dots) (and multiply it by the number of subjects).
+
+$$
+SS_{within} = \sum_{j=1}^{k}\sum_{i=1}^{n}(x_{ij}-\bar{x_j})^2
+$$
+
+For the SSwithin, we subtract each individual data point from the mean of it's wine group and add that up for all wines.
+
+$$
+SS_{subjects} = k\sum_{i=1}^{n}(\bar{x_i}-\bar{x})^2
+$$
+
+Here, we take *each subject's mean* and subtract the grand average from it, and multiply it with the number of wines.
+$$SS_{error} = SS_{within} - SS_{subjects}
+$$
+
+We can then calculate the Mean Squares by dividing with the Degrees of Freedom. The MS are then used to calculate the F-Value:
+
+$$
+MS_{wine} = \frac{SS_{wine}}{(k-1)}
+$$
+
+$$
+MS_{error} = \frac{SS_{error}}{(n-1)(k-1)}
+$$
+
+$$F=\frac{MS_{wine}}{MS_{error}}$$
+
+## Calculating an ANOVA in R
+
+There are a variety of functions to run an ANOVA in R. We will be using those from the `afex` package! (But any other is fine as well! The afex package has some advantages: The contrast definition and the Type 3 sum of squares etc.)
+
+The main function is aov_car() - because it runs the `ANOVA()` function from the `car` package. `aov_ez()` and `aov_4()` are wrappers around `aov_car()`: They should reproduce the same result, but the input format/syntax differs.
+
+```{r}
+#| echo: true
+# library(tidyverse)
+library(afex)
+library(performance) # for checking assumptions
+library(emmeans) # for contrasts/post-hoc tests
+library(report) # handy tool to help you report your findings
+```
+
+Let's use a bigger data set[^2]:
+
+[^2]: Example from: <https://tysonbarrett.com/jekyll/update/2018/03/14/afex_anova/> (but updated to newer packages)
+
+```{r}
+set.seed(42)
+z <- data.frame(ID = 1:300,
+                condition  = rep(c("A", "B", "C"), each = 100),
+                gender  = factor(rbinom(300, 1, .5)),
+                T_1 = c(rnorm(100,2), rnorm(100,1),rnorm(100,0)),
+                T_2 = c(rnorm(100,2), rnorm(100,1),rnorm(100,0)),
+                T_3 = c(rnorm(100,2), rnorm(100,1),rnorm(100,0)))
+```
+
+With the `afex` package, we can use the same function to calculate one-way ANOVA, factorial ANOVA, repeated measures ANOVA, and mixed ANOVA. For this aim, we always have to specify the `Error()` variance.
+
+E.g. one-way & factorial ANOVA:
+
+```{r}
+aov1 <- z %>%
+  aov_car(T_1 ~ b + Error(ID),
+          data = .)
+aov1
+
+# using different syntax:
+aov2 <- z %>%
+  aov_car(T_1 ~ b * c + Error(ID),
+          data = .)
+
+aov2.1 <- z %>%
+  select(T_1, b, c, ID) %>%
+  aov_ez(id = "ID",
+         dv = "T_1",
+         between = c("b", "c"),
+         data = .)
+
+aov2 <- z %>%
+  aov_4(T_1 ~ b * c + (1|ID),
+        data = .)
+
+aov2
+```
+
+## 
+Repeated measures ANOVA with afex
+
+For a rmANOVA (in R with the afex package), we need the data to be in long format:
+
+```{r}
+#| echo: true
+
+z_long <- z %>% 
+  pivot_longer(cols = starts_with("T"),
+               names_to = "timepoint")
+
+
+# calculate ANOVA
+
+aov_rm <- z_long %>%
+  aov_car(value ~ 1 + Error(ID/timepoint),
+          data = .)
+
+# I prefer the formular notation:
+aov_rm <- z_long %>%
+  aov_4(value ~ 1 + (timepoint|ID),
+        data = .)
+aov_rm
+```
+
+## Mixed ANOVA
+
+We can simply extent our model by adding between-subjects variables:
+
+```{r}
+#| echo: true
+
+mixed_mod <- z_long %>%
+  aov_4(value ~ condition + gender + (timepoint|ID),
+        data = .)
+mixed_mod
+
+```
+
+## Checking assumptions
+
+Unfortunately, we can't use the `performance``::check_model()` (yet) to check the assumptions of model fit with `afex`. This means that we'd have to check the assumptions individually:
+
+-   continuous DV
+
+-   (outliers)
+
+-   sphericity (the variances of the differences between all levels must be equal)
+
+-   normality of residuals
+
+```{r}
+#| echo: true
+
+# sphericity
+test_sphericity(mixed_mod)  # afex
+check_sphericity(mixed_mod) # performance
+
+# normality of residuals
+# residuals(mixed_mod)
+plot(check_normality(mixed_mod))
+```
+
+## Contrasts
+
+We can use the emmeans package to calculate "estimated marginal means":
+
+```{r}
+
+emmixed <- mixed_mod %>% 
+  emmeans(specs = c("timepoint", "condition")) %>% 
+  as_tibble()
+
+ggplot(emmixed, aes(timepoint, emmean, group = condition, color = condition)) +
+    geom_point() +
+    geom_line() +
+    geom_errorbar(aes(ymin = lower.CL, ymax = upper.CL),
+                  width = .2) 
+```
+
+We can use those to calculate pairwise contrasts:
+
+```{r}
+#| echo: true
+#|
+mixed_mod %>% 
+  emmeans(specs = c("timepoint", "condition")) %>% 
+  pairs(adjust = "tukey")
+
+mixed_mod %>% 
+  emmeans(specs = trt.vs.ctrlk ~ timepoint)
+```
+
+## Custom Contrasts
+
+```{r}
+#| echo: true
+
+# get emmeans
+emm1 <-  emmeans(mixed_mod, specs = ~ timepoint)
+
+# get custom contrasts from list
+contrast(emm1, method = list("timepoint 1 - timepoint 2" = T_1 - T_3) )
+# doesn't work yet
+
+```
+
+## Simple Slopes
+
+
+
