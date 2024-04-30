@@ -284,26 +284,52 @@ mixed_mod %>%
   emmeans(specs = c("timepoint", "condition")) %>% 
   pairs(adjust = "tukey")
 
-mixed_mod %>% 
-  emmeans(specs = trt.vs.ctrlk ~ timepoint)
 ```
 
 ## Custom Contrasts
+
+There are a number of ways to specify which contrasts you want to have in emmeans. Here are two examples, one using a predefined contrast (trt.vs.ctrlk) and one example with manually defined contrasts.
 
 ```{r}
 #| echo: true
 #| eval: false
 
+# compare everything to "last" level, in this case T_3:
+mixed_mod %>% 
+  emmeans(specs = trt.vs.ctrlk ~ timepoint)
+
+###
 # get emmeans
 emm1 <-  emmeans(mixed_mod, specs = ~ timepoint)
+emm1
+
+# we need to get the correct order:
+T_1_c <- c(1,0,0)
+T_2_c <- c(0,1,0)
+T_3_c <- c(0,0,1)
+T_23_c <- c(0,.5,.5)
 
 # get custom contrasts from list
-contrast(emm1, method = list("timepoint 1 - timepoint 2" = T_1 - T_3) )
-# doesn't work yet
+contrast(emm1, method = list("timepoint 1 - timepoint 3" = T_1_c - T_3_c,
+                             "timepoint 1 - timepoint 2" = T_1_c - T_3_c,
+                             "tp 1 - mean of tp 2 & 3" = T_1_c - (T_2_c + T_3_c)/2,
+                             "tp 1 - mean of tp 2 & 3" = T_1_c - T_23_c) )
 
+# same is possible with interactions/several factors
+emm2 <-  emmeans(mixed_mod, specs = ~ c(timepoint, condition))
+emm2
+
+T_1_A <- c(1,0,0,0,0,0,0,0,0) # etc
 ```
 
 ## Simple Slopes
 
+Sometimes, you do have a continuous IV in combination with e.g. a factorial IV - e.g. if you want to further investigate their interaction. Here, you can't easily work with contrasts (because which value do you take from the continuous variable? The mean?). You can get the slope (of the predicted values) for the cont. IV *within* each factor level of the other categorical factor. This is called a simple slope. For this aim, you would use the function `emtrends()`.
 
+(We will cover this later, when we talk about Linear Mixed Models - because you would probably not expect an interaction between a factor/IV and a cont. covariate...)
 
+## Thanks!
+
+Next time? May 14th?
+
+Topic? LMM? :D

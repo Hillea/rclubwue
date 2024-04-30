@@ -1565,41 +1565,49 @@ Sphericity correction method: GG </code></pre>
 Results are averaged over the levels of: gender 
 P value adjustment: tukey method for comparing a family of 9 estimates </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>mixed_mod <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">emmeans</span>(<span class="at">specs =</span> trt.vs.ctrlk <span class="sc">~</span> timepoint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$emmeans
- timepoint emmean     SE  df lower.CL upper.CL
- T_1        0.984 0.0547 296    0.876     1.09
- T_2        0.931 0.0578 296    0.817     1.04
- T_3        0.986 0.0618 296    0.865     1.11
-
-Results are averaged over the levels of: condition, gender 
-Confidence level used: 0.95 
-
-$contrasts
- contrast  estimate     SE  df t.ratio p.value
- T_1 - T_3 -0.00281 0.0855 296  -0.033  0.9981
- T_2 - T_3 -0.05559 0.0845 296  -0.658  0.7262
-
-Results are averaged over the levels of: condition, gender 
-P value adjustment: dunnettx method for 2 tests </code></pre>
-</div>
 </div>
 </section>
 <section id="custom-contrasts" class="slide level2">
 <h2>Custom Contrasts</h2>
+<p>There are a number of ways to specify which contrasts you want to have in emmeans. Here are two examples, one using a predefined contrast (trt.vs.ctrlk) and one example with manually defined contrasts.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># get emmeans</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>emm1 <span class="ot">&lt;-</span>  <span class="fu">emmeans</span>(mixed_mod, <span class="at">specs =</span> <span class="sc">~</span> timepoint)</span>
-<span id="cb17-3"><a href="#cb17-3"></a></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># get custom contrasts from list</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">contrast</span>(emm1, <span class="at">method =</span> <span class="fu">list</span>(<span class="st">&quot;timepoint 1 - timepoint 2&quot;</span> <span class="ot">=</span> T_1 <span class="sc">-</span> T_3) )</span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="co"># doesn&#39;t work yet</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># compare everything to &quot;last&quot; level, in this case T_3:</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>mixed_mod <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">emmeans</span>(<span class="at">specs =</span> trt.vs.ctrlk <span class="sc">~</span> timepoint)</span>
+<span id="cb15-4"><a href="#cb15-4"></a></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="do">###</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co"># get emmeans</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>emm1 <span class="ot">&lt;-</span>  <span class="fu">emmeans</span>(mixed_mod, <span class="at">specs =</span> <span class="sc">~</span> timepoint)</span>
+<span id="cb15-8"><a href="#cb15-8"></a>emm1</span>
+<span id="cb15-9"><a href="#cb15-9"></a></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="co"># we need to get the correct order:</span></span>
+<span id="cb15-11"><a href="#cb15-11"></a>T_1_c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span>
+<span id="cb15-12"><a href="#cb15-12"></a>T_2_c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb15-13"><a href="#cb15-13"></a>T_3_c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb15-14"><a href="#cb15-14"></a>T_23_c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">5</span>,.<span class="dv">5</span>)</span>
+<span id="cb15-15"><a href="#cb15-15"></a></span>
+<span id="cb15-16"><a href="#cb15-16"></a><span class="co"># get custom contrasts from list</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a><span class="fu">contrast</span>(emm1, <span class="at">method =</span> <span class="fu">list</span>(<span class="st">&quot;timepoint 1 - timepoint 3&quot;</span> <span class="ot">=</span> T_1_c <span class="sc">-</span> T_3_c,</span>
+<span id="cb15-18"><a href="#cb15-18"></a>                             <span class="st">&quot;timepoint 1 - timepoint 2&quot;</span> <span class="ot">=</span> T_1_c <span class="sc">-</span> T_3_c,</span>
+<span id="cb15-19"><a href="#cb15-19"></a>                             <span class="st">&quot;tp 1 - mean of tp 2 &amp; 3&quot;</span> <span class="ot">=</span> T_1_c <span class="sc">-</span> (T_2_c <span class="sc">+</span> T_3_c)<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb15-20"><a href="#cb15-20"></a>                             <span class="st">&quot;tp 1 - mean of tp 2 &amp; 3&quot;</span> <span class="ot">=</span> T_1_c <span class="sc">-</span> T_23_c) )</span>
+<span id="cb15-21"><a href="#cb15-21"></a></span>
+<span id="cb15-22"><a href="#cb15-22"></a><span class="co"># same is possible with interactions/several factors</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a>emm2 <span class="ot">&lt;-</span>  <span class="fu">emmeans</span>(mixed_mod, <span class="at">specs =</span> <span class="sc">~</span> <span class="fu">c</span>(timepoint, condition))</span>
+<span id="cb15-24"><a href="#cb15-24"></a>emm2</span>
+<span id="cb15-25"><a href="#cb15-25"></a></span>
+<span id="cb15-26"><a href="#cb15-26"></a>T_1_A <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) <span class="co"># etc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="simple-slopes" class="slide level2">
 <h2>Simple Slopes</h2>
+<p>Sometimes, you do have a continuous IV in combination with e.g. a factorial IV - e.g. if you want to further investigate their interaction. Here, you can’t easily work with contrasts (because which value do you take from the continuous variable? The mean?). You can get the slope (of the predicted values) for the cont. IV <em>within</em> each factor level of the other categorical factor. This is called a simple slope. For this aim, you would use the function <code>emtrends()</code>.</p>
+<p>(We will cover this later, when we talk about Linear Mixed Models - because you would probably not expect an interaction between a factor/IV and a cont. covariate…)</p>
+</section>
+<section id="thanks" class="slide level2">
+<h2>Thanks!</h2>
+<p>Next time? May 14th?</p>
+<p>Topic? LMM? :D</p>
 
 <div class="footer footer-default">
 
