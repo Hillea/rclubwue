@@ -171,24 +171,24 @@ E.g. one-way & factorial ANOVA:
 
 ```{r}
 aov1 <- z %>%
-  aov_car(T_1 ~ b + Error(ID),
+  aov_car(T_1 ~ condition + Error(ID),
           data = .)
 aov1
 
 # using different syntax:
 aov2 <- z %>%
-  aov_car(T_1 ~ b * c + Error(ID),
+  aov_car(T_1 ~ condition * gender + Error(ID),
           data = .)
 
 aov2.1 <- z %>%
-  select(T_1, b, c, ID) %>%
+  select(T_1, condition, gender, ID) %>%
   aov_ez(id = "ID",
          dv = "T_1",
-         between = c("b", "c"),
+         between = c("condition", "gender"),
          data = .)
 
 aov2 <- z %>%
-  aov_4(T_1 ~ b * c + (1|ID),
+  aov_4(T_1 ~ condition * gender + (1|ID),
         data = .)
 
 aov2
@@ -292,6 +292,7 @@ mixed_mod %>%
 
 ```{r}
 #| echo: true
+#| eval: false
 
 # get emmeans
 emm1 <-  emmeans(mixed_mod, specs = ~ timepoint)
