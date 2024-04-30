@@ -78,7 +78,8 @@ Imagine, we'd have a wine tasting and everyone of you tries six different wines 
 | **Mean_wine** | **4.833** | **5.333** | **5** | **6.833** | **4.833** | **4.167** | **5.167**    |
 
 ```{r}
-# | echo: true
+#| echo: false
+#| eval: true
 
 library(tidyverse)
 
@@ -95,14 +96,20 @@ wine_data <- tibble(
 wine_long <- wine_data %>% 
   pivot_longer(cols = starts_with("Wine"))
 
-ggplot(wine_long, aes(x=name, y=value, color=subject)) +
+plot <- ggplot(wine_long, aes(x=name, y=value, color=subject)) +
   geom_point(alpha=.3) +
   geom_line(aes(group=subject)) +
   stat_summary(geom = "point", fun.y = "mean", col = "black", size = 2)  +
   stat_summary(aes(x=6.5, group=subject), geom = "point", fun.y = "mean", size = 2) +
   stat_summary(aes(x=6.5), geom = "point", fun.y = "mean", size = 2, col="black", shape=24) 
+
+plot
   
 ```
+
+![](images/clipboard-454763449.png)
+
+## Example Sum of Squares partitioning - 2
 
 $$
 SS_{wine} = \sum_{i=1}^{n}n_i(\bar{x_i}-\bar{x})^2
@@ -156,6 +163,8 @@ Let's use a bigger data set[^2]:
 [^2]: Example from: <https://tysonbarrett.com/jekyll/update/2018/03/14/afex_anova/> (but updated to newer packages)
 
 ```{r}
+#| echo: true
+#| 
 set.seed(42)
 z <- data.frame(ID = 1:300,
                 condition  = rep(c("A", "B", "C"), each = 100),
@@ -170,6 +179,9 @@ With the `afex` package, we can use the same function to calculate one-way ANOVA
 E.g. one-way & factorial ANOVA:
 
 ```{r}
+#| echo: true
+#| eval: false
+#| 
 aov1 <- z %>%
   aov_car(T_1 ~ condition + Error(ID),
           data = .)
@@ -263,7 +275,8 @@ plot(check_normality(mixed_mod))
 We can use the emmeans package to calculate "estimated marginal means":
 
 ```{r}
-
+#| echo: true
+#| 
 emmixed <- mixed_mod %>% 
   emmeans(specs = c("timepoint", "condition")) %>% 
   as_tibble()
